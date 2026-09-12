@@ -3,6 +3,8 @@
 A redesign proposal for [kbt-konsulterna.se](https://kbt-konsulterna.se/), a private
 psychology practice in central Uppsala. Static HTML and CSS — no build step, no dependencies.
 
+**Live preview → https://kashnigahbaruda.github.io/kbt-konsulterna-redesign/**
+
 > **This is a design preview, not the live practice website.** Every page carries
 > `noindex, nofollow` so it cannot compete with the client's real site in search results.
 > Remove that before any real launch — see [Going live](#going-live).
