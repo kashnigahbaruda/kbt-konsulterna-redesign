@@ -658,3 +658,256 @@ button { font: inherit; }
 
 /* Anchored section within a hub page */
 .anchor { scroll-margin-top: 6.5rem; }
+
+/* --- Topic cards ----------------------------------------------------------
+   A topic in the grid that has its own page. The card is the whole link; the
+   underline lives on the heading so the hit area can be large without the
+   whole block looking like a button.
+   -------------------------------------------------------------------------- */
+.topic { display: block; }
+.topic--link {
+  color: inherit; text-decoration: none;
+  display: grid; align-content: start;
+  /* The hover tint bleeds past the text, but the bleed must stay inside the
+     narrowest gutter (1.15rem) and inside half the narrowest column gap
+     (1.5rem), or the cards overflow the page on a phone and overlap each
+     other in the grid. 0.7rem clears both. */
+  padding: 1.4rem 0.7rem 1.25rem;
+  margin: -1.4rem -0.7rem -1.25rem;
+  border-radius: 3px;
+  transition: background-color 0.25s var(--ease);
+}
+.topic--link:hover, .topic--link:focus-visible { background: rgb(27 58 56 / 0.05); }
+.band--hi .topic--link:hover, .band--hi .topic--link:focus-visible,
+.band--sand .topic--link:hover, .band--sand .topic--link:focus-visible {
+  background: rgb(27 58 56 / 0.07);
+}
+.topic--link h3 { text-decoration: underline; text-decoration-color: transparent;
+  text-underline-offset: 0.18em; transition: text-decoration-color 0.25s var(--ease); }
+.topic--link:hover h3, .topic--link:focus-visible h3 {
+  text-decoration-color: currentColor;
+}
+.topic__go {
+  display: inline-flex; align-items: center; gap: 0.4rem;
+  margin-top: 0.85rem;
+  font-family: var(--display); font-size: var(--step--1); font-weight: 600;
+  letter-spacing: 0.02em; color: var(--deep);
+}
+.topic--link:hover .topic__go .icon { transform: translateX(3px); }
+.topic__go .icon { transition: transform 0.25s var(--ease); }
+
+/* "Read the whole section" link under a hub section */
+.hub__more { margin: 1.8rem 0 0; }
+
+/* --- Article layout -------------------------------------------------------
+   Sidebar navigator beside the article. Below 62rem the two stack and the
+   navigator becomes a collapsed <details> above the text, so a phone reader
+   meets the article first rather than a list of thirteen siblings.
+   -------------------------------------------------------------------------- */
+.band--article { padding-block: clamp(2rem, 5vw, 3.5rem) var(--band); }
+.layout-side { display: grid; gap: clamp(2rem, 4vw, 3.5rem); align-items: start; }
+@media (min-width: 62rem) {
+  .layout-side { grid-template-columns: 17rem minmax(0, 1fr); gap: clamp(3rem, 5vw, 5rem); }
+  /* The article comes first in the DOM; put the navigator back on the left. */
+  .layout-side > .sidenav { grid-area: 1 / 1; }
+  .layout-side > .article { grid-area: 1 / 2; }
+}
+/* Below that the two stack, article first, and the navigator reads as
+   "the rest of this section" under the piece it belongs to. */
+@media (max-width: 61.99rem) {
+  .sidenav { margin-top: clamp(2rem, 5vw, 3rem); }
+}
+
+.article { max-width: 42rem; }
+.article h1 { font-size: var(--step-3); margin-bottom: 1.1rem; }
+.article__lede {
+  font-family: var(--display); font-size: var(--step-1); font-weight: 500;
+  line-height: 1.45; color: var(--deep); margin-bottom: 2rem;
+  max-width: 32rem;
+}
+.article__body h2 {
+  font-size: var(--step-2); margin-top: 2.6rem; margin-bottom: 0.9rem;
+}
+.article__body h3 {
+  font-size: var(--step-1); margin-top: 1.9rem; margin-bottom: 0.6rem;
+}
+.article__body > :first-child { margin-top: 0; }
+.article__body ul, .article__body ol { margin: 0 0 1.3rem 1.15rem; }
+.article__body li { margin-bottom: 0.45rem; }
+.article__body .callout {
+  border-left: 3px solid var(--sand);
+  padding: 0.15rem 0 0.15rem 1.15rem;
+  margin: 2rem 0 0; font-size: 1rem; color: var(--muted);
+}
+/* The numbered process list, reused inside an article without the band frame */
+.steps--plain { margin-left: 0; }
+.steps--plain h3 { margin-top: 0; }
+
+/* --- Sidebar navigator ----------------------------------------------------
+   The thing the old site had as a bare WordPress widget: the level-2 siblings
+   of wherever you are, with the active branch's children nested under it.
+   -------------------------------------------------------------------------- */
+.sidenav { font-family: var(--display); }
+@media (min-width: 62rem) {
+  .sidenav { position: sticky; top: 6.5rem; }
+}
+.sidenav__box {
+  border: 1px solid rgb(27 58 56 / 0.14);
+  border-radius: 3px;
+  background: var(--paper-hi);
+}
+.sidenav__head {
+  display: flex; align-items: center; justify-content: space-between;
+  gap: 1rem; cursor: pointer; list-style: none;
+  padding: 0.95rem 1.1rem;
+  font-size: var(--step--1); font-weight: 700;
+  letter-spacing: 0.09em; text-transform: uppercase; color: var(--deep);
+}
+.sidenav__head::-webkit-details-marker { display: none; }
+.sidenav__chev { transition: transform 0.25s var(--ease); }
+.sidenav__box[open] .sidenav__chev { transform: rotate(180deg); }
+@media (min-width: 62rem) {
+  /* No point offering to collapse it when it is a permanent column */
+  .sidenav__head { cursor: default; pointer-events: none; }
+  .sidenav__chev { display: none; }
+}
+.sidenav__list { list-style: none; margin: 0; padding: 0 0 0.4rem; }
+.sidenav__list > li { border-top: 1px solid rgb(27 58 56 / 0.1); }
+.sidenav__list a {
+  display: block; padding: 0.72rem 1.1rem;
+  font-size: 0.95rem; line-height: 1.35;
+  color: var(--body); text-decoration: none;
+  transition: background-color 0.2s var(--ease), color 0.2s var(--ease);
+}
+.sidenav__list a:hover { background: rgb(27 58 56 / 0.06); color: var(--deep); }
+.sidenav__list > li > a { font-weight: 600; color: var(--deep); }
+.sidenav__list > li.is-open > a { background: var(--deep); color: var(--paper-hi); }
+.sidenav__list > li.is-open > a:hover { background: var(--deep-soft); }
+.sidenav__sub { list-style: none; margin: 0; padding: 0.35rem 0 0.55rem; }
+.sidenav__sub a { padding: 0.42rem 1.1rem 0.42rem 1.6rem; font-size: 0.92rem; }
+.sidenav__sub a[aria-current="page"] {
+  font-weight: 700; color: var(--deep);
+  box-shadow: inset 3px 0 0 var(--linden);
+  background: rgb(138 154 91 / 0.12);
+}
+.sidenav__all {
+  margin: 0; padding: 0.9rem 1.1rem 1rem;
+  border-top: 1px solid rgb(27 58 56 / 0.1);
+  font-size: var(--step--1);
+}
+
+/* --- Bylines: who at the practice works with this -------------------------
+   Health content is judged on demonstrated expertise. Naming the clinician,
+   with credentials and a link to the full bio, is the strongest signal a
+   practice page can carry — and the old topic pages carried none of it.
+   -------------------------------------------------------------------------- */
+.bylines {
+  margin-top: clamp(2.5rem, 5vw, 3.5rem);
+  padding-top: 1.8rem;
+  border-top: 1px solid rgb(27 58 56 / 0.14);
+}
+.bylines__head {
+  font-family: var(--display); font-size: var(--step--1); font-weight: 700;
+  letter-spacing: 0.09em; text-transform: uppercase; color: var(--muted);
+  margin-bottom: 1.2rem;
+}
+.bylines__grid { display: grid; gap: 0.9rem; }
+@media (min-width: 40rem) { .bylines__grid { grid-template-columns: repeat(2, 1fr); } }
+.byline {
+  display: flex; align-items: center; gap: 0.85rem;
+  text-decoration: none; color: inherit;
+  padding: 0.5rem; margin: -0.5rem;
+  border-radius: 3px;
+  transition: background-color 0.25s var(--ease);
+}
+.byline:hover, .byline:focus-visible { background: rgb(27 58 56 / 0.05); }
+.byline__media { flex: 0 0 3.4rem; }
+.byline__media img {
+  width: 3.4rem; height: 3.4rem; object-fit: cover; object-position: center top;
+  border-radius: 50%; display: block;
+}
+.byline__text { display: grid; gap: 0.1rem; min-width: 0; }
+.byline__name {
+  font-family: var(--display); font-weight: 600; font-size: 1rem; color: var(--deep);
+}
+.byline__role { font-size: 0.82rem; line-height: 1.35; color: var(--muted); }
+.bylines__note { margin: 1.3rem 0 0; font-size: var(--step--1); }
+
+/* --- Child cards on a section hub ----------------------------------------- */
+.childgrid { margin-top: clamp(2.5rem, 5vw, 3.5rem); }
+.childgrid__head {
+  font-family: var(--display); font-size: var(--step--1); font-weight: 700;
+  letter-spacing: 0.09em; text-transform: uppercase; color: var(--muted);
+  margin-bottom: 1.4rem;
+}
+.topiccards { display: grid; border-top: 1px solid rgb(27 58 56 / 0.14); }
+@media (min-width: 46rem) {
+  .topiccards { grid-template-columns: repeat(2, 1fr); }
+  /* Rules on the cards, not as grid gaps: an odd card count would otherwise
+     leave the empty cell showing the gap colour as a grey block. */
+  .topiccard:nth-child(odd) { border-right: 1px solid rgb(27 58 56 / 0.14); }
+}
+.topiccard {
+  border-bottom: 1px solid rgb(27 58 56 / 0.14);
+  padding: 1.5rem 1.4rem;
+  text-decoration: none; color: inherit;
+  display: grid; align-content: start;
+  transition: background-color 0.25s var(--ease);
+}
+.topiccard:hover, .topiccard:focus-visible { background: var(--paper-hi); }
+.topiccard h3 { font-size: var(--step-1); margin-bottom: 0.5rem; }
+.topiccard p { font-size: 0.97rem; margin: 0; color: var(--muted); }
+.topiccard__go {
+  display: inline-flex; align-items: center; gap: 0.4rem; margin-top: 0.9rem;
+  font-family: var(--display); font-size: var(--step--1); font-weight: 600;
+  color: var(--deep);
+}
+.topiccard:hover .topiccard__go .icon { transform: translateX(3px); }
+.topiccard__go .icon { transition: transform 0.25s var(--ease); }
+
+/* --- Read next ------------------------------------------------------------ */
+.alsoread { margin-top: clamp(2.5rem, 5vw, 3.5rem); }
+.alsoread__head {
+  font-family: var(--display); font-size: var(--step--1); font-weight: 700;
+  letter-spacing: 0.09em; text-transform: uppercase; color: var(--muted);
+  margin-bottom: 0.6rem;
+}
+
+/* --- Previous / next across siblings -------------------------------------- */
+.pnav {
+  display: grid; gap: 1px; background: rgb(27 58 56 / 0.14);
+  margin-top: clamp(2.5rem, 5vw, 3.5rem);
+  border: 1px solid rgb(27 58 56 / 0.14);
+}
+@media (min-width: 40rem) { .pnav { grid-template-columns: repeat(2, 1fr); } }
+.pn {
+  background: var(--paper); padding: 1.1rem 1.3rem;
+  text-decoration: none; color: inherit; display: grid; gap: 0.2rem;
+  transition: background-color 0.25s var(--ease);
+}
+.pn:hover, .pn:focus-visible { background: var(--paper-hi); }
+.pn__dir {
+  font-family: var(--display); font-size: 0.76rem; font-weight: 600;
+  letter-spacing: 0.09em; text-transform: uppercase; color: var(--muted);
+}
+.pn__label { font-family: var(--display); font-weight: 600; color: var(--deep); }
+/* A lone "next" sits in the second column, so the pair always reads left→right */
+.pnav > .pn--next:only-child { grid-column: -2; text-align: right; }
+
+/* In an article the link list has no band around it, so it needs its own
+   hairlines — otherwise three link rows read as three floating headings. */
+.alsoread .linklist li + li { border-top: 1px solid rgb(27 58 56 / 0.12); }
+.alsoread .linklist { border-block: 1px solid rgb(27 58 56 / 0.12); }
+
+/* --- Narrow-phone header --------------------------------------------------
+   Below ~27rem the logo (168px) + "Boka samtal" + the 44px burger no longer
+   fit the row, and the burger pushed ~3px past the viewport — giving every
+   page on the site a sliver of horizontal scroll. Let the logo shrink and
+   tighten the button rather than wrapping the row.
+   -------------------------------------------------------------------------- */
+@media (max-width: 27rem) {
+  .site-head__logo { flex: 0 1 auto; min-width: 0; }
+  .site-head__logo img { width: 100%; max-width: 8.5rem; }
+  .site-head .btn { padding: 0.8em 0.95em; font-size: 0.82rem; }
+  .site-head__inner { gap: 0.7rem; }
+}

@@ -12,6 +12,8 @@ import html as H
 import os
 import re
 
+from articles import TREE
+
 try:
     from PIL import Image
 except ImportError:
@@ -49,20 +51,23 @@ def dim(path):
 # --------------------------------------------------------------------------
 NAV = [
     ('Vuxna', 'vuxna/index.html', [
-        ('Psykologisk behandling', 'vuxna/index.html#behandling'),
-        ('Parterapi', 'vuxna/index.html#parterapi'),
-        ('Skadligt bruk & beroende', 'vuxna/index.html#beroende'),
-        ('Utredning & bedömning', 'vuxna/index.html#utredning'),
+        ('Psykologisk behandling', 'vuxna/behandling/index.html'),
+        ('Parterapi', 'vuxna/parterapi/index.html'),
+        ('Skadligt bruk & beroende', 'vuxna/beroende/index.html'),
+        ('Utredning & bedömning', 'vuxna/utredning/index.html'),
+        ('Psykiatrisk bedömning', 'vuxna/psykiatri/index.html'),
     ]),
     ('Barn & ungdom', 'barn-och-ungdom/index.html', [
-        ('Psykologisk behandling', 'barn-och-ungdom/index.html#behandling'),
-        ('Utredning & bedömning', 'barn-och-ungdom/index.html#utredning'),
-        ('Stöd till vuxna runt barnet', 'barn-och-ungdom/index.html#stod'),
+        ('Psykologisk behandling', 'barn-och-ungdom/behandling/index.html'),
+        ('Utredning & bedömning', 'barn-och-ungdom/utredning/index.html'),
+        ('Stöd till vuxna runt barnet', 'barn-och-ungdom/stod/index.html'),
     ]),
     ('För organisationer', 'organisationer/index.html', [
-        ('Handledning & coaching', 'organisationer/index.html#handledning'),
-        ('Föreläsningar & utbildning', 'organisationer/index.html#utbildning'),
-        ('Rehabilitering', 'organisationer/index.html#rehabilitering'),
+        ('Handledning & coaching', 'organisationer/handledning/index.html'),
+        ('Föreläsningar & utbildning', 'organisationer/utbildning/index.html'),
+        ('Rehabilitering', 'organisationer/rehabilitering/index.html'),
+        ('Skadligt bruk', 'organisationer/skadligt-bruk/index.html'),
+        ('Kontakt för uppdrag', 'organisationer/kontakt/index.html'),
     ]),
     ('Medarbetare', 'medarbetare/index.html', []),
     ('Om oss', 'om-oss/index.html', [
@@ -157,13 +162,22 @@ def person_card(base, p, sizes=None):
       </a>'''
 
 
+def in_branch(href, current):
+    """True when `current` is `href` or lives under it, so the top-level nav
+    item stays marked while the reader is three levels down inside it."""
+    if href == current:
+        return True
+    section = href.rsplit('/', 1)[0]
+    return '/' in href and current.startswith(section + '/')
+
+
 def nav_html(base, current):
     out = []
     for item in NAV:
         label, href = item[0], item[1]
         if len(item) > 3 and item[3] is False:
             continue
-        cur = ' aria-current="page"' if href == current else ''
+        cur = ' aria-current="page"' if in_branch(href, current) else ''
         out.append(f'<a href="{rel(base, href)}"{cur}>{label}</a>')
     return '\n        '.join(out)
 
@@ -172,7 +186,7 @@ def mobile_nav_html(base, current):
     out = []
     for item in NAV:
         label, href, kids = item[0], item[1], item[2]
-        cur = ' aria-current="page"' if href == current else ''
+        cur = ' aria-current="page"' if in_branch(href, current) else ''
         out.append(f'<li><a href="{rel(base, href)}"{cur}>{label}</a>')
         if kids:
             out.append('<ul class="mobile-nav__sub">')
@@ -349,6 +363,13 @@ def page(path, title, desc, body, ogimg='hero-room', extra='', ogtitle=None):
         nav=nav_html(base, current), mnav=mobile_nav_html(base, current),
         tel=TEL, tel_href=TEL_HREF, extra=extra)
     foot = FOOT_TPL.format(base=base, addr=ADDR, tel=TEL, tel_href=TEL_HREF, mail=MAIL)
+    # A relative href ending in "/" resolves over HTTP but 404s over file://,
+    # which this build promises works. Normalise them all rather than relying on
+    # every hand-written link in the article copy remembering to say index.html.
+    out_links = re.compile(r'(href=")((?!https?:|tel:|mailto:|#)[^"]*/)(")')
+    body = out_links.sub(r'\1\2index.html\3', body)
+    assert len(title) <= 70, f'{path}: title is {len(title)} chars — {title}'
+    assert 50 <= len(desc) <= 165, f'{path}: description is {len(desc)} chars'
     out = head + body + foot
     os.makedirs(os.path.dirname(path) or '.', exist_ok=True)
     with open(path, 'w', encoding='utf-8') as f:
@@ -508,14 +529,16 @@ def price_band(base, dark=False):
 # Home
 # ==========================================================================
 ROUTER = [
-    ('Jag sover inte om nätterna.', 'Sömnproblem', 'vuxna/index.html#behandling'),
-    ('Jag orkar ingenting längre.', 'Stress &amp; utmattning', 'vuxna/index.html#behandling'),
-    ('Jag kan inte sluta oroa mig.', 'Oro &amp; ångest', 'vuxna/index.html#behandling'),
-    ('Mitt barn vägrar gå till skolan.', 'Barn &amp; ungdom', 'barn-och-ungdom/index.html'),
-    ('Jag dricker mer än jag vill.', 'Skadligt bruk', 'vuxna/index.html#beroende'),
-    ('Jag tror att jag har adhd eller autism.', 'Utredning', 'vuxna/index.html#utredning'),
-    ('Vi bråkar om samma sak, hela tiden.', 'Parterapi', 'vuxna/index.html#parterapi'),
-    ('Jag kan inte sluta tänka på det som hände.', 'Trauma &amp; ptsd', 'vuxna/index.html#behandling'),
+    # Each line goes to the page that actually answers it, not to an anchor on a
+    # hub the reader then has to scan. That was the whole point of the router.
+    ('Jag sover inte om nätterna.', 'Sömnproblem', 'vuxna/behandling/somn/'),
+    ('Jag orkar ingenting längre.', 'Stress &amp; utmattning', 'vuxna/behandling/stress-utmattning/'),
+    ('Jag kan inte sluta oroa mig.', 'Oro &amp; ångest', 'vuxna/behandling/oro-angest/'),
+    ('Mitt barn vägrar gå till skolan.', 'Barn &amp; ungdom', 'barn-och-ungdom/behandling/oro-angest/'),
+    ('Jag dricker mer än jag vill.', 'Skadligt bruk', 'vuxna/beroende/'),
+    ('Jag tror att jag har adhd eller autism.', 'Utredning', 'vuxna/utredning/'),
+    ('Vi bråkar om samma sak, hela tiden.', 'Parterapi', 'vuxna/parterapi/'),
+    ('Jag kan inte sluta tänka på det som hände.', 'Trauma &amp; ptsd', 'vuxna/behandling/trauma-ptsd/'),
     ('Jag vet inte var jag ska börja.', 'Hör av dig ändå', 'kontakt/index.html'),
 ]
 
@@ -540,7 +563,7 @@ HOME_LD = '''<script type="application/ld+json">
 def build_home():
     b = ''
     router = '\n      '.join(
-        f'''<li><a class="router__row" href="{b}{href}">
+        f'''<li><a class="router__row" href="{to_href(b, href)}">
         <span class="router__say">{say}</span>
         <span class="router__to">{to}{ARROW}</span>
       </a></li>''' for say, to, href in ROUTER)
@@ -714,29 +737,52 @@ def build_home():
 # ==========================================================================
 # Hub page scaffold
 # ==========================================================================
-def topics_grid(items, three=False):
+def topics_grid(base, items, three=False):
+    """Each item is (title, blurb) or (title, blurb, path). With a path the card
+    becomes a link to that topic's own page — the cards used to be dead text,
+    which is what made the topic layer unreachable."""
     cls = 'topics topics--three' if three else 'topics'
-    inner = '\n      '.join(
-        f'<div><h3>{t}</h3><p>{d}</p></div>' for t, d in items)
+    out = []
+    for it in items:
+        t, d = it[0], it[1]
+        href = it[2] if len(it) > 2 else None
+        if href:
+            out.append(f'<a class="topic topic--link" href="{to_href(base, href)}">'
+                       f'<h3>{t}</h3><p>{d}</p>'
+                       f'<span class="topic__go">Läs mer {ARROW}</span></a>')
+        else:
+            out.append(f'<div class="topic"><h3>{t}</h3><p>{d}</p></div>')
+    inner = '\n      '.join(out)
     return f'<div class="{cls}">\n      {inner}\n    </div>'
 
 
 def contents_list(base, items):
-    inner = '\n      '.join(
-        f'<li><a href="#{anchor}"><span>{label}</span>{ARROW}</a></li>'
-        for label, anchor in items)
+    """(label, target). A target with a slash is a page; otherwise an anchor on
+    this page."""
+    out = []
+    for label, target in items:
+        href = to_href(base, target) if '/' in target else f'#{target}'
+        out.append(f'<li><a href="{href}"><span>{label}</span>{ARROW}</a></li>')
+    inner = '\n      '.join(out)
     return f'<ul class="linklist linklist--two">\n      {inner}\n    </ul>'
 
 
-def hub_section(anchor, eyebrow, heading, intro, content, tone=''):
+def hub_section(anchor, eyebrow, heading, intro, content, tone='', more=None):
+    """`more` is (base, path, label): the link through to this section's own
+    page, so the hub summarises and the page carries the depth."""
     cls = f'band {tone}'.strip()
+    more_html = ''
+    if more:
+        mbase, mpath, mlabel = more
+        more_html = (f'\n      <p class="hub__more"><a class="a-link" '
+                     f'href="{to_href(mbase, mpath)}">{mlabel} {ARROW}</a></p>')
     return f'''<section class="{cls} anchor" id="{anchor}">
   <div class="wrap split">
     <div><p class="eyebrow">{eyebrow}</p></div>
     <div>
       <h2 data-reveal style="max-width:26rem;margin-bottom:1.2rem">{heading}</h2>
       <div class="prose prose--wide" style="margin-bottom:clamp(2rem,4vw,3rem)">{intro}</div>
-      {content}
+      {content}{more_html}
     </div>
   </div>
 </section>
@@ -772,46 +818,55 @@ def team_subset(base, slugs, eyebrow, heading, note):
 # ==========================================================================
 def build_vuxna():
     b = '../'
-    behandling = topics_grid([
+    behandling = topics_grid(b, [
         ('Oro och ångest',
          'Social ångest, panikångest, generaliserad ångest, tvångstankar och '
-         'tvångshandlingar (OCD) samt fobier, inklusive flygfobi.'),
+         'tvångshandlingar (OCD) samt fobier.', 'vuxna/behandling/oro-angest/'),
         ('Nedstämdhet och depression',
          'Från långvarig nedstämdhet till återkommande depressioner. Vi arbetar med '
-         'beteendeaktivering, kognitiv terapi och återfallsprevention.'),
+         'beteendeaktivering, kognitiv terapi och återfallsprevention.',
+         'vuxna/behandling/depression/'),
         ('Stress och utmattning',
          'När återhämtningen inte längre räcker till. Vi arbetar med belastning, '
-         'gränser och en hållbar väg tillbaka.'),
+         'gränser och en hållbar väg tillbaka.',
+         'vuxna/behandling/stress-utmattning/'),
         ('Sömnproblem',
          'Svårt att somna, vakna mitt i natten eller sova utan att bli utvilad. '
-         'KBT för insomni har starkt forskningsstöd.'),
+         'KBT för insomni har starkt forskningsstöd.', 'vuxna/behandling/somn/'),
         ('Trauma och PTSD',
          'Bearbetning av svåra händelser med metoder som prolonged exposure (PE). '
-         'Jens Karström har särskilt intresse för traumabehandling.'),
+         'Jens Karström har särskilt intresse för traumabehandling.',
+         'vuxna/behandling/trauma-ptsd/'),
         ('Sorg',
          'Vid förlust och komplicerad sorg. Barry Karlsson forskar på området vid '
-         'Uppsala universitet.'),
+         'Uppsala universitet.', 'vuxna/behandling/sorg/'),
         ('Låg självkänsla',
          'Återkommande känslor av otillräcklighet, prestationskrav och svårt att stå '
-         'upp för sig själv.'),
+         'upp för sig själv.', 'vuxna/behandling/sjalvkansla/'),
         ('Relationsproblem',
          'Återkommande konflikter, ensamhet i en relation, eller svårigheter som '
-         'går igen från relation till relation.'),
+         'går igen från relation till relation.', 'vuxna/behandling/relationer/'),
+        ('Fobier och flygfobi',
+         'Specifika fobier — sprutor, blod, höjder, hissar, flygplan. '
+         'Exponeringsbehandling har bland de bästa resultaten inom psykologin.',
+         'vuxna/behandling/fobier/'),
         ('Neuropsykiatriska funktionsnedsättningar',
          'Behandling och anpassat stöd vid adhd och autism i vuxen ålder — med eller '
-         'utan färdig diagnos.'),
+         'utan färdig diagnos.', 'vuxna/behandling/npf/'),
     ], three=True)
 
-    utredning = topics_grid([
+    utredning = topics_grid(b, [
         ('Utredning av adhd',
          'Psykologutredning med intervju, skattningsskalor och testning. Du får ett '
-         'skriftligt utlåtande och konkreta rekommendationer.'),
+         'skriftligt utlåtande och konkreta rekommendationer.',
+         'vuxna/utredning/adhd/'),
         ('Utredning av autism',
          'Bedömning av autismspektrumtillstånd hos vuxna, med samma noggranna '
-         'återkoppling och skriftliga utlåtande.'),
+         'återkoppling och skriftliga utlåtande.', 'vuxna/utredning/autism/'),
         ('Omprövning av diagnos',
          'Har du fått en diagnos som inte känns rätt, eller behöver den prövas på '
-         'nytt? Elias Westerlund arbetar särskilt med omprövningar.'),
+         'nytt? Elias Westerlund arbetar särskilt med omprövningar.',
+         'vuxna/utredning/omprovning/'),
     ], three=True)
 
     body = f'''
@@ -839,11 +894,11 @@ def build_vuxna():
         vad problemet heter för att höra av dig.</p>
       </div>
       {contents_list(b, [
-        ('Psykologisk behandling', 'behandling'),
-        ('Parterapi', 'parterapi'),
-        ('Skadligt bruk &amp; beroende', 'beroende'),
-        ('Utredning &amp; bedömning', 'utredning'),
-        ('Psykiatrisk bedömning', 'psykiatri'),
+        ('Psykologisk behandling', 'vuxna/behandling/'),
+        ('Parterapi', 'vuxna/parterapi/'),
+        ('Skadligt bruk &amp; beroende', 'vuxna/beroende/'),
+        ('Utredning &amp; bedömning', 'vuxna/utredning/'),
+        ('Psykiatrisk bedömning', 'vuxna/psykiatri/'),
       ])}
     </div>
   </div>
@@ -855,7 +910,8 @@ def build_vuxna():
              'därefter en plan utifrån dina mål och värderingar. För det mesta arbetar vi '
              '&rdquo;här och nu&rdquo;, men om din tidigare historia påverkar hur du mår i dag '
              'finns även den med i samtalen.</p>',
-             behandling, tone='band--hi')}
+             behandling, tone='band--hi',
+             more=(b, 'vuxna/behandling/', 'Om psykologisk behandling'))}
 
 {hub_section('parterapi', 'Parterapi',
              'När ni bråkar om samma sak, hela tiden.',
@@ -866,7 +922,8 @@ def build_vuxna():
              '<p style="margin-bottom:0">Parterapi bokas i 60-minuterspass, eller 2 × 45 '
              'minuter. Aksel Reppling tar emot par.</p>',
              f'<p style="margin-bottom:0"><a class="a-link" href="{b}priser/index.html">'
-             f'Se pris för parterapi {ARROW}</a></p>')}
+             f'Se pris för parterapi {ARROW}</a></p>',
+             more=(b, 'vuxna/parterapi/', 'Om parterapi och IBCT'))}
 
 {hub_section('beroende', 'Skadligt bruk &amp; beroende',
              'Alkohol, läkemedel, droger och spel.',
@@ -878,7 +935,8 @@ def build_vuxna():
              '<p style="margin-bottom:0">Du är också välkommen om du är <strong>anhörig</strong> '
              'till någon som använder alkohol eller droger på ett sätt som skapar problem. '
              'Thomas Alm och Angeli Holmstedt har båda lång erfarenhet inom beroendeområdet.</p>',
-             '', tone='band--hi')}
+             '', tone='band--hi',
+             more=(b, 'vuxna/beroende/', 'Om skadligt bruk och beroende'))}
 
 {hub_section('utredning', 'Utredning &amp; bedömning',
              'Neuropsykiatrisk utredning för vuxna.',
@@ -888,7 +946,8 @@ def build_vuxna():
              'utredningen är klar går vi igenom resultatet tillsammans och du får ett skriftligt '
              'utlåtande. Vi lägger stor vikt vid att identifiera dina styrkor och svårigheter, '
              'så att rekommendationerna blir konkreta — oavsett vad utredningen visar.</p>',
-             utredning)}
+             utredning,
+             more=(b, 'vuxna/utredning/', 'Om utredning och bedömning'))}
 
 {hub_section('psykiatri', 'Psykiatrisk bedömning',
              'Konsultation med specialistläkare.',
@@ -896,7 +955,8 @@ def build_vuxna():
              'psykiatri och kan erbjuda psykiatrisk bedömning och behandling som komplement '
              'till psykologisk behandling. Kontakta oss för att höra hur det kan se ut i '
              'ditt fall.</p>',
-             '', tone='band--hi')}
+             '', tone='band--hi',
+             more=(b, 'vuxna/psykiatri/', 'Om psykiatrisk bedömning'))}
 
 {process_band(b)}
 {team_subset(b, ['angeli-holmstedt', 'thomas-alm', 'jens-karstrom', 'aksel-reppling'],
@@ -921,44 +981,54 @@ def build_vuxna():
 # ==========================================================================
 def build_barn():
     b = '../'
-    behandling = topics_grid([
+    behandling = topics_grid(b, [
         ('Oro, ängslan och ångest',
-         'Oro som tar över vardagen, skolvägran, separationsångest och social ångest.'),
+         'Oro som tar över vardagen, skolvägran, separationsångest och social ångest.',
+         'barn-och-ungdom/behandling/oro-angest/'),
         ('Nedstämdhet och depression',
          'När barnet eller ungdomen drar sig undan, tappar intresse eller blir '
-         'irriterad och ledsen utan tydlig anledning.'),
+         'irriterad och ledsen utan tydlig anledning.',
+         'barn-och-ungdom/behandling/depression/'),
         ('Tvångstankar och tvångshandlingar',
-         'OCD hos barn och unga, där behandlingen görs tillsammans med föräldrarna.'),
+         'OCD hos barn och unga, där behandlingen görs tillsammans med föräldrarna.',
+         'barn-och-ungdom/behandling/ocd/'),
         ('Sömnproblem',
-         'Svårt att somna, nattliga uppvaknanden och dygnsrytm som glidit.'),
+         'Svårt att somna, nattliga uppvaknanden och dygnsrytm som glidit.',
+         'barn-och-ungdom/behandling/somn/'),
         ('Beteenden som utmanar',
          'Utbrott, trots och aggressivitet — där vi arbetar lika mycket med de vuxna '
-         'runt barnet som med barnet självt.'),
+         'runt barnet som med barnet självt.',
+         'barn-och-ungdom/behandling/beteende/'),
     ], three=True)
 
-    utredning = topics_grid([
+    utredning = topics_grid(b, [
         ('Utredning av adhd',
          'Neuropsykiatrisk utredning av barn och ungdomar, i nära samarbete med '
-         'föräldrar och skola.'),
+         'föräldrar och skola.', 'barn-och-ungdom/utredning/adhd/'),
         ('Utredning av autism',
          'Bedömning av autismspektrumtillstånd. Karin Holmström har lett ett '
-         'specialiserat utredningsteam inom området.'),
+         'specialiserat utredningsteam inom området.',
+         'barn-och-ungdom/utredning/autism/'),
         ('Intellektuell funktion',
          'Psykologutredning av intellektuell funktion, ofta som underlag för rätt '
-         'stöd i skolan.'),
+         'stöd i skolan.', 'barn-och-ungdom/utredning/intellektuell-funktion/'),
     ], three=True)
 
-    stod = topics_grid([
+    stod = topics_grid(b, [
         ('Föräldrar och anhöriga',
          'Stöd och rådgivning när du känner dig osäker i föräldraskapet, eller när '
-         'ditt barn inte kan eller vill gå i behandling själv.'),
+         'ditt barn inte kan eller vill gå i behandling själv.',
+         'barn-och-ungdom/stod/foraldrar/'),
         ('Skola och elevhälsa',
          'Konsultation, handledning och skolpsykologiska utredningar. Vi arbetar på '
-         'konsultbasis i elevhälsoteam från förskoleklass till årskurs 9.'),
+         'konsultbasis i elevhälsoteam från förskoleklass till årskurs 9.',
+         'barn-och-ungdom/stod/skola/'),
         ('HVB-hem och familjehem',
-         'Handledning till personalgrupper och konsultation i enskilda ärenden.'),
+         'Handledning till personalgrupper och konsultation i enskilda ärenden.',
+         'barn-och-ungdom/stod/hvb-familjehem/'),
         ('Socialtjänst',
-         'Utredning, bedömning och handledning som underlag för era insatser.'),
+         'Utredning, bedömning och handledning som underlag för era insatser.',
+         'barn-och-ungdom/stod/socialtjanst/'),
     ])
 
     body = f'''
@@ -985,9 +1055,9 @@ def build_barn():
         med barnet självt.</p>
       </div>
       {contents_list(b, [
-        ('Psykologisk behandling', 'behandling'),
-        ('Utredning &amp; bedömning', 'utredning'),
-        ('Stöd till vuxna runt barnet', 'stod'),
+        ('Psykologisk behandling', 'barn-och-ungdom/behandling/'),
+        ('Utredning &amp; bedömning', 'barn-och-ungdom/utredning/'),
+        ('Stöd till vuxna runt barnet', 'barn-och-ungdom/stod/'),
       ])}
     </div>
   </div>
@@ -999,7 +1069,8 @@ def build_barn():
              'behandlingsprocessen, antingen genom kontinuerligt föräldrastöd eller '
              'regelbundna avstämningar. Möten och samordning med skolan kan också vara '
              'en viktig pusselbit.</p>',
-             behandling, tone='band--hi')}
+             behandling, tone='band--hi',
+             more=(b, 'barn-och-ungdom/behandling/', 'Om psykologisk behandling'))}
 
 {hub_section('utredning', 'Utredning &amp; bedömning',
              'Neuropsykiatrisk utredning av barn och unga.',
@@ -1007,14 +1078,16 @@ def build_barn():
              'utreda barn i alla åldrar. Utredningen börjar med ett bedömningssamtal, och '
              'avslutas med en genomgång av resultatet och ett skriftligt utlåtande med '
              'konkreta rekommendationer till hem och skola.</p>',
-             utredning)}
+             utredning,
+             more=(b, 'barn-och-ungdom/utredning/', 'Om utredning av barn och unga'))}
 
 {hub_section('stod', 'Råd, stöd och handledning',
              'Stöd till de vuxna runt barnet.',
              '<p style="margin-bottom:0">Ofta är det de vuxna i barnets närhet som kan skapa '
              'störst förändring. Vi arbetar med föräldrar, skolpersonal, behandlingshem och '
              'socialtjänst — genom rådgivning, handledning och utbildning.</p>',
-             stod, tone='band--hi')}
+             stod, tone='band--hi',
+             more=(b, 'barn-och-ungdom/stod/', 'Om råd, stöd och handledning'))}
 
 <section class="bleed">
   <div class="bleed__media">{pic_wide(b, 'barn-play', 'Ett barn som bygger med klossar')}</div>
@@ -1052,7 +1125,7 @@ def build_barn():
 # ==========================================================================
 def build_org():
     b = '../'
-    handledning = topics_grid([
+    handledning = topics_grid(b, [
         ('Verksamhetshandledning',
          'Regelbunden handledning för arbetsgrupper inom vård, skola, socialtjänst '
          'och behandlingshem — med fokus på ärenden, metod och arbetsmiljö.'),
@@ -1064,7 +1137,7 @@ def build_org():
          'personalärenden.'),
     ], three=True)
 
-    utbildning = topics_grid([
+    utbildning = topics_grid(b, [
         ('Föreläsningar och workshops',
          'Om stress och utmattning, oro och ångest, depression, trauma, '
          'beroendeproblematik och neuropsykiatri.'),
@@ -1101,10 +1174,11 @@ def build_org():
         online och kommer ut till arbetsgivare runt om i landet.</p>
       </div>
       {contents_list(b, [
-        ('Handledning &amp; coaching', 'handledning'),
-        ('Föreläsningar &amp; utbildning', 'utbildning'),
-        ('Rehabilitering', 'rehabilitering'),
-        ('Skadligt bruk på arbetsplatsen', 'skadligt-bruk'),
+        ('Handledning &amp; coaching', 'organisationer/handledning/'),
+        ('Föreläsningar &amp; utbildning', 'organisationer/utbildning/'),
+        ('Rehabilitering', 'organisationer/rehabilitering/'),
+        ('Skadligt bruk på arbetsplatsen', 'organisationer/skadligt-bruk/'),
+        ('Kontakt för uppdrag', 'organisationer/kontakt/'),
       ])}
     </div>
   </div>
@@ -1116,14 +1190,16 @@ def build_org():
              'erfarenhet från psykiatri, primärvård, beroendevård, skola och företag. '
              'Barry Karlsson handleder med särskilt fokus på LSS, neuropsykiatri och '
              'kollegialt stöd.</p>',
-             handledning, tone='band--hi')}
+             handledning, tone='band--hi',
+             more=(b, 'organisationer/handledning/', 'Om handledning och coaching'))}
 
 {hub_section('utbildning', 'Föreläsningar &amp; utbildning',
              'Utbildning i KBT, MI och mindfulness.',
              '<p style="margin-bottom:0">Vi håller föreläsningar, workshops och längre '
              'utbildningar, anpassade efter verksamhetens behov. Flera av oss undervisar '
              'eller har undervisat vid Uppsala universitet.</p>',
-             utbildning)}
+             utbildning,
+             more=(b, 'organisationer/utbildning/', 'Om föreläsningar och utbildning'))}
 
 {hub_section('rehabilitering', 'Rehabilitering',
              'Tillbaka till arbetet, hållbart.',
@@ -1131,7 +1207,8 @@ def build_org():
              'utmattning — bedömning, behandling och stöd i återgång till arbete, i '
              'samarbete med arbetsgivare och företagshälsovård. Vi arbetar med både '
              'individen och de förutsättningar som ska tas tillbaka till.</p>',
-             '', tone='band--hi')}
+             '', tone='band--hi',
+             more=(b, 'organisationer/rehabilitering/', 'Om rehabilitering'))}
 
 {hub_section('skadligt-bruk', 'Skadligt bruk på arbetsplatsen',
              'Alkohol, läkemedel och spel i arbetslivet.',
@@ -1139,7 +1216,8 @@ def build_org():
              'beroende, och stöd till chefer som behöver hantera en oroande situation. '
              'Thomas Alm och Angeli Holmstedt har båda arbetat inom beroendeområdet i '
              'decennier, kliniskt och i forskning.</p>',
-             '')}
+             '',
+             more=(b, 'organisationer/skadligt-bruk/', 'Om skadligt bruk i arbetslivet'))}
 
 <section class="band band--deep">
   <div class="wrap split">
@@ -1523,7 +1601,7 @@ def build_faq():
 # ==========================================================================
 def build_om_oss():
     b = '../'
-    metoder = topics_grid([
+    metoder = topics_grid(b, [
         ('Beteendeterapi och kognitiv terapi',
          'Grunderna i KBT — att förändra beteenden och att arbeta med tankar och '
          'tolkningar.'),
@@ -1916,19 +1994,283 @@ def build_akut():
 
 
 # ==========================================================================
+# ==========================================================================
+# Topic tree: the level-2 hubs and level-3 articles.
+#
+# This is the layer the old site carried at /vuxna/psykologisk-behandling-terapi/*
+# and that the first cut of the redesign collapsed into page anchors. Collapsing
+# it cost 33 indexable URLs, each of which was the landing page for a distinct
+# search. They come back here as real pages, with the sibling navigator the old
+# site had — plus breadcrumbs, named clinicians and structured data, which it
+# did not.
+# ==========================================================================
+def node_path(*slugs):
+    """('vuxna', 'behandling', 'oro-angest') -> vuxna/behandling/oro-angest/index.html"""
+    return '/'.join(slugs) + '/index.html'
+
+
+def to_href(base, path):
+    """Content-tree paths are written root-relative and may omit index.html."""
+    if path.endswith('/'):
+        path += 'index.html'
+    return base + path
+
+
+def side_nav(base, section, l2_slug, l3_slug=None):
+    """The sibling navigator: every level-2 page in this section, with the
+    active one's children nested underneath. Sticky beside the article on
+    desktop; a closed <details> above it on phones."""
+    items = []
+    for c in section['children']:
+        active2 = c['slug'] == l2_slug
+        cur = ' aria-current="page"' if active2 and not l3_slug else ''
+        cls = ' class="is-open"' if active2 else ''
+        href = to_href(base, node_path(section['slug'], c['slug']))
+        items.append(f'<li{cls}><a href="{href}"{cur}>{H.escape(c["label"])}</a>')
+        kids = c.get('children') or []
+        if kids and active2:
+            items.append('<ul class="sidenav__sub">')
+            for g in kids:
+                gcur = ' aria-current="page"' if g['slug'] == l3_slug else ''
+                ghref = to_href(base, node_path(section['slug'], c['slug'], g['slug']))
+                items.append(
+                    f'<li><a href="{ghref}"{gcur}>{H.escape(g["label"])}</a></li>')
+            items.append('</ul>')
+        items.append('</li>')
+    inner = '\n        '.join(items)
+    shref = to_href(base, section['slug'] + '/index.html')
+    return f'''<nav class="sidenav" aria-label="Innehåll i {H.escape(section["label"])}">
+    <details class="sidenav__box" open>
+      <summary class="sidenav__head">
+        <span>{H.escape(section['label'])}</span>
+        {icon('chevron-down', 'sidenav__chev')}
+      </summary>
+      <ul class="sidenav__list">
+        {inner}
+      </ul>
+      <p class="sidenav__all"><a href="{shref}">Översikt {H.escape(section['label'].lower())} {ARROW}</a></p>
+    </details>
+  </nav>'''
+
+
+def crumbs(base, trail):
+    """trail: [(label, path-or-None)], last item is the current page."""
+    out = []
+    for label, path in trail[:-1]:
+        out.append(f'<a href="{to_href(base, path)}">{H.escape(label)}</a><span>/</span>')
+    out.append(H.escape(trail[-1][0]))
+    return ''.join(out)
+
+
+def breadcrumb_ld(trail):
+    items = []
+    for i, (label, path) in enumerate(trail, 1):
+        url = SITE + '/' + re.sub(r'index\.html$', '', path) if path else None
+        item = f'"name":{json_str(label)}'
+        if url:
+            item += f',"item":"{url}"'
+        items.append('{"@type":"ListItem","position":%d,%s}' % (i, item))
+    return ('<script type="application/ld+json">\n'
+            '{"@context":"https://schema.org","@type":"BreadcrumbList",'
+            '"itemListElement":[' + ','.join(items) + ']}\n</script>\n')
+
+
+def article_ld(title, desc, path, people):
+    """MedicalWebPage with named, credentialed authors — the E-E-A-T signal the
+    old topic pages had none of. Google weights it heavily for health content."""
+    url = SITE + '/' + re.sub(r'index\.html$', '', path)
+    authors = ','.join(
+        '{"@type":"Person","name":%s,"jobTitle":%s,"url":"%s/medarbetare/%s/"}'
+        % (json_str(BY_SLUG[s]['name']), json_str(BY_SLUG[s]['role']), SITE, s)
+        for s in people if s in BY_SLUG)
+    a = f',"author":[{authors}]' if authors else ''
+    return ('<script type="application/ld+json">\n'
+            '{"@context":"https://schema.org","@type":"MedicalWebPage",'
+            f'"name":{json_str(title)},"description":{json_str(desc)},"url":"{url}",'
+            '"inLanguage":"sv-SE",'
+            '"publisher":{"@type":"MedicalBusiness","name":"KBT-Konsulterna i Uppsala",'
+            f'"url":"{SITE}"}}{a}}}\n</script>\n')
+
+
+def json_str(s):
+    return '"' + s.replace('\\', '\\\\').replace('"', '\\"') + '"'
+
+
+def people_block(base, slugs):
+    """Who at the practice works with this. A clinic's topic page should say."""
+    if not slugs:
+        return ''
+    rows = '\n      '.join(
+        f'''<a class="byline" href="{base}medarbetare/{s}.html">
+        <span class="byline__media">{pic_person(base, s, BY_SLUG[s]["name"], sizes="120px")}</span>
+        <span class="byline__text">
+          <span class="byline__name">{BY_SLUG[s]["name"]}</span>
+          <span class="byline__role">{BY_SLUG[s]["role"]}</span>
+        </span>
+      </a>''' for s in slugs if s in BY_SLUG)
+    return f'''<aside class="bylines">
+      <h2 class="bylines__head">Vem träffar du?</h2>
+      <div class="bylines__grid">
+      {rows}
+      </div>
+      <p class="bylines__note"><a class="a-link" href="{base}medarbetare/index.html">Alla medarbetare {ARROW}</a></p>
+    </aside>'''
+
+
+def also_block(base, also):
+    if not also:
+        return ''
+    lis = '\n      '.join(
+        f'<li><a href="{to_href(base, p)}"><span>{H.escape(l)}</span>{ARROW}</a></li>'
+        for l, p in also)
+    return f'''<nav class="alsoread" aria-label="Läs vidare">
+      <h2 class="alsoread__head">Läs vidare</h2>
+      <ul class="linklist">
+      {lis}
+    </ul>
+    </nav>'''
+
+
+def child_cards(base, section, parent):
+    kids = parent.get('children') or []
+    if not kids:
+        return ''
+    cards = '\n      '.join(
+        f'''<a class="topiccard" href="{to_href(base, node_path(section["slug"], parent["slug"], g["slug"]))}">
+        <h3>{H.escape(g['label'])}</h3>
+        <p>{H.escape(g['lede'])}</p>
+        <span class="topiccard__go">Läs mer {ARROW}</span>
+      </a>''' for g in kids)
+    return f'''<section class="childgrid">
+      <h2 class="childgrid__head">{H.escape(parent['label'])} — vad vi hjälper med</h2>
+      <div class="topiccards">
+      {cards}
+      </div>
+    </section>'''
+
+
+def prev_next(base, section, parent, node):
+    """Sequential links across the level-3 siblings: real internal link equity
+    between the articles, which a flat sidebar alone does not create."""
+    kids = parent.get('children') or []
+    if not kids or node is parent:
+        return ''
+    i = kids.index(node)
+    prev = kids[i - 1] if i > 0 else None
+    nxt = kids[i + 1] if i < len(kids) - 1 else None
+    out = []
+    if prev:
+        out.append(f'''<a class="pn pn--prev" href="{to_href(base, node_path(section["slug"], parent["slug"], prev["slug"]))}">
+        <span class="pn__dir">Föregående</span><span class="pn__label">{H.escape(prev['label'])}</span></a>''')
+    if nxt:
+        out.append(f'''<a class="pn pn--next" href="{to_href(base, node_path(section["slug"], parent["slug"], nxt["slug"]))}">
+        <span class="pn__dir">Nästa</span><span class="pn__label">{H.escape(nxt['label'])}</span></a>''')
+    return f'<nav class="pnav" aria-label="Fler ämnen">\n      ' + '\n      '.join(out) + '\n    </nav>'
+
+
+def build_topic_page(section, parent, node=None):
+    """One article. node is None for a level-2 hub, otherwise the level-3 page."""
+    is_hub = node is None
+    n = parent if is_hub else node
+    slugs = ([section['slug'], parent['slug']] if is_hub
+             else [section['slug'], parent['slug'], node['slug']])
+    path = node_path(*slugs)
+    base = '../' * path.count('/')
+
+    trail = [('Hem', 'index.html'), (section['label'], section['slug'] + '/index.html')]
+    if is_hub:
+        trail.append((parent['label'], None))
+    else:
+        trail.append((parent['label'], node_path(section['slug'], parent['slug'])))
+        trail.append((node['label'], None))
+
+    body_html = n['body'].replace('{base}', base)
+    extra = (breadcrumb_ld([(l, p or path) for l, p in trail])
+             + article_ld(n['title'], n['desc'], path, n.get('people') or []))
+
+    inner = f'''<article class="article">
+    <p class="crumb">{crumbs(base, trail)}</p>
+    <h1>{H.escape(n['h1'])}</h1>
+    <p class="article__lede">{H.escape(n['lede'])}</p>
+    <div class="prose article__body">{body_html}</div>
+    {people_block(base, n.get('people') or [])}
+    {child_cards(base, section, parent) if is_hub else ''}
+    {also_block(base, n.get('also') or [])}
+    {prev_next(base, section, parent, n)}
+  </article>'''
+
+    # Article before navigator in source order: a phone reader and a crawler
+    # both meet the h1 first, and on mobile the sibling list falls naturally
+    # below the piece it belongs to. CSS puts it back in the left column on
+    # desktop.
+    body = f'''<section class="band band--article">
+  <div class="wrap layout-side">
+    {inner}
+    {side_nav(base, section, parent['slug'], None if is_hub else node['slug'])}
+  </div>
+</section>
+
+{cta_band(base)}
+{akut_strip(base)}
+'''
+    return page(path, n['title'], n['desc'], body,
+                ogimg=section.get('img', 'hero-room'), extra=extra)
+
+
+def build_topics():
+    total = 0
+    count = 0
+    for section in TREE:
+        for parent in section['children']:
+            total += build_topic_page(section, parent)
+            count += 1
+            for g in parent.get('children') or []:
+                total += build_topic_page(section, parent, g)
+                count += 1
+    print(f'  {count} topic pages')
+    return total
+
+
+def build_sitemap():
+    """Every canonical URL, so the 38 new topic pages get discovered at launch
+    rather than waiting to be crawled through the hubs."""
+    urls = ['']                                   # homepage
+    for path in ('vuxna/', 'barn-och-ungdom/', 'organisationer/', 'medarbetare/',
+                 'priser/', 'kontakt/', 'om-oss/', 'om-oss/vanliga-fragor.html',
+                 'akut-hjalp/'):
+        urls.append(path)
+    urls += [f'medarbetare/{p["slug"]}/' for p in TEAM]
+    for section in TREE:
+        for parent in section['children']:
+            urls.append(f'{section["slug"]}/{parent["slug"]}/')
+            for g in parent.get('children') or []:
+                urls.append(f'{section["slug"]}/{parent["slug"]}/{g["slug"]}/')
+    body = '\n'.join(f'  <url><loc>{SITE}/{u}</loc></url>' for u in urls)
+    out = ('<?xml version="1.0" encoding="UTF-8"?>\n'
+           '<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">\n'
+           f'{body}\n</urlset>\n')
+    with open('sitemap.xml', 'w', encoding='utf-8') as f:
+        f.write(out)
+    print(f'  sitemap.xml: {len(urls)} URLs')
+    return len(out)
+
+
 def main():
     total = 0
-    built = []
+    pages = 0
     for fn in (build_home, build_vuxna, build_barn, build_org,
                build_medarbetare, build_priser, build_kontakt,
                build_om_oss, build_faq, build_akut):
-        n = fn()
-        total += n
-        built.append(n)
+        total += fn()
+        pages += 1
     for p in TEAM:
         total += build_bio(p)
-        built.append(0)
-    print(f'Built {len(built)} pages, {total // 1024} KB of HTML.')
+        pages += 1
+    total += build_topics()
+    build_sitemap()
+    pages += sum(1 + len(c.get('children') or [])
+                 for s in TREE for c in s['children'])
+    print(f'Built {pages} pages, {total // 1024} KB of HTML.')
 
 
 if __name__ == '__main__':
