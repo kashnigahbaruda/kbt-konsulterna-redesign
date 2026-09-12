@@ -56,7 +56,8 @@ and buries booking and prices inside a 12-item "OM OSS & INFO" menu.
 
 ### The topic layer
 
-The current site carries 33 small pages, one per problem someone might search for
+The current site carries 38 pages in this layer — 13 section hubs and 25 small pages, one
+per problem someone might search for
 (`/vuxna/psykologisk-behandling-terapi/flygfobi/`, `…/sorg/`, and so on), reachable through a
 sidebar navigator. The client added them for SEO, and they are the pages that rank for the
 long-tail queries — "flygfobi behandling uppsala", "adhd utredning vuxen privat".
@@ -72,8 +73,12 @@ Each one carries what the originals did not:
 - **Related topics and prev/next**, so the articles link to each other rather than only
   upward to the hub.
 
-The originals were thin — eleven under 200 words, and thirty of the thirty-eight
-pages under 350 once ported. They have since been **expanded to ~500 words each**
+A client-facing summary of all this — in Swedish, ready to send to the practice as-is —
+is held with the other working documents outside this repo (`09-TILL-KUNDEN-AMNESSIDOR.md`).
+It covers what changed, what the practice needs to sign off, and what to expect at launch.
+
+The originals were thin — fourteen under 200 words, the shortest 58, and thirty of the
+thirty-eight under 350 once ported. They have since been **expanded to ~500 words each**
 (18,750 words across the topic layer; median 505, shortest 337). That new material is
 written by us, not ported, and needs the client's clinical sign-off — see
 *[Known gaps](#known-gaps)*.
@@ -232,7 +237,8 @@ file; the generated HTML here is complete and standalone without it.
    Psykologförbundet, MINT, BTF). They are third-party trademarks, and Socialstyrelsen in
    particular is a government authority with rules about implying endorsement.
 6. **Set up the redirects.** 69 old URLs need to 301 to a single canonical target, one hop
-   only — the explicit map is in `docs/08-REDIRECTS.md`. Wildcards will not do: seven of the
+   only — the explicit 69-row map is held with the working documents outside this repo
+   (`08-REDIRECTS.md`). Wildcards will not do: seven of the
    ten treatment slugs change. Every target in that map has been verified to exist.
 7. **Submit the new `sitemap.xml`** in the same release as the redirects, and retire the old
    sitemap entries at the same time.
