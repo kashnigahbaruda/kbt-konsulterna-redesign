@@ -12,3 +12,5 @@ assets/img/_src/
 .DS_Store
 *.pyc
 __pycache__/
+
+tmp/
