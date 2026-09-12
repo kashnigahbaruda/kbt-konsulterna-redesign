@@ -99,10 +99,9 @@ def main():
 # --------------------------------------------------------------------------
 # Brand marks
 #
-# logo.png ships fully opaque (white background) and btf.jpg has no alpha at
-# all, so both render as white boxes on any non-white ground. Key the white
-# out, feathering the edge band so the marks stay smooth, and emit a reversed
-# white version for use on the dark footer.
+# btf.jpg has no alpha, so it renders as a white box on any non-white ground.
+# (The logo is now an SVG, see build-logo.py.) Key the white
+# out, feathering the edge band so the mark stays smooth.
 # --------------------------------------------------------------------------
 def key_white(src, dest, make_white=False, floor=6, ramp=42):
     im = Image.open(src).convert('RGB')
@@ -123,8 +122,6 @@ def key_white(src, dest, make_white=False, floor=6, ramp=42):
 
 def build_brand():
     jobs = [
-        ('assets/brand/logo.png', 'assets/brand/logo-mark.png', False),
-        ('assets/brand/logo.png', 'assets/brand/logo-white.png', True),
         ('assets/brand/btf.jpg', 'assets/brand/btf.png', False),
     ]
     print('\nBrand marks (keying out white backgrounds):')

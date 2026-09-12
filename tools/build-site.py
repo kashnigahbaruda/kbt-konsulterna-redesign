@@ -233,7 +233,9 @@ HEAD_TPL = '''<!doctype html>
 <meta property="og:url" content="{canonical}">
 <meta property="og:image" content="{site}/assets/img/{ogimg}.jpg">
 <meta name="twitter:card" content="summary_large_image">
-<link rel="icon" href="{base}assets/brand/logo-mark.png">
+<link rel="icon" href="{base}assets/brand/logo-mark.svg" type="image/svg+xml">
+<link rel="icon" href="{base}assets/brand/icon-512.png" type="image/png" sizes="512x512">
+<link rel="apple-touch-icon" href="{base}assets/brand/apple-touch-icon.png">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Familjen+Grotesk:wght@400;500;600;700&family=Newsreader:opsz,wght@6..72,400;6..72,500&display=swap">
@@ -266,7 +268,7 @@ HEAD_TPL = '''<!doctype html>
 <header class="site-head">
   <div class="wrap site-head__inner">
     <a class="site-head__logo" href="{base}index.html">
-      <img src="{base}assets/brand/logo-mark.png" alt="KBT-Konsulterna i Uppsala" width="271" height="73">
+      <img src="{base}assets/brand/logo.svg" alt="KBT-Konsulterna i Uppsala" width="{logo_w}" height="{logo_h}">
     </a>
     <nav class="nav" aria-label="Huvudmeny">
         {nav}
@@ -303,7 +305,7 @@ FOOT_TPL = '''</main>
     <div class="site-foot__grid">
       <div>
         <div class="site-foot__logo">
-          <img src="{base}assets/brand/logo-white.png" alt="KBT-Konsulterna i Uppsala" width="271" height="73">
+          <img src="{base}assets/brand/logo-white.svg" alt="KBT-Konsulterna i Uppsala" width="{logo_w}" height="{logo_h}">
         </div>
         <address class="site-foot__addr">
           {addr}<br>
@@ -349,6 +351,13 @@ FOOT_TPL = '''</main>
 '''
 
 
+def logo_size():
+    """The intrinsic size of the logo SVG, so the <img> reserves the right box."""
+    m = re.search(r'viewBox="0 0 (\d+) (\d+)"', open('assets/brand/logo.svg', encoding='utf-8').read())
+    return m.group(1), m.group(2)
+LOGO_W, LOGO_H = logo_size()
+
+
 def page(path, title, desc, body, ogimg='hero-room', extra='', ogtitle=None):
     depth = path.count('/')
     base = '../' * depth
@@ -361,8 +370,9 @@ def page(path, title, desc, body, ogimg='hero-room', extra='', ogtitle=None):
         title=H.escape(title), desc=H.escape(desc), canonical=canonical,
         ogtitle=H.escape(ogtitle or title), site=SITE, ogimg=ogimg, base=base,
         nav=nav_html(base, current), mnav=mobile_nav_html(base, current),
-        tel=TEL, tel_href=TEL_HREF, extra=extra)
-    foot = FOOT_TPL.format(base=base, addr=ADDR, tel=TEL, tel_href=TEL_HREF, mail=MAIL)
+        tel=TEL, tel_href=TEL_HREF, extra=extra, logo_w=LOGO_W, logo_h=LOGO_H)
+    foot = FOOT_TPL.format(base=base, addr=ADDR, tel=TEL, tel_href=TEL_HREF, mail=MAIL,
+                           logo_w=LOGO_W, logo_h=LOGO_H)
     # A relative href ending in "/" resolves over HTTP but 404s over file://,
     # which this build promises works. Normalise them all rather than relying on
     # every hand-written link in the article copy remembering to say index.html.

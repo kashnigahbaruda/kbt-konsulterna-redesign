@@ -215,9 +215,12 @@ running both.
 python3 tools/build-site.py     # regenerate all 55 pages + sitemap.xml
 python3 tools/fetch-images.py   # re-download source imagery
 python3 tools/build-images.py   # regenerate responsive variants + keyed brand marks
+python3 tools/build-logo.py     # regenerate the logo SVGs + favicons from the client's file
 ```
 
-`build-images.py` needs Pillow (`pip install Pillow`). Nothing else has dependencies.
+`build-images.py` needs Pillow (`pip install Pillow`); `build-logo.py` needs fonttools and
+Pillow, and only has to run when the client's logo file changes. Nothing else has
+dependencies.
 
 Note: `build-site.py` reads the bios and FAQs from a crawl of the current site
 (`research/crawl-pages.json`), which is not included in this repo. Re-running it needs that
@@ -245,8 +248,9 @@ file; the generated HTML here is complete and standalone without it.
 
 ## Images and licensing
 
-Team photography, the logo and the accreditation marks belong to the client and are reused
-from the current site. All stock photography is **CC0 / public domain**, sourced from
+Team photography, the logo and the accreditation marks belong to the client. The logo files
+in `assets/brand/` are generated from the client's outlined lockup (`heart-source.svg`),
+recoloured to the site's deep green. All stock photography is **CC0 / public domain**, sourced from
 Wikimedia Commons, so there is no ongoing licence obligation and no risk of a stock-photo
 invoice later.
 
