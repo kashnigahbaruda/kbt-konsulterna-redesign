@@ -384,14 +384,38 @@ button { font: inherit; }
   .router__to { white-space: normal; }
 }
 
-/* --- Doors (three audiences) ---------------------------------------------- */
+/* --- Doors (three audiences) ----------------------------------------------
+   The title is set on the photograph itself, under the same scrim treatment
+   as the hero and the full-bleed bands, and the images run tall at wide
+   viewports so the three read as doorways rather than thumbnails. */
 .doors { display: grid; gap: clamp(1.5rem, 3vw, 2.5rem); }
-@media (min-width: 52rem) { .doors { grid-template-columns: repeat(3, 1fr); } }
+@media (min-width: 52rem) {
+  .doors { grid-template-columns: repeat(3, 1fr); }
+}
 .door { display: flex; flex-direction: column; text-decoration: none; }
-.door__media { overflow: hidden; margin-bottom: 1.35rem; background: var(--sand-soft); }
-.door__media img { width: 100%; height: auto; aspect-ratio: 4 / 3; object-fit: cover; transition: transform 0.5s var(--ease); }
-.door:hover .door__media img { transform: scale(1.035); }
-.door h3 { font-size: var(--step-2); margin-bottom: 0.55rem; }
+.door__media {
+  position: relative; isolation: isolate; overflow: hidden;
+  margin-bottom: 1.35rem; background: var(--sand-soft);
+}
+.door__media img { width: 100%; height: auto; aspect-ratio: 4 / 3; object-fit: cover; transition: transform 0.6s var(--ease); }
+@media (min-width: 52rem) { .door__media img { aspect-ratio: 4 / 5; } }
+.door:hover .door__media img, .door:focus-visible .door__media img { transform: scale(1.04); }
+.door__scrim {
+  position: absolute; inset: 0;
+  background: linear-gradient(to top, rgba(19,41,40,0.82) 0%, rgba(19,41,40,0.42) 36%, rgba(19,41,40,0) 66%);
+  transition: opacity 0.4s var(--ease);
+}
+.door:hover .door__scrim, .door:focus-visible .door__scrim { opacity: 0.92; }
+.door__label {
+  position: absolute; left: 0; right: 0; bottom: 0;
+  padding: 0 clamp(1.1rem, 2.6vw, 1.6rem) clamp(1.1rem, 2.6vw, 1.5rem);
+}
+.door__kicker {
+  display: block; margin-bottom: 0.55rem;
+  font-family: var(--display); font-size: var(--step--1); font-weight: 600;
+  text-transform: uppercase; letter-spacing: 0.11em; color: var(--sand);
+}
+.door__title { color: #fff; font-size: var(--step-3); margin: 0; line-height: 1.02; letter-spacing: -0.025em; }
 .door p { color: var(--body); margin-bottom: 0.9rem; font-size: 1rem; }
 .door__more {
   margin-top: auto;
@@ -401,6 +425,9 @@ button { font: inherit; }
 .door__more { display: flex; align-items: center; gap: 0.4em; }
 .door__more .icon { width: 0.95em; height: 0.95em; transition: transform 0.22s var(--ease); }
 .door:hover .door__more .icon { transform: translateX(4px); }
+/* Stagger the three doors' scroll reveal */
+.doors .door:nth-child(2).reveal { transition-delay: 0.1s; }
+.doors .door:nth-child(3).reveal { transition-delay: 0.2s; }
 
 /* --- Full-bleed image band ------------------------------------------------ */
 .bleed { position: relative; isolation: isolate; }

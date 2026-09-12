@@ -569,26 +569,33 @@ def build_home():
       </a></li>''' for say, to, href in ROUTER)
 
     doors = [
-        ('vuxna', 'Vuxna', 'vuxna/index.html',
+        ('vuxna', 'Vuxna', 'Från 18 år', 'vuxna/index.html',
          'Terapi, parterapi, utredning och behandling vid skadligt bruk. '
          'För dig som är över 18.',
          'Ett ljust rum med en soffa och en fåtölj'),
-        ('barn', 'Barn &amp; ungdom', 'barn-och-ungdom/index.html',
+        ('barn', 'Barn &amp; ungdom', 'Upp till 18 år', 'barn-och-ungdom/index.html',
          'Behandling och utredning för barn och unga — och stöd till dig som är '
          'förälder, lärare eller socialsekreterare.',
          'Ett barn som leker i snön'),
-        ('foretag', 'För organisationer', 'organisationer/index.html',
+        ('foretag', 'För organisationer', 'Uppdrag &amp; utbildning',
+         'organisationer/index.html',
          'Handledning, coaching, föreläsningar och utbildning för arbetsgivare, '
          'skola, vård och socialtjänst.',
          'Ett tomt, ljust mötesrum'),
     ]
     doors_html = '\n      '.join(
-        f'''<a class="door" href="{b}{href}">
-        <div class="door__media">{pic_wide(b, slug, alt, sizes='(min-width: 52rem) 33vw, 92vw')}</div>
-        <h3>{title}</h3>
+        f'''<a class="door" href="{b}{href}" data-reveal>
+        <div class="door__media">
+          {pic_wide(b, slug, alt, sizes='(min-width: 52rem) 33vw, 92vw')}
+          <div class="door__scrim"></div>
+          <div class="door__label">
+            <span class="door__kicker">{kicker}</span>
+            <h3 class="door__title">{title}</h3>
+          </div>
+        </div>
         <p>{text}</p>
         <span class="door__more">Läs mer{ARROW}</span>
-      </a>''' for slug, title, href, text, alt in doors)
+      </a>''' for slug, title, kicker, href, text, alt in doors)
 
     team_html = '\n      '.join(person_card(b, p) for p in TEAM)
 
@@ -602,33 +609,25 @@ def build_home():
       'Ett varmt, ljust rum med en fåtölj vid ett stort fönster',
       full=True, trust=True)}
 
-<!-- Signature element: the plain-language router. -->
 <section class="band">
-  <div class="wrap split">
-    <div>
-      <p class="eyebrow">Var ska jag börja?</p>
-      <p style="font-size:1rem;color:var(--muted);max-width:15rem">Säg det med dina
-      egna ord. Vi visar dig vidare.</p>
+  <div class="wrap">
+    <p class="eyebrow">Medarbetare</p>
+    <div class="split" style="margin-bottom:clamp(2.5rem,5vw,3.5rem)">
+      <div></div>
+      <div class="prose--wide">
+        <h2 data-reveal style="margin-bottom:1.1rem">Hos oss väljer du en person, inte en mottagning.</h2>
+        <p style="margin-bottom:0">Läs om var och en av oss och hör av dig direkt till den
+        du tror passar dig. Är du osäker hjälper vi dig vidare.</p>
+      </div>
     </div>
-    <div>
-      <ul class="router">
-      {router}
-      </ul>
+    <div class="team team--seven">
+      {team_html}
     </div>
+    <p style="margin-top:clamp(2.5rem,5vw,3.5rem);margin-bottom:0"><a class="a-link" href="{b}medarbetare/index.html">Osäker på vem du ska vända dig till? Se vem som arbetar med vad {ARROW}</a></p>
   </div>
 </section>
 
 <section class="band band--hi">
-  <div class="wrap">
-    <p class="eyebrow">Tre ingångar</p>
-    <h2 data-reveal style="max-width:30rem;margin-bottom:clamp(2.5rem,5vw,3.5rem)">Vem söker du hjälp för?</h2>
-    <div class="doors">
-      {doors_html}
-    </div>
-  </div>
-</section>
-
-<section class="band">
   <div class="wrap split">
     <div>
       <p class="eyebrow">Vilka är vi?</p>
@@ -660,19 +659,37 @@ def build_home():
   </div>
 </section>
 
+<!-- Three doors: title set on the photograph, middle door dropped a step. -->
 <section class="band">
   <div class="wrap">
-    <p class="eyebrow">Medarbetare</p>
     <div class="split" style="margin-bottom:clamp(2.5rem,5vw,3.5rem)">
-      <div></div>
+      <div>
+        <p class="eyebrow">Tre ingångar</p>
+      </div>
       <div class="prose--wide">
-        <h2 data-reveal style="margin-bottom:1.1rem">Hos oss väljer du en person, inte en mottagning.</h2>
-        <p style="margin-bottom:0">Läs om var och en av oss och hör av dig direkt till den
-        du tror passar dig. Är du osäker hjälper vi dig vidare.</p>
+        <h2 data-reveal style="margin-bottom:1.1rem">Vem söker du hjälp för?</h2>
+        <p style="margin-bottom:0">Välj den ingång som passar dig bäst. Vet du inte
+        riktigt vad det handlar om? Säg det med dina egna ord här nedanför.</p>
       </div>
     </div>
-    <div class="team team--seven">
-      {team_html}
+    <div class="doors">
+      {doors_html}
+    </div>
+  </div>
+</section>
+
+<!-- Signature element: the plain-language router. -->
+<section class="band band--hi">
+  <div class="wrap split">
+    <div>
+      <p class="eyebrow">Var ska jag börja?</p>
+      <p style="font-size:1rem;color:var(--muted);max-width:15rem">Säg det med dina
+      egna ord. Vi visar dig vidare.</p>
+    </div>
+    <div>
+      <ul class="router">
+      {router}
+      </ul>
     </div>
   </div>
 </section>
