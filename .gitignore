@@ -1,0 +1,14 @@
+# Research and internal notes — deliberately not published.
+# This repo is a shareable public preview of the site itself; the audit and
+# research contain candid notes about the client and named staff.
+docs/
+research/
+
+# CC0 stock originals — 25 MB, re-fetchable with tools/fetch-images.py.
+# The generated web variants in assets/img/ are committed.
+assets/img/_src/
+
+# Local preview / OS noise
+.DS_Store
+*.pyc
+__pycache__/
