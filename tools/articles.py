@@ -141,11 +141,37 @@ depressioner, ofta varvade med mani. Hos barn och ungdomar ser symtomen delvis
 annorlunda ut — se
 <a href="{base}barn-och-ungdom/behandling/depression/">nedstämdhet hos barn och unga</a>.</p>
 
-<h2>Hur vi arbetar</h2>
+<h2>Varför depression håller i sig</h2>
+<p>Depression har en inbyggd logik som gör den svår att ta sig ur. När orken tryter drar
+man ner på det som kräver något — träffa folk, träna, ta itu med det som skjutits upp.
+Det är fullt rimligt i stunden, och samtidigt försvinner då också det som gav energi,
+sammanhang och en känsla av att duga. Måendet sjunker ytterligare, orken blir mindre, och
+man drar ner mer. Det är den nedåtgående spiralen behandlingen riktar sig mot.</p>
+
+<h2>Så arbetar vi</h2>
 <p>Vi börjar med en gemensam bedömning för att skilja depression från exempelvis
 utmattningssyndrom, eftersom behandlingen skiljer sig åt. Därefter arbetar vi vanligen
-med beteendeaktivering, kognitiv terapi och återfallsprevention, med mål som utgår från
-vad som är viktigt för dig.</p>
+med:</p>
+<ul>
+  <li><strong>Beteendeaktivering.</strong> Att stegvis och planerat föra tillbaka
+  aktiviteter som ger mening eller tillfredsställelse — utifrån schema snarare än utifrån
+  lust, eftersom lusten vid depression kommer efter aktiviteten, inte före den. Det är
+  den enskilt mest studerade och verksamma delen.</li>
+  <li><strong>Att arbeta med tankarna.</strong> Att känna igen grubblandet och de
+  självkritiska slutsatserna, och att hitta ett annat sätt att förhålla sig till dem.</li>
+  <li><strong>Sömn och rutiner</strong>, som nästan alltid behöver adresseras
+  parallellt.</li>
+  <li><strong>Återfallsprevention.</strong> Att i slutet av behandlingen kartlägga dina
+  tidiga varningstecken och göra en konkret plan, eftersom depression för många är
+  återkommande.</li>
+</ul>
+
+<h2>Läkemedel och KBT</h2>
+<p>KBT och antidepressiva läkemedel är båda verksamma vid depression, och för många
+fungerar de bra tillsammans. Vi samarbetar med en specialistläkare i psykiatri när
+läkemedelsbedömning är aktuell — se
+<a href="{base}vuxna/psykiatri/index.html">psykiatrisk bedömning</a>. Har du redan
+medicinering hos din vårdcentral går det utmärkt att gå i behandling hos oss parallellt.</p>
 
 <h2>När det blir allvarligt</h2>
 <p>En del får självmordstankar, och risken för självmordsförsök ökar. Då behöver du
@@ -184,16 +210,53 @@ dem, kan det leda till trötthet, nedstämdhet och koncentrationssvårigheter.</
 två veckor, och brukar innebära brist på energi, minskad ork och uthållighet, samt ett
 behov av längre återhämtningstid efter belastning än tidigare.</p>
 
+<p>Det som ofta oroar mest är kognitionen: att inte hitta ord, tappa tråden, läsa samma
+stycke tre gånger, glömma sådant man aldrig brukade glömma. Många tolkar det som att
+något är allvarligt fel med hjärnan. Det är en väntad del av bilden vid utmattning, och
+den delen brukar förbättras — men långsammare än man hoppas.</p>
+
 <h2>Varför bedömningen kommer först</h2>
 <p>Utmattningsdepression är en form av utmattningssyndrom, och begreppen används ibland
 synonymt. Men det är viktigt att skilja mellan depression, utmattningssyndrom och
 utmattningsdepression — framför allt för att behandlingen ser olika ut. Därför gör vi
 alltid en noggrann bedömning innan behandlingen börjar.</p>
 
+<p>Skillnaden är inte akademisk. Vid depression är beteendeaktivering — att stegvis göra
+mer — en central del av behandlingen. Vid utmattning i ett tidigt skede kan samma
+tillvägagångssätt förvärra tillståndet om det görs för fort. Ordningen och takten är en
+del av behandlingen.</p>
+
 <h2>Vad behandlingen innehåller</h2>
-<p>Vi arbetar med belastning och återhämtning, med gränser och krav — både andras och
-dina egna — och med en successiv, hållbar väg tillbaka. Sömnen är ofta en del av
-bilden, och behandlas i så fall parallellt.</p>
+<ul>
+  <li><strong>Kartläggning av belastning och återhämtning.</strong> Inte bara arbetet —
+  också allt det andra som ska rymmas i ett dygn.</li>
+  <li><strong>Återhämtning som planeras.</strong> Vila som ligger i schemat, inte vila
+  som blir över.</li>
+  <li><strong>Sömnen</strong>, som nästan alltid är påverkad och ofta behandlas
+  parallellt. Se <a href="{base}vuxna/behandling/somn/">sömnproblem</a>.</li>
+  <li><strong>Krav och gränser.</strong> Andras krav — och de egna, som ofta är
+  hårdare.</li>
+  <li><strong>Värderingar.</strong> Vad belastningen ska vara till för, och vad som kan
+  få ta mindre plats.</li>
+  <li><strong>Stegvis återgång.</strong> Att bygga upp aktivitet och arbetstid i en takt
+  som håller, i samverkan med arbetsgivare och företagshälsovård när det är aktuellt.</li>
+</ul>
+
+<h2>Sjukskrivning</h2>
+<p>Vissa behöver vara sjukskrivna en period, andra klarar sig med anpassningar och
+fortsätter arbeta. Båda vägarna kan vara rätt. Vi utfärdar inte sjukintyg som psykologer,
+men samarbetar med en specialistläkare i psykiatri när läkarbedömning, intyg eller
+läkemedel behövs — se <a href="{base}vuxna/psykiatri/index.html">psykiatrisk
+bedömning</a>.</p>
+
+<p>Är det din arbetsgivare som vill ordna insatsen, se
+<a href="{base}organisationer/rehabilitering/">rehabilitering</a>.</p>
+
+<h2>Hur lång tid tar det?</h2>
+<p>Utmattning läker långsamt, och de flesta underskattar hur långsamt. Samtidigt går det
+oftast att märka en riktning redan tidigt — i sömn, i tålamod, i hur lång stunden är
+innan man är slut. Vi stämmer av regelbundet att behandlingen går åt rätt håll och att
+takten är rimlig.</p>
 ''',
     ),
     dict(
@@ -220,15 +283,63 @@ insomni.</p>
 Man fungerar sämre under dagen och är missnöjd med sin sömn. Ett kriterium är att
 besvären har funnits i minst tre månader.</p>
 
+<p>Det som gör insomni svår att ta sig ur på egen hand är att de lösningar som ligger
+närmast till hands ofta förvärrar problemet. Man går och lägger sig tidigare för att
+försöka få igen förlorad sömn, ligger kvar på morgonen, sover middag, drar ner på det som
+är ansträngande. Var och en av de sakerna är begriplig — och tillsammans försvagar de
+kopplingen mellan sängen och sömnen.</p>
+
 <h2>Sällan ensamt</h2>
 <p>Sömnlöshet förekommer ofta tillsammans med annat — depression, stress och utmattning,
 skadligt bruk eller ångest. Därför gör vi en helhetsbedömning: en kartläggning av
 sömnen tillsammans med eventuella andra besvär, som grund för en individuell
 behandlingsplan.</p>
 
+<h2>Varför KBT och inte sömntabletter?</h2>
+<p>KBT vid insomni — ofta förkortat KBT-i — rekommenderas i dag som förstahandsval vid
+långvariga sömnbesvär, före sömnläkemedel. Skälet är att effekten håller i sig efter att
+behandlingen avslutats, medan sömnmedel verkar så länge man tar dem och för många blir
+svåra att sluta med.</p>
+
+<p>Det betyder inte att läkemedel är fel. Om du använder sömnmedel i dag går det bra att
+göra behandlingen ändå. En eventuell nedtrappning planeras alltid tillsammans med den
+läkare som skrivit ut dem — aldrig på egen hand och aldrig som ett krav från oss.</p>
+
+<h2>Vad behandlingen innehåller</h2>
+<ul>
+  <li><strong>Sömndagbok.</strong> Vi börjar med att kartlägga hur du faktiskt sover under
+  ett par veckor. Bilden blir nästan alltid en annan än den man bär med sig.</li>
+  <li><strong>Sömnrestriktion.</strong> Att under en period korta ner tiden i sängen så att
+  den motsvarar den sömn du får. Det låter bakvänt och är krävande de första veckorna, men
+  det är den enskilt mest verksamma delen. Metoden passar inte alla, och vi bedömer alltid
+  lämpligheten först.</li>
+  <li><strong>Stimuluskontroll.</strong> Att återupprätta kopplingen mellan säng och sömn —
+  sängen används för att sova i, inte för att ligga vaken och oroa sig i.</li>
+  <li><strong>Att hantera tankarna.</strong> Oro för sömnen håller i sig sömnlösheten. Vi
+  arbetar med grubblandet och med katastroftankarna om hur i morgon ska gå.</li>
+  <li><strong>Sömnvanor och dygnsrytm.</strong> Ljus, motion, koffein, alkohol och
+  regelbundenhet — men som ett komplement, inte som behandlingen i sig.</li>
+</ul>
+
 <h2>Hur lång tid tar det?</h2>
-<p>Rena sömnbesvär kan ofta behandlas relativt snabbt. Behandlingstiden blir längre om
-det finns fler problem med i bilden.</p>
+<p>Rena sömnbesvär kan ofta behandlas relativt snabbt; ett vanligt upplägg är en handfull
+samtal. Behandlingstiden blir längre om det finns fler problem med i bilden — vid samtidig
+depression eller utmattning arbetar vi vanligen med sömnen parallellt med det andra.</p>
+
+<h2>Vanliga frågor</h2>
+
+<h3>Fungerar behandlingen via video?</h3>
+<p>Ja. Sömnbehandling lämpar sig väl för videosamtal, eftersom arbetet till stor del bygger
+på dagboken och på det du provar hemma mellan samtalen.</p>
+
+<h3>Måste jag sluta med mina sömntabletter först?</h3>
+<p>Nej. Många börjar behandlingen med pågående medicinering, och en eventuell nedtrappning
+kommer senare och alltid i samråd med förskrivande läkare.</p>
+
+<h3>Blir jag tröttare innan jag blir bättre?</h3>
+<p>Under de första veckorna av sömnrestriktion brukar dagtröttheten öka innan sömnen börjar
+bli djupare och mer sammanhållen. Det är väntat, du får veta det i förväg, och vi planerar
+när i ditt liv det passar att göra den delen.</p>
 ''',
     ),
     dict(
@@ -263,10 +374,58 @@ eller ser världen som en farlig plats. Man kan också börja undvika mycket i l
 rädsla som bottnar i det som hänt: aktiviteter, platser, relationer, och till och med
 egna känslor och tankar.</p>
 
+<p>Många beskriver också påträngande minnen som kommer utan förvarning, mardrömmar, och
+en känsla av att återuppleva händelsen snarare än att minnas den. Sömnen är nästan alltid
+påverkad. Det är vanligt att skämmas över sina reaktioner och att tolka dem som svaghet.
+De är i stället väntade följder av något som hjärnan inte hunnit bearbeta.</p>
+
+<h2>Varför besvären håller i sig</h2>
+<p>Undvikande är det som mest effektivt håller kvar posttraumatisk stress. Att hålla sig
+borta från platser, samtal, tankar och känslor som påminner ger lättnad i stunden, och
+gör samtidigt att minnet aldrig får chansen att bearbetas och läggas till rätta bland
+andra minnen. Det är därför behandlingen går i motsatt riktning mot det som känns
+naturligt — och därför den fungerar.</p>
+
 <h2>Hur vi behandlar</h2>
 <p>Vi arbetar med evidensbaserad KBT vid PTSD, bland annat prolonged exposure (PE),
 schematerapi och ACT. Behandlingen går i din takt, och exponeringen sker planerat och
 med stöd — aldrig oförberett.</p>
+
+<p>Ett vanligt upplägg innehåller:</p>
+<ul>
+  <li><strong>Psykoedukation.</strong> Att förstå vad som händer i kroppen och varför
+  reaktionerna ser ut som de gör. För många är det i sig en lättnad.</li>
+  <li><strong>Andnings- och nedvarvningsteknik</strong>, som något att ha med sig.</li>
+  <li><strong>Exponering in vivo.</strong> Att stegvis återta platser och situationer som
+  undvikits men som i dag är ofarliga, enligt en plan ni gör tillsammans.</li>
+  <li><strong>Imaginativ exponering.</strong> Att gå igenom minnet i trygg miljö, med
+  psykologen närvarande, tillräckligt många gånger för att det ska förlora sin laddning
+  och bli ett minne bland andra.</li>
+  <li><strong>Bearbetning av slutsatserna.</strong> Det trauman ofta lämnar efter sig är
+  inte bara rädsla utan övertygelser — att det var mitt fel, att jag borde ha gjort
+  annorlunda, att ingen går att lita på. De arbetar vi med särskilt.</li>
+</ul>
+
+<h2>Vanliga frågor</h2>
+
+<h3>Måste jag berätta allt?</h3>
+<p>Du bestämmer takten, och ingenting sker oförberett. Samtidigt är kärnan i behandlingen
+att stegvis närma sig det som undviks, och det arbetet börjar vi inte förrän du känner
+dig trygg med både metoden och med psykologen.</p>
+
+<h3>Kan jag må sämre av behandlingen?</h3>
+<p>Det är vanligt att må något sämre under en period när exponeringen börjar, innan det
+vänder. Du får veta det i förväg, vi följer det noga, och vi lägger upp arbetet så att du
+har återhämtning omkring det.</p>
+
+<h3>Hur många samtal handlar det om?</h3>
+<p>Traumabehandling vid en avgränsad händelse rör sig ofta om ett begränsat antal samtal.
+Har du varit utsatt under lång tid, eller under uppväxten, tar det längre tid och inleds
+vanligen med ett stabiliserande arbete först.</p>
+
+<h3>Tar ni emot remisser?</h3>
+<p>Jens Karström, leg. psykolog, leg. psykoterapeut och specialist i klinisk psykologi,
+arbetar särskilt med trauma och tar emot remisser från Regionen.</p>
 ''',
     ),
     dict(
@@ -302,9 +461,42 @@ bakgrunden.</p>
 fastnar man i sorgeprocessen och kommer inte vidare i sitt liv — och då behövs också
 professionell hjälp.</p>
 
-<h2>Forskning på området</h2>
+<h2>Sorg tar sig fler uttryck än ledsenhet</h2>
+<p>Många blir förvånade över hur mycket annat än sorgsenhet som ryms i en sorg. Det är
+vanligt med ilska — mot vården, mot omgivningen, mot den som dött. Med skuld över det
+man sade eller inte hann säga. Med lättnad, om det föregåtts av lång sjukdom, och med
+skam över den lättnaden. Kroppen är ofta med: trötthet, orolig mage, att man inte kan
+sova eller inte kan göra annat än sova. Koncentrationen och minnet sviktar.</p>
+
+<p>Sorg går sällan i prydliga faser, och den kommer ofta i vågor som utlöses av små
+saker långt efter att omgivningen slutat fråga. Inget av det betyder att något gått
+fel.</p>
+
+<h2>När sorgen fastnar</h2>
+<p>För de flesta blir sorgen med tiden möjlig att bära, utan att den för den skull
+försvinner. För en del gör den inte det. Tecken på att sorgeprocessen kört fast kan vara
+att längtan efter den som dött är lika intensiv efter lång tid, att man undviker allt som
+påminner, eller tvärtom inte kan göra något annat än att söka sig till påminnelserna —
+att livet i praktiken har stannat.</p>
+
+<p>Då finns hjälp att få. Behandlingen handlar inte om att sluta sörja eller att gå
+vidare, utan om att kunna leva med förlusten: att våga närma sig det som undviks, att
+hitta tillbaka till sammanhang och aktiviteter som betyder något, och att ge sorgen en
+plats i livet i stället för hela utrymmet.</p>
+
+<h2>Hos oss</h2>
+<p>Vi tar emot både dig som vill prata av dig med en medmänniska och dig som vill ha
+behandling. Det första samtalet syftar bland annat till att skilja de två sakerna åt —
+ibland är det stöd under en period som behövs, inte terapi.</p>
+
 <p>Barry Karlsson, leg. psykolog och specialist i neuropsykologi, forskar om förlust och
 komplicerad sorg vid Uppsala universitet.</p>
+
+<p>Sorg och depression överlappar, men är inte samma sak och behandlas delvis olika. Om
+du känner igen dig mer i beskrivningen av
+<a href="{base}vuxna/behandling/depression/">nedstämdhet och depression</a> kan den sidan
+passa bättre. Har förlusten skett plötsligt eller under skrämmande omständigheter kan
+<a href="{base}vuxna/behandling/trauma-ptsd/">trauma och PTSD</a> vara mer relevant.</p>
 ''',
     ),
     dict(
@@ -329,6 +521,13 @@ sanningen om dig.</p>
 sådan uppfattning kan utgöra kärnan i en känsla av underlägsenhet som påverkar många
 delar av livet.</p>
 
+<h2>Självkänsla och självförtroende är inte samma sak</h2>
+<p>Självförtroende handlar om vad du tror att du klarar av — det kan vara högt inom något
+område och lågt inom ett annat. Självkänsla handlar om vad du är värd oavsett vad du
+presterar. Det är fullt möjligt att vara skicklig, uppskattad och framgångsrik och ändå
+bära på en grundkänsla av att inte duga. Många som söker hjälp hos oss beskriver just
+det, och blir förvånade över att det går att skilja på de två sakerna.</p>
+
 <h2>Hur visar sig låg självkänsla?</h2>
 <p>Självtvivel kan visa sig som:</p>
 <ul>
@@ -347,6 +546,41 @@ behov av kontroll. I relationer till andra kan det visa sig som blygsel,
 
 <p>Ofta innebär en negativ självbild att man missar möjligheter till utveckling, därför
 att man inte vågar ta risken att misslyckas.</p>
+
+<h2>Varför det håller i sig</h2>
+<p>En negativ självbild är svår att motbevisa, eftersom den påverkar vad man gör. Tror du
+att du är ointressant håller du dig i bakgrunden, och då får du sällan erfarenheter som
+säger något annat. Presterar du för att slippa känna dig otillräcklig, och det går bra,
+är det lätt att tänka att det berodde på ansträngningen snarare än på dig. På så vis blir
+varje utfall en bekräftelse. Det är det mönstret behandlingen riktar sig mot — inte
+tanken i sig.</p>
+
+<h2>Så arbetar vi</h2>
+<ul>
+  <li><strong>Kartläggning.</strong> Vilka situationer väcker självkritiken, vad gör du då,
+  och vad blir konsekvensen på kort och lång sikt?</li>
+  <li><strong>Beteendeexperiment.</strong> Att pröva att göra tvärtom — säga vad du tycker,
+  lämna in något som inte är perfekt, be om hjälp — och se vad som faktiskt händer. Det är
+  erfarenheten, inte argumentet, som förändrar en grundläggande uppfattning.</li>
+  <li><strong>Att arbeta med självkritiken.</strong> Att känna igen den inre rösten och möta
+  den med något annat än att antingen tro på den eller bråka med den.</li>
+  <li><strong>Att sluta undvika.</strong> Perfektionism och undvikande är två sidor av
+  samma sak, och båda behöver minska för att bilden av dig själv ska kunna ändras.</li>
+  <li><strong>Värderingar.</strong> Vad vill du använda ditt liv till, om du slutar
+  använda det till att bevisa något?</li>
+</ul>
+
+<h2>Hur lång tid tar det?</h2>
+<p>Självkänsla förändras långsammare än exempelvis en fobi, eftersom det handlar om
+antaganden som byggts upp under lång tid. Samtidigt märks ofta en skillnad i hur du
+handlar långt innan känslan hunnit ikapp — och det är den ordningen som gäller: först
+gör man annorlunda, sedan känns det annorlunda.</p>
+
+<p>Låg självkänsla förekommer ofta tillsammans med
+<a href="{base}vuxna/behandling/depression/">nedstämdhet</a>,
+<a href="{base}vuxna/behandling/oro-angest/">social ångest</a> eller
+<a href="{base}vuxna/behandling/stress-utmattning/">utmattning</a>. Vi börjar alltid med
+en gemensam bedömning av vad som är mest angeläget att arbeta med först.</p>
 ''',
     ),
     dict(
@@ -379,6 +613,23 @@ utseende, eller låg självkänsla.</p>
 <p>Relationsproblem kan också bottna i arbetsmiljön eller andra svårigheter i
 omgivningen snarare än i personerna.</p>
 
+<h2>Mönster som går igen</h2>
+<p>Många som söker för relationsproblem känner igen sig i att samma sak upprepas, med
+olika människor. Några vanliga mönster:</p>
+<ul>
+  <li><strong>Att ge efter.</strong> Att säga ja när du menar nej, tills irritationen
+  samlas och kommer ut på fel sätt eller mot fel person.</li>
+  <li><strong>Att dra sig undan.</strong> Att hantera konflikt genom att tystna eller gå
+  därifrån, vilket dämpar obehaget i stunden och gör att inget löses.</li>
+  <li><strong>Att kräva och kontrollera.</strong> Att försöka få trygghet genom att söka
+  bekräftelse eller genom att styra, vilket ofta ger kortvarig lättnad och långsiktigt
+  avstånd.</li>
+  <li><strong>Att välja bort.</strong> Att avsluta relationer vid första besvikelsen,
+  innan det blir för nära.</li>
+</ul>
+<p>Mönstren är sällan dumma val. De har oftast fungerat någon gång, i något sammanhang.
+Frågan behandlingen ställer är om de fungerar nu.</p>
+
 <h2>Är relationsproblem en diagnos?</h2>
 <p>Nej — men man kan uppleva problem i relationer inom ramen för många diagnoser, till
 exempel:</p>
@@ -389,9 +640,26 @@ exempel:</p>
   <li>vid autismspektrumtillstånd</li>
 </ul>
 
-<p>Är ni två som vill komma tillsammans arbetar vi med
-<a href="{base}vuxna/parterapi/">parterapi</a>. Terapiformen fungerar också vid
-konflikter mellan personer som inte lever som par.</p>
+<h2>Så arbetar vi</h2>
+<p>Vi börjar med att kartlägga konkreta situationer: vad hände, vad tänkte och kände du,
+vad gjorde du, och hur blev det sedan? Utifrån det arbetar vi med färdigheter som går att
+öva — att säga vad du vill ha utan att anklaga, att stå kvar i en konflikt utan att
+eskalera eller fly, att sätta en gräns och stå för den, och att stå ut med det obehag som
+uppstår när du gör något annat än vanligt.</p>
+
+<p>Vi arbetar också med vad du vill med dina relationer. Det är en annan fråga än vad som
+skaver i dem, och den är ofta lättare att hålla fast vid när det blir svårt.</p>
+
+<h2>Enskilt eller tillsammans?</h2>
+<p>Den här sidan handlar om samtal där du kommer ensam — och det går utmärkt att arbeta
+med en relation även om den andra personen inte är med. Är ni två som vill komma
+tillsammans arbetar vi med <a href="{base}vuxna/parterapi/">parterapi</a>. Den
+terapiformen fungerar också vid konflikter mellan personer som inte lever som par, till
+exempel föräldrar som separerat eller kollegor som inte kan komma överens.</p>
+
+<p>Handlar svårigheterna framför allt om relationen till dig själv är
+<a href="{base}vuxna/behandling/sjalvkansla/">låg självkänsla</a> ofta en mer träffsäker
+ingång.</p>
 ''',
     ),
     dict(
@@ -418,23 +686,59 @@ för hundar och ormar, undviker vaccin, vågar inte bli gravid på grund av spru
 eller blodfobi, eller reser inte alls på grund av rädslan för det instängda utrymmet i
 ett flygplan.</p>
 
+<h2>Varför undvikandet håller rädslan vid liv</h2>
+<p>Varje gång du undviker det du är rädd för sjunker obehaget omedelbart. Den lättnaden
+är en belöning, och den lär hjärnan att undvikandet var det som räddade dig. Slutsatsen
+blir att faran var verklig — och nästa gång blir steget ännu svårare att ta. Det är den
+mekaniken behandlingen bryter, och den är densamma oavsett vad fobin gäller.</p>
+
+<h2>Exponering i praktiken</h2>
+<p>Ni börjar med att tillsammans göra en trappa, från det som väcker lite obehag till det
+som känns omöjligt. Sedan arbetar ni er uppåt, ett steg i taget, och stannar kvar i varje
+steg tillräckligt länge för att obehaget ska hinna sjunka av sig självt medan du är kvar
+i situationen. Det är den erfarenheten — att ångesten går ner utan att du flyr — som
+förändrar saken.</p>
+
+<p>Du bestämmer takten, och inget sker överraskande. Psykologen är med, och vid flera
+specifika fobier går en stor del av behandlingen ut på att göra sakerna tillsammans i
+verkligheten snarare än att prata om dem.</p>
+
+<h2>Blod-, spruts- och skadefobi</h2>
+<p>Blod- och sprutfobi skiljer sig från andra fobier: många svimmar eller är rädda för
+att svimma, eftersom blodtrycket sjunker i stället för att stiga. Där kompletteras
+exponeringen med <em>applied tension</em> — en teknik där du spänner stora muskelgrupper
+för att hålla uppe blodtrycket, så att du kan genomföra exponeringen utan att svimma.
+Det är en av anledningarna till att det är värt att söka hjälp i stället för att träna på
+egen hand.</p>
+
 <h2>Flygfobi</h2>
 <p>Rädslan för att flyga kan kännas logisk med tanke på hur starkt man tror på en möjlig
 katastrof. Vanliga föreställningar är att man ska svimma, bli så rädd att man dör i en
 hjärtinfarkt, få panik och tappa kontrollen, eller att planet ska råka ut för en incident
 eller störta.</p>
 
-<h2>Analys- och behandlingsfas</h2>
 <p>Under analysfasen får du redogöra för din flygrädsla och för vad du tror kommer att
 hända under en flygning. Under behandlingsfasen får du, via exponering, möjlighet att på
 ett kontrollerat sätt utmana de katastroftankarna under en flygning tillsammans med
 terapeuten.</p>
 
+<p>För en del handlar flygrädslan egentligen om det instängda utrymmet, för andra om
+höjden, om att tappa kontrollen eller om att få en panikattack inför andra. Vad rädslan
+faktiskt gäller påverkar hur behandlingen läggs upp, och det är en av de första sakerna
+vi tar reda på.</p>
+
 <h2>Evidensen bakom</h2>
-<p>Exponeringsbehandling vid fobier har säkrad evidens. Behandlingsupplägget vid
-flygfobi bygger på forskningen om andra specifika fobier — blodfobi, klaustrofobi,
-injektionsfobi samt orm- och spindelfobi — där exponering genomgående ger goda
-resultat.</p>
+<p>Exponeringsbehandling vid fobier har säkrad evidens och hör till de mest verksamma
+behandlingar som finns inom psykologin. Behandlingsupplägget vid flygfobi bygger på
+forskningen om andra specifika fobier — blodfobi, klaustrofobi, injektionsfobi samt orm-
+och spindelfobi — där exponering genomgående ger goda resultat.</p>
+
+<h2>Hur lång tid tar det?</h2>
+<p>Avgränsade specifika fobier är bland de tillstånd som går snabbast att behandla, och
+det rör sig ofta om ett fåtal samtal. Finns flera fobier samtidigt, eller
+<a href="{base}vuxna/behandling/oro-angest/">panikångest eller social ångest</a> i botten,
+tar det längre tid — och då är det oftast det bredare ångesttillståndet vi arbetar
+med.</p>
 ''',
     ),
     dict(
@@ -462,11 +766,45 @@ leder till psykisk ohälsa i form av oro och ångest, nedstämdhet och depressio
 självkänsla. Ibland leder det även till ett problematiskt användande av alkohol, droger
 eller ett överdrivet spelande, med allvarliga konsekvenser.</p>
 
-<h2>Behandling, utredning — eller båda</h2>
-<p>Du är välkommen hit både med och utan färdig diagnos. Vill du veta om kriterierna är
+<h2>Det som kommer ovanpå</h2>
+<p>Mycket av det som är tyngst att bära vid en NPF-diagnos i vuxen ålder är inte
+funktionsnedsättningen i sig, utan det som lagt sig ovanpå den under åren: en
+grundläggande känsla av att vara sämre, av att ha misslyckats med sådant som andra
+verkar klara utan ansträngning, och en trötthet efter att länge ha kompenserat i det
+tysta. Den delen går att behandla, oavsett hur svårigheterna i grunden ser ut.</p>
+
+<h2>Vad behandlingen kan innehålla</h2>
+<ul>
+  <li><strong>Struktur och strategier.</strong> Konkreta sätt att komma igång, hålla
+  ordning, planera tid och avsluta det som påbörjats — anpassade efter hur just du
+  fungerar, inte efter hur ett schema borde se ut.</li>
+  <li><strong>Känsloreglering.</strong> Att känna igen och hantera starka känslor innan
+  de tar över, och att återhämta sig snabbare när de gjort det.</li>
+  <li><strong>Självkänsla.</strong> Att arbeta med den inre kritiken efter år av
+  tillsägelser och jämförelser.</li>
+  <li><strong>Sömn och dygnsrytm.</strong> Sömnsvårigheter är mycket vanliga vid adhd och
+  autism och förvärrar nästan allt annat.</li>
+  <li><strong>Överbelastning och återhämtning.</strong> Särskilt vid autism — att
+  planera in vila från intryck och sociala krav innan utmattningen är ett faktum.</li>
+  <li><strong>Ångest och nedstämdhet</strong>, som ofta finns med i bilden och behandlas
+  parallellt.</li>
+</ul>
+
+<h2>Terapin anpassas</h2>
+<p>KBT fungerar väl vid NPF, men behöver ofta läggas upp annorlunda: tydligare ramar,
+konkreta exempel i stället för resonemang, skriftliga sammanfattningar att ta med sig,
+kortare eller färre moment per samtal, och hemuppgifter som är utformade för att faktiskt
+bli gjorda. Det är vårt jobb att anpassa formen — inte ditt att passa in i den.</p>
+
+<h2>Med eller utan diagnos</h2>
+<p>Du är välkommen hit både med och utan färdig utredning. Vill du veta om kriterierna är
 uppfyllda erbjuder vi <a href="{base}vuxna/utredning/index.html">neuropsykiatrisk
 utredning för vuxna</a>. Vill du ha behandling och anpassat stöd utifrån de svårigheter
-du redan känner igen, går det lika bra att börja där.</p>
+du redan känner igen, går det lika bra att börja där — en diagnos är inget krav för att
+få hjälp med det som är svårt.</p>
+
+<p>Har du en diagnos som inte längre känns rätt finns också
+<a href="{base}vuxna/utredning/omprovning/">omprövning av diagnos</a>.</p>
 
 <h2>Samarbete med specialistläkare</h2>
 <p>Vårt nära samarbete med en specialistläkare i psykiatri gör att vi kan erbjuda
@@ -639,6 +977,17 @@ omprövning på grund av karriärdrömmar inom yrken med strikta antagningskrav.
 vara viktigt att utreda om diagnosen fortfarande är aktuell, och i vilken grad den
 påverkar funktionsnivån i dag.</p>
 
+<h2>Vilka söker omprövning?</h2>
+<ul>
+  <li>Du som fick en diagnos som barn och inte känner igen dig i den som vuxen.</li>
+  <li>Du som söker till polisutbildning, militärtjänstgöring, flygutbildning eller ett
+  annat yrke med särskilda hälsokrav.</li>
+  <li>Du som utreddes under en period då du samtidigt hade en depression, en utmattning
+  eller ett skadligt bruk, och undrar om bilden blev rättvisande.</li>
+  <li>Du som behöver ett aktuellt underlag om din nuvarande funktionsnivå — för
+  arbetsgivare, för studier eller för fortsatt vård.</li>
+</ul>
+
 <h2>Ett historiskt rättsfall</h2>
 <p>Under 2021 slog Diskrimineringsombudsmannen fast att Försvarsmakten samt Plikt- och
 prövningsverket gjort sig skyldiga till diskriminering när de automatiskt uteslöt sökande
@@ -655,11 +1004,28 @@ att du kan utföra det framtida arbetet på ett säkert sätt.</p>
 omprövningen är motiverad. För hela utredningen beräknas ungefär fyra besök på
 mottagningen.</p>
 
+<p>Omprövningen bygger på samma metodik som en förstagångsutredning — klinisk intervju,
+standardiserade bedömningsinstrument och en genomgång av din utveckling och livshistoria
+— men med tonvikt på nuläget: vilka svårigheter finns kvar, vilka har förändrats, och
+vilken funktionsnivå har du i dag. Underlag från den tidigare utredningen är värdefullt
+om du kan få tag på det, men inget krav.</p>
+
+<h2>Vad utlåtandet säger</h2>
 <p>Oavsett orsak får du efter utredningen med dig ett utlåtande som beskriver din
 nuvarande funktion och om diagnosen fortfarande är aktuell. Önskar du omprövning i syfte
 att söka till polisutbildning eller militärtjänstgöring är det viktigt att du meddelar
 det — det ställer specifika krav på hur omprövningen ska gå till och på den efterföljande
 dokumentationen.</p>
+
+<h2>Bra att veta innan du bokar</h2>
+<p>En omprövning är en förutsättningslös undersökning, inte ett uppdrag att komma fram
+till ett bestämt svar. Utfallet kan bli att diagnosen kvarstår, att den inte längre är
+uppfylld, eller att bilden har förändrats på ett sätt som behöver beskrivas i nyanser.
+Vi kan inte veta i förväg vilket det blir, och vi lovar aldrig ett resultat.</p>
+
+<p>En omprövning raderar inte heller din journalhistorik. Den beskriver hur din funktion
+ser ut i dag, vilket är det myndigheter och arbetsgivare efterfrågar när de ska göra en
+individuell lämplighetsprövning.</p>
 
 <p>Precis som vid all utredning kan vi tillsammans upptäcka att du behöver stöd eller
 hjälp för annan psykisk ohälsa. Då hjälper vi dig vidare med fördjupad utredning eller
@@ -700,9 +1066,54 @@ situationer (<strong>social oro</strong>). Och för yngre barn är känslomässi
 svårigheter vid att lämna föräldrar eller andra trygga personer inte ovanligt
 (<strong>separationsoro</strong>).</p>
 
-<p>När rädslan börjar styra vad barnet gör och inte gör — vilka platser som undviks,
-vilka aktiviteter som väljs bort, om skolan blir svår att gå till — är det en god idé
-att söka hjälp.</p>
+<h2>Hur ångest ser ut i olika åldrar</h2>
+<p>Yngre barn beskriver sällan att de är oroliga. I stället kommer det ut som ont i
+magen eller huvudet, som svårigheter att somna, som klängighet, eller som ilska och
+utbrott när de ska göra något de vill slippa. Skolbarn börjar kunna sätta ord på oron men
+skäms ofta för den. Tonåringar kan beskriva den väl, och döljer den samtidigt effektivt
+genom att helt enkelt avstå från saker och kalla det ointresse.</p>
+
+<h2>Undvikande och trygghetsbeteenden</h2>
+<p>Det som gör ångest svårare över tid är sällan rädslan i sig, utan allt man gör för att
+slippa känna den: låta bli att gå på kalaset, be mamma svara i telefonen, kontrollera en
+extra gång, sitta längst bak. Varje sådant undvikande ger lättnad direkt — och lär barnet
+att det var undvikandet som gjorde det möjligt att klara sig. Nästa gång blir därför
+svårare.</p>
+
+<p>Som förälder dras man nästan alltid in i det, av kärlek och för att få lugn i stunden.
+En viktig del av behandlingen handlar om att stegvis lämna över de trygghetsbeteendena,
+utan att barnet känner sig lämnat.</p>
+
+<h2>När skolan blir svår att gå till</h2>
+<p>Ångest är en av de vanligaste orsakerna till att ett barn får allt svårare att komma
+iväg till skolan. Frånvaron ger omedelbar lättnad och blir snabbt svårare att bryta ju
+längre den pågått. Här är tidiga insatser särskilt viktiga, och samarbete med skolan
+nästan alltid en del av arbetet.</p>
+
+<h2>Så behandlar vi</h2>
+<ul>
+  <li><strong>Kartläggning.</strong> Vad är barnet rädd för, vad gör hen för att slippa,
+  och vad gör ni som föräldrar?</li>
+  <li><strong>Förståelse.</strong> Barnet och ni får lära er hur ångest fungerar — ofta
+  med bilder och exempel — så att den blir begriplig i stället för läskig.</li>
+  <li><strong>Stegvis exponering.</strong> En trappa av små, överenskomna utmaningar som
+  barnet klarar och lyckas med, uppbyggd tillsammans med barnet självt.</li>
+  <li><strong>Föräldrastöd.</strong> Hur ni uppmuntrar utan att pressa, och hur ni
+  stegvis slutar hjälpa till med undvikandet.</li>
+  <li><strong>Samarbete med skolan</strong> när det behövs, efter ert samtycke.</li>
+</ul>
+
+<h2>Vad ni kan göra som föräldrar</h2>
+<p>Ta oron på allvar utan att bekräfta faran, och beröm modet snarare än resultatet — att
+ha försökt är det som räknas. Undvik att lova att det obehagliga inte ska hända, och undvik
+samtidigt att tvinga fram stora steg. Små steg som barnet varit med och bestämt fungerar
+bättre än stora som bestämts över huvudet på hen.</p>
+
+<h2>Hur lång tid tar det?</h2>
+<p>Ångestbehandling för barn är ofta relativt kortvarig, särskilt vid avgränsade rädslor.
+Är oron bred, har pågått länge eller finns tillsammans med
+<a href="{base}barn-och-ungdom/behandling/depression/">nedstämdhet</a> eller
+<a href="{base}barn-och-ungdom/behandling/ocd/">tvång</a> tar det längre tid.</p>
 ''' + VARDNADSHAVARE,
     ),
     dict(
@@ -726,13 +1137,56 @@ känna glädje och lust inför sådant som tidigare har varit roligt. Det är va
 energilöshet, irritation, låg självkänsla, sömnstörningar, koncentrationssvårigheter och
 en känsla av hopplöshet.</p>
 
-<p>Hos barn och unga kan symtomen se annorlunda ut än hos vuxna — irritation och ilska är
-ofta mer framträdande än den nedstämdhet man förväntar sig. Det gör att en depression
-ibland misstas för trots eller för en jobbig period.</p>
+<h2>Det ser inte alltid ut som ledsenhet</h2>
+<p>Hos barn och unga är irritation och ilska ofta mer framträdande än den nedstämdhet man
+förväntar sig. Det gör att en depression ibland misstas för trots, lathet eller en jobbig
+period. Andra vanliga tecken är att barnet drar sig undan från kompisar, tappar intresset
+för fritidsaktiviteter, sover mycket mer eller mycket sämre än vanligt, får ont i magen
+eller huvudet, eller att skolresultaten sjunker utan tydlig förklaring.</p>
 
-<p>Om du som förälder är orolig för att ditt barn har tankar på att inte vilja leva:
-fråga rakt ut, och sök hjälp direkt. Se <a href="{base}akut-hjalp/index.html">akut
-hjälp</a>.</p>
+<p>Hos yngre barn är kroppsliga besvär och klängighet vanligare. Hos tonåringar syns
+oftare social tillbakadragenhet, sömn som vänts på dygnet, och en stark självkritik.</p>
+
+<h2>Nedstämd eller deprimerad?</h2>
+<p>Det finns ingen skarp gräns, men några saker talar för att det är mer än en svacka:
+att det pågått ett par veckor eller mer, att det syns i flera delar av livet samtidigt —
+skola, kompisar, hemma — och att barnet inte piggnar till ens av sådant som brukar
+fungera. Då är det värt att göra en bedömning.</p>
+
+<h2>Så arbetar vi</h2>
+<ul>
+  <li><strong>Bedömning.</strong> Vi kartlägger måendet, sömnen, skolan och relationerna,
+  och tar reda på om det finns annat med i bilden — oro, tvång, eller en obemärkt
+  inlärnings- eller koncentrationssvårighet som gjort skolan orimligt tung.</li>
+  <li><strong>Beteendeaktivering.</strong> Att stegvis och planerat få tillbaka
+  aktiviteter som ger energi och sammanhang. Vid depression kommer lusten efter
+  aktiviteten, inte före — det är en av de viktigaste sakerna både barnet och ni får med
+  er.</li>
+  <li><strong>Sömn och dygnsrytm</strong>, som nästan alltid behöver adresseras
+  parallellt.</li>
+  <li><strong>Tankar och självkritik.</strong> Att känna igen de hårda slutsatserna om
+  sig själv och att öva på ett annat sätt att möta dem.</li>
+  <li><strong>Föräldrastöd.</strong> Hur ni stöttar utan att ta över, och hur ni orkar
+  själva.</li>
+  <li><strong>Skolan</strong>, efter ert samtycke, när kraven behöver anpassas under en
+  period.</li>
+</ul>
+
+<h2>Vad ni kan göra som föräldrar</h2>
+<p>Håll fast vid det lilla och vardagliga: mat, sömn, att komma ut, att någon finns kvar
+i rummet. Sänk kraven tillfälligt utan att ta bort dem helt. Undvik att argumentera mot
+de negativa tankarna — det leder sällan någon vart — och satsa hellre på att göra saker
+tillsammans. Och ta hand om er själva; att leva nära ett barn som mår dåligt är
+tungt.</p>
+
+<h2>Om du är orolig för självmordstankar</h2>
+<p>Fråga rakt ut. Att fråga ökar inte risken, och de flesta unga blir lättade över att
+någon vågar. Får du ett ja, lämna inte barnet ensamt och sök hjälp direkt.</p>
+
+<p>Vid fara för liv: ring <strong>112</strong>. Ni kan också ringa
+<strong>1177</strong> för råd, eller söka barn- och ungdomspsykiatrisk akutmottagning där
+ni bor. Se <a href="{base}akut-hjalp/index.html">akut hjälp</a>. Vi är en mottagning med
+bokade tider och kan inte ta emot akut.</p>
 ''' + VARDNADSHAVARE,
     ),
     dict(
@@ -761,8 +1215,47 @@ hindrande i barnets eller ungdomens vardag. Vanliga teman för tvångstankar är
 smuts, baciller och föroreningar; oro för att orsaka skador och olyckor; eller tankar om
 balans och om att saker måste vara ”på ett visst sätt”.</p>
 
-<p>När tankarna och beteendena utgör ett hinder i vardagen kan behandling vara nödvändig
-för att komma till rätta med problemen.</p>
+<h2>Hur OCD visar sig hos barn</h2>
+<p>Tvångshandlingarna är inte alltid synliga. Vid sidan av tvättande, kontrollerande och
+ordnande finns mentala ritualer — att räkna, att upprepa ord tyst för sig själv, att i
+huvudet gå igenom en händelse om och om igen för att försäkra sig om att inget hemskt
+hänt. Ett vanligt tecken är också att barnet ställer samma fråga gång på gång och behöver
+höra samma svar, eller att rutiner tar orimligt lång tid: läggningen drar ut, morgonen
+går inte ihop, läxan skrivs om flera gånger.</p>
+
+<p>Många barn skäms djupt över innehållet i sina tvångstankar och berättar därför inte
+om dem. Att tankarna känns obehagliga och främmande är just det som kännetecknar dem —
+de säger ingenting om barnet.</p>
+
+<h2>När familjen dras in</h2>
+<p>Nästan alla familjer hamnar med tiden i att hjälpa till med tvånget: svara på frågan
+en gång till, tvätta extra, gå in i rummet i en viss ordning, vänta medan ritualen
+genomförs. Det är begripligt — det ger lugn, och konflikten uteblir. Men det gör också
+att tvånget får rätt, och det växer.</p>
+
+<p>En central del av behandlingen är därför att ni som föräldrar, stegvis och planerat,
+slutar delta i ritualerna. Det görs tillsammans med barnet och i en takt ni kommer
+överens om — inte över en natt.</p>
+
+<h2>Behandlingen: exponering med responsprevention</h2>
+<p>KBT vid OCD bygger på exponering med responsprevention, ERP. Barnet närmar sig
+stegvis det som väcker obehag — utan att utföra tvångshandlingen. Genom att stanna kvar i
+obehaget får barnet erfarenheten att det klingar av av sig självt, och att det befarade
+inte inträffar. Det är den erfarenheten, inte resonemanget, som får tvånget att släppa.</p>
+
+<p>Vi gör det konkret och åldersanpassat: barnet får ofta göra tvånget till en egen
+figur att bekämpa, ni bygger trappan tillsammans, och varje steg är något barnet varit
+med och valt. ERP är en av de bäst dokumenterade behandlingarna som finns för barn.</p>
+
+<h2>Hur lång tid tar det?</h2>
+<p>Ett vanligt upplägg rör sig om ett antal samtal över några månader, med hemuppgifter
+mellan gångerna — det är där det viktigaste arbetet sker. Många märker skillnad
+förhållandevis tidigt, men behandlingen fortsätter tills tvånget släppt sitt grepp om
+vardagen och ni har en plan för hur ni gör om det skulle komma tillbaka.</p>
+
+<p>OCD förekommer ofta tillsammans med
+<a href="{base}barn-och-ungdom/behandling/oro-angest/">annan oro och ångest</a>. Vi gör
+alltid en bedömning av helheten först.</p>
 ''' + VARDNADSHAVARE,
     ),
     dict(
@@ -789,6 +1282,54 @@ irritation mer irriterad.</p>
 
 <p>När besvären blir mer uttalade och inte går över kan psykologisk behandling för
 sömnsvårigheter vara en god idé.</p>
+
+<h2>Hur mycket sömn behövs?</h2>
+<p>Sömnbehovet minskar med åldern och varierar mellan individer. Grovt räknat behöver
+förskolebarn omkring 10–13 timmar, skolbarn ungefär 9–11 timmar och tonåringar omkring
+8–10 timmar. Siffrorna är riktmärken, inte krav — ett barn som är piggt, fungerar i
+skolan och är på gott humör sover sannolikt tillräckligt, även om timmarna är något
+färre.</p>
+
+<h2>Vanliga orsaker</h2>
+<ul>
+  <li><strong>Oro och ångest.</strong> Kvällen är ofta den stund på dygnet då tankarna
+  får plats. Många barn med insomningssvårigheter är i själva verket oroliga barn.</li>
+  <li><strong>Inlärda vanor.</strong> Att somna med en förälder i rummet, med tv eller i
+  soffan gör det svårt att somna om vid nattliga uppvaknanden — som alla har, flera
+  gånger per natt.</li>
+  <li><strong>Oregelbundenhet.</strong> Mycket olika tider i veckan och på helgen ger en
+  dygnsrytm som aldrig hinner sätta sig.</li>
+  <li><strong>Skärmar och sena kvällar</strong>, framför allt det som är engagerande
+  precis innan läggning.</li>
+  <li><strong>NPF.</strong> Sömnsvårigheter är mycket vanliga vid adhd och autism.</li>
+</ul>
+
+<h2>Tonåringar och dygnsrytm</h2>
+<p>I puberteten förskjuts dygnsrytmen biologiskt — det blir naturligt att somna och vakna
+senare. Kombinerat med tidiga skolstarter ger det en kronisk sömnskuld som tas igen på
+helgerna, vilket i sin tur förskjuter rytmen ytterligare. Att en tonåring inte kan somna
+klockan tio är alltså ofta inte trots, utan biologi. Det går att arbeta med, men det
+kräver en annan ansats än med yngre barn.</p>
+
+<h2>Så arbetar vi</h2>
+<p>Vi börjar med en kartläggning, ofta med sömndagbok under ett par veckor, och tar reda
+på om sömnen är problemet eller ett symtom på något annat. Därefter arbetar vi med
+regelbundna tider, med rutinerna kring läggning, med att barnet stegvis lär sig somna på
+egen hand, och — när oron är drivkraften — med oron i sig.</p>
+
+<p>Precis som all behandling av barn sker arbetet i nära samarbete med er som
+vårdnadshavare, eftersom det är hemma på kvällarna som förändringen ska genomföras.</p>
+
+<h2>Vad ni kan göra</h2>
+<p>Håll ungefär samma tider även på helgerna. Låt den sista halvtimmen före läggning vara
+förutsägbar och lugn, och lägg den utanför sängen om möjligt. Låt barnet somna på den
+plats där det ska vakna. Och undvik att göra sömnen till en stridsfråga — ju mer
+prestation, desto svårare blir det att somna.</p>
+
+<p>Om oron är det som håller barnet vaket, se
+<a href="{base}barn-och-ungdom/behandling/oro-angest/">oro, ängslan och ångest</a>. För
+vuxna med långvariga besvär, se <a href="{base}vuxna/behandling/somn/">sömnproblem hos
+vuxna</a>.</p>
 ''' + VARDNADSHAVARE,
     ),
     dict(
@@ -814,10 +1355,49 @@ eller försvinna när barnet blir äldre.</p>
 motgångar samtidigt som sättet att agera blir svårt att möta — då kan det vara en god idé
 att söka psykologisk behandling.</p>
 
-<p>Arbetet handlar lika mycket om de vuxna runt barnet som om barnet självt: vad som
-utlöser utbrotten, vad som händer efteråt, och vilka strategier som faktiskt fungerar i
-just er familj. Ibland finns en neuropsykiatrisk förklaring i botten, och då kan en
-<a href="{base}barn-och-ungdom/utredning/index.html">utredning</a> vara nästa steg.</p>
+<h2>Vad som ligger bakom</h2>
+<p>Utmanande beteende är nästan alltid ett uttryck för att kraven i situationen är större
+än barnets förmåga just då. Bakom kan ligga svårigheter att vänta, att byta aktivitet,
+att hantera besvikelse, att förstå vad som förväntas, eller att sätta ord på det som
+känns. Ofta finns också trötthet, hunger eller för många intryck med i bilden.</p>
+
+<p>Det är sällan fråga om att barnet inte vill. Att utgå från att barnet gör så gott det
+kan med de förmågor det har förändrar både vad man letar efter och vad man provar.</p>
+
+<h2>Mönstret som byggs upp</h2>
+<p>Utbrott har konsekvenser som gör att de upprepas. Om utbrottet gör att kravet
+försvinner har det fungerat. Om det som fungerar för att få uppmärksamhet är att bråka,
+medan det som fungerar dåligt är att göra rätt, blir slutsatsen begriplig. Samtidigt
+hamnar familjen lätt i ett mönster där nästan all uppmärksamhet handlar om det som går
+fel. Det är den balansen behandlingen arbetar med.</p>
+
+<h2>Så arbetar vi</h2>
+<ul>
+  <li><strong>Beteendeanalys.</strong> Vad händer före, under och efter utbrotten? Ofta
+  framträder ett tydligt mönster som går att förändra.</li>
+  <li><strong>Föräldrastöd.</strong> Konkreta verktyg att öva på hemma — det är den mest
+  verksamma insatsen vid utmanande beteende hos yngre barn.</li>
+  <li><strong>Förutsägbarhet.</strong> Att förbereda övergångar och göra dagen begriplig,
+  eftersom det mesta som utlöser utbrott är sådant som kommer oväntat.</li>
+  <li><strong>Att förstärka det som fungerar.</strong> Att systematiskt lägga märke till
+  och bekräfta det barnet gör bra, i stället för att enbart hantera det som går fel.</li>
+  <li><strong>Lågaffektivt bemötande.</strong> Hur ni möter ett barn i affekt utan att
+  trappa upp, och hur ni tar samtalet efteråt i stället för mitt i.</li>
+  <li><strong>Färdighetsträning med barnet</strong>, anpassad efter ålder — att känna igen
+  ilskan tidigare och att hitta något annat att göra med den.</li>
+</ul>
+
+<h2>Vad ni kan göra</h2>
+<p>Förbered övergångar i förväg. Ge ett val i stället för en order när det går. Undvik att
+förhandla eller resonera mitt i ett utbrott — då är förmågan att tänka tillfälligt
+borta. Och satsa på att öka andelen stunder som är positiva; det gör mer för samarbetet
+än fler konsekvenser gör.</p>
+
+<h2>När det kan finnas något mer bakom</h2>
+<p>Ihållande svårigheter med impulskontroll, med att vänta eller med att klara
+förändringar kan ibland ha en neuropsykiatrisk förklaring. Om bilden pekar åt det hållet
+kan en <a href="{base}barn-och-ungdom/utredning/index.html">utredning</a> vara nästa steg
+— men behandling och föräldrastöd kan påbörjas oavsett, och kräver ingen diagnos.</p>
 ''' + VARDNADSHAVARE,
     ),
 ]
@@ -1035,12 +1615,41 @@ ungdomar i alla åldrar.</p>
 ungdomen. Då kan det vara till god hjälp att träffa en utomstående, professionell person
 för att diskutera det som oroar eller bekymrar.</p>
 
-<p>Stödet kan handla om konkreta strategier i vardagen, om hur man förhåller sig till ett
-barn som mår dåligt, om hur syskon påverkas, eller om ditt eget mående — att vara
-förälder till ett barn som har det svårt tär, och det är inte själviskt att ta hand om
-sig själv också.</p>
+<h2>Vad samtalen kan handla om</h2>
+<ul>
+  <li>Konkreta situationer som återkommer — morgnar, läggning, läxor, skärmar,
+  konflikter mellan syskon.</li>
+  <li>Hur ni förhåller er till ett barn som är oroligt, nedstämt eller argt.</li>
+  <li>Hur ni pratar med barnet om något svårt: en separation, en sjukdom, ett dödsfall.</li>
+  <li>Att ni som föräldrar gör olika och drar åt olika håll.</li>
+  <li>Om det ni ser är skäl att söka hjälp, och i så fall var.</li>
+  <li>Ert eget mående. Att leva nära ett barn som har det svårt tär, och det är inte
+  själviskt att ta hand om sig själv också.</li>
+</ul>
 
-<p>Du behöver inte ha ett barn i behandling hos oss för att boka ett samtal.</p>
+<h2>Föräldrastöd är ofta behandlingen</h2>
+<p>Vid yngre barn och vid utmanande beteende är arbete med föräldrarna inte ett komplement
+till behandlingen — det är den mest verksamma delen av den. Det är hemma, i vardagen, som
+mönstren finns och som förändringen ska ske, och ni är de som är där. Ofta räcker ett
+begränsat antal samtal med er för att en situation ska vända, utan att barnet behöver gå
+i egen behandling.</p>
+
+<h2>Ni behöver inte ha ett barn i behandling hos oss</h2>
+<p>Många hör av sig för att de är oroliga och vill resonera med någon, utan att barnet är
+patient någonstans. Det går utmärkt. Ni behöver ingen remiss, och ett samtal kan lika
+gärna landa i att det ni redan gör är rätt.</p>
+
+<h2>Att vara anhörig</h2>
+<p>Vi tar också emot anhöriga i vidare mening — mor- och farföräldrar, bonusföräldrar,
+vuxna syskon. Är du anhörig till någon med skadligt bruk eller beroende finns särskild
+erfarenhet av det hos oss; se <a href="{base}vuxna/beroende/index.html">skadligt bruk och
+beroende</a>.</p>
+
+<h2>Praktiskt</h2>
+<p>Samtalen sker på mottagningen i centrala Uppsala eller via video. Ni kan komma en och
+en eller tillsammans — vid gemensam vårdnad är det ofta värdefullt att båda är med, men
+det är inget krav för att boka. Aksel Reppling och Angeli Holmstedt arbetar särskilt med
+föräldra- och anhörigstöd.</p>
 ''',
     ),
     dict(
@@ -1063,16 +1672,50 @@ en gynnsam skolmiljö till alla — vilket ofta innebär stora utmaningar.</p>
 
 <h2>Vad vi erbjuder</h2>
 <ul>
-  <li>hälsofrämjande och förebyggande arbete</li>
-  <li>åtgärdande arbete för enskilda elever</li>
-  <li>personalhandledning, enskilt och i grupp</li>
-  <li>skolpsykologiskt utredningsarbete</li>
+  <li><strong>Hälsofrämjande och förebyggande arbete</strong> — att bygga en skolmiljö
+  som fungerar för fler elever, innan enskilda ärenden uppstår.</li>
+  <li><strong>Åtgärdande arbete för enskilda elever</strong> — konsultation i ett
+  specifikt ärende, som underlag för era beslut om anpassningar och stöd.</li>
+  <li><strong>Personalhandledning</strong>, enskilt eller i grupp — för arbetslag,
+  elevhälsoteam eller resurspersonal.</li>
+  <li><strong>Skolpsykologiskt utredningsarbete</strong> — inklusive bedömning av
+  intellektuell funktionsnivå, som ofta är avgörande för att förstå varför en elev inte
+  når målen trots ansträngning.</li>
+  <li><strong>Fortbildning</strong> för personalgrupper om exempelvis neuropsykiatriska
+  funktionsnedsättningar, utmanande beteende, skolfrånvaro eller bemötande.</li>
 </ul>
 
 <p>Vi är väl förtrogna med både personalhandledning och skolpsykologiskt
 utredningsarbete, och kan utgöra en stabil stöttepelare för er i dessa frågor.</p>
 
-<p>För upphandling, ramavtal och större uppdrag, se
+<h2>Vanliga frågeställningar</h2>
+<p><strong>Skolfrånvaro.</strong> Frånvaro som börjat krypa uppåt är svårare att vända ju
+längre den pågår. Bakom ligger ofta oro, social rädsla eller en skolsituation där kraven
+inte motsvarar elevens förutsättningar. Vi hjälper er kartlägga vad som upprätthåller
+frånvaron och lägga en plan för stegvis återgång.</p>
+
+<p><strong>NPF i klassrummet.</strong> Hur anpassningar utformas så att de faktiskt
+används, hur lektionsstruktur och övergångar kan se ut, och hur personalen möter en elev
+i affekt utan att situationen trappas upp.</p>
+
+<p><strong>Elever som inte når målen.</strong> När insatserna prövats utan effekt behövs
+ibland en bedömning av vilka kognitiva förutsättningar som finns, för att kravnivån ska
+kunna läggas rätt. Se
+<a href="{base}barn-och-ungdom/utredning/intellektuell-funktion/">utredning av
+intellektuell funktion</a>.</p>
+
+<p><strong>Personalens egna reaktioner.</strong> Att arbeta nära elever som har det svårt
+väcker känslor, och utan ett rum för det blir slitaget stort. Handledning är också
+personalvård.</p>
+
+<h2>Upplägg</h2>
+<p>Uppdragen ser olika ut: en enstaka konsultation, handledning en gång i månaden under
+ett läsår, en utbildningsdag, eller återkommande skolpsykologiskt arbete på konsultbasis.
+Vi börjar alltid med ett samtal om vad ni behöver, och gör därefter en tydlig
+överenskommelse om omfattning, frekvens och ramar.</p>
+
+<p>Vi arbetar hos er, hos oss i centrala Uppsala eller via video, i hela landet. Priser
+lämnas på förfrågan; moms tillkommer. För större uppdrag, ramavtal och upphandling, se
 <a href="{base}organisationer/index.html">För organisationer</a>.</p>
 ''',
     ),
@@ -1094,11 +1737,57 @@ kunskap och väl genomtänkta strategier — och som samtidigt väcker starka eg
 reaktioner.</p>
 
 <p>Vi har mångårig erfarenhet av att handleda familjehemsföräldrar och personal vid
-behandlingshem och HVB-hem. Handledningen kan handla om ett enskilt placerat barn, om
-bemötande och förhållningssätt i gruppen, eller om att ge personalen ett rum att bearbeta
-det som är tungt i uppdraget.</p>
+behandlingshem och HVB-hem.</p>
 
-<p>Vi arbetar både på plats hos er och via videosamtal, i hela landet.</p>
+<h2>Vad handledningen kan innehålla</h2>
+<ul>
+  <li><strong>Enskilda ärenden.</strong> Att tillsammans förstå ett placerat barns
+  beteende och lägga upp ett gemensamt förhållningssätt.</li>
+  <li><strong>Bemötande och struktur.</strong> Hur verksamheten möter utmanande beteende
+  utan att trappa upp, och hur förutsägbarhet byggs in i vardagen.</li>
+  <li><strong>Trauma och anknytning.</strong> Många placerade barn bär på svåra
+  erfarenheter, och beteenden som ser ut som trots eller manipulation är ofta begripliga
+  överlevnadsstrategier. Det perspektivet förändrar vad som fungerar.</li>
+  <li><strong>Gränssättning.</strong> Hur regler och konsekvenser kan utformas så att de
+  fungerar och inte blir en kamp.</li>
+  <li><strong>Neuropsykiatri.</strong> Vad en adhd- eller autismdiagnos betyder i
+  praktiken för hur vardagen behöver läggas upp.</li>
+  <li><strong>Personalens egna reaktioner.</strong> Frustration, uppgivenhet, konflikter
+  i arbetsgruppen och den utmattning som kommer av att engagera sig länge i barn som har
+  det svårt. Ett rum för det är en förutsättning för att orka stanna kvar i uppdraget.</li>
+</ul>
+
+<h2>Form och omfattning</h2>
+<p>Handledningen kan ges till en hel personalgrupp, till ett arbetslag eller enskilt till
+familjehemsföräldrar. Vanligast är återkommande tillfällen över en längre period —
+exempelvis varannan eller var fjärde vecka — eftersom värdet till stor del ligger i
+kontinuiteten. Vi tar också enskilda konsultationsuppdrag i ett avgränsat ärende.</p>
+
+<p>Vi arbetar både på plats hos er och via videosamtal, i hela landet. Inför ett uppdrag
+gör vi alltid en överenskommelse om syfte, ramar, frekvens och sekretess.</p>
+
+<h2>Konsultation och utbildning</h2>
+<p>Utöver löpande handledning erbjuder vi konsultation i enskilda ärenden och fortbildning
+för personalgrupper — om utmanande beteende, om NPF, om trauma eller om bemötande. Se
+<a href="{base}organisationer/utbildning/">föreläsningar och utbildning</a>.</p>
+
+<p>Vi handleder även socialtjänsten som placerar barnen; se
+<a href="{base}barn-och-ungdom/stod/socialtjanst/">stöd till socialtjänsten</a>. Priser
+lämnas på förfrågan, moms tillkommer.</p>
+
+<h2>Familjehem har andra behov än personalgrupper</h2>
+<p>Familjehemsföräldrar arbetar inte i skift och går inte hem efter passet — uppdraget
+pågår dygnet runt, i det egna hemmet, och påverkar hela familjen inklusive egna barn.
+Handledningen ser därför annorlunda ut: den behöver rymma både strategierna kring det
+placerade barnet och det som händer med familjen som helhet, och den behöver vara en
+plats där det går att säga att man inte orkar utan att det uppfattas som att uppdraget
+ifrågasätts.</p>
+
+<h2>Skolgången</h2>
+<p>Placerade barn har som grupp betydligt sämre skolresultat än andra barn, och skolan är
+samtidigt en av de starkaste skyddsfaktorer som finns. Vi arbetar gärna med den delen —
+kontakten med skolan, vilka anpassningar som behövs, och hur läxor och krav hanteras
+hemma utan att det blir en daglig strid.</p>
 ''',
     ),
     dict(
@@ -1123,9 +1812,55 @@ metodhandledning och processhandledning, enskilt eller i grupp. Flera av oss har
 egen erfarenhet av arbete i och mot socialtjänst, beroendevård och Statens
 institutionsstyrelse.</p>
 
-<p>Vi har också lång erfarenhet av frågor om skadligt bruk och beroende hos föräldrar,
-och av hur det påverkar barnen i en familj. Se
-<a href="{base}vuxna/beroende/index.html">skadligt bruk och beroende</a>.</p>
+<h2>Tre former</h2>
+<ul>
+  <li><strong>Ärendehandledning.</strong> Att tillsammans gå igenom enskilda ärenden och
+  få psykologisk kompetens som underlag för era egna bedömningar och beslut.</li>
+  <li><strong>Metodhandledning.</strong> Stöd i att använda en metod som avsett — vi
+  utbildar och handleder bland annat i motiverande samtal (MI) och i KBT-baserade
+  arbetssätt.</li>
+  <li><strong>Processhandledning.</strong> Arbetsgruppens eget arbete: samarbete,
+  förhållningssätt, och de reaktioner som väcks av att arbeta med människor i utsatta
+  situationer.</li>
+</ul>
+
+<h2>Vanliga teman</h2>
+<p>Barns utveckling och behov i olika åldrar. Psykisk ohälsa hos barn, unga och
+föräldrar. Neuropsykiatriska funktionsnedsättningar och vad de innebär i praktiken.
+Skadligt bruk och beroende hos föräldrar, och hur det påverkar barnen i en familj — ett
+område där vi har särskilt lång erfarenhet, se
+<a href="{base}vuxna/beroende/index.html">skadligt bruk och beroende</a>. Bemötande av
+klienter i kris eller affekt. Och sekundär traumatisering och medkänsloutmattning hos
+personalen — ett slitage som är väl dokumenterat i människovårdande yrken och som sällan
+får tillräckligt utrymme.</p>
+
+<h2>Konsultation, bedömning och utbildning</h2>
+<p>Vi tar också uppdrag som avgränsad konsultation i ett enskilt ärende, och som
+fortbildning för en hel enhet. Behöver ni en psykologisk eller neuropsykiatrisk utredning
+som underlag finns den möjligheten också — se
+<a href="{base}barn-och-ungdom/utredning/index.html">utredning och bedömning</a>.</p>
+
+<p>Vi handleder även de verksamheter ni placerar i; se
+<a href="{base}barn-och-ungdom/stod/hvb-familjehem/">stöd till HVB-hem och
+familjehem</a>.</p>
+
+<h2>Upplägg</h2>
+<p>Handledning ges vanligen återkommande över en längre period, hos er, hos oss eller via
+video. Vi inleder med ett samtal om behov och gör därefter en överenskommelse om syfte,
+omfattning, frekvens och ramar. Priser lämnas på förfrågan; moms tillkommer.</p>
+
+<h2>Utredning som underlag för era beslut</h2>
+<p>Ibland är det inte handledning som saknas utan ett faktaunderlag. Vi gör psykologiska
+och neuropsykiatriska utredningar av barn och ungdomar, samt bedömningar av intellektuell
+funktionsnivå — vilket kan vara avgörande för att förstå varför en ungdom inte tar till
+sig en insats, eller varför en placering inte fungerat. Se
+<a href="{base}barn-och-ungdom/utredning/index.html">utredning och bedömning</a>.</p>
+
+<h2>Samverkan kring en placering</h2>
+<p>Vi handleder ofta flera parter kring samma barn: er som placerar, och verksamheten där
+barnet bor. Det ger en gemensam förståelse och minskar risken att barnet möts av olika
+förhållningssätt på olika håll. När vi arbetar med flera parter regleras alltid i förväg
+vad som får delas mellan dem och vad som stannar i respektive handledning.</p>
 ''',
     ),
 ]
@@ -1164,6 +1899,20 @@ handleda anställda inom bland annat:</p>
   <li>beroendekliniker</li>
 </ul>
 
+<h2>Olika slags handledning</h2>
+<ul>
+  <li><strong>Ärendehandledning</strong> — enskilda ärenden, som stöd för medarbetarnas
+  egna bedömningar.</li>
+  <li><strong>Metodhandledning</strong> — att använda en metod som avsett, exempelvis KBT
+  eller motiverande samtal.</li>
+  <li><strong>Processhandledning</strong> — arbetsgruppens samarbete, förhållningssätt och
+  de reaktioner arbetet väcker.</li>
+  <li><strong>Utbildningshandledning</strong> — inom ramen för formella utbildningar, se
+  nedan.</li>
+  <li><strong>Chefshandledning och coaching</strong> — enskilt stöd i en roll där man
+  ofta står ensam med besluten.</li>
+</ul>
+
 <h2>Utbildningshandledning</h2>
 <p>Vi har under många år handlett blivande psykologer, psykoterapeuter och andra
 yrkesgrupper — enskilt eller i grupp — inom ramen för utbildningar i KBT. Av tradition
@@ -1179,6 +1928,21 @@ och metoder som är användbara för det.</p>
 formulerande av värderingar och mål, beteendeförändringar, samt analys och utveckling av
 hjälpsammare tankemönster och förhållningssätt till tankar som kan upplevas hindrande.
 Även känslohantering ingår.</p>
+
+<h2>Så går det till</h2>
+<p>Vi inleder med ett samtal om vad ni behöver och vad ni vill att handledningen ska leda
+till. Därefter gör vi en överenskommelse som reglerar syfte, deltagare, frekvens,
+omfattning, sekretess och hur uppdraget följs upp — en tydlig ram är en förutsättning för
+att handledningen ska bli något annat än ett trevligt samtal.</p>
+
+<p>Grupphandledning sker vanligen med en grupp om några få till ett tiotal deltagare, ofta
+varannan till var fjärde vecka över en längre period. Kontinuiteten är en stor del av
+värdet.</p>
+
+<h2>Praktiskt</h2>
+<p>Vi arbetar hos er, hos oss i centrala Uppsala eller via video, i hela landet. Tre av
+oss är utbildade handledare. Priser lämnas på förfrågan; moms tillkommer. Hör av er via
+<a href="{base}organisationer/kontakt/">kontakt för uppdrag</a>.</p>
 ''',
     ),
     dict(
@@ -1204,13 +1968,67 @@ på 4–5 dagar, till längre grundläggande psykoterapiutbildningar — det som
 <p>Vi är också verksamma som lärare och handledare på psykolog- och
 psykoterapeututbildningar knutna till Uppsala universitet.</p>
 
+<h2>Format</h2>
+<ul>
+  <li><strong>Föredrag och föreläsningar</strong> — från en timme och uppåt, för en
+  arbetsplatsträff, en konferens eller en hel personaldag.</li>
+  <li><strong>Workshops och seminarier</strong> — kortare och med praktiska inslag, där
+  deltagarna får öva och inte bara lyssna.</li>
+  <li><strong>Orienteringsutbildningar</strong> på 4–5 dagar, för en yrkesgrupp som ska
+  börja arbeta utifrån ett gemensamt förhållningssätt.</li>
+  <li><strong>Föreläsningsserier</strong> över en termin eller ett år.</li>
+  <li><strong>Grundläggande psykoterapiutbildning</strong> i KBT.</li>
+</ul>
+
+<h2>Ämnen vi undervisar i</h2>
+<p>Kognitiv beteendeterapi och beteendeanalys. Motiverande samtal och samtalsmetodik.
+Mindfulness och mindfulnessbaserade program. Stress, utmattning och återhämtning.
+Skadligt bruk, beroende och spel om pengar. Neuropsykiatriska funktionsnedsättningar.
+Oro, ångest, nedstämdhet och trauma. Ledarskap, kommunikation och bemötande.</p>
+
 <h2>Skräddarsydda uppdrag</h2>
 <p>Vi erbjuder utbildning och föredrag för företag och offentlig verksamhet om exempelvis
 stress, skadligt bruk och beroende, ledarskap och kommunikation, samtalsmetodik,
 motiverande samtal, mindfulness och många andra teman.</p>
 
+<p>De flesta uppdrag anpassas efter verksamheten. Vi börjar med ett samtal om vilka
+deltagarna är, vad de redan kan, och vad som ska vara annorlunda efteråt — det sista är
+den viktigaste frågan, och den som avgör hur dagen läggs upp. En utbildning som ska
+förändra hur människor faktiskt arbetar behöver mer övning och mindre föreläsning än man
+ofta tänker sig.</p>
+
+<h2>Uppföljning</h2>
+<p>Kunskap från en utbildningsdag försvinner snabbt om ingenting följer på den. Vi
+rekommenderar därför ofta att en utbildningsinsats kombineras med
+<a href="{base}organisationer/handledning/">handledning</a> under en period efteråt, så
+att det som lärts in får stöd att bli praktik.</p>
+
+<h2>Praktiskt</h2>
+<p>Vi håller utbildningar hos er, hos oss i centrala Uppsala eller via video, i hela
+landet. Angeli Holmstedt är medlem i MINT, det internationella nätverket av
+MI-utbildare. Priser lämnas på förfrågan; moms tillkommer.</p>
+
 <p>Hör av er för information om uppdragsutbildningar, workshops, föreläsningsserier,
-föredrag och övrig fortbildning.</p>
+föredrag och övrig fortbildning — se
+<a href="{base}organisationer/kontakt/">kontakt för uppdrag</a>.</p>
+
+<h2>Vanliga frågor</h2>
+
+<h3>Hur stor grupp kan ni ta?</h3>
+<p>En föreläsning kan hållas för en stor grupp. En utbildning som ska förändra hur
+deltagarna arbetar behöver mindre grupper, eftersom den bygger på övning och
+återkoppling. Vi säger gärna vad vi tror är rimligt utifrån vad ni vill uppnå.</p>
+
+<h3>Kan utbildningen hållas på distans?</h3>
+<p>Ja, både föreläsningar och längre utbildningar fungerar via video. Moment som bygger på
+rollspel och praktisk övning blir dock oftast bättre på plats.</p>
+
+<h3>Får deltagarna intyg?</h3>
+<p>Ja, vi utfärdar intyg på genomgången utbildning med omfattning och innehåll angivet.</p>
+
+<h3>Hur lång framförhållning behövs?</h3>
+<p>Det varierar med årstid och uppdragets storlek. Hör av er så tidigt ni kan, särskilt
+för längre utbildningar och för datum under vår och höst.</p>
 ''',
     ),
     dict(
@@ -1261,6 +2079,35 @@ evidensbaserade metoder.</p>
 
 <p>Vidare handleder och utbildar vi de nätverk som drabbas — anhöriga, vänner,
 arbetskamrater och chefer.</p>
+
+<h2>Så kan ett uppdrag se ut</h2>
+<ol class="steps steps--plain">
+  <li><h3>Kontakt och ramar</h3><p>Vi går igenom situationen med er som arbetsgivare,
+  och kommer överens om uppdragets omfattning, ramar och vad ni får återkoppling om.</p></li>
+  <li><h3>Bedömningssamtal</h3><p>Medarbetaren träffar en av våra psykologer för en
+  kartläggning av besvär, belastning och återhämtning — och för att bedöma om vår insats
+  är rätt, eller om något annat behövs.</p></li>
+  <li><h3>Behandling</h3><p>KBT anpassad efter vad bedömningen visade. Vid behov
+  samarbetar vi med en specialistläkare i psykiatri.</p></li>
+  <li><h3>Återgång i steg</h3><p>Upptrappning av arbetstid och uppgifter i en takt som
+  håller, i samverkan med er och med företagshälsovården.</p></li>
+</ol>
+
+<h2>Sekretess och roller</h2>
+<p>Det här är ofta den viktigaste punkten att reda ut i förväg. Även när ni som
+arbetsgivare betalar för insatsen omfattas medarbetarens uppgifter av tystnadsplikt. Ni
+får veta att kontakt är etablerad, att den fortgår, och — med medarbetarens samtycke —
+det som rör arbetsförmåga, anpassningar och planering. Innehållet i samtalen är inte er
+information.</p>
+
+<p>Den tydligheten är inte en begränsning utan en förutsättning: en medarbetare som inte
+litar på ramarna berättar inte det som behövs för att insatsen ska göra nytta.</p>
+
+<h2>Praktiskt</h2>
+<p>Vi arbetar på mottagningen i centrala Uppsala, hos er och via video i hela landet.
+Priser lämnas på förfrågan; moms tillkommer när arbetsgivare, försäkringsbolag eller
+socialtjänst betalar. Hör av er via
+<a href="{base}organisationer/kontakt/">kontakt för uppdrag</a>.</p>
 ''',
     ),
     dict(
@@ -1281,6 +2128,14 @@ förgyllandet av en god middag, lindringen av smärta — och i stället börjar
 och negativa konsekvenser, blir det problematiskt för individen själv, på arbetet, bland
 vänner, i familjen och för barnen.</p>
 
+<h2>Tecken på en arbetsplats</h2>
+<p>Det som märks först är sällan berusning. Oftare är det upprepad korttidsfrånvaro,
+särskilt måndagar och dagen efter helger; sena ankomster; att prestationen svajar utan
+förklaring; att humöret svänger; att personen drar sig undan gemensamma sammanhang eller
+tvärtom blir påfallande beroende av dem; och att kollegor börjar täcka upp. Det sista är
+ett tidigt och ofta förbisett tecken — problemet blir synligt i arbetsgruppens beteende
+innan det blir synligt hos individen.</p>
+
 <h2>Vad vi erbjuder arbetsgivare</h2>
 <ul>
   <li>stöd till chefer inför och under det svåra samtalet med en medarbetare</li>
@@ -1290,7 +2145,16 @@ vänner, i familjen och för barnen.</p>
   rekommendationer</li>
   <li>handledning och utbildning till de nätverk som påverkas — anhöriga, vänner,
   arbetskamrater och chefer</li>
+  <li>stöd i att ta fram eller se över en alkohol- och drogpolicy, så att rutinerna är
+  bestämda innan de behövs</li>
 </ul>
+
+<h2>Chefssamtalet</h2>
+<p>Många chefer väntar för länge, av rädsla för att ha fel eller för att göra situationen
+värre. Ett samtal behöver inte innehålla någon anklagelse och inte någon diagnos. Det
+räcker att beskriva det man faktiskt har sett — frånvaron, förändringen, det som inte
+stämmer — och att erbjuda hjälp. Vi förbereder gärna chefen inför ett sådant samtal, och
+finns med som stöd efteråt.</p>
 
 <h2>Vår kompetens</h2>
 <ul>
@@ -1302,9 +2166,20 @@ vänner, i familjen och för barnen.</p>
   anhöriga</li>
 </ul>
 
+<h2>Sekretess och roller</h2>
+<p>Även när arbetsgivaren betalar omfattas medarbetarens uppgifter av tystnadsplikt. Ni
+får veta att kontakt finns och pågår, och — med medarbetarens samtycke — det som rör
+arbetsförmåga och planering. Innehållet i samtalen är inte arbetsgivarens information. Vi
+går igenom vad som gäller med båda parter innan en insats påbörjas.</p>
+
+<h2>Anhöriga och kollegor</h2>
+<p>Skadligt bruk drabbar fler än den som dricker eller spelar. Vi arbetar också med
+anhöriga, och med arbetsgrupper som påverkats.</p>
+
 <p>Den fullständiga beskrivningen av hur vi arbetar kliniskt — riskbruk, skadligt bruk,
 beroende och spelberoende — finns på sidan
-<a href="{base}vuxna/beroende/index.html">skadligt bruk och beroende</a>.</p>
+<a href="{base}vuxna/beroende/index.html">skadligt bruk och beroende</a>. Priser lämnas
+på förfrågan; moms tillkommer.</p>
 ''',
     ),
     dict(
@@ -1341,16 +2216,38 @@ olika verksamheter:</p>
   <li>företagshälsovård</li>
 </ul>
 
+<h2>Så brukar ett uppdrag börja</h2>
+<p>Med ett samtal, utan kostnad, där ni beskriver situationen och vi säger vad vi tror
+behövs — eller att någon annan är bättre lämpad. Därefter lämnar vi ett förslag på
+upplägg och pris, och när ni sagt ja gör vi en skriftlig överenskommelse om syfte,
+omfattning, frekvens, ramar och sekretess.</p>
+
+<p>Det hjälper oss om ni redan i första kontakten kan säga något om vilka deltagarna är,
+vad ni har provat tidigare, ungefär vilken omfattning ni tänker er, och vad som ska vara
+annorlunda när uppdraget är slut.</p>
+
 <h2>Var håller vi hus?</h2>
 <p>Vår bas är i centrala Uppsala, där mottagningen ligger i Gårdshuset vid Slottskällan
 på gångavstånd från Centralstationen. Där tar vi emot kunder och klienter — men vi
 arbetar också online och hos arbetsgivare runt om i landet.</p>
+
+<h2>Priser och fakturering</h2>
+<p>Priser för handledning, utbildning, konsultation och utredning lämnas på förfrågan,
+eftersom de beror på uppdragets omfattning och form. Moms tillkommer när arbetsgivare,
+försäkringsbolag eller socialtjänst betalar. Vi fakturerar efter överenskommelse.</p>
 
 <h2>Nå oss</h2>
 <p>E-post: <a href="mailto:kontakt@kbt-konsulterna.se">kontakt@kbt-konsulterna.se</a><br>
 Telefon: <a href="tel:+4618104044">018 – 10 40 44</a></p>
 <p>Du kan också använda <a href="{base}kontakt/index.html">kontaktformuläret</a>. Vi
 återkommer så snart vi har möjlighet.</p>
+
+<h2>Sekretess när ni är uppdragsgivare</h2>
+<p>Rör uppdraget en enskild medarbetare omfattas dennes uppgifter av tystnadsplikt även
+när ni betalar. Ni får veta att en kontakt finns och pågår, och — med medarbetarens
+samtycke — det som rör arbetsförmåga och planering. Vad som gäller går vi igenom med båda
+parter innan insatsen påbörjas, eftersom tydliga ramar är en förutsättning för att
+insatsen ska göra nytta.</p>
 ''',
     ),
 ]
@@ -1402,6 +2299,30 @@ och lindra psykologiskt lidande.</p>
 <p>Vi börjar med en gemensam bedömning och formulerar därefter en plan utifrån dina mål
 och värderingar. För det mesta arbetar vi ”här och nu”, men om din tidigare historia
 påverkar hur du mår i dag finns även den med i samtalen.</p>
+
+<h2>Hur ett samtal går till</h2>
+<p>Ett samtal är 45 minuter. De första en till tre gångerna handlar om att tillsammans
+ta reda på vad du behöver hjälp med — och om du känner dig bekväm med oss. Därefter
+formulerar vi mål och kommer överens om metod och ungefär hur många samtal det troligen
+handlar om.</p>
+
+<p>Mellan samtalen brukar du ha något med dig att pröva eller observera i vardagen. Det
+är inte läxor för deras egen skull: det är där förändringen sker, medan samtalet är
+platsen där ni planerar och utvärderar den. Vi stämmer av regelbundet att behandlingen
+går i rätt riktning och att tiden används väl.</p>
+
+<h2>Hur många samtal behövs?</h2>
+<p>Det varierar kraftigt. En avgränsad fobi kan vara avklarad på några gånger, medan
+utmattning, trauma eller långvarig nedstämdhet tar längre tid. Du binder dig aldrig till
+ett antal, och du bestämmer själv när du vill avsluta.</p>
+
+<h2>På mottagningen eller online</h2>
+<p>Vi tar emot i Gårdshuset vid Slottskällan i centrala Uppsala, tio minuters promenad
+från Centralstationen, och erbjuder videosamtal i hela Sverige. De flesta
+behandlingsformer fungerar lika väl på video.</p>
+
+<p>Du behöver ingen remiss, och du behöver inte veta vad problemet heter för att höra av
+dig.</p>
 ''',
                 children=V_BEHANDLING,
             ),
@@ -1427,6 +2348,16 @@ Kriser i livet, otrohet, ett livspussel med för lite tid tillsammans, oro för 
 alkoholproblem hos partnern, sexuella problem — det finns många påfrestningar som gör
 kommunikationen allt sämre. Då kan man behöva hjälp utifrån.</p>
 
+<h2>När är parterapi rätt?</h2>
+<p>Vanliga skäl att söka är återkommande konflikter om samma sak, en känsla av att ha
+blivit sambos i stället för partners, otrohet eller annat svek, ojämn fördelning av
+ansvaret hemma, olika syn på närhet och sex, eller att en av er funderar på att gå.</p>
+
+<p>Ni behöver inte vara överens om att ni vill fortsätta relationen för att börja. Ni
+behöver däremot båda vara beredda att komma och att titta på er egen del — parterapi
+fungerar dåligt som en plats dit den ena tar med den andra för att få denne
+tillrättavisad.</p>
+
 <h2>Vilken metod använder vi?</h2>
 <p>Vi arbetar utifrån IBCT — Integrative Behavioral Couple Therapy — en evidensbaserad
 form av KBT som syftar till att integrera förändringsarbete med acceptansstrategier.</p>
@@ -1438,6 +2369,10 @@ acceptans och förståelse för sin partner. Acceptansen är en förutsättning 
 förändringarna ska bli bestående, och för att den känslomässiga närheten ska kunna
 byggas upp igen.</p>
 
+<p>En bärande tanke i IBCT är att en del skillnader mellan två personer inte går att
+förhandla bort. Det som går att förändra är vad ni gör med dem — om de fortsätter vara
+det ni bråkar om, eller blir något ni förstår hos varandra.</p>
+
 <h2>Hur går det till?</h2>
 <p>Vid den första kontakten börjar vi vanligen med ett gemensamt samtal där ni tillsammans
 beskriver den situation ni befinner er i. Det följs oftast av två individuella möten, för
@@ -1446,11 +2381,28 @@ sammanfattning från psykologen, som beskriver hur den fortsatta behandlingen ka
 upp utifrån de mål ni formulerat.</p>
 
 <p>En målsättning kan vara att stärka relationen — men den kan lika gärna vara att göra
-ett bra avslut.</p>
+ett bra avslut. Att separera ordnat, särskilt när det finns barn med i bilden, är ett
+fullt legitimt mål för en parterapi.</p>
+
+<h2>Vad ni arbetar med</h2>
+<ul>
+  <li><strong>Konfliktmönstret.</strong> Inte vem som har rätt, utan hur bråket brukar gå
+  — vem som trappar upp, vem som drar sig undan, och vad som utlöser det.</li>
+  <li><strong>Att prata så att den andra kan höra.</strong> Att säga vad du behöver i
+  stället för vad den andra gör fel.</li>
+  <li><strong>Närhet.</strong> Vänskapen och det positiva, som ofta hunnit bli det man
+  slutar prioritera först.</li>
+  <li><strong>Acceptans.</strong> Att förstå varför den andra reagerar som den gör, även
+  när du inte håller med.</li>
+</ul>
 
 <h2>Tider och pris</h2>
-<p>Parterapi bokas i 60-minuterspass, eller som 2 × 45 minuter. Ofta behövs minst 60
-minuter per besök. Se <a href="{base}priser/index.html">priser</a>.</p>
+<p>Parterapi bokas i 60-minuterspass, eller som 2 × 45 minuter — ofta behövs minst 60
+minuter per besök för att båda ska hinna komma till tals. Aksel Reppling tar emot par.
+Se <a href="{base}priser/index.html">priser</a>.</p>
+
+<p>Söker du hjälp med relationer men kommer ensam, se
+<a href="{base}vuxna/behandling/relationer/">relationsproblem</a>.</p>
 ''',
             ),
             dict(
@@ -1636,6 +2588,20 @@ en tydligare karta över dina styrkor och utmaningar.</p>
 <p>Vi har ett nära samarbete med vår psykiater, och i vissa situationer har våra klienter
 kontakt både med psykologen eller psykoterapeuten och med psykiatern.</p>
 
+<h2>När kan det vara aktuellt?</h2>
+<ul>
+  <li>När psykologisk behandling behöver kompletteras med läkemedel — eller när du vill
+  veta om den möjligheten finns.</li>
+  <li>När en diagnos behöver fastställas av läkare, till exempel i samband med en
+  <a href="{base}vuxna/utredning/index.html">neuropsykiatrisk utredning</a>.</li>
+  <li>När en pågående medicinering inte ger effekt, ger biverkningar, eller behöver ses
+  över.</li>
+  <li>När sjukskrivning eller ett läkarutlåtande behövs. Psykologer utfärdar inte
+  sjukintyg.</li>
+  <li>När bilden är oklar och en psykiatrisk bedömning behövs som grund för att välja
+  rätt väg framåt.</li>
+</ul>
+
 <h2>Vad psykiatern erbjuder</h2>
 <ul>
   <li>bedömning och utredning av besvär</li>
@@ -1649,8 +2615,26 @@ kontakt både med psykologen eller psykoterapeuten och med psykiatern.</p>
   <li>utbildningar och föreläsningar</li>
 </ul>
 
-<p>Kombinationen av KBT och läkemedelsbehandling kan också innefatta sjukskrivning och
-läkarutlåtande vid behov.</p>
+<h2>Hur det går till</h2>
+<p>Besöken sker på mottagningen i centrala Uppsala eller som videosamtal. Bedömningen
+börjar med ett samtal om dina besvär, din historia och din nuvarande situation, och
+utmynnar i ett förslag på hur en behandling kan se ut. Går du redan i behandling hos
+någon av oss kan psykologen och psykiatern — med ditt samtycke — samråda, så att de två
+insatserna drar åt samma håll i stället för var för sig.</p>
+
+<h2>Kombinationsbehandling</h2>
+<p>För flera tillstånd är KBT och läkemedel var för sig verksamma, och för en del
+fungerar de bäst tillsammans. Kombinationen kan också innefatta sjukskrivning och
+läkarutlåtande när det behövs. Vad som passar dig avgörs av vad du söker för, vad du
+tidigare provat och vad du själv vill — läkemedel är aldrig ett villkor för att gå i
+behandling hos oss.</p>
+
+<h2>Bra att veta</h2>
+<p>Vi är en mottagning med bokade tider och kan inte ta emot akut. Behöver du hjälp
+omedelbart, se <a href="{base}akut-hjalp/index.html">akut hjälp</a>. Vi bedriver inte
+heller beroendevård med läkemedelsassisterad behandling eller avgiftning; vid sådana
+behov hänvisar vi vidare. Se <a href="{base}vuxna/beroende/index.html">skadligt bruk och
+beroende</a> för vad vi gör på det området.</p>
 
 <p>För att komma i kontakt med vår psykiater, hör av dig via
 <a href="mailto:kontakt@kbt-konsulterna.se">e-post</a>.</p>
@@ -1678,6 +2662,44 @@ besvär.</p>
 <p>De flesta besvär kan tas om hand i barnets närhet, tillsammans med föräldrar och andra
 viktiga vuxna. Men ibland behövs professionell hjälp — och då är tröskeln hit låg. Du
 behöver ingen remiss, och ni behöver inte veta på förhand vad problemet heter.</p>
+
+<h2>När är det dags att söka hjälp?</h2>
+<p>Det finns ingen skarp gräns, men några hållpunkter: när besvären håller i sig över tid
+snarare än går över, när de påverkar skolan, kompisrelationerna eller vardagen hemma, när
+barnet drar sig undan från sådant det tidigare tyckte om, eller när ni som föräldrar
+märker att det ni brukar göra inte längre räcker.</p>
+
+<p>Ni behöver inte vänta tills det är allvarligt. Det är ofta lättare att vända en
+utveckling tidigt, och ett bedömningssamtal kan lika gärna landa i att det inte behövs
+någon behandling.</p>
+
+<h2>Hur vi arbetar med barn</h2>
+<p>Behandlingen anpassas efter ålder och mognad. Med yngre barn arbetar vi konkret och
+lekfullt, med bilder och material snarare än långa resonemang, och en stor del av arbetet
+sker via föräldrarna. Med tonåringar ser samtalen mer ut som med vuxna, och ungdomen får
+större utrymme att själv formulera vad hen vill ha hjälp med.</p>
+
+<p>Gemensamt är att KBT för barn och unga är konkret och inriktat på vad som ska bli
+annorlunda i vardagen — inte bara på att prata om hur det känns.</p>
+
+<h2>Föräldrarnas roll</h2>
+<p>All behandling av barn och ungdomar genomförs i nära samarbete med vårdnadshavare.
+Ni är inte åskådare: ni är ofta den viktigaste delen av behandlingen, eftersom det är
+hemma, i vardagen, som det som övas ska fungera. Ju yngre barnet är, desto större andel
+av arbetet sker genom er.</p>
+
+<p>Vid gemensam vårdnad behöver båda vårdnadshavarna vanligtvis samtycka till
+behandlingen. Hör av er om ni är osäkra på vad som gäller i er situation.</p>
+
+<h2>Skolan</h2>
+<p>Skolan är en stor del av ett barns liv, och mycket av det som är svårt visar sig där.
+Om ni vill, och efter ert samtycke, samarbetar vi gärna med skolan — det kan handla om
+att inhämta information, delta i ett möte eller ge råd om anpassningar.</p>
+
+<h2>Praktiskt</h2>
+<p>Vi tar emot på mottagningen i centrala Uppsala, och erbjuder videosamtal när det
+passar bättre. Ingen remiss behövs. Om det under bedömningen visar sig att barnet behöver
+en annan vårdnivå än den vi kan erbjuda, säger vi det och hjälper er vidare.</p>
 ''' + VARDNADSHAVARE,
                 children=B_BEHANDLING,
             ),
@@ -1701,9 +2723,44 @@ inlärning. Genom att kartlägga barnets styrkor och svårigheter skapar vi för
 för rätt stöd i skolan, en mer harmonisk vardag hemma, och en stärkt självkänsla hos
 barnet.</p>
 
+<h2>När är en utredning aktuell?</h2>
+<p>Om svårigheterna håller i sig över tid, visar sig i mer än ett sammanhang — både hemma
+och i skolan — och påverkar barnets inlärning, kompisrelationer eller mående. Enstaka
+perioder av svårigheter hör till uppväxten; det är varaktigheten och bredden som gör en
+utredning motiverad.</p>
+
+<p>Ofta är det skolan som först väcker frågan, men ni kan söka er hit direkt utan att
+någon annan gjort det. Är ni osäkra går det bra att boka ett bedömningssamtal för att
+resonera om saken.</p>
+
+<h2>Vad en utredning ger — och inte ger</h2>
+<p>En utredning ger en beskrivning av hur ert barn fungerar: vilka förmågor som är
+starka, vilka som är svaga, och vad det betyder i praktiken. Den ger ett skriftligt
+utlåtande med konkreta rekommendationer, och den ger ofta en lättnad — både för er och för
+barnet, som kan ha gått länge med en känsla av att vara sämre utan att förstå varför.</p>
+
+<p>Den ger däremot ingen garanti om ett visst resultat. Utfallet kan bli att kriterierna
+för en diagnos är uppfyllda, att de inte är det, eller att svårigheterna har en annan
+förklaring — stress, oro, sömnbrist, en inlärningssvårighet eller något i barnets
+situation. Även då är kartan över styrkor och svårigheter användbar, och vi går igenom
+vad den betyder för er.</p>
+
+<p>En diagnos utlöser inte automatiskt insatser. Skolans stöd ska ges utifrån elevens
+behov, inte utifrån diagnos — men utlåtandet blir ofta det underlag som gör behovet
+tydligt och konkret.</p>
+
 <h2>Ingen remiss behövs</h2>
 <p>Som privat mottagning kan ni söka er till oss direkt. Vi samarbetar gärna med barnets
 skola eller andra vårdgivare om ni önskar det.</p>
+
+<h2>Efter utredningen</h2>
+<p>Återgivningen är inte slutet. Vi går igenom vad resultatet innebär i vardagen, vilka
+anpassningar som är rimliga att be skolan om, och vad ni kan göra hemma. Behöver barnet
+behandling eller ni föräldrastöd finns båda hos oss — se
+<a href="{base}barn-och-ungdom/behandling/index.html">psykologisk behandling</a> och
+<a href="{base}barn-och-ungdom/stod/foraldrar/">stöd till föräldrar</a>. Vi har också
+tillgång till specialistläkare som bidrar till diagnostiken och som kan hjälpa till vid
+önskemål om medicinsk behandling.</p>
 ''',
                 children=B_UTREDNING,
             ),
@@ -1723,6 +2780,46 @@ behandlingshem och i familjehem.</p>
 
 <p>Ofta är det de vuxna runt barnet som har mest att vinna på stöd: det är där
 strategierna finns, och det är där uthålligheten behöver komma ifrån.</p>
+
+<h2>Tre former av stöd</h2>
+<ul>
+  <li><strong>Rådgivning</strong> — ett eller några samtal om en konkret fråga. Vad gör vi
+  åt morgnarna? Hur pratar vi med henne om det här? Ska vi söka hjälp?</li>
+  <li><strong>Handledning</strong> — återkommande samtal med en yrkesgrupp, enskilt eller i
+  grupp, om det egna arbetet: bemötande, förhållningssätt och de egna reaktionerna på
+  det som är svårt.</li>
+  <li><strong>Konsultation</strong> — en avgränsad insats i ett enskilt ärende, där ni
+  behöver psykologisk kompetens som underlag för era egna beslut.</li>
+</ul>
+
+<h2>Vilka vi arbetar med</h2>
+<p>Föräldrar och andra anhöriga, skolpersonal och elevhälsoteam, personal vid HVB-hem och
+behandlingshem, familjehemsföräldrar, och medarbetare inom socialtjänsten. Flera av oss
+har lång egen erfarenhet från BUP, skola, behandlingshem och specialskolor.</p>
+
+<h2>Så går det till</h2>
+<p>Vi börjar med ett samtal om vad ni behöver, hur ofta och i vilken form. Därefter gör vi
+en överenskommelse om upplägg, omfattning och ramar. Handledning sker vanligen
+återkommande över en längre period; rådgivning kan vara ett enda samtal.</p>
+
+<p>Vi arbetar på mottagningen i centrala Uppsala, hos er, och via videosamtal i hela
+landet. För uppdrag från arbetsgivare, se även
+<a href="{base}organisationer/index.html">För organisationer</a>.</p>
+
+<p>Priser för handledning och konsultation lämnas på förfrågan. Moms tillkommer när
+arbetsgivare, försäkringsbolag eller socialtjänst betalar.</p>
+
+<h2>Rådgivning eller behandling?</h2>
+<p>En vanlig fråga är om det är barnet som ska gå i behandling eller ni som vuxna som
+behöver stöd. Ofta är svaret det senare, särskilt när barnet är yngre — det är hemma och i
+skolan som vardagen finns, och det är de vuxna som är där. Ett bedömningssamtal reder
+vanligen ut vilket som är mest verkningsfullt att börja med, och de två utesluter inte
+varandra.</p>
+
+<p>Behöver barnet egen behandling finns den hos oss, se
+<a href="{base}barn-och-ungdom/behandling/index.html">psykologisk behandling</a>. Behövs
+en kartläggning av barnets förutsättningar, se
+<a href="{base}barn-och-ungdom/utredning/index.html">utredning och bedömning</a>.</p>
 ''',
                 children=B_STOD,
             ),

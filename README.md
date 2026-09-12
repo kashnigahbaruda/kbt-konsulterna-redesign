@@ -72,7 +72,10 @@ Each one carries what the originals did not:
 - **Related topics and prev/next**, so the articles link to each other rather than only
   upward to the hub.
 
-Eleven of the originals are under 200 words. Their copy is ported as-is here — see
+The originals were thin — eleven under 200 words, and thirty of the thirty-eight
+pages under 350 once ported. They have since been **expanded to ~500 words each**
+(18,750 words across the topic layer; median 505, shortest 337). That new material is
+written by us, not ported, and needs the client's clinical sign-off — see
 *[Known gaps](#known-gaps)*.
 
 ## The design
@@ -109,30 +112,66 @@ they work under confidentiality. That decision is respected, not worked around.
 
 ## Known gaps
 
-- **Eleven ported topic pages are still thin** (58–199 words in the original: `flygfobi`,
-  `somnproblem`, the five children's treatment pages, and the four `stod` pages). They are
-  faithful ports, and thin pages drag a domain. Either expand each to ~500 words or merge it
-  into its parent before launch.
-- **No page-level FAQ schema yet.** Six topic pages carry a real Q&A section
-  (`vuxna/utredning/adhd/`, `…/autism/`, the two hubs, and the children's equivalents). Adding
-  `FAQPage` to those is a cheap win once the copy is signed off.
+### The expanded copy needs clinical review — this is the blocker
+
+The topic pages were ported from the client's own text, then expanded. The **ported**
+material asserts nothing new. The **added** material does, and a licensed psychologist at
+the practice should read it before launch. Specifically, these claims are mainstream and
+sourced from standard clinical guidance, but are ours and not the client's:
+
+| Claim | Page |
+|---|---|
+| KBT-i is first-line for chronic insomnia, ahead of sleep medication | `vuxna/behandling/somn/` |
+| Sleep restriction is not suitable for everyone and is assessed first | `vuxna/behandling/somn/` |
+| *Applied tension* is used for blood/injection phobia with fainting | `vuxna/behandling/fobier/` |
+| Sleep-need ranges by age (≈10–13 / 9–11 / 8–10 hours) | `barn-och-ungdom/behandling/somn/` |
+| Asking a young person about suicidal thoughts does not increase risk | `barn-och-ungdom/behandling/depression/` |
+| ERP is among the best-documented treatments for childhood OCD | `barn-och-ungdom/behandling/ocd/` |
+| Parent work is the most effective intervention for younger children's behaviour | `barn-och-ungdom/stod/foraldrar/` |
+| Placed children have markedly poorer school outcomes as a group | `barn-och-ungdom/stod/hvb-familjehem/` |
+| Behavioural activation is the most-studied component in depression treatment | `vuxna/behandling/depression/` |
+
+Two operational claims need the client's confirmation rather than a clinician's, because
+they describe how the practice works:
+
+- **"Vid gemensam vårdnad behöver båda vårdnadshavarna vanligtvis samtycka"**
+  (`barn-och-ungdom/behandling/`) — legally sound, but it describes an intake rule the
+  practice has to actually follow.
+- **Confidentiality when an employer pays** (`organisationer/rehabilitering/` and
+  `…/skadligt-bruk/`) — the pages state that the employer is told that contact exists and,
+  with consent, what bears on work capacity, but never the content of sessions. Confirm
+  this matches the practice's actual agreements.
+
+### Smaller
+
+- **No page-level `FAQPage` schema yet.** Ten topic pages carry question-form headings with
+  answers — 35 questions in all, concentrated on the assessment pages, which are the highest
+  commercial-intent pages on the site. Marking those up is a cheap win, but do it *after*
+  sign-off: the markup has to match the visible text exactly, so it cannot be written before
+  the copy is final.
+- `organisationer/kontakt/` is 337 words, the shortest page. That is appropriate for a
+  contact page and was left alone rather than padded.
+- The client's own source pages quote the assessment conversation at **1 500 kr** on the
+  adult pages and **1 400 kr** on one children's page. The children's FAQ here avoids the
+  figure entirely; the adult pages carry 1 500 kr. Needs one answer.
 
 ## Quality
 
 Checked across all 55 pages:
 
-- No broken internal links or dangling anchors — 4 036 checked
+- No broken internal links or dangling anchors — 4 073 checked, each resolving to a real
+  file rather than a directory, so the build works over `file://` as promised
 - One `<h1>` per page, no skipped heading levels, every image has `alt`
 - No duplicate `id`s, every form input has a label
 - Skip link, real landmarks, visible keyboard focus
 - `lang="sv"` — the current site declares `lang="en-US"` on entirely Swedish content
 - No zoom restriction — the current site sets `maximum-scale=1.5`, which fails WCAG 1.4.4
-- No horizontal overflow at 381px on any page. Adding the topic layer surfaced two real
+- No horizontal overflow at 381px on any page, re-checked across all 24 expanded pages. Adding the topic layer surfaced two real
   bugs here, both now fixed: the header row (logo + "Boka samtal" + burger) overflowed by
   ~3px on every page below 27rem, and the topic cards' hover bleed ran past the gutter
 - **Text contrast meets WCAG AA** — 2,113 rendered text nodes measured at 1280px and 390px
-  with the mobile menu open, plus 458 more across the topic layer's new components
-  (navigator, bylines, cards, prev/next) with translucent backgrounds properly composited:
+  with the mobile menu open, plus 1,115 more across the expanded topic layer (article prose,
+  navigator, bylines, cards, prev/next) with translucent backgrounds properly composited:
   zero failures. Getting there fixed four real bugs where a
   descendant selector was overriding a button or bold colour to invisible. Text over
   photography is excluded from that measurement and was checked by eye; it is white on a
