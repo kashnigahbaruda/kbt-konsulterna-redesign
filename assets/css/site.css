@@ -685,6 +685,9 @@ button { font: inherit; }
 
 /* Anchored section within a hub page */
 .anchor { scroll-margin-top: 6.5rem; }
+/* A full-bleed band lands flush under the sticky header (min-height 5rem),
+   so the previous band's background never peeks through the gap. */
+.band.anchor { scroll-margin-top: 5rem; }
 
 /* --- Topic cards ----------------------------------------------------------
    A topic in the grid that has its own page. The card is the whole link; the
