@@ -338,7 +338,7 @@ FOOT_TPL = '''</main>
       </div>
     </div>
     <div class="site-foot__base">
-      <span>KBT Konsulterna, Evidensbaserad Praktik, Uppland AB</span>
+      <span>KBT Konsulterna, Psykologmottagning i Uppsala AB</span>
       <a href="https://www.facebook.com/KBTKonsulterna/">Facebook</a>
       <span>Leg. psykologer · Tystnadsplikt</span>
     </div>
@@ -555,7 +555,7 @@ ROUTER = [
 HOME_LD = '''<script type="application/ld+json">
 {"@context":"https://schema.org","@type":["MedicalBusiness","Organization"],
 "name":"KBT-Konsulterna i Uppsala",
-"legalName":"KBT Konsulterna, Evidensbaserad Praktik, Uppland AB",
+"legalName":"KBT Konsulterna, Psykologmottagning i Uppsala AB",
 "url":"https://kbt-konsulterna.se","email":"kontakt@kbt-konsulterna.se",
 "telephone":"+46181040 44",
 "address":{"@type":"PostalAddress","streetAddress":"G\\u00e5rdshuset, Slottsk\\u00e4llan, Sjukhusv\\u00e4gen 3",
@@ -633,7 +633,7 @@ def build_home():
     <div class="team team--seven">
       {team_html}
     </div>
-    <p style="margin-top:clamp(2.5rem,5vw,3.5rem);margin-bottom:0"><a class="a-link" href="{b}medarbetare/index.html">Osäker på vem du ska vända dig till? Se vem som arbetar med vad {ARROW}</a></p>
+    <p style="margin-top:clamp(2.5rem,5vw,3.5rem);margin-bottom:0"><a class="a-link" href="{b}medarbetare/index.html#vem-gor-vad">Osäker på vem du ska vända dig till? Se vem som arbetar med vad {ARROW}</a></p>
   </div>
 </section>
 
@@ -1324,7 +1324,7 @@ def build_medarbetare():
   </div>
 </section>
 
-<section class="band band--hi">
+<section class="band band--hi anchor" id="vem-gor-vad">
   <div class="wrap split">
     <div>
       <p class="eyebrow">Vem gör vad</p>
@@ -1693,9 +1693,9 @@ def build_om_oss():
              metoder, tone='band--hi')}
 
 {hub_section('evidens', 'Evidensbaserad praktik',
-             'Det står i vårt namn.',
-             '<p>Vårt företag heter KBT Konsulterna, Evidensbaserad Praktik, Uppland AB. '
-             'En evidensbaserad praktik innebär att man som professionell väger samman sin '
+             'Så arbetar vi.',
+             '<p>Vi arbetar utifrån evidensbaserad praktik. '
+             'Det innebär att man som professionell väger samman sin '
              'samlade erfarenhet och expertis med den bästa forskningsbaserade kunskap som '
              'finns tillgänglig — och med den enskildes situation, erfarenhet och önskemål.</p>'
              '<p>Evidens kommer från vetenskapliga studier om insatsers effekter, och det '
@@ -1837,7 +1837,7 @@ def build_kontakt():
         <div>
           <dt>Direkt till en av oss</dt>
           <dd>Alla medarbetare har egen e-post.
-          <a class="a-link" href="{b}medarbetare/index.html">Se vem som arbetar med vad {ARROW}</a></dd>
+          <a class="a-link" href="{b}medarbetare/index.html#vem-gor-vad">Se vem som arbetar med vad {ARROW}</a></dd>
         </div>
       </dl>
     </div>
