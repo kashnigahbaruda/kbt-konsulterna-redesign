@@ -386,6 +386,11 @@ button { font: inherit; }
   .router__row { grid-template-columns: 1fr; }
   .router__to { white-space: normal; }
 }
+/* Beside an eyebrow, pull the list up by the first row's padding so its
+   first line sits level with the label rather than a row's padding below it. */
+@media (min-width: 62rem) {
+  .split .router { margin-top: calc(-1 * clamp(1rem, 2.2vw, 1.5rem)); }
+}
 
 /* --- Doors (three audiences) ----------------------------------------------
    The title is set on the photograph itself, under the same scrim treatment
