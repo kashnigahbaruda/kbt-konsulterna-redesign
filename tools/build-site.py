@@ -20,6 +20,7 @@ except ImportError:
     Image = None
 
 SITE = 'https://kbt-konsulterna.se'
+ORG_ID = SITE + '/#organisation'
 
 # True while this build is being published as a shareable preview (GitHub Pages).
 # Set to False for the real launch — noindex on production would be catastrophic.
@@ -132,9 +133,12 @@ def rel(base, href):
 def pic_wide(base, slug, alt, sizes='100vw', cls='', eager=False):
     p = f'assets/img/{slug}.jpg'
     w, h = dim(p)
+    have = [n for n in (800, 1000, 1600, 2400)
+            if os.path.exists(f'assets/img/{slug}-{n}.webp')]
+    srcset = ', '.join(f'{base}assets/img/{slug}-{n}.webp {n}w' for n in have)
     load = 'fetchpriority="high"' if eager else 'loading="lazy"'
     return f'''<picture{f' class="{cls}"' if cls else ''}>
-        <source type="image/webp" sizes="{sizes}" srcset="{base}assets/img/{slug}-1000.webp 1000w, {base}assets/img/{slug}-1600.webp 1600w, {base}assets/img/{slug}-2400.webp 2400w">
+        <source type="image/webp" sizes="{sizes}" srcset="{srcset}">
         <img src="{base}assets/img/{slug}.jpg" alt="{H.escape(alt)}" width="{w}" height="{h}" decoding="async" {load}>
       </picture>'''
 
@@ -142,7 +146,7 @@ def pic_wide(base, slug, alt, sizes='100vw', cls='', eager=False):
 def pic_person(base, slug, alt, sizes='(min-width: 76rem) 20vw, (min-width: 56rem) 30vw, (min-width: 34rem) 45vw, 90vw', eager=False):
     p = f'assets/img/team/{slug}.jpg'
     w, h = dim(p)
-    have = [n for n in (340, 600, 900)
+    have = [n for n in (340, 600, 700, 900)
             if os.path.exists(f'assets/img/team/{slug}-{n}.webp')]
     srcset = ', '.join(f'{base}assets/img/team/{slug}-{n}.webp {n}w' for n in have)
     load = 'fetchpriority="high"' if eager else 'loading="lazy"'
@@ -232,14 +236,15 @@ HEAD_TPL = '''<!doctype html>
 <meta property="og:description" content="{desc}">
 <meta property="og:url" content="{canonical}">
 <meta property="og:image" content="{site}/assets/img/{ogimg}.jpg">
+<meta property="og:image:width" content="{ogw}">
+<meta property="og:image:height" content="{ogh}">
 <meta name="twitter:card" content="summary_large_image">
 <link rel="icon" href="{base}assets/brand/logo-mark.svg" type="image/svg+xml">
 <link rel="icon" href="{base}assets/brand/icon-512.png" type="image/png" sizes="512x512">
 <link rel="apple-touch-icon" href="{base}assets/brand/apple-touch-icon.png">
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Familjen+Grotesk:wght@400;500;600;700&family=Newsreader:opsz,wght@6..72,400;6..72,500&display=swap">
 <link rel="stylesheet" href="{base}assets/css/site.css">
+<link rel="preload" href="{base}assets/fonts/familjen-grotesk-latin.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="preload" href="{base}assets/fonts/newsreader-latin.woff2" as="font" type="font/woff2" crossorigin>
 <noscript><style>
   /* The burger needs JS to toggle. Without it, show the menu and hide the button
      so small screens still have navigation. The desktop rule uses !important,
@@ -358,6 +363,21 @@ def logo_size():
 LOGO_W, LOGO_H = logo_size()
 
 
+def crumb_trail(body, base, path):
+    """Read the visible breadcrumb back out of a page body, so its BreadcrumbList
+    markup cannot disagree with what the visitor sees."""
+    m = re.search(r'<p class="crumb">(.*?)</p>', body, re.S)
+    if not m:
+        return None
+    parts = m.group(1).split('<span>/</span>')
+    trail = []
+    for part in parts[:-1]:
+        a = re.search(r'href="([^"]*)"[^>]*>(.*?)</a>', part, re.S)
+        trail.append((H.unescape(a.group(2).strip()), a.group(1)[len(base):]))
+    trail.append((H.unescape(re.sub(r'<[^>]+>', '', parts[-1]).strip()), path))
+    return trail
+
+
 def page(path, title, desc, body, ogimg='hero-room', extra='', ogtitle=None):
     depth = path.count('/')
     base = '../' * depth
@@ -365,8 +385,13 @@ def page(path, title, desc, body, ogimg='hero-room', extra='', ogtitle=None):
     canonical = SITE + '/' + re.sub(r'index\.html$', '', path)
     robots = ('<meta name="robots" content="noindex, nofollow">\n'
               if PREVIEW else '')
+    if 'BreadcrumbList' not in extra:
+        trail = crumb_trail(body, base, path)
+        if trail:
+            extra = breadcrumb_ld(trail) + extra
+    ogw, ogh = dim(f'assets/img/{ogimg}.jpg')
     head = HEAD_TPL.format(
-        robots=robots,
+        robots=robots, ogw=ogw, ogh=ogh,
         title=H.escape(title), desc=H.escape(desc), canonical=canonical,
         ogtitle=H.escape(ogtitle or title), site=SITE, ogimg=ogimg, base=base,
         nav=nav_html(base, current), mnav=mobile_nav_html(base, current),
@@ -556,8 +581,11 @@ HOME_LD = '''<script type="application/ld+json">
 {"@context":"https://schema.org","@type":["MedicalBusiness","Organization"],
 "name":"KBT-Konsulterna i Uppsala",
 "legalName":"KBT Konsulterna, Psykologmottagning i Uppsala AB",
-"url":"https://kbt-konsulterna.se","email":"kontakt@kbt-konsulterna.se",
-"telephone":"+46181040 44",
+"@id":"https://kbt-konsulterna.se/#organisation",
+"url":"https://kbt-konsulterna.se/","email":"kontakt@kbt-konsulterna.se",
+"telephone":"+46-18-10 40 44",
+"logo":"https://kbt-konsulterna.se/assets/brand/icon-512.png",
+"image":"https://kbt-konsulterna.se/assets/img/hero-room.jpg",
 "address":{"@type":"PostalAddress","streetAddress":"G\\u00e5rdshuset, Slottsk\\u00e4llan, Sjukhusv\\u00e4gen 3",
 "addressLocality":"Uppsala","postalCode":"753 09","addressRegion":"Uppsala","addressCountry":"SE"},
 "geo":{"@type":"GeoCoordinates","latitude":59.8536563,"longitude":17.6384567},
@@ -621,9 +649,8 @@ def build_home():
 
 <section class="band">
   <div class="wrap">
-    <p class="eyebrow">Medarbetare</p>
     <div class="split" style="margin-bottom:clamp(2.5rem,5vw,3.5rem)">
-      <div></div>
+      <div><p class="eyebrow">Medarbetare</p></div>
       <div class="prose--wide">
         <h2 data-reveal style="margin-bottom:1.1rem">Hos oss väljer du en person, inte en mottagning.</h2>
         <p style="margin-bottom:0">Läs om var och en av oss och hör av dig direkt till den
@@ -732,7 +759,7 @@ def build_home():
         <div>
           <dt>Online</dt>
           <dd>Videosamtal i hela Sverige via Kaddio, med BankID och samma sekretess som
-          på mottagningen. <a class="a-link" href="{b}om-oss/index.html#online">Läs mer</a></dd>
+          på mottagningen. <a class="a-link" href="{b}om-oss/index.html#online">Mer om onlinesamtal</a></dd>
         </div>
         <div>
           <dt>Remiss och högkostnadsskydd</dt>
@@ -823,9 +850,8 @@ def team_subset(base, slugs, eyebrow, heading, note):
         for s in slugs)
     return f'''<section class="band band--hi">
   <div class="wrap">
-    <p class="eyebrow">{eyebrow}</p>
     <div class="split" style="margin-bottom:clamp(2.5rem,5vw,3.5rem)">
-      <div></div>
+      <div><p class="eyebrow">{eyebrow}</p></div>
       <div class="prose--wide">
         <h2 data-reveal style="margin-bottom:1.1rem">{heading}</h2>
         <p style="margin-bottom:0">{note}</p>
@@ -1451,10 +1477,23 @@ def build_bio(p):
     desc = f'{name}, {p["role"].split(" · ")[0].lower()} hos KBT-Konsulterna i Uppsala. {first}.'
     if len(desc) > 165:
         desc = f'{name}, {p["role"].split(" · ")[0].lower()} hos KBT-Konsulterna i Uppsala.'
+    ld = {
+        '@context': 'https://schema.org', '@type': 'ProfilePage',
+        'mainEntity': {
+            '@type': 'Person', 'name': name, 'jobTitle': p['role'],
+            'description': p['note'], 'email': email,
+            'image': f'{SITE}/assets/img/team/{slug}.jpg',
+            'url': f'{SITE}/medarbetare/{slug}.html',
+            'worksFor': {'@type': 'MedicalBusiness', '@id': ORG_ID,
+                         'name': 'KBT-Konsulterna i Uppsala', 'url': SITE + '/'},
+        },
+    }
+    extra = ('<script type="application/ld+json">'
+             + json.dumps(ld, ensure_ascii=False) + '</script>\n')
     return page(f'medarbetare/{slug}.html',
                 f'{name} – {p["role"].split(" · ")[0]} i Uppsala | KBT-Konsulterna',
                 desc,
-                body, ogimg='stillhet', ogtitle=f'{name} | KBT-Konsulterna')
+                body, ogimg='stillhet', ogtitle=f'{name} | KBT-Konsulterna', extra=extra)
 
 
 # ==========================================================================
@@ -1765,7 +1804,7 @@ def build_om_oss():
 {marks_band(b)}
 '''
     return page('om-oss/index.html',
-                'Om KBT-Konsulterna – psykologmottagning i Uppsala | KBT-Konsulterna',
+                'Om oss – psykologmottagning i centrala Uppsala | KBT-Konsulterna',
                 'Om KBT-Konsulterna i Uppsala: vilka vi är, vad KBT är, vår '
                 'evidensbaserade praktik och vad legitimation betyder.',
                 body, ogimg='stillhet')
@@ -2107,7 +2146,7 @@ def article_ld(title, desc, path, people):
     old topic pages had none of. Google weights it heavily for health content."""
     url = SITE + '/' + re.sub(r'index\.html$', '', path)
     authors = ','.join(
-        '{"@type":"Person","name":%s,"jobTitle":%s,"url":"%s/medarbetare/%s/"}'
+        '{"@type":"Person","name":%s,"jobTitle":%s,"url":"%s/medarbetare/%s.html"}'
         % (json_str(BY_SLUG[s]['name']), json_str(BY_SLUG[s]['role']), SITE, s)
         for s in people if s in BY_SLUG)
     a = f',"author":[{authors}]' if authors else ''
@@ -2115,8 +2154,9 @@ def article_ld(title, desc, path, people):
             '{"@context":"https://schema.org","@type":"MedicalWebPage",'
             f'"name":{json_str(title)},"description":{json_str(desc)},"url":"{url}",'
             '"inLanguage":"sv-SE",'
-            '"publisher":{"@type":"MedicalBusiness","name":"KBT-Konsulterna i Uppsala",'
-            f'"url":"{SITE}"}}{a}}}\n</script>\n')
+            '"publisher":{"@type":"MedicalBusiness",'
+            f'"@id":"{ORG_ID}","name":"KBT-Konsulterna i Uppsala",'
+            f'"url":"{SITE}/"}}{a}}}\n</script>\n')
 
 
 def json_str(s):
@@ -2266,7 +2306,7 @@ def build_sitemap():
                  'priser/', 'kontakt/', 'om-oss/', 'om-oss/vanliga-fragor.html',
                  'akut-hjalp/'):
         urls.append(path)
-    urls += [f'medarbetare/{p["slug"]}/' for p in TEAM]
+    urls += [f'medarbetare/{p["slug"]}.html' for p in TEAM]
     for section in TREE:
         for parent in section['children']:
             urls.append(f'{section["slug"]}/{parent["slug"]}/')
@@ -2278,6 +2318,8 @@ def build_sitemap():
            f'{body}\n</urlset>\n')
     with open('sitemap.xml', 'w', encoding='utf-8') as f:
         f.write(out)
+    with open('robots.txt', 'w', encoding='utf-8') as f:
+        f.write(f'User-agent: *\nAllow: /\n\nSitemap: {SITE}/sitemap.xml\n')
     print(f'  sitemap.xml: {len(urls)} URLs')
     return len(out)
 

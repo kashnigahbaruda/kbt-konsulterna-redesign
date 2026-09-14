@@ -1,8 +1,11 @@
 #!/usr/bin/env python3
 """Generate responsive web variants from the source imagery.
 
-Wide images  -> WebP at 1000/1600/2400px + a 1600px JPEG fallback
-Portraits    -> 3:4 crop, WebP at 340/600/900px + a JPEG fallback
+Wide images  -> WebP at 800/1000/1600/2400px + a 1600px JPEG fallback
+Portraits    -> 3:4 crop, WebP at 340/600/700/900px + a JPEG fallback
+
+The 800 and 700 widths are for phones: a 412px screen at 1.75x density wants
+~720px, which otherwise fetched the 1000/900 file at nearly twice the bytes.
 
 Portraits are never upscaled more than 1.1x their source, so the two low-resolution
 headshots (Angeli Holmstedt, Thomas Alm) emit fewer variants rather than soft ones.
@@ -19,7 +22,7 @@ OUT = 'assets/img'
 # Per-width byte budgets for the full-bleed backgrounds. Detailed foliage
 # encodes far larger than an interior at the same quality, so target a size
 # instead of a fixed quality: the scrim hides the difference either way.
-BUDGET = {2400: 300 * 1024, 1600: 165 * 1024, 1000: 80 * 1024}
+BUDGET = {2400: 300 * 1024, 1600: 165 * 1024, 1000: 80 * 1024, 800: 55 * 1024}
 
 
 def variants(im, base, widths, jpg_width, quality=80, budget=False):
@@ -68,7 +71,7 @@ def main():
     for src in sorted(glob.glob(f'{OUT}/_src/*.jpg')):
         slug = os.path.splitext(os.path.basename(src))[0]
         im = ImageOps.exif_transpose(Image.open(src)).convert('RGB')
-        widths = [w for w in (2400, 1600, 1000) if w <= im.width]
+        widths = [w for w in (2400, 1600, 1000, 800) if w <= im.width]
         made = variants(im, f'{OUT}/{slug}', widths, min(1600, im.width),
                         quality=72, budget=True)
         for p in made:
@@ -83,7 +86,7 @@ def main():
         target_w = min(900, int(im.width * 1.1))       # never upscale beyond 1.1x
         base = ImageOps.fit(im, (target_w, round(target_w * 4 / 3)),
                             Image.LANCZOS, centering=(0.5, 0.35))
-        widths = [w for w in (900, 600, 340) if w <= target_w] or [target_w]
+        widths = [w for w in (900, 700, 600, 340) if w <= target_w] or [target_w]
         for p in variants(base, f'{OUT}/team/{slug}', widths,
                           min(600, target_w), quality=82):
             total += os.path.getsize(p)

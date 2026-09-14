@@ -40,13 +40,16 @@ om-oss/                       About, what KBT is, evidence base, online, licensi
 om-oss/vanliga-fragor.html    All 16 FAQs
 akut-hjalp/                   Emergency help
 sitemap.xml                   Generated — all 55 canonical URLs
+robots.txt                    Generated — allows everything, points at the sitemap
 
 assets/css/site.css           The whole design system, ~880 lines
 assets/js/site.js             Mobile nav + scroll reveals. Progressive enhancement only.
 assets/img/                   Generated responsive WebP + JPEG
 assets/team/                  The client's own photography
 assets/brand/                 Logo and accreditation marks
+assets/fonts/                 Self-hosted variable fonts + their OFL licences (generated)
 tools/articles.py             The topic tree: copy for all 38 sub-pages
+tools/build-fonts.py          Fetches the OFL fonts and cuts Newsreader down
 tools/build-site.py           Shared shell + every page builder
 ```
 
@@ -91,6 +94,12 @@ written by us, not ported, and needs the client's clinical sign-off — see
 - **Familjen Grotesk** (a Swedish grotesque, by Letters from Sweden) for display and UI,
   **Newsreader** for long-form body. Sans headlines over serif prose — inverted from the
   professional-services norm, and the bios run to 500 words so they deserve a reading face.
+  Both are self-hosted from `assets/fonts/` rather than loaded from Google Fonts — no visitor
+  IPs sent to Google, and no render-blocking stylesheet on a third-party origin. Newsreader
+  is cut to weights 400–600 with its optical size pinned at 18: it is only ever set between
+  17 and 34px here, and the full optical-size axis tripled the file (132 → 38 KB) for no
+  visible difference at body size. Metric-adjusted Arial/Georgia fallbacks keep text from
+  reflowing when the fonts swap in on a slow connection.
 - **Whitespace does all the separating.** No card borders, no rules, no shadows-as-structure.
   Sections are separated by vertical rhythm and alternating ground tone.
 - **Full-bleed imagery as punctuation** — a fullscreen hero, then image bands marking the
@@ -194,14 +203,22 @@ Checked across all 55 pages:
   an animation that may not run
 - Every one of the 55 pages has a unique `<title>`, meta description and canonical URL —
   verified, no duplicates
-- `MedicalBusiness`, `FAQPage`, `BreadcrumbList` and `MedicalWebPage` structured data; every
-  JSON-LD block parses
+- `MedicalBusiness`, `FAQPage`, `BreadcrumbList`, `MedicalWebPage` and `ProfilePage`/`Person`
+  structured data; every JSON-LD block parses. `BreadcrumbList` is read back out of each
+  page's visible breadcrumb at build time, so the two cannot disagree
+- **Lighthouse 13** (September 2026, served with gzip as any real host would, `noindex`
+  stripped because Lighthouse fails the preview on it by design): accessibility, best
+  practices, SEO and agentic browsing 100 on every page. Performance 100 on desktop, and on
+  mobile on 52 of 55 pages; three bios score 98–99, where the LCP element is the portrait
+  itself. The preview as published scores SEO 69 — that is the `noindex`, and nothing else
 
 ### Weight
 
 Homepage is about 710 KB total across 13 images at a 1440px viewport, and roughly 120 KB
 before the fold. Every wide image sits under a dark scrim, so `build-images.py` encodes those
-to a per-width byte budget rather than a fixed quality.
+to a per-width byte budget rather than a fixed quality. Wide images also come at 800px and
+portraits at 700px, because a phone at 1.75x density wants about 720px and would otherwise
+fetch the 1000/900 file at nearly twice the bytes. On heroes and bios that file is the LCP.
 
 ## Regenerating
 
@@ -216,11 +233,12 @@ python3 tools/build-site.py     # regenerate all 55 pages + sitemap.xml
 python3 tools/fetch-images.py   # re-download source imagery
 python3 tools/build-images.py   # regenerate responsive variants + keyed brand marks
 python3 tools/build-logo.py     # regenerate the logo SVGs + favicons from the client's file
+python3 tools/build-fonts.py    # re-fetch and rebuild the self-hosted fonts
 ```
 
-`build-images.py` needs Pillow (`pip install Pillow`); `build-logo.py` needs fonttools and
-Pillow, and only has to run when the client's logo file changes. Nothing else has
-dependencies.
+`build-images.py` needs Pillow (`pip install Pillow`); `build-fonts.py` needs fonttools and
+brotli; `build-logo.py` needs fonttools and Pillow, and only has to run when the client's
+logo file changes. Nothing else has dependencies.
 
 Note: `build-site.py` reads the bios and FAQs from a crawl of the current site
 (`research/crawl-pages.json`), which is not included in this repo. Re-running it needs that

@@ -8,6 +8,9 @@ research/
 # The generated web variants in assets/img/ are committed.
 assets/img/_src/
 
+# Fontsource variable-font originals, re-fetchable with tools/build-fonts.py.
+assets/fonts/_src/
+
 # Local preview / OS noise
 .DS_Store
 *.pyc
