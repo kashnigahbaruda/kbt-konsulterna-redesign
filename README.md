@@ -263,6 +263,22 @@ file; the generated HTML here is complete and standalone without it.
    ten treatment slugs change. Every target in that map has been verified to exist.
 7. **Submit the new `sitemap.xml`** in the same release as the redirects, and retire the old
    sitemap entries at the same time.
+8. **Set long cache lifetimes on the real host.** GitHub Pages sends `max-age=600` on
+   everything and cannot be changed, which is why Lighthouse flags ~250 KB of short-cached
+   files on the preview. On production, give `assets/fonts/`, `assets/img/`, `assets/brand/`
+   and `assets/team/` a year (`Cache-Control: public, max-age=31536000, immutable`). Keep
+   `site.css` and `site.js` short-cached, or add a version to their URLs first: they keep the
+   same filename when they change, so a long cache would serve returning visitors stale styles.
+   HTML should stay short-cached.
+9. **Minify the CSS.** `site.css` is served as the commented source: 11.6 KB gzipped, 6.9 KB
+   minified — a ~4.7 KB saving on a render-blocking file, which Lighthouse lists under
+   "Minify CSS". Do it in `build-site.py` (write `site.min.css` and point the pages at it) so
+   `site.css` stays the file you edit. It was left out of the preview on purpose: pages
+   pointing at a generated file would silently ignore hand edits to `site.css` until the next
+   rebuild.
+10. **Re-run Lighthouse against the live domain in an incognito window.** Browser extensions
+    inject scripts that Lighthouse counts — React Developer Tools shows up as ~51 KB of
+    "unused JavaScript" that is not the site's. The site's only script is `site.js`, 1.5 KB.
 
 ## Images and licensing
 
