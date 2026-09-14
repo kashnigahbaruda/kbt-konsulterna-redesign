@@ -27,8 +27,9 @@
   /* The burger needs JS to toggle. Without it, show the menu and hide the button
      so small screens still have navigation. The desktop rule uses !important,
      so this cannot leak above 66rem. */
-  /* static, not the fixed overlay — with no JS there is no way to close it */
-  .mobile-nav { display: block; position: static; overflow: visible; }
+  /* static, not the fixed overlay — with no JS there is no way to close it.
+     opacity/transform undo the open animation's resting "closed" state. */
+  .mobile-nav { display: block; position: static; overflow: visible; opacity: 1; transform: none; }
   .burger { display: none; }
 </style></noscript>
 <script type="application/ld+json">
@@ -66,7 +67,7 @@
         <a href="../priser/index.html">Priser</a>
     </nav>
     <a class="head-akut" href="../akut-hjalp/index.html">Akut hjälp</a>
-    <a class="head-tel" href="tel:+4618104044">018 – 10 40 44</a>
+    <a class="head-tel" href="tel:+4618104044">018 – 10 40 44</a>
     <a class="btn btn--primary" href="../kontakt/index.html">Boka samtal</a>
     <button class="burger" type="button" aria-expanded="false" aria-controls="mnav" aria-label="Meny">
       <svg class="icon burger__bars" aria-hidden="true" focusable="false"><use href="#i-menu"></use></svg>
@@ -118,7 +119,7 @@
       </ul>
       <div class="mobile-nav__foot">
         <a class="btn btn--primary" href="../kontakt/index.html">Boka samtal</a>
-        <a class="btn btn--ghost" href="tel:+4618104044">Ring 018 – 10 40 44</a>
+        <a class="btn btn--ghost" href="tel:+4618104044">Ring 018 – 10 40 44</a>
         <a class="a-link" href="../akut-hjalp/index.html">Akut hjälp</a>
       </div>
     </div>
@@ -142,7 +143,7 @@
         <div>
           <p class="price__label" style="margin-bottom:0.4rem">Kontakt</p>
           <p style="margin-bottom:0.4rem"><a class="a-link" href="mailto:aksel.reppling@kbt-konsulterna.se">aksel.reppling@kbt-konsulterna.se</a></p>
-          <p style="margin-bottom:0"><a class="a-link" href="tel:+4618104044">018 – 10 40 44</a></p>
+          <p style="margin-bottom:0"><a class="a-link" href="tel:+4618104044">018 – 10 40 44</a></p>
         </div>
         <a class="btn btn--primary" href="../kontakt/index.html">Boka samtal <svg class="icon btn__arrow" aria-hidden="true" focusable="false"><use href="#i-arrow-right"></use></svg></a>
       </div>
@@ -167,7 +168,7 @@
   <div class="wrap">
     <p class="eyebrow">Fler medarbetare</p>
     <div class="team">
-      <a class="person" href="../medarbetare/angeli-holmstedt.html">
+      <a class="person" href="../medarbetare/angeli-holmstedt.html" data-reveal>
         <div class="person__media"><picture>
         <source type="image/webp" sizes="(min-width: 56rem) 22vw, (min-width: 34rem) 45vw, 90vw" srcset="../assets/img/team/angeli-holmstedt-340.webp 340w">
         <img src="../assets/img/team/angeli-holmstedt.jpg" alt="Angeli Holmstedt, leg. psykolog" width="459" height="612" decoding="async" loading="lazy">
@@ -176,7 +177,7 @@
         <div class="person__role">Leg. psykolog · Leg. psykoterapeut · Handledare</div>
         <p class="person__note">Ångest, OCD och beroendeproblem, och stöd till dig som är anhörig. Utbildare i motiverande samtal och lärare i mindfulnessbaserade program.</p>
       </a>
-      <a class="person" href="../medarbetare/thomas-alm.html">
+      <a class="person" href="../medarbetare/thomas-alm.html" data-reveal>
         <div class="person__media"><picture>
         <source type="image/webp" sizes="(min-width: 56rem) 22vw, (min-width: 34rem) 45vw, 90vw" srcset="../assets/img/team/thomas-alm-340.webp 340w">
         <img src="../assets/img/team/thomas-alm.jpg" alt="Thomas Alm, leg. psykolog" width="581" height="775" decoding="async" loading="lazy">
@@ -185,7 +186,7 @@
         <div class="person__role">Leg. psykolog · Leg. psykoterapeut · Specialist i klinisk psykologi</div>
         <p class="person__note">Legitimerad psykolog sedan 1978. Missbruk och beroende, ångest och depression. Handledare inom psykiatri, primärvård och beroendevård.</p>
       </a>
-      <a class="person" href="../medarbetare/karin-holmstrom.html">
+      <a class="person" href="../medarbetare/karin-holmstrom.html" data-reveal>
         <div class="person__media"><picture>
         <source type="image/webp" sizes="(min-width: 56rem) 22vw, (min-width: 34rem) 45vw, 90vw" srcset="../assets/img/team/karin-holmstrom-340.webp 340w, ../assets/img/team/karin-holmstrom-600.webp 600w, ../assets/img/team/karin-holmstrom-700.webp 700w, ../assets/img/team/karin-holmstrom-900.webp 900w">
         <img src="../assets/img/team/karin-holmstrom.jpg" alt="Karin Holmström, leg. psykolog" width="600" height="800" decoding="async" loading="lazy">
@@ -206,12 +207,12 @@
       </picture></div>
   <div class="bleed__scrim"></div>
   <div class="wrap bleed__inner">
-    <div class="prose--wide">
-      <h2 data-reveal>Ta första steget när du är klar för det.</h2>
+    <div class="prose--wide" data-reveal>
+      <h2>Ta första steget när du är klar för det.</h2>
       <p class="hero__lede" style="margin-top:1.2rem">Skriv eller ring. Vi hör av oss så snart vi kan, och du behöver inte veta på förhand vad du vill ha hjälp med.</p>
       <div class="actions" style="margin-top:2rem">
         <a class="btn btn--on-dark" href="../kontakt/index.html">Boka samtal <svg class="icon btn__arrow" aria-hidden="true" focusable="false"><use href="#i-arrow-right"></use></svg></a>
-        <a class="hero__tel" href="tel:+4618104044">eller ring 018 – 10 40 44</a>
+        <a class="hero__tel" href="tel:+4618104044">eller ring 018 – 10 40 44</a>
       </div>
     </div>
   </div>
@@ -228,7 +229,7 @@
         </div>
         <address class="site-foot__addr">
           Gårdshuset, Slottskällan, Sjukhusvägen 3, 753 09 Uppsala<br>
-          <a href="tel:+4618104044">018 – 10 40 44</a><br>
+          <a href="tel:+4618104044">018 – 10 40 44</a><br>
           <a href="mailto:kontakt@kbt-konsulterna.se">kontakt@kbt-konsulterna.se</a>
         </address>
         <p class="site-foot__akut">

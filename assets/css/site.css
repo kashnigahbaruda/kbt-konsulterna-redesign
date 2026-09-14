@@ -139,6 +139,10 @@ h1, h2, h3, h4 {
   margin: 0;
   text-wrap: balance;
 }
+/* Section headings need a size of their own. Without one they fell to the
+   browser's 1.5em, which made every primary heading smaller than the side
+   headings that had been given --step-2 inline. */
+h2 { font-size: var(--step-3); }
 p, ul, ol { margin: 0 0 1.1em; }
 ul, ol { padding-left: 1.15em; }
 li { margin-bottom: 0.45em; }
@@ -152,14 +156,14 @@ button { font: inherit; }
 
 /* Links in prose: deep text, linden underline. No borders anywhere on this
    site, so the underline is doing real work and is allowed to be visible. */
-.prose a, .a-link {
+.prose a, .a-link, .facts dd a {
   text-decoration: underline;
   text-decoration-color: var(--linden);
   text-decoration-thickness: 1.5px;
   text-underline-offset: 0.18em;
   transition: text-decoration-color 0.2s var(--ease), color 0.2s var(--ease);
 }
-.prose a:hover, .a-link:hover { color: var(--linden-ink); text-decoration-color: var(--linden-ink); }
+.prose a:hover, .a-link:hover, .facts dd a:hover { color: var(--linden-ink); text-decoration-color: var(--linden-ink); }
 
 :where(a, button, summary, input, textarea, select):focus-visible {
   outline: 3px solid var(--linden-ink);
@@ -222,11 +226,17 @@ button { font: inherit; }
   display: grid;
   gap: clamp(1.75rem, 4vw, 4.5rem);
 }
+/* The eyebrow column sits beside a heading, a lede, a form or a list, and each
+   starts its first line at a different height. Aligning first baselines keeps
+   the eyebrow level with whatever text opens the other column. It also stops
+   a short column being centred against a tall form. */
 @media (min-width: 62rem) {
-  .split { grid-template-columns: 15rem 1fr; }
-  .split--even { grid-template-columns: 1fr 1fr; align-items: center; }
+  .split { grid-template-columns: 15rem 1fr; align-items: baseline; }
+  .split--even { grid-template-columns: 1fr 1fr; }
   .split--media { grid-template-columns: 1fr 1.15fr; align-items: center; }
 }
+/* A split used as the heading row above a full-width grid (team, doors, steps) */
+.split--head { margin-bottom: clamp(2.5rem, 5vw, 3.5rem); }
 
 /* --- Buttons -------------------------------------------------------------- */
 .btn {
@@ -238,11 +248,13 @@ button { font: inherit; }
   border: 0; border-radius: 2px;
   cursor: pointer;
   white-space: nowrap;
-  transition: background-color 0.22s var(--ease), color 0.22s var(--ease);
+  transition: background-color 0.22s var(--ease), color 0.22s var(--ease), transform 0.12s var(--ease);
 }
+/* A 1px press, so a tap on a phone — where there is no hover — still answers. */
+.btn:active { transform: translateY(1px); }
 /* Primary: no movement on hover — the fill crossfades to the hero button's
    sand and the label darkens to meet it. */
-.btn--primary { background: var(--deep); color: #fff; transition-duration: 0.3s; }
+.btn--primary { background: var(--deep); color: #fff; transition-duration: 0.3s, 0.3s, 0.12s; }
 .btn--primary:hover,
 .btn--primary:focus-visible { background: var(--sand); color: var(--deep-deeper); }
 .btn--light { background: var(--paper-hi); color: var(--deep); }
@@ -252,7 +264,7 @@ button { font: inherit; }
 .btn--on-dark { background: var(--sand); color: var(--deep-deeper); }
 .btn--on-dark:hover { background: #fff; }
 .btn__arrow { width: 1.05em; height: 1.05em; transition: transform 0.22s var(--ease); }
-.btn:hover .btn__arrow { transform: translateX(3px); }
+.btn:hover .btn__arrow, .btn:focus-visible .btn__arrow { transform: translateX(3px); }
 
 .actions { display: flex; flex-wrap: wrap; gap: 0.85rem 1.1rem; align-items: center; }
 
@@ -262,6 +274,11 @@ button { font: inherit; }
   background: var(--paper);
   transition: background-color 0.3s var(--ease), box-shadow 0.3s var(--ease);
 }
+/* Set by site.js once the page is scrolled: a hairline instead of a
+   permanent border. The header deliberately keeps its height — it is in the
+   document flow, so shrinking it would jolt the whole page up by the
+   difference the moment the threshold is crossed. */
+.site-head.is-scrolled { box-shadow: 0 1px 0 0 rgba(27,58,56,0.12); }
 .site-head__inner {
   display: flex; align-items: center; flex-wrap: nowrap;
   gap: clamp(0.9rem, 2vw, 2rem);
@@ -285,10 +302,13 @@ button { font: inherit; }
 .nav a::after {
   content: ''; position: absolute; left: 0; right: 0; bottom: 0;
   height: 2px; background: var(--linden);
-  transform: scaleX(0); transform-origin: left;
+  transform: scaleX(0); transform-origin: right;
   transition: transform 0.24s var(--ease);
 }
-.nav a:hover::after, .nav a[aria-current="page"]::after { transform: scaleX(1); }
+/* Grows in from the left and leaves to the right, so the line passes through
+   the link rather than retracting back the way it came. */
+.nav a:hover::after, .nav a:focus-visible::after { transform-origin: left; }
+.nav a:hover::after, .nav a:focus-visible::after, .nav a[aria-current="page"]::after { transform: scaleX(1); }
 
 .head-tel {
   display: none;
@@ -297,11 +317,16 @@ button { font: inherit; }
 }
 @media (min-width: 92rem) { .head-tel { display: block; } }
 
+/* Sentence case like the nav beside it; the colour and the dot set it apart. */
 .head-akut {
-  font-family: var(--display); font-size: 0.8rem; font-weight: 600;
-  text-transform: uppercase; letter-spacing: 0.09em;
+  font-family: var(--display); font-size: 0.92rem; font-weight: 600;
   color: var(--linden-ink); text-decoration: none; white-space: nowrap;
   display: none;
+}
+.head-akut::before {
+  content: ''; display: inline-block;
+  width: 0.4em; height: 0.4em; margin-right: 0.45em; border-radius: 50%;
+  background: currentColor; vertical-align: 0.12em;
 }
 @media (min-width: 78rem) { .head-akut { display: block; } }
 .head-akut:hover { color: var(--deep); }
@@ -321,10 +346,17 @@ button { font: inherit; }
   color: var(--deep);
 }
 @media (min-width: 66rem) { .burger { display: none; } }
-.burger .icon { width: 1.6rem; height: 1.6rem; stroke-width: 1.85; }
-.burger__x { display: none; }
-.burger[aria-expanded="true"] .burger__bars { display: none; }
-.burger[aria-expanded="true"] .burger__x { display: inline-block; }
+/* Stacked in the same spot and crossfaded with a quarter-turn, rather than
+   swapped outright. */
+.burger { position: relative; }
+.burger .icon {
+  position: absolute; inset: 0; margin: auto;
+  width: 1.6rem; height: 1.6rem; stroke-width: 1.85;
+  transition: opacity 0.2s var(--ease), transform 0.3s var(--ease);
+}
+.burger__x { opacity: 0; transform: rotate(-90deg); }
+.burger[aria-expanded="true"] .burger__bars { opacity: 0; transform: rotate(90deg); }
+.burger[aria-expanded="true"] .burger__x { opacity: 1; transform: none; }
 
 /* The menu holds ~1370px of content, more than a phone viewport. It must not
    grow the sticky header to do that: a header taller than the screen puts its
@@ -347,6 +379,30 @@ button { font: inherit; }
   -webkit-overflow-scrolling: touch;
 }
 .mobile-nav[data-open="true"] { display: block; }
+/* Fades and settles in, top-level items a beat apart. @starting-style supplies
+   the first frame of the display:none → block change, and allow-discrete holds
+   display back on close until the fade is done. Browsers without either simply
+   open and close instantly, as before. The <noscript> rule in each page's head
+   resets opacity, since without JS the menu is shown statically. */
+@media (prefers-reduced-motion: no-preference) {
+  .mobile-nav {
+    opacity: 0; transform: translateY(-0.5rem);
+    transition: opacity 0.22s var(--ease), transform 0.3s var(--ease),
+                display 0.3s allow-discrete;
+  }
+  .mobile-nav[data-open="true"] { opacity: 1; transform: none; }
+  .mobile-nav > .wrap > ul > li { transition: opacity 0.35s var(--ease), transform 0.4s var(--ease); }
+  .mobile-nav > .wrap > ul > li:nth-child(2) { transition-delay: 0.03s; }
+  .mobile-nav > .wrap > ul > li:nth-child(3) { transition-delay: 0.06s; }
+  .mobile-nav > .wrap > ul > li:nth-child(4) { transition-delay: 0.09s; }
+  .mobile-nav > .wrap > ul > li:nth-child(5) { transition-delay: 0.12s; }
+  .mobile-nav > .wrap > ul > li:nth-child(6) { transition-delay: 0.15s; }
+  .mobile-nav > .wrap > ul > li:nth-child(n+7) { transition-delay: 0.18s; }
+  @starting-style {
+    .mobile-nav[data-open="true"] { opacity: 0; transform: translateY(-0.5rem); }
+    .mobile-nav[data-open="true"] > .wrap > ul > li { opacity: 0; transform: translateY(0.4rem); }
+  }
+}
 @media (min-width: 66rem) { .mobile-nav { display: none !important; } }
 .mobile-nav ul { list-style: none; margin: 0; padding: 0; }
 .mobile-nav li { margin: 0; }
@@ -390,13 +446,18 @@ button { font: inherit; }
 }
 .hero__lede { font-size: var(--step-1); line-height: 1.6; color: #DCE4E0; max-width: 33rem; margin-bottom: 2rem; }
 .hero .actions { margin-bottom: 2.4rem; }
+/* max-content lets the row run past the 40rem text column so the four points
+   stay on one line on desktop; the viewport cap wraps it on a phone. */
 .hero__trust {
+  width: max-content; max-width: calc(100vw - 2 * var(--gutter));
   display: flex; flex-wrap: wrap; gap: 0.5rem 1.6rem;
   list-style: none; margin: 0; padding: 0;
   font-family: var(--display); font-size: 0.88rem; letter-spacing: 0.04em;
   color: #C6D1CC;
 }
-.hero__trust li { margin: 0; }
+.hero__trust li { margin: 0; display: inline-flex; align-items: center; gap: 0.45em; }
+/* A check per item, so the list still reads as separate points once it wraps */
+.hero__trust .icon { width: 0.9em; height: 0.9em; color: var(--sand); }
 .hero__tel { color: #fff; font-family: var(--display); font-weight: 600; text-decoration: none; font-size: var(--step-0); }
 .hero__tel:hover { text-decoration: underline; text-underline-offset: 0.2em; }
 
@@ -409,7 +470,7 @@ button { font: inherit; }
 .router li { margin: 0; }
 .router__row {
   display: grid;
-  grid-template-columns: 1fr auto;
+  grid-template-columns: auto minmax(2rem, 1fr) auto;
   align-items: baseline;
   gap: 0.35rem 1.5rem;
   padding-block: clamp(1rem, 2.2vw, 1.5rem);
@@ -435,13 +496,26 @@ button { font: inherit; }
   transition: color 0.2s var(--ease), transform 0.28s var(--ease);
 }
 .router__to .icon { width: 0.92em; height: 0.92em; margin-left: 0.45em; }
+.router__say { grid-column: 1; }
+.router__to { grid-column: 3; }
+/* A leader line draws across the gap on hover, joining what the visitor said
+   to where it takes them. The column gaps keep it clear of both nudges. */
+.router__row::after {
+  content: ''; grid-column: 2; grid-row: 1; align-self: center;
+  height: 1px; background: var(--linden);
+  transform: scaleX(0); transform-origin: left;
+  transition: transform 0.45s var(--ease);
+}
+.router__row:hover::after, .router__row:focus-visible::after { transform: scaleX(1); }
 .router__row:hover .router__say,
 .router__row:focus-visible .router__say { transform: translateX(0.5rem); }
 .router__row:hover .router__to,
 .router__row:focus-visible .router__to { color: var(--linden-ink); transform: translateX(0.25rem); }
 @media (max-width: 40rem) {
   .router__row { grid-template-columns: 1fr; }
+  .router__say, .router__to { grid-column: 1; }
   .router__to { white-space: normal; }
+  .router__row::after { display: none; }
 }
 /* Beside an eyebrow, pull the list up by the first row's padding so its
    first line sits level with the label rather than a row's padding below it. */
@@ -471,14 +545,19 @@ button { font: inherit; }
   transition: opacity 0.4s var(--ease);
 }
 .door:hover .door__scrim, .door:focus-visible .door__scrim { opacity: 0.92; }
+/* The label carries a scrim of its own, sized to the text, so a title that
+   wraps to two lines — pushing the kicker up into the lighter part of the
+   photograph — keeps the kicker legible. */
 .door__label {
   position: absolute; left: 0; right: 0; bottom: 0;
-  padding: 0 clamp(1.1rem, 2.6vw, 1.6rem) clamp(1.1rem, 2.6vw, 1.5rem);
+  padding: 3.5rem clamp(1.1rem, 2.6vw, 1.6rem) clamp(1.1rem, 2.6vw, 1.5rem);
+  background: linear-gradient(to top, rgba(19,41,40,0.45) 0%, rgba(19,41,40,0.3) 60%, rgba(19,41,40,0) 100%);
 }
 .door__kicker {
   display: block; margin-bottom: 0.55rem;
   font-family: var(--display); font-size: var(--step--1); font-weight: 600;
   text-transform: uppercase; letter-spacing: 0.11em; color: var(--sand);
+  text-shadow: 0 1px 12px rgba(19,41,40,0.55);
 }
 .door__title { color: #fff; font-size: var(--step-3); margin: 0; line-height: 1.02; letter-spacing: -0.025em; }
 .door p { color: var(--body); margin-bottom: 0.9rem; font-size: 1rem; }
@@ -489,10 +568,7 @@ button { font: inherit; }
 }
 .door__more { display: flex; align-items: center; gap: 0.4em; }
 .door__more .icon { width: 0.95em; height: 0.95em; transition: transform 0.22s var(--ease); }
-.door:hover .door__more .icon { transform: translateX(4px); }
-/* Stagger the three doors' scroll reveal */
-.doors .door:nth-child(2).reveal { transition-delay: 0.1s; }
-.doors .door:nth-child(3).reveal { transition-delay: 0.2s; }
+.door:hover .door__more .icon, .door:focus-visible .door__more .icon { transform: translateX(4px); }
 
 /* --- Full-bleed image band ------------------------------------------------ */
 .bleed { position: relative; isolation: isolate; }
@@ -523,18 +599,63 @@ button { font: inherit; }
 }
 
 /* --- Team ----------------------------------------------------------------- */
-.team { display: grid; gap: clamp(1.75rem, 3.5vw, 3rem) clamp(1.25rem, 2.5vw, 2rem); }
-@media (min-width: 34rem) { .team { grid-template-columns: repeat(2, 1fr); } }
+/* Two-up even on a phone: one full-width portrait each ran the seven of them
+   to ~4,000px before the visitor reached anything else. The note is dropped
+   at that width to make it fit. */
+.team { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: clamp(1.75rem, 3.5vw, 3rem) clamp(1rem, 2.5vw, 2rem); }
 @media (min-width: 56rem) { .team { grid-template-columns: repeat(3, 1fr); } }
 @media (min-width: 76rem) { .team--seven { grid-template-columns: repeat(4, 1fr); } }
 
 .person { display: flex; flex-direction: column; text-decoration: none; }
+/* Rows shared across the whole grid, so a role that wraps to two lines no
+   longer pushes one card's note out of line with its neighbours'.
+   The space between cards moves from the grid's row-gap to each card's own
+   padding: a subgrid still lays its inner rows across the parent's gaps, so a
+   48px row-gap opened up between name, role and note. The negative margin
+   takes back the last row's padding. */
+@supports (grid-template-rows: subgrid) {
+  .team { row-gap: 0; margin-bottom: calc(-1 * clamp(1.75rem, 3.5vw, 3rem)); }
+  .person {
+    display: grid; grid-row: span 4; grid-template-rows: subgrid; row-gap: 0;
+    padding-bottom: clamp(1.75rem, 3.5vw, 3rem);
+  }
+}
 .person__media { overflow: hidden; margin-bottom: 1.1rem; background: var(--sand-soft); }
 .person__media img { width: 100%; height: auto; aspect-ratio: 3 / 4; object-fit: cover; transition: transform 0.55s var(--ease); }
-.person:hover .person__media img { transform: scale(1.035); }
+.person:hover .person__media img, .person:focus-visible .person__media img { transform: scale(1.035); }
 .person__name { font-family: var(--display); font-size: var(--step-1); font-weight: 600; color: var(--deep); letter-spacing: -0.015em; line-height: 1.15; }
 .person__role { font-family: var(--display); font-size: 0.85rem; font-weight: 500; color: var(--muted); letter-spacing: 0.02em; margin-top: 0.35rem; line-height: 1.4; }
 .person__note { font-size: 0.98rem; color: var(--body); margin-top: 0.7rem; line-height: 1.6; }
+@media (max-width: 33.99rem) {
+  .person__media { margin-bottom: 0.8rem; }
+  .person__name { font-size: 1.05rem; }
+  .person__role { font-size: 0.78rem; }
+  .person__note { display: none; }
+}
+
+/* The eighth cell of the seven-person grid. It holds the "who does what" route,
+   in the slot that was otherwise an empty hole at the end of the last row. */
+.person--cta .person__media {
+  aspect-ratio: 3 / 4;
+  display: flex; flex-direction: column; justify-content: flex-end; gap: 0.7rem;
+  margin-bottom: 0; padding: clamp(1rem, 2.4vw, 1.6rem);
+  color: var(--deep);
+  transition: background-color 0.3s var(--ease);
+}
+.person--cta:hover .person__media, .person--cta:focus-visible .person__media { background: var(--sand); }
+.person__cta-title {
+  font-family: var(--display); font-size: var(--step-1); font-weight: 600;
+  line-height: 1.15; letter-spacing: -0.015em; text-wrap: balance;
+}
+/* Block, not flex: as a flex row the arrow was a separate item, and when the
+   label wrapped on a phone it drifted off to the right edge of the tile. */
+.person__cta-go {
+  display: block;
+  font-family: var(--display); font-size: var(--step--1); font-weight: 600;
+}
+.person__cta-go .icon { transition: transform 0.22s var(--ease); }
+.person--cta:hover .person__cta-go .icon, .person--cta:focus-visible .person__cta-go .icon { transform: translateX(3px); }
+@media (max-width: 33.99rem) { .person__cta-title { font-size: 1.05rem; } }
 
 /* --- Numbered process ----------------------------------------------------
    The only numbered markers on the site. The bios describe a genuine
@@ -551,6 +672,8 @@ button { font: inherit; }
   letter-spacing: 0.12em; color: var(--linden-ink);
   margin-bottom: 0.9rem;
 }
+/* --linden-ink on --deep is 1.67:1 — the numbers all but vanished */
+.band--deep .steps li::before { color: var(--sand); }
 .steps h3 { font-size: var(--step-1); margin-bottom: 0.5rem; }
 .steps p { font-size: 1rem; margin: 0; }
 
@@ -558,7 +681,9 @@ button { font: inherit; }
 .prices { display: grid; gap: clamp(1.5rem, 3vw, 2.75rem); }
 @media (min-width: 44rem) { .prices { grid-template-columns: repeat(2, 1fr); } }
 .price__label { font-family: var(--display); font-size: var(--step--1); font-weight: 600; text-transform: uppercase; letter-spacing: 0.11em; color: var(--muted); margin-bottom: 0.6rem; }
-.price__fig { font-family: var(--display); font-size: var(--step-3); font-weight: 600; color: var(--deep); letter-spacing: -0.025em; line-height: 1; }
+/* margin 0: the inherited 1.1em is ~50px at this size, which cut the parterapi
+   note loose from the figure it qualifies */
+.price__fig { font-family: var(--display); font-size: var(--step-3); font-weight: 600; color: var(--deep); letter-spacing: -0.025em; line-height: 1; margin-bottom: 0; }
 .price__unit { font-family: var(--display); font-size: var(--step-0); font-weight: 500; color: var(--muted); letter-spacing: 0; }
 .price__note { font-size: 0.98rem; color: var(--body); margin-top: 0.8rem; }
 
@@ -582,14 +707,19 @@ button { font: inherit; }
 @media (min-width: 48rem) { .linklist--two { grid-template-columns: repeat(2, 1fr); column-gap: clamp(2rem, 5vw, 4rem); } }
 .linklist li { margin: 0; }
 .linklist a {
-  display: flex; align-items: baseline; justify-content: space-between; gap: 1rem;
+  display: flex; align-items: center; justify-content: space-between; gap: 1rem;
   padding-block: 0.95rem;
   font-family: var(--display); font-size: var(--step-0); font-weight: 500;
   color: var(--deep); text-decoration: none;
 }
-.linklist a .icon { color: var(--linden-ink); opacity: 0; transform: translateX(-4px); transition: opacity 0.2s var(--ease), transform 0.2s var(--ease); }
+/* The arrow is always shown: hidden until hover, a touch screen never showed
+   that these rows were links at all. Hover nudges it instead. The hairlines
+   stop a column of link rows reading as floating headings. */
+.linklist { border-top: 1px solid rgb(27 58 56 / 0.12); }
+.linklist li { border-bottom: 1px solid rgb(27 58 56 / 0.12); }
+.linklist a .icon { color: var(--linden-ink); transition: transform 0.2s var(--ease); }
 .linklist a:hover { color: var(--linden-ink); }
-.linklist a:hover .icon, .linklist a:focus-visible .icon { opacity: 1; transform: translateX(0); }
+.linklist a:hover .icon, .linklist a:focus-visible .icon { transform: translateX(3px); }
 
 /* --- FAQ ------------------------------------------------------------------ */
 .faq { display: grid; gap: 0.35rem; max-width: 48rem; }
@@ -609,6 +739,7 @@ button { font: inherit; }
   transition: transform 0.25s var(--ease);
 }
 .faq details[open] .faq__toggle { transform: rotate(45deg); }
+.faq summary:hover .faq__toggle { color: var(--deep); }
 .faq details > div { max-width: var(--measure); padding-bottom: 1.1rem; }
 .faq details > div > :last-child { margin-bottom: 0; }
 
@@ -714,7 +845,11 @@ button { font: inherit; }
 /* Opt IN to the load sequence rather than out of it. These elements must be
    visible by default: animating them in from opacity:0 means any environment
    that does not run the animation renders an empty hero. */
+@keyframes settle { from { transform: scale(1.06); } to { transform: none; } }
+
 @media (prefers-reduced-motion: no-preference) {
+  /* The photograph settles back as the text rises over it */
+  .hero__media img { animation: settle 2.2s var(--ease) both; }
   .hero__eyebrow { animation: rise 0.8s var(--ease) 0.15s backwards; }
   .hero h1 { animation: rise 0.85s var(--ease) 0.28s backwards; }
   .hero__lede { animation: rise 0.85s var(--ease) 0.42s backwards; }
@@ -724,6 +859,20 @@ button { font: inherit; }
 
 .reveal { opacity: 0; transform: translateY(1.4rem); transition: opacity 0.7s var(--ease), transform 0.7s var(--ease); }
 .reveal[data-seen="true"] { opacity: 1; transform: none; }
+
+/* <details> open and close by height where the browser can animate to
+   `auto`; everywhere else they snap open, as before. The clip margin keeps
+   the focus ring on the links inside from being cut off at the edges. */
+@supports (interpolate-size: allow-keywords) {
+  @media (prefers-reduced-motion: no-preference) {
+    .faq details, .sidenav__box { interpolate-size: allow-keywords; }
+    .faq details::details-content, .sidenav__box::details-content {
+      block-size: 0; overflow: clip; overflow-clip-margin: 6px;
+      transition: block-size 0.35s var(--ease), content-visibility 0.35s allow-discrete;
+    }
+    .faq details[open]::details-content, .sidenav__box[open]::details-content { block-size: auto; }
+  }
+}
 
 @media (prefers-reduced-motion: reduce) {
   html { scroll-behavior: auto; }
@@ -788,8 +937,29 @@ button { font: inherit; }
   font-family: var(--display); font-size: var(--step--1); font-weight: 600;
   letter-spacing: 0.02em; color: var(--deep);
 }
-.topic--link:hover .topic__go .icon { transform: translateX(3px); }
+.topic--link:hover .topic__go .icon, .topic--link:focus-visible .topic__go .icon { transform: translateX(3px); }
 .topic__go .icon { transition: transform 0.25s var(--ease); }
+
+/* Shared rows, so a title that wraps to two lines ("Nedstämdhet och
+   depression") no longer drops that card's text below its neighbours'. */
+/* As with .team: the grid's row-gap becomes spacing on each card, or the
+   subgrid opens the parent's gap between title, text and link. */
+@supports (grid-template-rows: subgrid) {
+  .topics { row-gap: 0; margin-bottom: calc(-1 * clamp(1.85rem, 3.5vw, 3rem)); }
+  /* Titles sit on the bottom of their row, so a one-line title stays next to
+     its own text when a neighbour's title takes two lines. */
+  .topics > .topic > h3, .topiccards > .topiccard > h3 { align-self: end; }
+  .topics > .topic--link {
+    grid-row: span 3; grid-template-rows: subgrid; row-gap: 0;
+    margin-bottom: calc(clamp(1.85rem, 3.5vw, 3rem) - 1.25rem);   /* gap, less the hover bleed */
+  }
+  .topics > .topic:not(.topic--link) {
+    display: grid; grid-row: span 2; grid-template-rows: subgrid; row-gap: 0;
+    padding-bottom: clamp(1.85rem, 3.5vw, 3rem);
+  }
+  .topiccards { row-gap: 0; margin-bottom: -0.75rem; }
+  .topiccards > .topiccard { grid-row: span 3; grid-template-rows: subgrid; row-gap: 0; margin-bottom: 0.75rem; }
+}
 
 /* "Read the whole section" link under a hub section */
 .hub__more { margin: 1.8rem 0 0; }
@@ -846,8 +1016,9 @@ button { font: inherit; }
 @media (min-width: 62rem) {
   .sidenav { position: sticky; top: 6.5rem; }
 }
+/* Tone, not a ruled box: the lighter ground is what separates it from the
+   article, as tone separates everything else on the site. */
 .sidenav__box {
-  border: 1px solid rgb(27 58 56 / 0.14);
   border-radius: 3px;
   background: var(--paper-hi);
 }
@@ -867,7 +1038,6 @@ button { font: inherit; }
   .sidenav__chev { display: none; }
 }
 .sidenav__list { list-style: none; margin: 0; padding: 0 0 0.4rem; }
-.sidenav__list > li { border-top: 1px solid rgb(27 58 56 / 0.1); }
 .sidenav__list a {
   display: block; padding: 0.72rem 1.1rem;
   font-size: 0.95rem; line-height: 1.35;
@@ -876,18 +1046,19 @@ button { font: inherit; }
 }
 .sidenav__list a:hover { background: rgb(27 58 56 / 0.06); color: var(--deep); }
 .sidenav__list > li > a { font-weight: 600; color: var(--deep); }
-.sidenav__list > li.is-open > a { background: var(--deep); color: var(--paper-hi); }
-.sidenav__list > li.is-open > a:hover { background: var(--deep-soft); }
-.sidenav__sub { list-style: none; margin: 0; padding: 0.35rem 0 0.55rem; }
+/* The open branch is marked by the list nested under it, not by a solid block
+   of --deep, which was the heaviest thing on an otherwise quiet page. Wherever
+   the current page sits in the tree it gets the same linden bar. */
+.sidenav__list > li.is-open > a { font-weight: 700; }
+.sidenav__sub { list-style: none; margin: 0; padding: 0 0 0.55rem; }
 .sidenav__sub a { padding: 0.42rem 1.1rem 0.42rem 1.6rem; font-size: 0.92rem; }
-.sidenav__sub a[aria-current="page"] {
+.sidenav__list a[aria-current="page"] {
   font-weight: 700; color: var(--deep);
   box-shadow: inset 3px 0 0 var(--linden);
   background: rgb(138 154 91 / 0.12);
 }
 .sidenav__all {
-  margin: 0; padding: 0.9rem 1.1rem 1rem;
-  border-top: 1px solid rgb(27 58 56 / 0.1);
+  margin: 0; padding: 0.6rem 1.1rem 1rem;
   font-size: var(--step--1);
 }
 
@@ -935,21 +1106,19 @@ button { font: inherit; }
   letter-spacing: 0.09em; text-transform: uppercase; color: var(--muted);
   margin-bottom: 1.4rem;
 }
-.topiccards { display: grid; border-top: 1px solid rgb(27 58 56 / 0.14); }
-@media (min-width: 46rem) {
-  .topiccards { grid-template-columns: repeat(2, 1fr); }
-  /* Rules on the cards, not as grid gaps: an odd card count would otherwise
-     leave the empty cell showing the gap colour as a grey block. */
-  .topiccard:nth-child(odd) { border-right: 1px solid rgb(27 58 56 / 0.14); }
-}
+/* Tiles on a lighter ground rather than a ruled table: tone separates them,
+   as it does everywhere else on the site. */
+.topiccards { display: grid; gap: 0.75rem; }
+@media (min-width: 46rem) { .topiccards { grid-template-columns: repeat(2, 1fr); } }
 .topiccard {
-  border-bottom: 1px solid rgb(27 58 56 / 0.14);
-  padding: 1.5rem 1.4rem;
+  padding: 1.4rem 1.4rem 1.3rem;
+  border-radius: 3px;
+  background: var(--paper-hi);
   text-decoration: none; color: inherit;
   display: grid; align-content: start;
   transition: background-color 0.25s var(--ease);
 }
-.topiccard:hover, .topiccard:focus-visible { background: var(--paper-hi); }
+.topiccard:hover, .topiccard:focus-visible { background: #fff; }
 .topiccard h3 { font-size: var(--step-1); margin-bottom: 0.5rem; }
 .topiccard p { font-size: 0.97rem; margin: 0; color: var(--muted); }
 .topiccard__go {
@@ -957,7 +1126,7 @@ button { font: inherit; }
   font-family: var(--display); font-size: var(--step--1); font-weight: 600;
   color: var(--deep);
 }
-.topiccard:hover .topiccard__go .icon { transform: translateX(3px); }
+.topiccard:hover .topiccard__go .icon, .topiccard:focus-visible .topiccard__go .icon { transform: translateX(3px); }
 .topiccard__go .icon { transition: transform 0.25s var(--ease); }
 
 /* --- Read next ------------------------------------------------------------ */
@@ -969,30 +1138,37 @@ button { font: inherit; }
 }
 
 /* --- Previous / next across siblings -------------------------------------- */
+/* Plain text under one hairline rather than a boxed pair. Each arrow points
+   the way it goes and nudges that way on hover. */
 .pnav {
-  display: grid; gap: 1px; background: rgb(27 58 56 / 0.14);
+  display: grid; gap: 1.5rem 2rem;
   margin-top: clamp(2.5rem, 5vw, 3.5rem);
-  border: 1px solid rgb(27 58 56 / 0.14);
+  padding-top: 1.6rem;
+  border-top: 1px solid rgb(27 58 56 / 0.14);
 }
-@media (min-width: 40rem) { .pnav { grid-template-columns: repeat(2, 1fr); } }
+@media (min-width: 40rem) {
+  .pnav { grid-template-columns: repeat(2, 1fr); }
+  .pn--next { text-align: right; justify-items: end; }
+}
 .pn {
-  background: var(--paper); padding: 1.1rem 1.3rem;
+  padding: 0.6rem 0.7rem; margin: -0.6rem -0.7rem;
+  border-radius: 3px;
   text-decoration: none; color: inherit; display: grid; gap: 0.2rem;
   transition: background-color 0.25s var(--ease);
 }
-.pn:hover, .pn:focus-visible { background: var(--paper-hi); }
+.pn:hover, .pn:focus-visible { background: rgb(27 58 56 / 0.05); }
 .pn__dir {
   font-family: var(--display); font-size: 0.76rem; font-weight: 600;
   letter-spacing: 0.09em; text-transform: uppercase; color: var(--muted);
 }
-.pn__label { font-family: var(--display); font-weight: 600; color: var(--deep); }
+.pn__label { display: inline-flex; align-items: center; gap: 0.45em; font-family: var(--display); font-weight: 600; color: var(--deep); }
+.pn__label .icon { color: var(--linden-ink); transition: transform 0.22s var(--ease); }
+.pn--prev .pn__label .icon { transform: rotate(180deg); }
+.pn--prev:hover .pn__label .icon, .pn--prev:focus-visible .pn__label .icon { transform: rotate(180deg) translateX(3px); }
+.pn--next:hover .pn__label .icon, .pn--next:focus-visible .pn__label .icon { transform: translateX(3px); }
 /* A lone "next" sits in the second column, so the pair always reads left→right */
-.pnav > .pn--next:only-child { grid-column: -2; text-align: right; }
+@media (min-width: 40rem) { .pnav > .pn--next:only-child { grid-column: -2; } }
 
-/* In an article the link list has no band around it, so it needs its own
-   hairlines — otherwise three link rows read as three floating headings. */
-.alsoread .linklist li + li { border-top: 1px solid rgb(27 58 56 / 0.12); }
-.alsoread .linklist { border-block: 1px solid rgb(27 58 56 / 0.12); }
 
 /* --- Narrow-phone header --------------------------------------------------
    Below ~27rem the logo (168px) + "Boka samtal" + the 44px burger no longer

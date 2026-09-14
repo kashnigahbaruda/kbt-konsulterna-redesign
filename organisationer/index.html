@@ -27,8 +27,9 @@
   /* The burger needs JS to toggle. Without it, show the menu and hide the button
      so small screens still have navigation. The desktop rule uses !important,
      so this cannot leak above 66rem. */
-  /* static, not the fixed overlay — with no JS there is no way to close it */
-  .mobile-nav { display: block; position: static; overflow: visible; }
+  /* static, not the fixed overlay — with no JS there is no way to close it.
+     opacity/transform undo the open animation's resting "closed" state. */
+  .mobile-nav { display: block; position: static; overflow: visible; opacity: 1; transform: none; }
   .burger { display: none; }
 </style></noscript>
 <script type="application/ld+json">
@@ -65,7 +66,7 @@
         <a href="../priser/index.html">Priser</a>
     </nav>
     <a class="head-akut" href="../akut-hjalp/index.html">Akut hjälp</a>
-    <a class="head-tel" href="tel:+4618104044">018 – 10 40 44</a>
+    <a class="head-tel" href="tel:+4618104044">018 – 10 40 44</a>
     <a class="btn btn--primary" href="../kontakt/index.html">Boka samtal</a>
     <button class="burger" type="button" aria-expanded="false" aria-controls="mnav" aria-label="Meny">
       <svg class="icon burger__bars" aria-hidden="true" focusable="false"><use href="#i-menu"></use></svg>
@@ -117,7 +118,7 @@
       </ul>
       <div class="mobile-nav__foot">
         <a class="btn btn--primary" href="../kontakt/index.html">Boka samtal</a>
-        <a class="btn btn--ghost" href="tel:+4618104044">Ring 018 – 10 40 44</a>
+        <a class="btn btn--ghost" href="tel:+4618104044">Ring 018 – 10 40 44</a>
         <a class="a-link" href="../akut-hjalp/index.html">Akut hjälp</a>
       </div>
     </div>
@@ -140,7 +141,7 @@
       <p class="hero__lede">Handledning, coaching, föreläsningar och utbildning för arbetsgivare, skola, vård och socialtjänst. På plats hos er, hos oss eller online.</p>
       <div class="actions">
           <a class="btn btn--on-dark" href="../kontakt/index.html">Boka samtal <svg class="icon btn__arrow" aria-hidden="true" focusable="false"><use href="#i-arrow-right"></use></svg></a>
-          <a class="hero__tel" href="tel:+4618104044">eller ring 018 – 10 40 44</a>
+          <a class="hero__tel" href="tel:+4618104044">eller ring 018 – 10 40 44</a>
         </div>
       
     </div>
@@ -179,8 +180,10 @@
   <div class="wrap split">
     <div><p class="eyebrow">Handledning &amp; coaching</p></div>
     <div>
-      <h2 data-reveal style="max-width:26rem;margin-bottom:1.2rem">Handledning för personalgrupper och studenter.</h2>
-      <div class="prose prose--wide" style="margin-bottom:clamp(2rem,4vw,3rem)"><p style="margin-bottom:0">Tre av oss är utbildade handledare med lång erfarenhet från psykiatri, primärvård, beroendevård, skola och företag. Barry Karlsson handleder med särskilt fokus på LSS, neuropsykiatri och kollegialt stöd.</p></div>
+      <div data-reveal>
+        <h2 style="max-width:32rem;margin-bottom:1.2rem">Handledning för personalgrupper och studenter.</h2>
+        <div class="prose prose--wide" style="margin-bottom:clamp(2rem,4vw,3rem)"><p style="margin-bottom:0">Tre av oss är utbildade handledare med lång erfarenhet från psykiatri, primärvård, beroendevård, skola och företag. Barry Karlsson handleder med särskilt fokus på LSS, neuropsykiatri och kollegialt stöd.</p></div>
+      </div>
       <div class="topics topics--three">
       <div class="topic"><h3>Verksamhetshandledning</h3><p>Regelbunden handledning för arbetsgrupper inom vård, skola, socialtjänst och behandlingshem — med fokus på ärenden, metod och arbetsmiljö.</p></div>
       <div class="topic"><h3>Utbildningshandledning</h3><p>Handledning för studenter på KBT-utbildningar och för psykologer under specialisering.</p></div>
@@ -196,8 +199,10 @@
   <div class="wrap split">
     <div><p class="eyebrow">Föreläsningar &amp; utbildning</p></div>
     <div>
-      <h2 data-reveal style="max-width:26rem;margin-bottom:1.2rem">Utbildning i KBT, MI och mindfulness.</h2>
-      <div class="prose prose--wide" style="margin-bottom:clamp(2rem,4vw,3rem)"><p style="margin-bottom:0">Vi håller föreläsningar, workshops och längre utbildningar, anpassade efter verksamhetens behov. Flera av oss undervisar eller har undervisat vid Uppsala universitet.</p></div>
+      <div data-reveal>
+        <h2 style="max-width:32rem;margin-bottom:1.2rem">Utbildning i KBT, MI och mindfulness.</h2>
+        <div class="prose prose--wide" style="margin-bottom:clamp(2rem,4vw,3rem)"><p style="margin-bottom:0">Vi håller föreläsningar, workshops och längre utbildningar, anpassade efter verksamhetens behov. Flera av oss undervisar eller har undervisat vid Uppsala universitet.</p></div>
+      </div>
       <div class="topics topics--three">
       <div class="topic"><h3>Föreläsningar och workshops</h3><p>Om stress och utmattning, oro och ångest, depression, trauma, beroendeproblematik och neuropsykiatri.</p></div>
       <div class="topic"><h3>Motiverande samtal (MI)</h3><p>Utbildning i MI på grund- och fördjupningsnivå. Angeli Holmstedt är medlem i MINT, det internationella nätverket av MI-utbildare.</p></div>
@@ -213,8 +218,10 @@
   <div class="wrap split">
     <div><p class="eyebrow">Rehabilitering</p></div>
     <div>
-      <h2 data-reveal style="max-width:26rem;margin-bottom:1.2rem">Tillbaka till arbetet, hållbart.</h2>
-      <div class="prose prose--wide" style="margin-bottom:clamp(2rem,4vw,3rem)"><p style="margin-bottom:0">Insatser vid stressrelaterad ohälsa och utmattning — bedömning, behandling och stöd i återgång till arbete, i samarbete med arbetsgivare och företagshälsovård. Vi arbetar med både individen och de förutsättningar som ska tas tillbaka till.</p></div>
+      <div data-reveal>
+        <h2 style="max-width:32rem;margin-bottom:1.2rem">Tillbaka till arbetet, hållbart.</h2>
+        <div class="prose prose--wide" style="margin-bottom:clamp(2rem,4vw,3rem)"><p style="margin-bottom:0">Insatser vid stressrelaterad ohälsa och utmattning — bedömning, behandling och stöd i återgång till arbete, i samarbete med arbetsgivare och företagshälsovård. Vi arbetar med både individen och de förutsättningar som ska tas tillbaka till.</p></div>
+      </div>
       
       <p class="hub__more"><a class="a-link" href="../organisationer/rehabilitering/index.html">Om rehabilitering <svg class="icon" aria-hidden="true" focusable="false"><use href="#i-arrow-right"></use></svg></a></p>
     </div>
@@ -226,8 +233,10 @@
   <div class="wrap split">
     <div><p class="eyebrow">Skadligt bruk på arbetsplatsen</p></div>
     <div>
-      <h2 data-reveal style="max-width:26rem;margin-bottom:1.2rem">Alkohol, läkemedel och spel i arbetslivet.</h2>
-      <div class="prose prose--wide" style="margin-bottom:clamp(2rem,4vw,3rem)"><p style="margin-bottom:0">Bedömning och behandling vid riskbruk och beroende, och stöd till chefer som behöver hantera en oroande situation. Thomas Alm och Angeli Holmstedt har båda arbetat inom beroendeområdet i decennier, kliniskt och i forskning.</p></div>
+      <div data-reveal>
+        <h2 style="max-width:32rem;margin-bottom:1.2rem">Alkohol, läkemedel och spel i arbetslivet.</h2>
+        <div class="prose prose--wide" style="margin-bottom:clamp(2rem,4vw,3rem)"><p style="margin-bottom:0">Bedömning och behandling vid riskbruk och beroende, och stöd till chefer som behöver hantera en oroande situation. Thomas Alm och Angeli Holmstedt har båda arbetat inom beroendeområdet i decennier, kliniskt och i forskning.</p></div>
+      </div>
       
       <p class="hub__more"><a class="a-link" href="../organisationer/skadligt-bruk/index.html">Om skadligt bruk i arbetslivet <svg class="icon" aria-hidden="true" focusable="false"><use href="#i-arrow-right"></use></svg></a></p>
     </div>
@@ -238,13 +247,13 @@
 <section class="band band--deep">
   <div class="wrap split">
     <div><p class="eyebrow">Kontakt för uppdrag</p></div>
-    <div class="prose--wide">
-      <h2 data-reveal style="margin-bottom:1.2rem">Berätta vad ni behöver.</h2>
+    <div class="prose--wide" data-reveal>
+      <h2 style="margin-bottom:1.2rem">Berätta vad ni behöver.</h2>
       <p>Vi svarar på frågor om uppdrag, handledning, utbildning och samarbeten. Priser
       för handledning, utbildning och utredning lämnas på förfrågan.</p>
       <div class="actions" style="margin-top:2rem">
         <a class="btn btn--on-dark" href="../kontakt/index.html#foretag">Kontakta oss <svg class="icon btn__arrow" aria-hidden="true" focusable="false"><use href="#i-arrow-right"></use></svg></a>
-        <a class="hero__tel" href="tel:+4618104044">eller ring 018 – 10 40 44</a>
+        <a class="hero__tel" href="tel:+4618104044">eller ring 018 – 10 40 44</a>
       </div>
     </div>
   </div>
@@ -252,15 +261,15 @@
 
 <section class="band band--hi">
   <div class="wrap">
-    <div class="split" style="margin-bottom:clamp(2.5rem,5vw,3.5rem)">
+    <div class="split split--head">
       <div><p class="eyebrow">Handledare</p></div>
-      <div class="prose--wide">
-        <h2 data-reveal style="margin-bottom:1.1rem">Tre utbildade handledare.</h2>
+      <div class="prose--wide" data-reveal>
+        <h2 style="margin-bottom:1.1rem">Tre utbildade handledare.</h2>
         <p style="margin-bottom:0">Angeli Holmstedt är dessutom MI-utbildare via MINT och lärare i mindfulnessbaserade program.</p>
       </div>
     </div>
     <div class="team">
-      <a class="person" href="../medarbetare/angeli-holmstedt.html">
+      <a class="person" href="../medarbetare/angeli-holmstedt.html" data-reveal>
         <div class="person__media"><picture>
         <source type="image/webp" sizes="(min-width: 56rem) 25vw, (min-width: 34rem) 45vw, 90vw" srcset="../assets/img/team/angeli-holmstedt-340.webp 340w">
         <img src="../assets/img/team/angeli-holmstedt.jpg" alt="Angeli Holmstedt, leg. psykolog" width="459" height="612" decoding="async" loading="lazy">
@@ -269,7 +278,7 @@
         <div class="person__role">Leg. psykolog · Leg. psykoterapeut · Handledare</div>
         <p class="person__note">Ångest, OCD och beroendeproblem, och stöd till dig som är anhörig. Utbildare i motiverande samtal och lärare i mindfulnessbaserade program.</p>
       </a>
-      <a class="person" href="../medarbetare/thomas-alm.html">
+      <a class="person" href="../medarbetare/thomas-alm.html" data-reveal>
         <div class="person__media"><picture>
         <source type="image/webp" sizes="(min-width: 56rem) 25vw, (min-width: 34rem) 45vw, 90vw" srcset="../assets/img/team/thomas-alm-340.webp 340w">
         <img src="../assets/img/team/thomas-alm.jpg" alt="Thomas Alm, leg. psykolog" width="581" height="775" decoding="async" loading="lazy">
@@ -278,7 +287,7 @@
         <div class="person__role">Leg. psykolog · Leg. psykoterapeut · Specialist i klinisk psykologi</div>
         <p class="person__note">Legitimerad psykolog sedan 1978. Missbruk och beroende, ångest och depression. Handledare inom psykiatri, primärvård och beroendevård.</p>
       </a>
-      <a class="person" href="../medarbetare/barry-karlsson.html">
+      <a class="person" href="../medarbetare/barry-karlsson.html" data-reveal>
         <div class="person__media"><picture>
         <source type="image/webp" sizes="(min-width: 56rem) 25vw, (min-width: 34rem) 45vw, 90vw" srcset="../assets/img/team/barry-karlsson-340.webp 340w, ../assets/img/team/barry-karlsson-600.webp 600w, ../assets/img/team/barry-karlsson-700.webp 700w, ../assets/img/team/barry-karlsson-900.webp 900w">
         <img src="../assets/img/team/barry-karlsson.jpg" alt="Barry Karlsson, leg. psykolog" width="600" height="800" decoding="async" loading="lazy">
@@ -315,7 +324,7 @@
         </div>
         <address class="site-foot__addr">
           Gårdshuset, Slottskällan, Sjukhusvägen 3, 753 09 Uppsala<br>
-          <a href="tel:+4618104044">018 – 10 40 44</a><br>
+          <a href="tel:+4618104044">018 – 10 40 44</a><br>
           <a href="mailto:kontakt@kbt-konsulterna.se">kontakt@kbt-konsulterna.se</a>
         </address>
         <p class="site-foot__akut">

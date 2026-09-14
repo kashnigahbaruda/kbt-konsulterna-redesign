@@ -27,8 +27,9 @@
   /* The burger needs JS to toggle. Without it, show the menu and hide the button
      so small screens still have navigation. The desktop rule uses !important,
      so this cannot leak above 66rem. */
-  /* static, not the fixed overlay — with no JS there is no way to close it */
-  .mobile-nav { display: block; position: static; overflow: visible; }
+  /* static, not the fixed overlay — with no JS there is no way to close it.
+     opacity/transform undo the open animation's resting "closed" state. */
+  .mobile-nav { display: block; position: static; overflow: visible; opacity: 1; transform: none; }
   .burger { display: none; }
 </style></noscript>
 <script type="application/ld+json">
@@ -65,7 +66,7 @@
         <a href="../priser/index.html">Priser</a>
     </nav>
     <a class="head-akut" href="../akut-hjalp/index.html">Akut hjälp</a>
-    <a class="head-tel" href="tel:+4618104044">018 – 10 40 44</a>
+    <a class="head-tel" href="tel:+4618104044">018 – 10 40 44</a>
     <a class="btn btn--primary" href="../kontakt/index.html">Boka samtal</a>
     <button class="burger" type="button" aria-expanded="false" aria-controls="mnav" aria-label="Meny">
       <svg class="icon burger__bars" aria-hidden="true" focusable="false"><use href="#i-menu"></use></svg>
@@ -117,7 +118,7 @@
       </ul>
       <div class="mobile-nav__foot">
         <a class="btn btn--primary" href="../kontakt/index.html">Boka samtal</a>
-        <a class="btn btn--ghost" href="tel:+4618104044">Ring 018 – 10 40 44</a>
+        <a class="btn btn--ghost" href="tel:+4618104044">Ring 018 – 10 40 44</a>
         <a class="a-link" href="../akut-hjalp/index.html">Akut hjälp</a>
       </div>
     </div>
@@ -140,7 +141,7 @@
       <p class="hero__lede">Terapi, parterapi, utredning och behandling vid skadligt bruk — hos legitimerade psykologer och psykoterapeuter med lång erfarenhet.</p>
       <div class="actions">
           <a class="btn btn--on-dark" href="../kontakt/index.html">Boka samtal <svg class="icon btn__arrow" aria-hidden="true" focusable="false"><use href="#i-arrow-right"></use></svg></a>
-          <a class="hero__tel" href="tel:+4618104044">eller ring 018 – 10 40 44</a>
+          <a class="hero__tel" href="tel:+4618104044">eller ring 018 – 10 40 44</a>
         </div>
       
     </div>
@@ -179,8 +180,10 @@
   <div class="wrap split">
     <div><p class="eyebrow">Psykologisk behandling</p></div>
     <div>
-      <h2 data-reveal style="max-width:26rem;margin-bottom:1.2rem">Samtalsterapi och KBT för vuxna.</h2>
-      <div class="prose prose--wide" style="margin-bottom:clamp(2rem,4vw,3rem)"><p style="margin-bottom:0">Vi börjar med en gemensam bedömning och formulerar därefter en plan utifrån dina mål och värderingar. För det mesta arbetar vi &rdquo;här och nu&rdquo;, men om din tidigare historia påverkar hur du mår i dag finns även den med i samtalen.</p></div>
+      <div data-reveal>
+        <h2 style="max-width:32rem;margin-bottom:1.2rem">Samtalsterapi och KBT för vuxna.</h2>
+        <div class="prose prose--wide" style="margin-bottom:clamp(2rem,4vw,3rem)"><p style="margin-bottom:0">Vi börjar med en gemensam bedömning och formulerar därefter en plan utifrån dina mål och värderingar. För det mesta arbetar vi &rdquo;här och nu&rdquo;, men om din tidigare historia påverkar hur du mår i dag finns även den med i samtalen.</p></div>
+      </div>
       <div class="topics topics--three">
       <a class="topic topic--link" href="../vuxna/behandling/oro-angest/index.html"><h3>Oro och ångest</h3><p>Social ångest, panikångest, generaliserad ångest, tvångstankar och tvångshandlingar (OCD) samt fobier.</p><span class="topic__go">Läs mer <svg class="icon" aria-hidden="true" focusable="false"><use href="#i-arrow-right"></use></svg></span></a>
       <a class="topic topic--link" href="../vuxna/behandling/depression/index.html"><h3>Nedstämdhet och depression</h3><p>Från långvarig nedstämdhet till återkommande depressioner. Vi arbetar med beteendeaktivering, kognitiv terapi och återfallsprevention.</p><span class="topic__go">Läs mer <svg class="icon" aria-hidden="true" focusable="false"><use href="#i-arrow-right"></use></svg></span></a>
@@ -203,8 +206,10 @@
   <div class="wrap split">
     <div><p class="eyebrow">Parterapi</p></div>
     <div>
-      <h2 data-reveal style="max-width:26rem;margin-bottom:1.2rem">När ni bråkar om samma sak, hela tiden.</h2>
-      <div class="prose prose--wide" style="margin-bottom:clamp(2rem,4vw,3rem)"><p>Vi arbetar bland annat med IBCT (Integrative Behavioral Couple Therapy), en KBT-baserad parterapi med gott forskningsstöd. Fokus ligger på hur ni samtalar med varandra, vad konflikterna egentligen handlar om, och vad ni vill med relationen.</p><p style="margin-bottom:0">Parterapi bokas i 60-minuterspass, eller 2 × 45 minuter. Aksel Reppling tar emot par.</p></div>
+      <div data-reveal>
+        <h2 style="max-width:32rem;margin-bottom:1.2rem">När ni bråkar om samma sak, hela tiden.</h2>
+        <div class="prose prose--wide" style="margin-bottom:clamp(2rem,4vw,3rem)"><p>Vi arbetar bland annat med IBCT (Integrative Behavioral Couple Therapy), en KBT-baserad parterapi med gott forskningsstöd. Fokus ligger på hur ni samtalar med varandra, vad konflikterna egentligen handlar om, och vad ni vill med relationen.</p><p style="margin-bottom:0">Parterapi bokas i 60-minuterspass, eller 2 × 45 minuter. Aksel Reppling tar emot par.</p></div>
+      </div>
       <p style="margin-bottom:0"><a class="a-link" href="../priser/index.html">Se pris för parterapi <svg class="icon" aria-hidden="true" focusable="false"><use href="#i-arrow-right"></use></svg></a></p>
       <p class="hub__more"><a class="a-link" href="../vuxna/parterapi/index.html">Om parterapi och IBCT <svg class="icon" aria-hidden="true" focusable="false"><use href="#i-arrow-right"></use></svg></a></p>
     </div>
@@ -216,8 +221,10 @@
   <div class="wrap split">
     <div><p class="eyebrow">Skadligt bruk &amp; beroende</p></div>
     <div>
-      <h2 data-reveal style="max-width:26rem;margin-bottom:1.2rem">Alkohol, läkemedel, droger och spel.</h2>
-      <div class="prose prose--wide" style="margin-bottom:clamp(2rem,4vw,3rem)"><p>Många upptäcker att alkohol eller andra substanser har börjat ta en alltför stor plats i livet, och känner en längtan efter att förändra det. Vi arbetar med bedömning och behandling vid riskbruk, missbruk och beroende — inklusive spelberoende — med metoder som återfallsprevention, motiverande samtal och MBRP (mindfulnessbaserad återfallsprevention).</p><p style="margin-bottom:0">Du är också välkommen om du är <strong>anhörig</strong> till någon som använder alkohol eller droger på ett sätt som skapar problem. Thomas Alm och Angeli Holmstedt har båda lång erfarenhet inom beroendeområdet.</p></div>
+      <div data-reveal>
+        <h2 style="max-width:32rem;margin-bottom:1.2rem">Alkohol, läkemedel, droger och spel.</h2>
+        <div class="prose prose--wide" style="margin-bottom:clamp(2rem,4vw,3rem)"><p>Många upptäcker att alkohol eller andra substanser har börjat ta en alltför stor plats i livet, och känner en längtan efter att förändra det. Vi arbetar med bedömning och behandling vid riskbruk, missbruk och beroende — inklusive spelberoende — med metoder som återfallsprevention, motiverande samtal och MBRP (mindfulnessbaserad återfallsprevention).</p><p style="margin-bottom:0">Du är också välkommen om du är <strong>anhörig</strong> till någon som använder alkohol eller droger på ett sätt som skapar problem. Thomas Alm och Angeli Holmstedt har båda lång erfarenhet inom beroendeområdet.</p></div>
+      </div>
       
       <p class="hub__more"><a class="a-link" href="../vuxna/beroende/index.html">Om skadligt bruk och beroende <svg class="icon" aria-hidden="true" focusable="false"><use href="#i-arrow-right"></use></svg></a></p>
     </div>
@@ -229,8 +236,10 @@
   <div class="wrap split">
     <div><p class="eyebrow">Utredning &amp; bedömning</p></div>
     <div>
-      <h2 data-reveal style="max-width:26rem;margin-bottom:1.2rem">Neuropsykiatrisk utredning för vuxna.</h2>
-      <div class="prose prose--wide" style="margin-bottom:clamp(2rem,4vw,3rem)"><p style="margin-bottom:0">När du kommer till oss för en utredning har vi alltid ett första bedömningssamtal där vi tillsammans går igenom dina behov, problem och förväntningar. Därefter formulerar vi en frågeställning och gör upp en plan. När utredningen är klar går vi igenom resultatet tillsammans och du får ett skriftligt utlåtande. Vi lägger stor vikt vid att identifiera dina styrkor och svårigheter, så att rekommendationerna blir konkreta — oavsett vad utredningen visar.</p></div>
+      <div data-reveal>
+        <h2 style="max-width:32rem;margin-bottom:1.2rem">Neuropsykiatrisk utredning för vuxna.</h2>
+        <div class="prose prose--wide" style="margin-bottom:clamp(2rem,4vw,3rem)"><p style="margin-bottom:0">När du kommer till oss för en utredning har vi alltid ett första bedömningssamtal där vi tillsammans går igenom dina behov, problem och förväntningar. Därefter formulerar vi en frågeställning och gör upp en plan. När utredningen är klar går vi igenom resultatet tillsammans och du får ett skriftligt utlåtande. Vi lägger stor vikt vid att identifiera dina styrkor och svårigheter, så att rekommendationerna blir konkreta — oavsett vad utredningen visar.</p></div>
+      </div>
       <div class="topics topics--three">
       <a class="topic topic--link" href="../vuxna/utredning/adhd/index.html"><h3>Utredning av adhd</h3><p>Psykologutredning med intervju, skattningsskalor och testning. Du får ett skriftligt utlåtande och konkreta rekommendationer.</p><span class="topic__go">Läs mer <svg class="icon" aria-hidden="true" focusable="false"><use href="#i-arrow-right"></use></svg></span></a>
       <a class="topic topic--link" href="../vuxna/utredning/autism/index.html"><h3>Utredning av autism</h3><p>Bedömning av autismspektrumtillstånd hos vuxna, med samma noggranna återkoppling och skriftliga utlåtande.</p><span class="topic__go">Läs mer <svg class="icon" aria-hidden="true" focusable="false"><use href="#i-arrow-right"></use></svg></span></a>
@@ -246,8 +255,10 @@
   <div class="wrap split">
     <div><p class="eyebrow">Psykiatrisk bedömning</p></div>
     <div>
-      <h2 data-reveal style="max-width:26rem;margin-bottom:1.2rem">Konsultation med specialistläkare.</h2>
-      <div class="prose prose--wide" style="margin-bottom:clamp(2rem,4vw,3rem)"><p style="margin-bottom:0">Vi samarbetar med en erfaren specialistläkare i psykiatri och kan erbjuda psykiatrisk bedömning och behandling som komplement till psykologisk behandling. Kontakta oss för att höra hur det kan se ut i ditt fall.</p></div>
+      <div data-reveal>
+        <h2 style="max-width:32rem;margin-bottom:1.2rem">Konsultation med specialistläkare.</h2>
+        <div class="prose prose--wide" style="margin-bottom:clamp(2rem,4vw,3rem)"><p style="margin-bottom:0">Vi samarbetar med en erfaren specialistläkare i psykiatri och kan erbjuda psykiatrisk bedömning och behandling som komplement till psykologisk behandling. Kontakta oss för att höra hur det kan se ut i ditt fall.</p></div>
+      </div>
       
       <p class="hub__more"><a class="a-link" href="../vuxna/psykiatri/index.html">Om psykiatrisk bedömning <svg class="icon" aria-hidden="true" focusable="false"><use href="#i-arrow-right"></use></svg></a></p>
     </div>
@@ -257,28 +268,32 @@
 
 <section class="band band--deep">
   <div class="wrap">
-    <p class="eyebrow">Så går det till</p>
-    <h2 data-reveal style="max-width:32rem;margin-bottom:clamp(2.5rem,5vw,4rem)">Fyra steg, och du bestämmer takten.</h2>
+    <div class="split split--head">
+      <div><p class="eyebrow">Så går det till</p></div>
+      <div class="prose--wide" data-reveal>
+        <h2 style="max-width:32rem">Fyra steg, och du bestämmer takten.</h2>
+      </div>
+    </div>
     <ol class="steps">
-      <li><h3>Första kontakten</h3><p>Du skriver eller ringer. Vi hör av oss så snart vi kan och bokar en tid. Du behöver inte ha en diagnos eller veta vad problemet heter.</p></li>
-      <li><h3>Gemensam bedömning</h3><p>Ett till tre samtal där vi tillsammans tar reda på vad du behöver hjälp med — och om du känner dig bekväm med oss.</p></li>
-      <li><h3>En plan</h3><p>Vi formulerar mål utifrån vad som är viktigt för dig, och kommer överens om metod och hur många samtal det troligen handlar om.</p></li>
-      <li><h3>Behandling och avstämning</h3><p>Vi arbetar mot målen och stämmer av regelbundet att behandlingen går i rätt riktning och att vi använder tiden väl.</p></li>
+      <li data-reveal><h3>Första kontakten</h3><p>Du skriver eller ringer. Vi hör av oss så snart vi kan och bokar en tid. Du behöver inte ha en diagnos eller veta vad problemet heter.</p></li>
+      <li data-reveal><h3>Gemensam bedömning</h3><p>Ett till tre samtal där vi tillsammans tar reda på vad du behöver hjälp med — och om du känner dig bekväm med oss.</p></li>
+      <li data-reveal><h3>En plan</h3><p>Vi formulerar mål utifrån vad som är viktigt för dig, och kommer överens om metod och hur många samtal det troligen handlar om.</p></li>
+      <li data-reveal><h3>Behandling och avstämning</h3><p>Vi arbetar mot målen och stämmer av regelbundet att behandlingen går i rätt riktning och att vi använder tiden väl.</p></li>
     </ol>
   </div>
 </section>
 
 <section class="band band--hi">
   <div class="wrap">
-    <div class="split" style="margin-bottom:clamp(2.5rem,5vw,3.5rem)">
+    <div class="split split--head">
       <div><p class="eyebrow">Vem träffar du?</p></div>
-      <div class="prose--wide">
-        <h2 data-reveal style="margin-bottom:1.1rem">Fyra av oss arbetar främst med vuxna.</h2>
+      <div class="prose--wide" data-reveal>
+        <h2 style="margin-bottom:1.1rem">Fyra av oss arbetar främst med vuxna.</h2>
         <p style="margin-bottom:0">Elias Westerlund och Barry Karlsson arbetar med utredning och bedömning, och Karin Holmström med barn och unga.</p>
       </div>
     </div>
     <div class="team">
-      <a class="person" href="../medarbetare/angeli-holmstedt.html">
+      <a class="person" href="../medarbetare/angeli-holmstedt.html" data-reveal>
         <div class="person__media"><picture>
         <source type="image/webp" sizes="(min-width: 56rem) 25vw, (min-width: 34rem) 45vw, 90vw" srcset="../assets/img/team/angeli-holmstedt-340.webp 340w">
         <img src="../assets/img/team/angeli-holmstedt.jpg" alt="Angeli Holmstedt, leg. psykolog" width="459" height="612" decoding="async" loading="lazy">
@@ -287,7 +302,7 @@
         <div class="person__role">Leg. psykolog · Leg. psykoterapeut · Handledare</div>
         <p class="person__note">Ångest, OCD och beroendeproblem, och stöd till dig som är anhörig. Utbildare i motiverande samtal och lärare i mindfulnessbaserade program.</p>
       </a>
-      <a class="person" href="../medarbetare/thomas-alm.html">
+      <a class="person" href="../medarbetare/thomas-alm.html" data-reveal>
         <div class="person__media"><picture>
         <source type="image/webp" sizes="(min-width: 56rem) 25vw, (min-width: 34rem) 45vw, 90vw" srcset="../assets/img/team/thomas-alm-340.webp 340w">
         <img src="../assets/img/team/thomas-alm.jpg" alt="Thomas Alm, leg. psykolog" width="581" height="775" decoding="async" loading="lazy">
@@ -296,7 +311,7 @@
         <div class="person__role">Leg. psykolog · Leg. psykoterapeut · Specialist i klinisk psykologi</div>
         <p class="person__note">Legitimerad psykolog sedan 1978. Missbruk och beroende, ångest och depression. Handledare inom psykiatri, primärvård och beroendevård.</p>
       </a>
-      <a class="person" href="../medarbetare/jens-karstrom.html">
+      <a class="person" href="../medarbetare/jens-karstrom.html" data-reveal>
         <div class="person__media"><picture>
         <source type="image/webp" sizes="(min-width: 56rem) 25vw, (min-width: 34rem) 45vw, 90vw" srcset="../assets/img/team/jens-karstrom-340.webp 340w, ../assets/img/team/jens-karstrom-600.webp 600w, ../assets/img/team/jens-karstrom-700.webp 700w, ../assets/img/team/jens-karstrom-900.webp 900w">
         <img src="../assets/img/team/jens-karstrom.jpg" alt="Jens Karström, leg. psykolog" width="600" height="800" decoding="async" loading="lazy">
@@ -305,7 +320,7 @@
         <div class="person__role">Leg. psykolog · Leg. psykoterapeut · Specialist i klinisk psykologi</div>
         <p class="person__note">Trauma och traumabehandling. Prolonged exposure, schematerapi och ACT. Tar emot remisser från Regionen.</p>
       </a>
-      <a class="person" href="../medarbetare/aksel-reppling.html">
+      <a class="person" href="../medarbetare/aksel-reppling.html" data-reveal>
         <div class="person__media"><picture>
         <source type="image/webp" sizes="(min-width: 56rem) 25vw, (min-width: 34rem) 45vw, 90vw" srcset="../assets/img/team/aksel-reppling-340.webp 340w, ../assets/img/team/aksel-reppling-600.webp 600w, ../assets/img/team/aksel-reppling-700.webp 700w, ../assets/img/team/aksel-reppling-900.webp 900w">
         <img src="../assets/img/team/aksel-reppling.jpg" alt="Aksel Reppling, leg. psykolog" width="600" height="800" decoding="async" loading="lazy">
@@ -321,19 +336,17 @@
 
 <section class="band band--sand">
   <div class="wrap split">
-    <div>
-      <p class="eyebrow">Priser</p>
-      <h2 data-reveal style="font-size:var(--step-2)">Vad det kostar, utan att du behöver fråga.</h2>
-    </div>
-    <div>
+    <div><p class="eyebrow">Priser</p></div>
+    <div data-reveal>
+      <h2 style="margin-bottom:clamp(1.75rem,3.5vw,2.5rem)">Vad det kostar, utan att du behöver fråga.</h2>
       <div class="prices">
         <div>
           <p class="price__label">Enskilt samtal</p>
-          <p class="price__fig">1 500 kr <span class="price__unit">/ 45 min</span></p>
+          <p class="price__fig">1&nbsp;500&nbsp;kr <span class="price__unit">/ 45 min</span></p>
         </div>
         <div>
           <p class="price__label">Parterapi</p>
-          <p class="price__fig">2 400 kr <span class="price__unit">/ 60 min</span></p>
+          <p class="price__fig">2&nbsp;400&nbsp;kr <span class="price__unit">/ 60 min</span></p>
           <p class="price__note">1 800 kr / 45 min. Ofta behövs minst 60 minuter,
           eller 2 × 45 minuter per besök.</p>
         </div>
@@ -353,12 +366,12 @@
       </picture></div>
   <div class="bleed__scrim"></div>
   <div class="wrap bleed__inner">
-    <div class="prose--wide">
-      <h2 data-reveal>Ta första steget när du är klar för det.</h2>
+    <div class="prose--wide" data-reveal>
+      <h2>Ta första steget när du är klar för det.</h2>
       <p class="hero__lede" style="margin-top:1.2rem">Skriv eller ring. Vi hör av oss så snart vi kan, och du behöver inte veta på förhand vad du vill ha hjälp med.</p>
       <div class="actions" style="margin-top:2rem">
         <a class="btn btn--on-dark" href="../kontakt/index.html">Boka samtal <svg class="icon btn__arrow" aria-hidden="true" focusable="false"><use href="#i-arrow-right"></use></svg></a>
-        <a class="hero__tel" href="tel:+4618104044">eller ring 018 – 10 40 44</a>
+        <a class="hero__tel" href="tel:+4618104044">eller ring 018 – 10 40 44</a>
       </div>
     </div>
   </div>
@@ -370,7 +383,7 @@
     <div class="prose--wide">
       <p style="margin-bottom:0.8rem"><strong>Behöver du hjälp direkt?</strong> Vi är en
       mottagning med bokade tider och kan inte ta emot akut. Ring <strong>112</strong> vid fara
-      för liv. Du kan också ringa MIND Stödlinje på <strong>90 101</strong>, eller söka
+      för liv. Du kan också ringa MIND Stödlinje på <strong>90&nbsp;101</strong>, eller söka
       psykakuten där du bor.</p>
       <p style="margin-bottom:0"><a class="a-link" href="../akut-hjalp/index.html">Se var du kan få akut hjälp <svg class="icon" aria-hidden="true" focusable="false"><use href="#i-arrow-right"></use></svg></a></p>
     </div>
@@ -388,7 +401,7 @@
         </div>
         <address class="site-foot__addr">
           Gårdshuset, Slottskällan, Sjukhusvägen 3, 753 09 Uppsala<br>
-          <a href="tel:+4618104044">018 – 10 40 44</a><br>
+          <a href="tel:+4618104044">018 – 10 40 44</a><br>
           <a href="mailto:kontakt@kbt-konsulterna.se">kontakt@kbt-konsulterna.se</a>
         </address>
         <p class="site-foot__akut">

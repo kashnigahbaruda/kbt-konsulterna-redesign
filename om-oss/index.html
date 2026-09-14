@@ -27,8 +27,9 @@
   /* The burger needs JS to toggle. Without it, show the menu and hide the button
      so small screens still have navigation. The desktop rule uses !important,
      so this cannot leak above 66rem. */
-  /* static, not the fixed overlay — with no JS there is no way to close it */
-  .mobile-nav { display: block; position: static; overflow: visible; }
+  /* static, not the fixed overlay — with no JS there is no way to close it.
+     opacity/transform undo the open animation's resting "closed" state. */
+  .mobile-nav { display: block; position: static; overflow: visible; opacity: 1; transform: none; }
   .burger { display: none; }
 </style></noscript>
 <script type="application/ld+json">
@@ -65,7 +66,7 @@
         <a href="../priser/index.html">Priser</a>
     </nav>
     <a class="head-akut" href="../akut-hjalp/index.html">Akut hjälp</a>
-    <a class="head-tel" href="tel:+4618104044">018 – 10 40 44</a>
+    <a class="head-tel" href="tel:+4618104044">018 – 10 40 44</a>
     <a class="btn btn--primary" href="../kontakt/index.html">Boka samtal</a>
     <button class="burger" type="button" aria-expanded="false" aria-controls="mnav" aria-label="Meny">
       <svg class="icon burger__bars" aria-hidden="true" focusable="false"><use href="#i-menu"></use></svg>
@@ -117,7 +118,7 @@
       </ul>
       <div class="mobile-nav__foot">
         <a class="btn btn--primary" href="../kontakt/index.html">Boka samtal</a>
-        <a class="btn btn--ghost" href="tel:+4618104044">Ring 018 – 10 40 44</a>
+        <a class="btn btn--ghost" href="tel:+4618104044">Ring 018 – 10 40 44</a>
         <a class="a-link" href="../akut-hjalp/index.html">Akut hjälp</a>
       </div>
     </div>
@@ -140,7 +141,7 @@
       <p class="hero__lede">KBT-Konsulterna är en privat psykologmottagning i centrala Uppsala. Vi är legitimerade psykologer och psykoterapeuter, och specialister i kognitiv beteendeterapi.</p>
       <div class="actions">
           <a class="btn btn--on-dark" href="../kontakt/index.html">Boka samtal <svg class="icon btn__arrow" aria-hidden="true" focusable="false"><use href="#i-arrow-right"></use></svg></a>
-          <a class="hero__tel" href="tel:+4618104044">eller ring 018 – 10 40 44</a>
+          <a class="hero__tel" href="tel:+4618104044">eller ring 018 – 10 40 44</a>
         </div>
       
     </div>
@@ -170,8 +171,10 @@
   <div class="wrap split">
     <div><p class="eyebrow">Vad är KBT?</p></div>
     <div>
-      <h2 data-reveal style="max-width:26rem;margin-bottom:1.2rem">Ett paraply, inte en mall.</h2>
-      <div class="prose prose--wide" style="margin-bottom:clamp(2rem,4vw,3rem)"><p>KBT — kognitiv beteendeterapi — har ett mångårigt och gediget forskningsstöd och är i dag ett paraplybegrepp som samlar flera olika behandlingsformer. Vi använder framför allt dem som Socialstyrelsen rekommenderar och som har starkast forskningsstöd.</p><p style="margin-bottom:0">KBT betraktas i dag som en av de mest effektiva behandlingsformerna vid depression, ångest, sömnstörningar, problem i parrelationer och vid överdrivet användande av alkohol, droger, läkemedel och spel. Att metoderna är strukturerade betyder inte att behandlingen är det samma för alla — den utgår från dina mål och dina värderingar.</p></div>
+      <div data-reveal>
+        <h2 style="max-width:32rem;margin-bottom:1.2rem">Ett paraply, inte en mall.</h2>
+        <div class="prose prose--wide" style="margin-bottom:clamp(2rem,4vw,3rem)"><p>KBT — kognitiv beteendeterapi — har ett mångårigt och gediget forskningsstöd och är i dag ett paraplybegrepp som samlar flera olika behandlingsformer. Vi använder framför allt dem som Socialstyrelsen rekommenderar och som har starkast forskningsstöd.</p><p style="margin-bottom:0">KBT betraktas i dag som en av de mest effektiva behandlingsformerna vid depression, ångest, sömnstörningar, problem i parrelationer och vid överdrivet användande av alkohol, droger, läkemedel och spel. Att metoderna är strukturerade betyder inte att behandlingen är det samma för alla — den utgår från dina mål och dina värderingar.</p></div>
+      </div>
       <div class="topics topics--three">
       <div class="topic"><h3>Beteendeterapi och kognitiv terapi</h3><p>Grunderna i KBT — att förändra beteenden och att arbeta med tankar och tolkningar.</p></div>
       <div class="topic"><h3>ACT</h3><p>Acceptance and Commitment Therapy. Att göra plats för det svåra och samtidigt röra sig mot det som är viktigt.</p></div>
@@ -191,8 +194,10 @@
   <div class="wrap split">
     <div><p class="eyebrow">Evidensbaserad praktik</p></div>
     <div>
-      <h2 data-reveal style="max-width:26rem;margin-bottom:1.2rem">Så arbetar vi.</h2>
-      <div class="prose prose--wide" style="margin-bottom:clamp(2rem,4vw,3rem)"><p>Vi arbetar utifrån evidensbaserad praktik. Det innebär att man som professionell väger samman sin samlade erfarenhet och expertis med den bästa forskningsbaserade kunskap som finns tillgänglig — och med den enskildes situation, erfarenhet och önskemål.</p><p>Evidens kommer från vetenskapliga studier om insatsers effekter, och det krävs kunskap för att värdera dem. Att det finns forskning inom ett område betyder inte att resultatet går att lita på. Som utbildade psykologer och psykoterapeuter har vi en gedigen kompetens i att värdera forskning.</p><p style="margin-bottom:0">Socialstyrelsens nationella riktlinjer vägleder oss inom många av de problemområden vi arbetar med.</p></div>
+      <div data-reveal>
+        <h2 style="max-width:32rem;margin-bottom:1.2rem">Så arbetar vi.</h2>
+        <div class="prose prose--wide" style="margin-bottom:clamp(2rem,4vw,3rem)"><p>Vi arbetar utifrån evidensbaserad praktik. Det innebär att man som professionell väger samman sin samlade erfarenhet och expertis med den bästa forskningsbaserade kunskap som finns tillgänglig — och med den enskildes situation, erfarenhet och önskemål.</p><p>Evidens kommer från vetenskapliga studier om insatsers effekter, och det krävs kunskap för att värdera dem. Att det finns forskning inom ett område betyder inte att resultatet går att lita på. Som utbildade psykologer och psykoterapeuter har vi en gedigen kompetens i att värdera forskning.</p><p style="margin-bottom:0">Socialstyrelsens nationella riktlinjer vägleder oss inom många av de problemområden vi arbetar med.</p></div>
+      </div>
       
     </div>
   </div>
@@ -203,8 +208,10 @@
   <div class="wrap split">
     <div><p class="eyebrow">Onlinesamtal</p></div>
     <div>
-      <h2 data-reveal style="max-width:26rem;margin-bottom:1.2rem">När det inte passar att ses på plats.</h2>
-      <div class="prose prose--wide" style="margin-bottom:clamp(2rem,4vw,3rem)"><p>Om du inte har möjlighet att komma till mottagningen erbjuder vi samtal online via dator eller mobiltelefon. Du kan ha hela din kontakt med oss på distans, eller bara vid de tillfällen du är bortrest eller sjuk.</p><p>För privatpersoner erbjuder vi bedömning, behandling, rådgivning och stöd online, i hela Sverige. För företag och offentlig verksamhet erbjuder vi handledning och andra insatser online.</p><p style="margin-bottom:0"><strong>Säkerhet:</strong> vi använder Kaddios system för säkra videosamtal, som uppfyller Socialstyrelsens krav på stark autentisering. Inloggning sker med BankID. Samma lagar om sekretess och patientsäkerhet gäller som vid besök på mottagningen.</p></div>
+      <div data-reveal>
+        <h2 style="max-width:32rem;margin-bottom:1.2rem">När det inte passar att ses på plats.</h2>
+        <div class="prose prose--wide" style="margin-bottom:clamp(2rem,4vw,3rem)"><p>Om du inte har möjlighet att komma till mottagningen erbjuder vi samtal online via dator eller mobiltelefon. Du kan ha hela din kontakt med oss på distans, eller bara vid de tillfällen du är bortrest eller sjuk.</p><p>För privatpersoner erbjuder vi bedömning, behandling, rådgivning och stöd online, i hela Sverige. För företag och offentlig verksamhet erbjuder vi handledning och andra insatser online.</p><p style="margin-bottom:0"><strong>Säkerhet:</strong> vi använder Kaddios system för säkra videosamtal, som uppfyller Socialstyrelsens krav på stark autentisering. Inloggning sker med BankID. Samma lagar om sekretess och patientsäkerhet gäller som vid besök på mottagningen.</p></div>
+      </div>
       
     </div>
   </div>
@@ -215,8 +222,10 @@
   <div class="wrap split">
     <div><p class="eyebrow">Vem får ge behandling?</p></div>
     <div>
-      <h2 data-reveal style="max-width:26rem;margin-bottom:1.2rem">Legitimation är en skyddad titel.</h2>
-      <div class="prose prose--wide" style="margin-bottom:clamp(2rem,4vw,3rem)"><p>Titlarna <strong>psykolog</strong> och <strong>psykoterapeut</strong> är skyddade i lag. En legitimerad psykolog har en femårig universitetsutbildning och ett års praktisk tjänstgöring bakom sig, och står under Socialstyrelsens tillsyn. En legitimerad psykoterapeut har därefter ytterligare en påbyggnadsutbildning.</p><p style="margin-bottom:0">Begrepp som &rdquo;terapeut&rdquo;, &rdquo;samtalsterapeut&rdquo; eller &rdquo;coach&rdquo; är däremot inte skyddade — vem som helst får kalla sig det. Hos oss är alla legitimerade psykologer, och vi arbetar under tystnadsplikt och med patientförsäkring.</p></div>
+      <div data-reveal>
+        <h2 style="max-width:32rem;margin-bottom:1.2rem">Legitimation är en skyddad titel.</h2>
+        <div class="prose prose--wide" style="margin-bottom:clamp(2rem,4vw,3rem)"><p>Titlarna <strong>psykolog</strong> och <strong>psykoterapeut</strong> är skyddade i lag. En legitimerad psykolog har en femårig universitetsutbildning och ett års praktisk tjänstgöring bakom sig, och står under Socialstyrelsens tillsyn. En legitimerad psykoterapeut har därefter ytterligare en påbyggnadsutbildning.</p><p style="margin-bottom:0">Begrepp som &rdquo;terapeut&rdquo;, &rdquo;samtalsterapeut&rdquo; eller &rdquo;coach&rdquo; är däremot inte skyddade — vem som helst får kalla sig det. Hos oss är alla legitimerade psykologer, och vi arbetar under tystnadsplikt och med patientförsäkring.</p></div>
+      </div>
       
     </div>
   </div>
@@ -244,14 +253,11 @@
     <div><p class="eyebrow">Mer</p></div>
     <div>
       <ul class="linklist linklist--two">
-      
+      <li><a href="../om-oss/vanliga-fragor.html"><span>Vanliga frågor</span><svg class="icon" aria-hidden="true" focusable="false"><use href="#i-arrow-right"></use></svg></a></li>
+      <li><a href="../medarbetare/index.html"><span>Medarbetare</span><svg class="icon" aria-hidden="true" focusable="false"><use href="#i-arrow-right"></use></svg></a></li>
+      <li><a href="../priser/index.html"><span>Priser och villkor</span><svg class="icon" aria-hidden="true" focusable="false"><use href="#i-arrow-right"></use></svg></a></li>
+      <li><a href="../akut-hjalp/index.html"><span>Akut hjälp</span><svg class="icon" aria-hidden="true" focusable="false"><use href="#i-arrow-right"></use></svg></a></li>
     </ul>
-      <ul class="linklist linklist--two">
-        <li><a href="../om-oss/vanliga-fragor.html">Vanliga frågor</a></li>
-        <li><a href="../medarbetare/index.html">Medarbetare</a></li>
-        <li><a href="../priser/index.html">Priser och villkor</a></li>
-        <li><a href="../akut-hjalp/index.html">Akut hjälp</a></li>
-      </ul>
     </div>
   </div>
 </section>
@@ -263,12 +269,12 @@
       </picture></div>
   <div class="bleed__scrim"></div>
   <div class="wrap bleed__inner">
-    <div class="prose--wide">
-      <h2 data-reveal>Ta första steget när du är klar för det.</h2>
+    <div class="prose--wide" data-reveal>
+      <h2>Ta första steget när du är klar för det.</h2>
       <p class="hero__lede" style="margin-top:1.2rem">Skriv eller ring. Vi hör av oss så snart vi kan, och du behöver inte veta på förhand vad du vill ha hjälp med.</p>
       <div class="actions" style="margin-top:2rem">
         <a class="btn btn--on-dark" href="../kontakt/index.html">Boka samtal <svg class="icon btn__arrow" aria-hidden="true" focusable="false"><use href="#i-arrow-right"></use></svg></a>
-        <a class="hero__tel" href="tel:+4618104044">eller ring 018 – 10 40 44</a>
+        <a class="hero__tel" href="tel:+4618104044">eller ring 018 – 10 40 44</a>
       </div>
     </div>
   </div>
@@ -297,7 +303,7 @@
         </div>
         <address class="site-foot__addr">
           Gårdshuset, Slottskällan, Sjukhusvägen 3, 753 09 Uppsala<br>
-          <a href="tel:+4618104044">018 – 10 40 44</a><br>
+          <a href="tel:+4618104044">018 – 10 40 44</a><br>
           <a href="mailto:kontakt@kbt-konsulterna.se">kontakt@kbt-konsulterna.se</a>
         </address>
         <p class="site-foot__akut">

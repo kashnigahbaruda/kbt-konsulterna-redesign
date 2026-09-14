@@ -27,8 +27,9 @@
   /* The burger needs JS to toggle. Without it, show the menu and hide the button
      so small screens still have navigation. The desktop rule uses !important,
      so this cannot leak above 66rem. */
-  /* static, not the fixed overlay — with no JS there is no way to close it */
-  .mobile-nav { display: block; position: static; overflow: visible; }
+  /* static, not the fixed overlay — with no JS there is no way to close it.
+     opacity/transform undo the open animation's resting "closed" state. */
+  .mobile-nav { display: block; position: static; overflow: visible; opacity: 1; transform: none; }
   .burger { display: none; }
 </style></noscript>
 <script type="application/ld+json">
@@ -68,7 +69,7 @@
         <a href="../../../priser/index.html">Priser</a>
     </nav>
     <a class="head-akut" href="../../../akut-hjalp/index.html">Akut hjälp</a>
-    <a class="head-tel" href="tel:+4618104044">018 – 10 40 44</a>
+    <a class="head-tel" href="tel:+4618104044">018 – 10 40 44</a>
     <a class="btn btn--primary" href="../../../kontakt/index.html">Boka samtal</a>
     <button class="burger" type="button" aria-expanded="false" aria-controls="mnav" aria-label="Meny">
       <svg class="icon burger__bars" aria-hidden="true" focusable="false"><use href="#i-menu"></use></svg>
@@ -120,7 +121,7 @@
       </ul>
       <div class="mobile-nav__foot">
         <a class="btn btn--primary" href="../../../kontakt/index.html">Boka samtal</a>
-        <a class="btn btn--ghost" href="tel:+4618104044">Ring 018 – 10 40 44</a>
+        <a class="btn btn--ghost" href="tel:+4618104044">Ring 018 – 10 40 44</a>
         <a class="a-link" href="../../../akut-hjalp/index.html">Akut hjälp</a>
       </div>
     </div>
@@ -242,9 +243,9 @@ en gemensam bedömning av vad som är mest angeläget att arbeta med först.</p>
     </nav>
     <nav class="pnav" aria-label="Fler ämnen">
       <a class="pn pn--prev" href="../../../vuxna/behandling/sorg/index.html">
-        <span class="pn__dir">Föregående</span><span class="pn__label">Sorg</span></a>
+        <span class="pn__dir">Föregående</span><span class="pn__label"><svg class="icon" aria-hidden="true" focusable="false"><use href="#i-arrow-right"></use></svg>Sorg</span></a>
       <a class="pn pn--next" href="../../../vuxna/behandling/relationer/index.html">
-        <span class="pn__dir">Nästa</span><span class="pn__label">Relationsproblem</span></a>
+        <span class="pn__dir">Nästa</span><span class="pn__label">Relationsproblem<svg class="icon" aria-hidden="true" focusable="false"><use href="#i-arrow-right"></use></svg></span></a>
     </nav>
   </article>
     <nav class="sidenav" aria-label="Innehåll i Vuxna">
@@ -290,12 +291,12 @@ en gemensam bedömning av vad som är mest angeläget att arbeta med först.</p>
       </picture></div>
   <div class="bleed__scrim"></div>
   <div class="wrap bleed__inner">
-    <div class="prose--wide">
-      <h2 data-reveal>Ta första steget när du är klar för det.</h2>
+    <div class="prose--wide" data-reveal>
+      <h2>Ta första steget när du är klar för det.</h2>
       <p class="hero__lede" style="margin-top:1.2rem">Skriv eller ring. Vi hör av oss så snart vi kan, och du behöver inte veta på förhand vad du vill ha hjälp med.</p>
       <div class="actions" style="margin-top:2rem">
         <a class="btn btn--on-dark" href="../../../kontakt/index.html">Boka samtal <svg class="icon btn__arrow" aria-hidden="true" focusable="false"><use href="#i-arrow-right"></use></svg></a>
-        <a class="hero__tel" href="tel:+4618104044">eller ring 018 – 10 40 44</a>
+        <a class="hero__tel" href="tel:+4618104044">eller ring 018 – 10 40 44</a>
       </div>
     </div>
   </div>
@@ -307,7 +308,7 @@ en gemensam bedömning av vad som är mest angeläget att arbeta med först.</p>
     <div class="prose--wide">
       <p style="margin-bottom:0.8rem"><strong>Behöver du hjälp direkt?</strong> Vi är en
       mottagning med bokade tider och kan inte ta emot akut. Ring <strong>112</strong> vid fara
-      för liv. Du kan också ringa MIND Stödlinje på <strong>90 101</strong>, eller söka
+      för liv. Du kan också ringa MIND Stödlinje på <strong>90&nbsp;101</strong>, eller söka
       psykakuten där du bor.</p>
       <p style="margin-bottom:0"><a class="a-link" href="../../../akut-hjalp/index.html">Se var du kan få akut hjälp <svg class="icon" aria-hidden="true" focusable="false"><use href="#i-arrow-right"></use></svg></a></p>
     </div>
@@ -325,7 +326,7 @@ en gemensam bedömning av vad som är mest angeläget att arbeta med först.</p>
         </div>
         <address class="site-foot__addr">
           Gårdshuset, Slottskällan, Sjukhusvägen 3, 753 09 Uppsala<br>
-          <a href="tel:+4618104044">018 – 10 40 44</a><br>
+          <a href="tel:+4618104044">018 – 10 40 44</a><br>
           <a href="mailto:kontakt@kbt-konsulterna.se">kontakt@kbt-konsulterna.se</a>
         </address>
         <p class="site-foot__akut">

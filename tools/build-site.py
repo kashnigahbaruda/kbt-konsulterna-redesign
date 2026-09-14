@@ -25,7 +25,8 @@ ORG_ID = SITE + '/#organisation'
 # True while this build is being published as a shareable preview (GitHub Pages).
 # Set to False for the real launch — noindex on production would be catastrophic.
 PREVIEW = True
-TEL = '018 – 10 40 44'
+# Non-breaking spaces: the number should never split across two lines.
+TEL = '018 – 10 40 44'
 TEL_HREF = 'tel:+4618104044'
 MAIL = 'kontakt@kbt-konsulterna.se'
 ADDR = 'Gårdshuset, Slottskällan, Sjukhusvägen 3, 753 09 Uppsala'
@@ -158,11 +159,22 @@ def pic_person(base, slug, alt, sizes='(min-width: 76rem) 20vw, (min-width: 56re
 
 def person_card(base, p, sizes=None):
     kw = {'sizes': sizes} if sizes else {}
-    return f'''<a class="person" href="{base}medarbetare/{p['slug']}.html">
+    return f'''<a class="person" href="{base}medarbetare/{p['slug']}.html" data-reveal>
         <div class="person__media">{pic_person(base, p['slug'], f"{p['name']}, {p['role'].split(' · ')[0].lower()}", **kw)}</div>
         <div class="person__name">{p['name']}</div>
         <div class="person__role">{p['role']}</div>
         <p class="person__note">{p['note']}</p>
+      </a>'''
+
+
+def team_cta(href):
+    """The eighth cell of the seven-person grid: the route to "who does what",
+    in the slot that would otherwise be an empty hole in the last row."""
+    return f'''<a class="person person--cta" href="{href}" data-reveal>
+        <div class="person__media">
+          <span class="person__cta-title">Osäker på vem du ska vända dig till?</span>
+          <span class="person__cta-go">Se vem som arbetar med vad {ARROW}</span>
+        </div>
       </a>'''
 
 
@@ -249,8 +261,9 @@ HEAD_TPL = '''<!doctype html>
   /* The burger needs JS to toggle. Without it, show the menu and hide the button
      so small screens still have navigation. The desktop rule uses !important,
      so this cannot leak above 66rem. */
-  /* static, not the fixed overlay — with no JS there is no way to close it */
-  .mobile-nav {{ display: block; position: static; overflow: visible; }}
+  /* static, not the fixed overlay — with no JS there is no way to close it.
+     opacity/transform undo the open animation's resting "closed" state. */
+  .mobile-nav {{ display: block; position: static; overflow: visible; opacity: 1; transform: none; }}
   .burger {{ display: none; }}
 </style></noscript>
 {extra}</head>
@@ -419,12 +432,11 @@ def hero(base, slug, eyebrow, h1, lede, alt, full=False, crumb=None,
          actions=True, trust=False):
     kind = 'hero--full' if full else 'hero--page'
     crumb_html = f'<p class="crumb">{crumb}</p>' if crumb else ''
-    trust_html = ('''<ul class="hero__trust">
-        <li>Leg. psykologer</li>
-        <li>Tystnadsplikt</li>
-        <li>Mottagning i centrala Uppsala</li>
-        <li>Videosamtal i hela Sverige</li>
-      </ul>''' if trust else '')
+    trust_html = ('<ul class="hero__trust">\n        ' + '\n        '.join(
+        f'<li>{CHECK}<span>{t}</span></li>' for t in (
+            'Leg. psykologer', 'Tystnadsplikt',
+            'Mottagning i centrala Uppsala', 'Videosamtal i hela Sverige'))
+        + '\n      </ul>') if trust else ''
     act = f'''<div class="actions">
           <a class="btn btn--on-dark" href="{base}kontakt/index.html">Boka samtal {ARROW_BTN}</a>
           <a class="hero__tel" href="{TEL_HREF}">eller ring {TEL}</a>
@@ -453,8 +465,8 @@ def cta_band(base, heading='Ta första steget när du är klar för det.',
   <div class="bleed__media">{pic_wide(base, 'samtal', 'Två personer sitter mitt emot varandra med en kopp kaffe var')}</div>
   <div class="bleed__scrim"></div>
   <div class="wrap bleed__inner">
-    <div class="prose--wide">
-      <h2 data-reveal>{heading}</h2>
+    <div class="prose--wide" data-reveal>
+      <h2>{heading}</h2>
       <p class="hero__lede" style="margin-top:1.2rem">{text}</p>
       <div class="actions" style="margin-top:2rem">
         <a class="btn btn--on-dark" href="{base}kontakt/index.html">Boka samtal {ARROW_BTN}</a>
@@ -488,7 +500,7 @@ def akut_strip(base):
     <div class="prose--wide">
       <p style="margin-bottom:0.8rem"><strong>Behöver du hjälp direkt?</strong> Vi är en
       mottagning med bokade tider och kan inte ta emot akut. Ring <strong>112</strong> vid fara
-      för liv. Du kan också ringa MIND Stödlinje på <strong>90 101</strong>, eller söka
+      för liv. Du kan också ringa MIND Stödlinje på <strong>90&nbsp;101</strong>, eller söka
       psykakuten där du bor.</p>
       <p style="margin-bottom:0"><a class="a-link" href="{base}akut-hjalp/index.html">Se var du kan få akut hjälp {ARROW}</a></p>
     </div>
@@ -515,12 +527,16 @@ PROCESS_STEPS = [
 
 def process_band(base, dark=True):
     items = '\n      '.join(
-        f'<li><h3>{t}</h3><p>{d}</p></li>' for t, d in PROCESS_STEPS)
+        f'<li data-reveal><h3>{t}</h3><p>{d}</p></li>' for t, d in PROCESS_STEPS)
     cls = 'band band--deep' if dark else 'band band--hi'
     return f'''<section class="{cls}">
   <div class="wrap">
-    <p class="eyebrow">Så går det till</p>
-    <h2 data-reveal style="max-width:32rem;margin-bottom:clamp(2.5rem,5vw,4rem)">Fyra steg, och du bestämmer takten.</h2>
+    <div class="split split--head">
+      <div><p class="eyebrow">Så går det till</p></div>
+      <div class="prose--wide" data-reveal>
+        <h2 style="max-width:32rem">Fyra steg, och du bestämmer takten.</h2>
+      </div>
+    </div>
     <ol class="steps">
       {items}
     </ol>
@@ -533,19 +549,17 @@ def price_band(base, dark=False):
     cls = 'band band--sand' if not dark else 'band band--deep'
     return f'''<section class="{cls}">
   <div class="wrap split">
-    <div>
-      <p class="eyebrow">Priser</p>
-      <h2 data-reveal style="font-size:var(--step-2)">Vad det kostar, utan att du behöver fråga.</h2>
-    </div>
-    <div>
+    <div><p class="eyebrow">Priser</p></div>
+    <div data-reveal>
+      <h2 style="margin-bottom:clamp(1.75rem,3.5vw,2.5rem)">Vad det kostar, utan att du behöver fråga.</h2>
       <div class="prices">
         <div>
           <p class="price__label">Enskilt samtal</p>
-          <p class="price__fig">1 500 kr <span class="price__unit">/ 45 min</span></p>
+          <p class="price__fig">1&nbsp;500&nbsp;kr <span class="price__unit">/ 45 min</span></p>
         </div>
         <div>
           <p class="price__label">Parterapi</p>
-          <p class="price__fig">2 400 kr <span class="price__unit">/ 60 min</span></p>
+          <p class="price__fig">2&nbsp;400&nbsp;kr <span class="price__unit">/ 60 min</span></p>
           <p class="price__note">1 800 kr / 45 min. Ofta behövs minst 60 minuter,
           eller 2 × 45 minuter per besök.</p>
         </div>
@@ -601,7 +615,7 @@ HOME_LD = '''<script type="application/ld+json">
 def build_home():
     b = ''
     router = '\n      '.join(
-        f'''<li><a class="router__row" href="{to_href(b, href)}">
+        f'''<li data-reveal><a class="router__row" href="{to_href(b, href)}">
         <span class="router__say">{say}</span>
         <span class="router__to">{to}{ARROW}</span>
       </a></li>''' for say, to, href in ROUTER)
@@ -635,24 +649,25 @@ def build_home():
         <span class="door__more">Läs mer{ARROW}</span>
       </a>''' for slug, title, kicker, href, text, alt in doors)
 
-    team_html = '\n      '.join(person_card(b, p) for p in TEAM)
+    team_html = '\n      '.join([person_card(b, p) for p in TEAM]
+                               + [team_cta(f'{b}medarbetare/index.html#vem-gor-vad')])
 
     body = f'''
 {hero(b, 'hero-room',
       'Privat psykologmottagning i Uppsala',
       'Vi kan kognitiv beteendeterapi',
       'Sju legitimerade psykologer och psykoterapeuter i Gårdshuset vid '
-      'Slottskällan, tio minuter från Uppsala C. Vi tar emot på mottagningen '
+      'Slottskällan, tio minuter från Uppsala&nbsp;C. Vi tar emot på mottagningen '
       'och online i hela Sverige.',
       'Ett varmt, ljust rum med en fåtölj vid ett stort fönster',
       full=True, trust=True)}
 
 <section class="band">
   <div class="wrap">
-    <div class="split" style="margin-bottom:clamp(2.5rem,5vw,3.5rem)">
+    <div class="split split--head">
       <div><p class="eyebrow">Medarbetare</p></div>
-      <div class="prose--wide">
-        <h2 data-reveal style="margin-bottom:1.1rem">Hos oss väljer du en person, inte en mottagning.</h2>
+      <div class="prose--wide" data-reveal>
+        <h2 style="margin-bottom:1.1rem">Hos oss väljer du en person, inte en mottagning.</h2>
         <p style="margin-bottom:0">Läs om var och en av oss och hör av dig direkt till den
         du tror passar dig. Är du osäker hjälper vi dig vidare.</p>
       </div>
@@ -660,7 +675,6 @@ def build_home():
     <div class="team team--seven">
       {team_html}
     </div>
-    <p style="margin-top:clamp(2.5rem,5vw,3.5rem);margin-bottom:0"><a class="a-link" href="{b}medarbetare/index.html#vem-gor-vad">Osäker på vem du ska vända dig till? Se vem som arbetar med vad {ARROW}</a></p>
   </div>
 </section>
 
@@ -669,8 +683,8 @@ def build_home():
     <div>
       <p class="eyebrow">Vilka är vi?</p>
     </div>
-    <div class="prose prose--wide">
-      <h2 data-reveal style="margin-bottom:1.4rem">Legitimerade psykologer med lång och bred erfarenhet.</h2>
+    <div class="prose prose--wide" data-reveal>
+      <h2 style="margin-bottom:1.4rem">Legitimerade psykologer med lång och bred erfarenhet.</h2>
       <p>KBT-Konsulterna är en privat psykologmottagning i centrala Uppsala. Vi är
       legitimerade psykologer, legitimerade psykoterapeuter och specialister i kognitiv
       beteendeterapi. Flera av oss har arbetat inom psykiatrin, BUP, primärvården och
@@ -696,15 +710,15 @@ def build_home():
   </div>
 </section>
 
-<!-- Three doors: title set on the photograph, middle door dropped a step. -->
+<!-- Three doors: title set on the photograph. -->
 <section class="band">
   <div class="wrap">
-    <div class="split" style="margin-bottom:clamp(2.5rem,5vw,3.5rem)">
+    <div class="split split--head">
       <div>
         <p class="eyebrow">Tre ingångar</p>
       </div>
-      <div class="prose--wide">
-        <h2 data-reveal style="margin-bottom:1.1rem">Vem söker du hjälp för?</h2>
+      <div class="prose--wide" data-reveal>
+        <h2 style="margin-bottom:1.1rem">Vem söker du hjälp för?</h2>
         <p style="margin-bottom:0">Välj den ingång som passar dig bäst. Vet du inte
         riktigt vad det handlar om? Säg det med dina egna ord här nedanför.</p>
       </div>
@@ -720,8 +734,8 @@ def build_home():
   <div class="wrap split">
     <div>
       <p class="eyebrow">Var ska jag börja?</p>
-      <p style="font-size:1rem;color:var(--muted);max-width:15rem">Säg det med dina
-      egna ord. Vi visar dig vidare.</p>
+      <p style="font-size:1rem;color:var(--muted);max-width:15rem">Välj den mening som
+      ligger närmast. Den leder dig direkt till rätt sida.</p>
     </div>
     <div>
       <ul class="router">
@@ -736,11 +750,9 @@ def build_home():
 
 <section class="band band--hi">
   <div class="wrap split">
-    <div>
-      <p class="eyebrow">Praktiskt</p>
-      <h2 data-reveal style="font-size:var(--step-2)">Var vi finns och hur vi ses.</h2>
-    </div>
-    <div>
+    <div><p class="eyebrow">Praktiskt</p></div>
+    <div data-reveal>
+      <h2 style="margin-bottom:clamp(1.75rem,3.5vw,2.5rem)">Var vi finns och hur vi ses.</h2>
       <dl class="facts">
         <div>
           <dt>Mottagning</dt>
@@ -834,8 +846,10 @@ def hub_section(anchor, eyebrow, heading, intro, content, tone='', more=None):
   <div class="wrap split">
     <div><p class="eyebrow">{eyebrow}</p></div>
     <div>
-      <h2 data-reveal style="max-width:26rem;margin-bottom:1.2rem">{heading}</h2>
-      <div class="prose prose--wide" style="margin-bottom:clamp(2rem,4vw,3rem)">{intro}</div>
+      <div data-reveal>
+        <h2 style="max-width:32rem;margin-bottom:1.2rem">{heading}</h2>
+        <div class="prose prose--wide" style="margin-bottom:clamp(2rem,4vw,3rem)">{intro}</div>
+      </div>
       {content}{more_html}
     </div>
   </div>
@@ -850,10 +864,10 @@ def team_subset(base, slugs, eyebrow, heading, note):
         for s in slugs)
     return f'''<section class="band band--hi">
   <div class="wrap">
-    <div class="split" style="margin-bottom:clamp(2.5rem,5vw,3.5rem)">
+    <div class="split split--head">
       <div><p class="eyebrow">{eyebrow}</p></div>
-      <div class="prose--wide">
-        <h2 data-reveal style="margin-bottom:1.1rem">{heading}</h2>
+      <div class="prose--wide" data-reveal>
+        <h2 style="margin-bottom:1.1rem">{heading}</h2>
         <p style="margin-bottom:0">{note}</p>
       </div>
     </div>
@@ -1275,8 +1289,8 @@ def build_org():
 <section class="band band--deep">
   <div class="wrap split">
     <div><p class="eyebrow">Kontakt för uppdrag</p></div>
-    <div class="prose--wide">
-      <h2 data-reveal style="margin-bottom:1.2rem">Berätta vad ni behöver.</h2>
+    <div class="prose--wide" data-reveal>
+      <h2 style="margin-bottom:1.2rem">Berätta vad ni behöver.</h2>
       <p>Vi svarar på frågor om uppdrag, handledning, utbildning och samarbeten. Priser
       för handledning, utbildning och utredning lämnas på förfrågan.</p>
       <div class="actions" style="margin-top:2rem">
@@ -1326,7 +1340,7 @@ ROUTING = [
 
 def build_medarbetare():
     b = '../'
-    cards = '\n      '.join(person_card(b, p) for p in TEAM)
+    cards = '\n      '.join([person_card(b, p) for p in TEAM] + [team_cta('#vem-gor-vad')])
     rows = '\n        '.join(
         f'''<div>
           <dt>{need}</dt>
@@ -1357,8 +1371,8 @@ def build_medarbetare():
       <p style="font-size:1rem;color:var(--muted);max-width:15rem">Är du osäker? Skriv till
       <a class="a-link" href="mailto:{MAIL}">{MAIL}</a> och vi hjälper dig vidare.</p>
     </div>
-    <div>
-      <h2 data-reveal style="max-width:26rem;margin-bottom:clamp(2rem,4vw,2.75rem)">Hitta rätt person direkt.</h2>
+    <div data-reveal>
+      <h2 style="max-width:32rem;margin-bottom:clamp(2rem,4vw,2.75rem)">Hitta rätt person direkt.</h2>
       <dl class="facts">
         {rows}
       </dl>
@@ -1369,8 +1383,8 @@ def build_medarbetare():
 <section class="band band--deep">
   <div class="wrap split">
     <div><p class="eyebrow">Så är vi organiserade</p></div>
-    <div class="prose--wide">
-      <h2 data-reveal style="margin-bottom:1.2rem">Ett paraplyföretag som vi äger tillsammans.</h2>
+    <div class="prose--wide" data-reveal>
+      <h2 style="margin-bottom:1.2rem">Ett paraplyföretag som vi äger tillsammans.</h2>
       <p style="margin-bottom:0">KBT-Konsulterna är ett paraplyföretag som vi äger gemensamt,
       och inom ramen för det arbetar vi också i våra individuella aktiebolag. Det är vanligt
       i vår bransch. I praktiken betyder det att du har en behandlare — och en mottagning
@@ -1516,17 +1530,17 @@ def build_priser():
       <div class="prices" style="margin-bottom:clamp(2.5rem,5vw,3.5rem)">
         <div>
           <p class="price__label">Enskilt samtal</p>
-          <p class="price__fig">1 500 kr <span class="price__unit">/ 45 min</span></p>
+          <p class="price__fig">1&nbsp;500&nbsp;kr <span class="price__unit">/ 45 min</span></p>
         </div>
         <div>
           <p class="price__label">Parterapi</p>
-          <p class="price__fig">2 400 kr <span class="price__unit">/ 60 min</span></p>
+          <p class="price__fig">2&nbsp;400&nbsp;kr <span class="price__unit">/ 60 min</span></p>
           <p class="price__note">Eller 1 800 kr / 45 min. Ofta behövs minst 60 minuter,
           eller 2 × 45 minuter per besök.</p>
         </div>
       </div>
-      <div class="prose prose--wide">
-        <h2 data-reveal style="font-size:var(--step-2);margin-bottom:1.1rem">Villkor</h2>
+      <div class="prose prose--wide" data-reveal>
+        <h2 style="font-size:var(--step-2);margin-bottom:1.1rem">Villkor</h2>
         {ticks(['Moms tillkommer om arbetsgivare, försäkringsbolag eller socialtjänst betalar.', 'Avbokning senare än 24 timmar före bokat besök debiteras i sin helhet.', 'Samtalen finansieras vanligen av privatpersoner eller arbetsgivare. I vissa fall betalar ett försäkringsbolag, behandlingshem, socialtjänsten, en skola eller annan verksamhet.'])}
       </div>
     </div>
@@ -1536,8 +1550,8 @@ def build_priser():
 <section class="band band--hi">
   <div class="wrap split">
     <div><p class="eyebrow">Övriga tjänster</p></div>
-    <div class="prose prose--wide">
-      <h2 data-reveal style="margin-bottom:1.2rem">Handledning, utbildning och utredning</h2>
+    <div class="prose prose--wide" data-reveal>
+      <h2 style="margin-bottom:1.2rem">Handledning, utbildning och utredning</h2>
       <p>Priser för handledning, utbildning och neuropsykiatrisk utredning sätts utifrån
       uppdragets omfattning och lämnas på förfrågan. Skriv till
       <a class="a-link" href="mailto:{MAIL}">{MAIL}</a> och beskriv vad ni behöver, så
@@ -1550,8 +1564,8 @@ def build_priser():
 <section class="band">
   <div class="wrap split">
     <div><p class="eyebrow">Remiss &amp; högkostnadsskydd</p></div>
-    <div class="prose prose--wide">
-      <h2 data-reveal style="margin-bottom:1.2rem">Två av oss tar emot remisser från Regionen</h2>
+    <div class="prose prose--wide" data-reveal>
+      <h2 style="margin-bottom:1.2rem">Två av oss tar emot remisser från Regionen</h2>
       <p><strong>Angeli Holmstedt</strong> och <strong>Jens Karström</strong> tar emot
       patientremisser via Region Uppsala under högkostnadsskyddet.</p>
       <p>För att det ska gälla behöver du vara patient inom psykiatrin och ha blivit erbjuden
@@ -1789,13 +1803,12 @@ def build_om_oss():
   <div class="wrap split">
     <div><p class="eyebrow">Mer</p></div>
     <div>
-      {contents_list(b, [])}
-      <ul class="linklist linklist--two">
-        <li><a href="{b}om-oss/vanliga-fragor.html">Vanliga frågor</a></li>
-        <li><a href="{b}medarbetare/index.html">Medarbetare</a></li>
-        <li><a href="{b}priser/index.html">Priser och villkor</a></li>
-        <li><a href="{b}akut-hjalp/index.html">Akut hjälp</a></li>
-      </ul>
+      {contents_list(b, [
+        ('Vanliga frågor', 'om-oss/vanliga-fragor.html'),
+        ('Medarbetare', 'medarbetare/index.html'),
+        ('Priser och villkor', 'priser/index.html'),
+        ('Akut hjälp', 'akut-hjalp/index.html'),
+      ])}
     </div>
   </div>
 </section>
@@ -1846,9 +1859,9 @@ def build_kontakt():
 
 <section class="band">
   <div class="wrap split split--even">
-    <div>
+    <div data-reveal>
       <p class="eyebrow">Kontaktuppgifter</p>
-      <h2 data-reveal style="font-size:var(--step-2);margin-bottom:1.6rem">Ring, mejla eller använd formuläret.</h2>
+      <h2 style="font-size:var(--step-2);margin-bottom:1.6rem">Ring, mejla eller använd formuläret.</h2>
       <dl class="facts" style="grid-template-columns:1fr">
         <div>
           <dt>Telefon</dt>
@@ -1880,9 +1893,9 @@ def build_kontakt():
         </div>
       </dl>
     </div>
-    <div>
+    <div data-reveal>
       <p class="eyebrow">Kontaktformulär</p>
-      <h2 data-reveal style="font-size:var(--step-2);margin-bottom:1.6rem">Frågor eller förfrågan om tid</h2>
+      <h2 style="font-size:var(--step-2);margin-bottom:1.6rem">Frågor eller förfrågan om tid</h2>
       <form class="form" method="post" action="#">
         <div class="field">
           <label for="namn">Namn <span class="field__req">*</span></label>
@@ -1911,9 +1924,9 @@ def build_kontakt():
 
 <section class="band band--hi anchor" id="foretag">
   <div class="wrap split split--even">
-    <div>
+    <div data-reveal>
       <p class="eyebrow">Företag &amp; offentlig verksamhet</p>
-      <h2 data-reveal style="font-size:var(--step-2);margin-bottom:1.2rem">Förfrågan om uppdrag</h2>
+      <h2 style="font-size:var(--step-2);margin-bottom:1.2rem">Förfrågan om uppdrag</h2>
       <div class="prose">
         <p>Vill ni diskutera handledning, utbildning, föreläsningar eller ett samarbete?
         Beskriv kort vad ni behöver, så återkommer vi med ett förslag och en prisuppgift.</p>
@@ -2040,8 +2053,8 @@ def build_akut():
 <section class="band band--deep">
   <div class="wrap split">
     <div><p class="eyebrow">När det inte är akut</p></div>
-    <div class="prose--wide">
-      <h2 data-reveal style="margin-bottom:1.2rem">Vi finns här för det som inte brådskar i dag.</h2>
+    <div class="prose--wide" data-reveal>
+      <h2 style="margin-bottom:1.2rem">Vi finns här för det som inte brådskar i dag.</h2>
       <p>Vårt mål är att ge snabba tider, och för det mesta lyckas vi med det. Hör av dig
       och berätta kort vad det handlar om.</p>
       <div class="actions" style="margin-top:2rem">
@@ -2228,10 +2241,10 @@ def prev_next(base, section, parent, node):
     out = []
     if prev:
         out.append(f'''<a class="pn pn--prev" href="{to_href(base, node_path(section["slug"], parent["slug"], prev["slug"]))}">
-        <span class="pn__dir">Föregående</span><span class="pn__label">{H.escape(prev['label'])}</span></a>''')
+        <span class="pn__dir">Föregående</span><span class="pn__label">{ARROW}{H.escape(prev['label'])}</span></a>''')
     if nxt:
         out.append(f'''<a class="pn pn--next" href="{to_href(base, node_path(section["slug"], parent["slug"], nxt["slug"]))}">
-        <span class="pn__dir">Nästa</span><span class="pn__label">{H.escape(nxt['label'])}</span></a>''')
+        <span class="pn__dir">Nästa</span><span class="pn__label">{H.escape(nxt['label'])}{ARROW}</span></a>''')
     return f'<nav class="pnav" aria-label="Fler ämnen">\n      ' + '\n      '.join(out) + '\n    </nav>'
 
 
