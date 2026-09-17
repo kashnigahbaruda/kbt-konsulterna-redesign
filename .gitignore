@@ -8,6 +8,10 @@ research/
 # The generated web variants in assets/img/ are committed.
 assets/img/_src/
 
+# Client's phone clip and the stabilised intermediate, rebuilt by
+# tools/build-video.py. The encoded web videos in assets/video/ are committed.
+assets/video/_src/
+
 # Fontsource variable-font originals, re-fetchable with tools/build-fonts.py.
 assets/fonts/_src/
 

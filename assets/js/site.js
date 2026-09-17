@@ -65,6 +65,54 @@
     window.addEventListener('scroll', onScroll, { passive: true });
   }
 
+  /* Homepage hero clip. Started from here rather than with `autoplay` so that
+     reduced-motion and Save-Data visitors keep the still poster and never
+     download the video. Fades in over the poster once frames are actually
+     playing, pauses while scrolled out of view, and gets a pause button,
+     since anything moving for more than five seconds must be stoppable. */
+  var video = document.querySelector('[data-hero-video]');
+  var saveData = navigator.connection && navigator.connection.saveData;
+  if (video && !saveData &&
+      !window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
+    var userPaused = false;
+    var visible = true;
+    var btn = document.createElement('button');
+    btn.type = 'button';
+    btn.className = 'hero__playpause';
+    var ICON_PAUSE = '<svg viewBox="0 0 16 16" aria-hidden="true" focusable="false"><path d="M4.5 3h2.5v10H4.5zM9 3h2.5v10H9z"/></svg>';
+    var ICON_PLAY = '<svg viewBox="0 0 16 16" aria-hidden="true" focusable="false"><path d="M5 2.8v10.4L13.2 8z"/></svg>';
+    var syncBtn = function () {
+      btn.innerHTML = userPaused ? ICON_PLAY : ICON_PAUSE;
+      btn.setAttribute('aria-label', userPaused ? 'Spela bakgrundsfilmen' : 'Pausa bakgrundsfilmen');
+    };
+    var update = function () {
+      if (!userPaused && visible) {
+        var p = video.play();
+        if (p && p.catch) p.catch(function () {});
+      } else {
+        video.pause();
+      }
+    };
+    video.addEventListener('playing', function () {
+      video.setAttribute('data-playing', 'true');
+    }, { once: true });
+    btn.addEventListener('click', function () {
+      userPaused = !userPaused;
+      syncBtn();
+      update();
+    });
+    syncBtn();
+    video.parentNode.parentNode.appendChild(btn);
+    if ('IntersectionObserver' in window) {
+      new IntersectionObserver(function (entries) {
+        visible = entries[0].isIntersecting;
+        update();
+      }).observe(video);
+    } else {
+      update();
+    }
+  }
+
   /* Reveal-on-scroll for section heads (heading and text together), cards,
      steps and router rows. Elements start hidden only when this runs, so a
      no-JS visitor sees everything. */

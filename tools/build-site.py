@@ -428,8 +428,24 @@ def page(path, title, desc, body, ogimg='hero-room', extra='', ogtitle=None):
 # ==========================================================================
 # Shared content fragments
 # ==========================================================================
+def hero_video(base, slug):
+    """Looping background clip over its poster <picture>. No autoplay attribute:
+    site.js starts it, unless the visitor prefers reduced motion or has
+    Save-Data on, so without JS the poster simply stays. Phones get the 1280
+    encode through <source media>."""
+    srcs = []
+    for media, w in (('(max-width: 50rem)', 1280), (None, 1920)):
+        m = f' media="{media}"' if media else ''
+        for ext in ('webm', 'mp4'):
+            srcs.append(f'<source{m} type="video/{ext}" '
+                        f'src="{base}assets/video/{slug}-{w}.{ext}">')
+    return ('<video class="hero__video" muted loop playsinline preload="none" '
+            'aria-hidden="true" tabindex="-1" data-hero-video>\n          '
+            + '\n          '.join(srcs) + '\n        </video>')
+
+
 def hero(base, slug, eyebrow, h1, lede, alt, full=False, crumb=None,
-         actions=True, trust=False):
+         actions=True, trust=False, video=None):
     kind = 'hero--full' if full else 'hero--page'
     crumb_html = f'<p class="crumb">{crumb}</p>' if crumb else ''
     trust_html = ('<ul class="hero__trust">\n        ' + '\n        '.join(
@@ -442,7 +458,7 @@ def hero(base, slug, eyebrow, h1, lede, alt, full=False, crumb=None,
           <a class="hero__tel" href="{TEL_HREF}">eller ring {TEL}</a>
         </div>''' if actions else ''
     return f'''<section class="hero {kind}">
-  <div class="hero__media">{pic_wide(base, slug, alt, eager=True)}</div>
+  <div class="hero__media">{pic_wide(base, slug, alt, eager=True)}{hero_video(base, video) if video else ''}</div>
   <div class="hero__scrim"></div>
   <div class="wrap hero__inner">
     <div class="hero__body">
@@ -653,14 +669,14 @@ def build_home():
                                + [team_cta(f'{b}medarbetare/index.html#vem-gor-vad')])
 
     body = f'''
-{hero(b, 'hero-room',
+{hero(b, 'slottskallan-poster',
       'Privat psykologmottagning i Uppsala',
       'Vi kan kognitiv beteendeterapi',
       'Sju legitimerade psykologer och psykoterapeuter i Gårdshuset vid '
       'Slottskällan, tio minuter från Uppsala&nbsp;C. Vi tar emot på mottagningen '
       'och online i hela Sverige.',
-      'Ett varmt, ljust rum med en fåtölj vid ett stort fönster',
-      full=True, trust=True)}
+      'Fontänen i parken vid Slottskällan',
+      full=True, trust=True, video='slottskallan')}
 
 <section class="band">
   <div class="wrap">
@@ -698,7 +714,7 @@ def build_home():
 </section>
 
 <section class="bleed">
-  <div class="bleed__media">{pic_wide(b, 'band-forest', 'Solljus genom trädstammar i en skog')}</div>
+  <div class="bleed__media">{pic_wide(b, 'slottet', 'Uppsala slott på kullen ovanför Gårdshuset vid Slottskällan', cls='pic--sky')}</div>
   <div class="bleed__scrim"></div>
   <div class="wrap bleed__inner">
     <blockquote class="pull" data-reveal>
