@@ -2826,7 +2826,7 @@ en kartläggning av barnets förutsättningar, se
         ],
     ),
     dict(
-        slug='organisationer', label='För organisationer', img='org',
+        slug='organisationer', label='För organisationer', img='foretag',
         children=ORG,
     ),
 ]

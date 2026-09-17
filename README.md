@@ -247,7 +247,9 @@ file; the generated HTML here is complete and standalone without it.
 ## Going live
 
 1. **Set `PREVIEW = False`** in `tools/build-site.py` and rebuild. That flag is what emits the
-   `noindex, nofollow` tag — leaving it on would keep the real site out of Google entirely.
+   `noindex, nofollow` tag — leaving it on would keep the real site out of Google entirely It also
+   points `og:image` and `og:url` at the GitHub Pages preview; switched off, they go back to
+   kbt-konsulterna.se.
 2. **Wire up the contact forms.** Both have `action="#"` and do nothing. They need a backend
    or a form service.
 3. **Confirm the prices** — 1 500 kr / 45 min, 2 400 kr / 60 min and 1 800 kr / 45 min are

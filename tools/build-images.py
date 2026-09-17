@@ -93,10 +93,29 @@ def main():
         flag = '  (low-res source)' if im.width < 900 else ''
         print(f'  {slug:18} {im.width}px -> {widths} + jpg{flag}')
 
+    build_og()
     build_brand()
     print(f'\nTotal generated: {total // 1024} KB')
 
 
+
+
+# --------------------------------------------------------------------------
+# Share image
+#
+# Link previews (Facebook, LinkedIn, Slack, iMessage) crop to 1.91:1 and are
+# shown small, so the homepage gets its own 1200x630 cut rather than a hero
+# variant: the castle and Gårdshuset say "Uppsala, this place" at a glance.
+# --------------------------------------------------------------------------
+def build_og():
+    src = f'{OUT}/_src/slottet.jpg'
+    if not os.path.exists(src):
+        print(f'\n  skip (missing) {src}')
+        return
+    im = ImageOps.exif_transpose(Image.open(src)).convert('RGB')
+    og = ImageOps.fit(im, (1200, 630), Image.LANCZOS, centering=(0.5, 0.4))
+    og.save(f'{OUT}/og-home.jpg', 'JPEG', quality=84, optimize=True, progressive=True)
+    print(f'\nShare image:\n  og-home.jpg          {os.path.getsize(f"{OUT}/og-home.jpg") // 1024:4} KB')
 
 
 # --------------------------------------------------------------------------

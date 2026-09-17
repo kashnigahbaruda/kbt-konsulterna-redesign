@@ -25,6 +25,10 @@ ORG_ID = SITE + '/#organisation'
 # True while this build is being published as a shareable preview (GitHub Pages).
 # Set to False for the real launch — noindex on production would be catastrophic.
 PREVIEW = True
+# Where the preview is actually served. Share cards need an absolute image URL
+# that resolves, and kbt-konsulterna.se does not host these files yet, so while
+# PREVIEW is on og:image points here instead.
+PREVIEW_SITE = 'https://kashnigahbaruda.github.io/kbt-konsulterna-redesign'
 # Non-breaking spaces: the number should never split across two lines.
 TEL = '018 – 10 40 44'
 TEL_HREF = 'tel:+4618104044'
@@ -246,8 +250,8 @@ HEAD_TPL = '''<!doctype html>
 <meta property="og:site_name" content="KBT-Konsulterna i Uppsala">
 <meta property="og:title" content="{ogtitle}">
 <meta property="og:description" content="{desc}">
-<meta property="og:url" content="{canonical}">
-<meta property="og:image" content="{site}/assets/img/{ogimg}.jpg">
+<meta property="og:url" content="{ogurl}">
+<meta property="og:image" content="{assets}/assets/img/{ogimg}.jpg">
 <meta property="og:image:width" content="{ogw}">
 <meta property="og:image:height" content="{ogh}">
 <meta name="twitter:card" content="summary_large_image">
@@ -402,11 +406,16 @@ def page(path, title, desc, body, ogimg='hero-room', extra='', ogtitle=None):
         trail = crumb_trail(body, base, path)
         if trail:
             extra = breadcrumb_ld(trail) + extra
+    assert os.path.exists(f'assets/img/{ogimg}.jpg'), f'{path}: no og image {ogimg}.jpg'
     ogw, ogh = dim(f'assets/img/{ogimg}.jpg')
     head = HEAD_TPL.format(
         robots=robots, ogw=ogw, ogh=ogh,
         title=H.escape(title), desc=H.escape(desc), canonical=canonical,
         ogtitle=H.escape(ogtitle or title), site=SITE, ogimg=ogimg, base=base,
+        assets=PREVIEW_SITE if PREVIEW else SITE,
+        # Scrapers re-fetch og:url and take the tags found there, so it must be
+        # the page that carries these tags, not the client's current site.
+        ogurl=canonical.replace(SITE, PREVIEW_SITE, 1) if PREVIEW else canonical,
         nav=nav_html(base, current), mnav=mobile_nav_html(base, current),
         tel=TEL, tel_href=TEL_HREF, extra=extra, logo_w=LOGO_W, logo_h=LOGO_H)
     foot = FOOT_TPL.format(base=base, addr=ADDR, tel=TEL, tel_href=TEL_HREF, mail=MAIL,
@@ -615,7 +624,7 @@ HOME_LD = '''<script type="application/ld+json">
 "url":"https://kbt-konsulterna.se/","email":"kontakt@kbt-konsulterna.se",
 "telephone":"+46-18-10 40 44",
 "logo":"https://kbt-konsulterna.se/assets/brand/icon-512.png",
-"image":"https://kbt-konsulterna.se/assets/img/hero-room.jpg",
+"image":"https://kbt-konsulterna.se/assets/img/og-home.jpg",
 "address":{"@type":"PostalAddress","streetAddress":"G\\u00e5rdshuset, Slottsk\\u00e4llan, Sjukhusv\\u00e4gen 3",
 "addressLocality":"Uppsala","postalCode":"753 09","addressRegion":"Uppsala","addressCountry":"SE"},
 "geo":{"@type":"GeoCoordinates","latitude":59.8536563,"longitude":17.6384567},
@@ -812,7 +821,7 @@ def build_home():
                 'Privat psykologmottagning i centrala Uppsala och online. Sju '
                 'legitimerade psykologer. Terapi för barn, ungdomar, vuxna och par, '
                 'utredning av adhd och autism.',
-                body, ogimg='hero-room', extra=HOME_LD,
+                body, ogimg='og-home', extra=HOME_LD,
                 ogtitle='KBT-Konsulterna – privat psykologmottagning i Uppsala')
 
 
