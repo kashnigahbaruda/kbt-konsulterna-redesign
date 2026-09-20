@@ -2,6 +2,7 @@
 """Generate responsive web variants from the source imagery.
 
 Wide images  -> WebP at 800/1000/1600/2400px + a 1600px JPEG fallback
+             (sources in assets/img/_src/ and assets/img/_client/)
 Portraits    -> 3:4 crop, WebP at 340/600/700/900px + a JPEG fallback
 
 The 800 and 700 widths are for phones: a 412px screen at 1.75x density wants
@@ -64,11 +65,22 @@ def main():
     total = 0
     os.makedirs(f'{OUT}/team', exist_ok=True)
 
-    # Every wide image is used as a full-bleed background under a 70-88% dark
-    # scrim, so fine detail is not visible and a lower quality saves a lot of
-    # weight. Detailed foliage shots in particular were several hundred KB.
+    # Every wide image is used as a full-bleed background under a scrim, so fine
+    # detail is not visible and a lower quality saves a lot of weight. Detailed
+    # foliage shots in particular were several hundred KB.
+    #
+    # Two caveats before trusting that sentence for a new image. The hero scrim
+    # is a DIAGONAL gradient (0.88 opacity at the left edge, 0.10 at the right),
+    # so only the left quarter is well hidden. And a source narrower than 2400px
+    # has its top variant upscaled by the browser rather than downscaled, which
+    # magnifies artefacts instead of absorbing them.
+    #
+    # _src holds the CC0 stock originals, which are gitignored because
+    # fetch-images.py can re-download them. _client holds the client's own
+    # photographs, which are committed: nothing can recover those but the
+    # client. Both build identically — see assets/img/_client/README.md.
     print('Wide / background images (size-budgeted; all sit under a scrim):')
-    for src in sorted(glob.glob(f'{OUT}/_src/*.jpg')):
+    for src in sorted(glob.glob(f'{OUT}/_src/*.jpg') + glob.glob(f'{OUT}/_client/*.jpg')):
         slug = os.path.splitext(os.path.basename(src))[0]
         im = ImageOps.exif_transpose(Image.open(src)).convert('RGB')
         widths = [w for w in (2400, 1600, 1000, 800) if w <= im.width]

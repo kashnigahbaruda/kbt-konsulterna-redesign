@@ -6,6 +6,8 @@ research/
 
 # CC0 stock originals — 25 MB, re-fetchable with tools/fetch-images.py.
 # The generated web variants in assets/img/ are committed.
+# NOTE: assets/img/_client/ is deliberately NOT ignored — those are the client's
+# own photographs of the practice and nothing can re-fetch them.
 assets/img/_src/
 
 # Client's phone clip and the stabilised intermediate, rebuilt by

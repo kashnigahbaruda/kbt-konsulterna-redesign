@@ -1373,12 +1373,12 @@ def build_medarbetare():
         </div>''' for need, slugs in ROUTING)
 
     body = f'''
-{hero(b, 'stillhet', 'Medarbetare',
+{hero(b, 'fonster-plantor', 'Medarbetare',
       'Sju personer, inte en mottagning',
       'Alla legitimerade psykologer. Flera är dessutom legitimerade '
       'psykoterapeuter, specialister och handledare. Läs om var och en och '
       'hör av dig direkt.',
-      'Ett fönster med en krukväxt i motljus',
+      'Krukväxter i ett motljust fönster på mottagningen',
       crumb=f'<a href="{b}index.html">Hem</a><span>/</span>Medarbetare')}
 
 <section class="band">
@@ -1425,7 +1425,7 @@ def build_medarbetare():
                 'Medarbetare – psykologer i Uppsala | KBT-Konsulterna',
                 'Sju legitimerade psykologer och psykoterapeuter i Uppsala. Se vem '
                 'som arbetar med vad, och hör av dig direkt.',
-                body, ogimg='stillhet')
+                body, ogimg='fonster-plantor')
 
 
 # ==========================================================================
@@ -1812,7 +1812,7 @@ def build_om_oss():
              '')}
 
 <section class="bleed">
-  <div class="bleed__media">{pic_wide(b, 'kunskap', 'Bokhyllor fyllda med böcker')}</div>
+  <div class="bleed__media">{pic_wide(b, 'bokhylla-kbt', 'Mottagningens bokhyllor med KBT-litteratur')}</div>
   <div class="bleed__scrim"></div>
   <div class="wrap bleed__inner">
     <blockquote class="pull" data-reveal>
@@ -1874,11 +1874,11 @@ def source_select(idx):
 def build_kontakt():
     b = '../'
     body = f'''
-{hero(b, 'samtal', 'Kontakt &amp; bokning',
+{hero(b, 'mottagning', 'Kontakt &amp; bokning',
       'Hör av dig',
       'Skriv eller ring. Vi återkommer så snart vi har möjlighet. Du behöver '
       'inte veta på förhand vad du vill ha hjälp med.',
-      'Två personer vid ett bord med en kopp kaffe var',
+      'Ett av våra samtalsrum med fåtölj, bokhylla och fönster',
       crumb=f'<a href="{b}index.html">Hem</a><span>/</span>Kontakt',
       actions=False)}
 
@@ -1995,7 +1995,7 @@ def build_kontakt():
                 'Kontakta KBT-Konsulterna i Uppsala. Telefon 018 – 10 40 44. '
                 'Mottagning i Gårdshuset vid Slottskällan, tio minuter från '
                 'Centralstationen.',
-                body, ogimg='samtal')
+                body, ogimg='mottagning')
 
 
 # ==========================================================================
