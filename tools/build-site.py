@@ -172,12 +172,12 @@ def person_card(base, p, sizes=None):
 
 
 def team_cta(href):
-    """The eighth cell of the seven-person grid: the route to "who does what",
-    in the slot that would otherwise be an empty hole in the last row."""
+    """The eighth cell of the seven-person grid: the route to the practice's
+    shared contact, in the slot that would otherwise be an empty hole."""
     return f'''<a class="person person--cta" href="{href}" data-reveal>
         <div class="person__media">
           <span class="person__cta-title">Osäker på vem du ska vända dig till?</span>
-          <span class="person__cta-go">Se vem som arbetar med vad {ARROW}</span>
+          <span class="person__cta-go">Hör av dig till mottagningen {ARROW}</span>
         </div>
       </a>'''
 
@@ -484,8 +484,9 @@ def hero(base, slug, eyebrow, h1, lede, alt, full=False, crumb=None,
 
 
 def cta_band(base, heading='Ta första steget när du är klar för det.',
-             text='Skriv eller ring. Vi hör av oss så snart vi kan, och du '
-                  'behöver inte veta på förhand vad du vill ha hjälp med.'):
+             text='Skriv eller ring. Vi hör vanligen av oss samma dag. Du '
+                  'behöver inte veta på förhand vad du vill ha hjälp med, men '
+                  'om du vet — berätta gärna för oss.'):
     return f'''<section class="bleed">
   <div class="bleed__media">{pic_wide(base, 'samtal', 'Två personer sitter mitt emot varandra med en kopp kaffe var')}</div>
   <div class="bleed__scrim"></div>
@@ -536,7 +537,7 @@ def akut_strip(base):
 
 PROCESS_STEPS = [
     ('Första kontakten',
-     'Du skriver eller ringer. Vi hör av oss så snart vi kan och bokar en tid. '
+     'Du skriver eller ringer. Vi hör vanligen av oss samma dag och bokar en tid. '
      'Du behöver inte ha en diagnos eller veta vad problemet heter.'),
     ('Gemensam bedömning',
      'Ett till tre samtal där vi tillsammans tar reda på vad du behöver hjälp med '
@@ -647,8 +648,8 @@ def build_home():
 
     doors = [
         ('vuxna', 'Vuxna', 'Från 18 år', 'vuxna/index.html',
-         'Terapi, parterapi, utredning och behandling vid skadligt bruk. '
-         'För dig som är över 18.',
+         'Terapi, parterapi, neuropsykiatriska utredningar av adhd och autism, '
+         'och behandling vid substansproblem. För dig som är över 18.',
          'Ett ljust rum med en soffa och en fåtölj'),
         ('barn', 'Barn &amp; ungdom', 'Upp till 18 år', 'barn-och-ungdom/index.html',
          'Behandling och utredning för barn och unga — och stöd till dig som är '
@@ -675,7 +676,7 @@ def build_home():
       </a>''' for slug, title, kicker, href, text, alt in doors)
 
     team_html = '\n      '.join([person_card(b, p) for p in TEAM]
-                               + [team_cta(f'{b}medarbetare/index.html#vem-gor-vad')])
+                               + [team_cta(f'{b}kontakt/index.html')])
 
     body = f'''
 {hero(b, 'slottskallan-poster',
@@ -692,9 +693,9 @@ def build_home():
     <div class="split split--head">
       <div><p class="eyebrow">Medarbetare</p></div>
       <div class="prose--wide" data-reveal>
-        <h2 style="margin-bottom:1.1rem">Hos oss väljer du en person, inte en mottagning.</h2>
-        <p style="margin-bottom:0">Läs om var och en av oss och hör av dig direkt till den
-        du tror passar dig. Är du osäker hjälper vi dig vidare.</p>
+        <h2 style="margin-bottom:1.1rem">En mottagning, sju personer.</h2>
+        <p style="margin-bottom:0">Hör av dig till mottagningen, så hjälper vi dig till den
+        av oss som passar bäst. Vill du kontakta någon av oss direkt går det också bra.</p>
       </div>
     </div>
     <div class="team team--seven">
@@ -716,7 +717,7 @@ def build_home():
       habiliteringen, och undervisar eller handleder vid Uppsala universitet.</p>
       <p>Vi levererar en gedigen kompetens förpackad i ett varmt och professionellt
       bemötande. Varmt välkommen till oss.</p>
-      {ticks(['Terapi för barn, ungdomar, vuxna och par', 'Neuropsykiatriska utredningar i alla åldrar', 'Bedömning och behandling vid skadligt bruk', 'Stöd till föräldrar och anhöriga', 'Uppdrag för företag och offentlig verksamhet', 'Handledning, kurser och utbildningar'], two=True, extra='margin-top:2rem')}
+      {ticks(['Terapi för barn, ungdomar, vuxna och par', 'Neuropsykiatriska utredningar i alla åldrar', 'Bedömning och behandling vid substansproblem: alkohol, spel om pengar', 'Stöd till föräldrar och anhöriga', 'Uppdrag för företag och offentlig verksamhet', 'Handledning, kurser och utbildningar'], two=True, extra='margin-top:2rem')}
       <p style="margin-top:2rem;margin-bottom:0"><a class="a-link" href="{b}om-oss/index.html">Mer om oss och hur vi arbetar {ARROW}</a></p>
     </div>
   </div>
@@ -724,15 +725,7 @@ def build_home():
 
 <section class="bleed">
   <div class="bleed__media">{pic_wide(b, 'slottet', 'Uppsala slott på kullen ovanför Gårdshuset vid Slottskällan', cls='pic--sky')}</div>
-  <div class="bleed__scrim"></div>
-  <div class="wrap bleed__inner">
-    <blockquote class="pull" data-reveal>
-      &rdquo;Du behöver inte ha någon diagnos för att träffa mig, utan jag träffar även
-      dig som befinner dig i en pågående livskris eller bara känner att du kört fast och
-      hamnat i en återvändsgränd.&rdquo;
-      <cite>Jens Karström, leg. psykolog och leg. psykoterapeut</cite>
-    </blockquote>
-  </div>
+  <div class="bleed__inner"></div>
 </section>
 
 <!-- Three doors: title set on the photograph. -->
@@ -964,8 +957,8 @@ def build_vuxna():
     body = f'''
 {hero(b, 'vuxna', 'Vuxna',
       'Från psykisk ohälsa till ett bättre mående',
-      'Terapi, parterapi, utredning och behandling vid skadligt bruk — hos '
-      'legitimerade psykologer och psykoterapeuter med lång erfarenhet.',
+      'Terapi, parterapi, utredning och behandling — hos legitimerade '
+      'psykologer och legitimerade psykoterapeuter med lång erfarenhet.',
       'Ett ljust rum med en soffa, en fåtölj och tegelvägg',
       crumb=f'<a href="{b}index.html">Hem</a><span>/</span>Vuxna')}
 
@@ -1012,7 +1005,7 @@ def build_vuxna():
              'samtalar med varandra, vad konflikterna egentligen handlar om, och vad ni '
              'vill med relationen.</p>'
              '<p style="margin-bottom:0">Parterapi bokas i 60-minuterspass, eller 2 × 45 '
-             'minuter. Aksel Reppling tar emot par.</p>',
+             'minuter. Aksel Reppling och Angeli Holmstedt tar emot par.</p>',
              f'<p style="margin-bottom:0"><a class="a-link" href="{b}priser/index.html">'
              f'Se pris för parterapi {ARROW}</a></p>',
              more=(b, 'vuxna/parterapi/', 'Om parterapi och IBCT'))}
@@ -1051,11 +1044,6 @@ def build_vuxna():
              more=(b, 'vuxna/psykiatri/', 'Om psykiatrisk bedömning'))}
 
 {process_band(b)}
-{team_subset(b, ['angeli-holmstedt', 'thomas-alm', 'jens-karstrom', 'aksel-reppling'],
-             'Vem träffar du?',
-             'Fyra av oss arbetar främst med vuxna.',
-             'Elias Westerlund och Barry Karlsson arbetar med utredning och bedömning, '
-             'och Karin Holmström med barn och unga.')}
 {price_band(b)}
 {cta_band(b)}
 {akut_strip(b)}
@@ -1193,11 +1181,6 @@ def build_barn():
   </div>
 </section>
 
-{team_subset(b, ['karin-holmstrom', 'aksel-reppling', 'jens-karstrom', 'elias-westerlund'],
-             'Vem träffar du?',
-             'Fyra av oss arbetar med barn, unga och deras nätverk.',
-             'Karin Holmström har femton år inom BUP och arbetar även genom tolk. '
-             'Aksel Reppling och Jens Karström kommer också från BUP.')}
 {price_band(b)}
 {cta_band(b, heading='Osäker på om det är dags att söka hjälp?',
           text='Hör av dig ändå. Ett första samtal kostar inget mer än tiden det tar, '
@@ -1260,8 +1243,7 @@ def build_org():
         <p>Flera av oss har arbetat inom psykiatrin, BUP, primärvården, habiliteringen och
         universitetet. Vi har varit konsulter åt, utbildat och handlett verksamheter som
         BUP, primärvården, psykiatrin, behandlingshem och HVB, universitet, socialtjänst,
-        Statens institutionsstyrelse, skolor, resurs- och specialskolor samt
-        företagshälsovård.</p>
+        Statens institutionsstyrelse, alla skolformer samt företagshälsovård.</p>
         <p style="margin-bottom:0">Vår bas är i centrala Uppsala. Vi tar emot här, arbetar
         online och kommer ut till arbetsgivare runt om i landet.</p>
       </div>
@@ -1343,41 +1325,16 @@ def build_org():
 # ==========================================================================
 # Medarbetare — index
 # ==========================================================================
-ROUTING = [
-    ('Oro, ångest, OCD, panik', ['angeli-holmstedt', 'aksel-reppling', 'jens-karstrom']),
-    ('Nedstämdhet och depression', ['angeli-holmstedt', 'thomas-alm', 'aksel-reppling', 'jens-karstrom']),
-    ('Trauma och PTSD', ['jens-karstrom', 'elias-westerlund']),
-    ('Stress och utmattning', ['angeli-holmstedt', 'jens-karstrom']),
-    ('Skadligt bruk, beroende, spel', ['thomas-alm', 'angeli-holmstedt']),
-    ('Anhörig till någon med beroende', ['angeli-holmstedt']),
-    ('Parterapi', ['aksel-reppling']),
-    ('Sorg och förlust', ['barry-karlsson']),
-    ('Barn och unga — behandling', ['aksel-reppling', 'jens-karstrom', 'karin-holmstrom']),
-    ('Barn och unga — utredning', ['karin-holmstrom']),
-    ('Vuxna — adhd- och autismutredning', ['elias-westerlund', 'barry-karlsson']),
-    ('Omprövning av diagnos', ['elias-westerlund']),
-    ('Kognitiv utredning, hjärnskada, LSS', ['barry-karlsson']),
-    ('Föräldrastöd och skola', ['karin-holmstrom', 'aksel-reppling', 'jens-karstrom']),
-    ('Handledning och utbildning', ['angeli-holmstedt', 'thomas-alm', 'barry-karlsson']),
-    ('Remiss från Regionen', ['angeli-holmstedt', 'jens-karstrom']),
-]
-
-
 def build_medarbetare():
     b = '../'
-    cards = '\n      '.join([person_card(b, p) for p in TEAM] + [team_cta('#vem-gor-vad')])
-    rows = '\n        '.join(
-        f'''<div>
-          <dt>{need}</dt>
-          <dd>{', '.join(f'<a class="a-link" href="{b}medarbetare/{s}.html">{BY_SLUG[s]["name"]}</a>' for s in slugs)}</dd>
-        </div>''' for need, slugs in ROUTING)
+    cards = '\n      '.join([person_card(b, p) for p in TEAM] + [team_cta(f'{b}kontakt/index.html')])
 
     body = f'''
 {hero(b, 'fonster-plantor', 'Medarbetare',
-      'Sju personer, inte en mottagning',
+      'En mottagning, sju personer',
       'Alla legitimerade psykologer. Flera är dessutom legitimerade '
-      'psykoterapeuter, specialister och handledare. Läs om var och en och '
-      'hör av dig direkt.',
+      'psykoterapeuter, specialister och handledare. Hör av dig till '
+      'mottagningen, så hjälper vi dig till den av oss som passar bäst.',
       'Krukväxter i ett motljust fönster på mottagningen',
       crumb=f'<a href="{b}index.html">Hem</a><span>/</span>Medarbetare')}
 
@@ -1389,18 +1346,16 @@ def build_medarbetare():
   </div>
 </section>
 
-<section class="band band--hi anchor" id="vem-gor-vad">
+<section class="band band--hi">
   <div class="wrap split">
-    <div>
-      <p class="eyebrow">Vem gör vad</p>
-      <p style="font-size:1rem;color:var(--muted);max-width:15rem">Är du osäker? Skriv till
-      <a class="a-link" href="mailto:{MAIL}">{MAIL}</a> och vi hjälper dig vidare.</p>
-    </div>
-    <div data-reveal>
-      <h2 style="max-width:32rem;margin-bottom:clamp(2rem,4vw,2.75rem)">Hitta rätt person direkt.</h2>
-      <dl class="facts">
-        {rows}
-      </dl>
+    <div><p class="eyebrow">Kontakt</p></div>
+    <div class="prose--wide" data-reveal>
+      <h2 style="margin-bottom:1.2rem">Hör av dig till mottagningen.</h2>
+      <p>Använd <a class="a-link" href="{b}kontakt/index.html">kontaktformuläret</a>, mejla
+      <a class="a-link" href="mailto:{MAIL}">{MAIL}</a> eller ring
+      <a class="a-link" href="{TEL_HREF}">{TEL}</a>. Vi ser till att du får träffa den av oss
+      som passar bäst för det du söker hjälp med.</p>
+      <p style="margin-bottom:0">Vill du kontakta någon av oss direkt går det också bra.</p>
     </div>
   </div>
 </section>
@@ -1423,8 +1378,8 @@ def build_medarbetare():
 '''
     return page('medarbetare/index.html',
                 'Medarbetare – psykologer i Uppsala | KBT-Konsulterna',
-                'Sju legitimerade psykologer och psykoterapeuter i Uppsala. Se vem '
-                'som arbetar med vad, och hör av dig direkt.',
+                'Sju legitimerade psykologer och psykoterapeuter på en mottagning i '
+                'Uppsala. Hör av dig så hjälper vi dig till rätt person.',
                 body, ogimg='fonster-plantor')
 
 
@@ -1728,6 +1683,10 @@ def build_om_oss():
         ('PE och schematerapi',
          'Prolonged exposure vid trauma, och schematerapi vid mönster som går igen '
          'över tid.'),
+        ('Positivt beteendestöd (PBS)',
+         'Ett arbetssätt för att främja utveckling och livskvalitet och att förebygga '
+         'och minska olika typer av problemskapande beteenden, för personer med stort '
+         'behov av stöd.'),
     ], three=True)
 
     body = f'''
@@ -1750,6 +1709,8 @@ def build_om_oss():
       handledare. Vi har arbetat inom psykiatrin, BUP, primärvården, habiliteringen,
       beroendevården, skolan och behandlingshem — och undervisar eller har undervisat vid
       Uppsala universitet.</p>
+      <p>Psykoterapeututbildningen är tre år på halvfart. Dessutom vidareutbildar vi oss
+      kontinuerligt och håller oss uppdaterade kring den senaste forskningen.</p>
       <p>Vår mottagning ligger i Gårdshuset vid Slottskällan på Sjukhusvägen 3, tio minuter
       från Centralstationen. Vi tar emot här, och online i hela Sverige.</p>
       <p style="margin-bottom:0"><a class="a-link" href="{b}medarbetare/index.html">Läs om var och en av oss {ARROW}</a></p>
@@ -1767,7 +1728,10 @@ def build_om_oss():
              'behandlingsformerna vid depression, ångest, sömnstörningar, problem i '
              'parrelationer och vid överdrivet användande av alkohol, droger, läkemedel '
              'och spel. Att metoderna är strukturerade betyder inte att behandlingen är '
-             'det samma för alla — den utgår från dina mål och dina värderingar.</p>',
+             'det samma för alla — den utgår från dina mål och dina värderingar.</p>'
+             '<p style="margin-bottom:0">Vi följer inga mallar. Vi samtalar, lyssnar och '
+             'finns med i det du står i — livets utmaningar och svårigheter, men också '
+             'glädjeämnena.</p>',
              metoder, tone='band--hi')}
 
 {hub_section('evidens', 'Evidensbaserad praktik',
@@ -1876,8 +1840,9 @@ def build_kontakt():
     body = f'''
 {hero(b, 'mottagning', 'Kontakt &amp; bokning',
       'Hör av dig',
-      'Skriv eller ring. Vi återkommer så snart vi har möjlighet. Du behöver '
-      'inte veta på förhand vad du vill ha hjälp med.',
+      'Skriv eller ring. Vi återkommer för det mesta samma dag. Du behöver '
+      'inte veta på förhand vad du vill ha hjälp med, men om du vet — berätta '
+      'gärna för oss.',
       'Ett av våra samtalsrum med fåtölj, bokhylla och fönster',
       crumb=f'<a href="{b}index.html">Hem</a><span>/</span>Kontakt',
       actions=False)}
@@ -1891,7 +1856,7 @@ def build_kontakt():
         <div>
           <dt>Telefon</dt>
           <dd><a class="a-link" href="{TEL_HREF}">{TEL}</a><br>
-          Lämna ett meddelande på telefonsvararen så återkommer vi så snart vi kan.</dd>
+          Lämna ett meddelande på telefonsvararen så återkommer vi för det mesta samma dag.</dd>
         </div>
         <div>
           <dt>E-post</dt>
@@ -1904,17 +1869,12 @@ def build_kontakt():
         <div>
           <dt>Vägbeskrivning</dt>
           <dd>Vi finns i hjärtat av Uppsala, tio minuter från Centralstationen. Mottagningen
-          ligger i en vacker miljö i Gårdshuset, vid Slottskällan.</dd>
+          ligger i Gårdshuset vid Slottskällan — huset på gården med fontänen.</dd>
         </div>
         <div>
           <dt>Öppettider</dt>
           <dd>Måndag–fredag 09–17. Kvällstider ett par gånger per vecka, både digitalt och
           på mottagningen.</dd>
-        </div>
-        <div>
-          <dt>Direkt till en av oss</dt>
-          <dd>Alla medarbetare har egen e-post.
-          <a class="a-link" href="{b}medarbetare/index.html#vem-gor-vad">Se vem som arbetar med vad {ARROW}</a></dd>
         </div>
       </dl>
     </div>
@@ -2079,7 +2039,7 @@ def build_akut():
   <div class="wrap split">
     <div><p class="eyebrow">När det inte är akut</p></div>
     <div class="prose--wide" data-reveal>
-      <h2 style="margin-bottom:1.2rem">Vi finns här för det som inte brådskar i dag.</h2>
+      <h2 style="margin-bottom:1.2rem">Behöver du stöd, men inte akut? Hör av dig till oss.</h2>
       <p>Vårt mål är att ge snabba tider, och för det mesta lyckas vi med det. Hör av dig
       och berätta kort vad det handlar om.</p>
       <div class="actions" style="margin-top:2rem">
@@ -2201,27 +2161,6 @@ def json_str(s):
     return '"' + s.replace('\\', '\\\\').replace('"', '\\"') + '"'
 
 
-def people_block(base, slugs):
-    """Who at the practice works with this. A clinic's topic page should say."""
-    if not slugs:
-        return ''
-    rows = '\n      '.join(
-        f'''<a class="byline" href="{base}medarbetare/{s}.html">
-        <span class="byline__media">{pic_person(base, s, BY_SLUG[s]["name"], sizes="120px")}</span>
-        <span class="byline__text">
-          <span class="byline__name">{BY_SLUG[s]["name"]}</span>
-          <span class="byline__role">{BY_SLUG[s]["role"]}</span>
-        </span>
-      </a>''' for s in slugs if s in BY_SLUG)
-    return f'''<aside class="bylines">
-      <h2 class="bylines__head">Vem träffar du?</h2>
-      <div class="bylines__grid">
-      {rows}
-      </div>
-      <p class="bylines__note"><a class="a-link" href="{base}medarbetare/index.html">Alla medarbetare {ARROW}</a></p>
-    </aside>'''
-
-
 def also_block(base, also):
     if not also:
         return ''
@@ -2298,7 +2237,6 @@ def build_topic_page(section, parent, node=None):
     <h1>{H.escape(n['h1'])}</h1>
     <p class="article__lede">{H.escape(n['lede'])}</p>
     <div class="prose article__body">{body_html}</div>
-    {people_block(base, n.get('people') or [])}
     {child_cards(base, section, parent) if is_hub else ''}
     {also_block(base, n.get('also') or [])}
     {prev_next(base, section, parent, n)}

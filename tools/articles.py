@@ -1364,13 +1364,6 @@ känns. Ofta finns också trötthet, hunger eller för många intryck med i bild
 <p>Det är sällan fråga om att barnet inte vill. Att utgå från att barnet gör så gott det
 kan med de förmågor det har förändrar både vad man letar efter och vad man provar.</p>
 
-<h2>Mönstret som byggs upp</h2>
-<p>Utbrott har konsekvenser som gör att de upprepas. Om utbrottet gör att kravet
-försvinner har det fungerat. Om det som fungerar för att få uppmärksamhet är att bråka,
-medan det som fungerar dåligt är att göra rätt, blir slutsatsen begriplig. Samtidigt
-hamnar familjen lätt i ett mönster där nästan all uppmärksamhet handlar om det som går
-fel. Det är den balansen behandlingen arbetar med.</p>
-
 <h2>Så arbetar vi</h2>
 <ul>
   <li><strong>Beteendeanalys.</strong> Vad händer före, under och efter utbrotten? Ofta
@@ -1894,7 +1887,7 @@ handleda anställda inom bland annat:</p>
   <li>primärvård</li>
   <li>psykiatrisk verksamhet</li>
   <li>socialtjänst</li>
-  <li>skolor och specialskolor</li>
+  <li>alla skolformer</li>
   <li>behandlingshem</li>
   <li>beroendekliniker</li>
 </ul>
@@ -2162,9 +2155,9 @@ finns med som stöd efteråt.</p>
   <li>motiverande samtal (MI)</li>
   <li>KBT-behandling vid alkohol, droger och spel om pengar</li>
   <li>mindfulnessbaserad återfallsprevention (MBRP)</li>
-  <li>12-stegsbehandling / Minnesotamodellen, för olika typer av beroenden och för
-  anhöriga</li>
 </ul>
+<p>Vi har också god kännedom om 12-stegsmodellen (Minnesotamodellen) och ser den som en
+positiv möjlighet för många, både vid olika typer av beroenden och för anhöriga.</p>
 
 <h2>Sekretess och roller</h2>
 <p>Även när arbetsgivaren betalar omfattas medarbetarens uppgifter av tystnadsplikt. Ni
@@ -2212,7 +2205,7 @@ olika verksamheter:</p>
   <li>universitet</li>
   <li>socialtjänst</li>
   <li>Statens institutionsstyrelse (SiS)</li>
-  <li>skolor samt resurs- och specialskolor</li>
+  <li>alla skolformer</li>
   <li>företagshälsovård</li>
 </ul>
 
@@ -2240,7 +2233,7 @@ försäkringsbolag eller socialtjänst betalar. Vi fakturerar efter överenskomm
 <p>E-post: <a href="mailto:kontakt@kbt-konsulterna.se">kontakt@kbt-konsulterna.se</a><br>
 Telefon: <a href="tel:+4618104044">018 – 10 40 44</a></p>
 <p>Du kan också använda <a href="{base}kontakt/index.html">kontaktformuläret</a>. Vi
-återkommer så snart vi har möjlighet.</p>
+återkommer för det mesta samma dag.</p>
 
 <h2>Sekretess när ni är uppdragsgivare</h2>
 <p>Rör uppdraget en enskild medarbetare omfattas dennes uppgifter av tystnadsplikt även
@@ -2334,7 +2327,7 @@ dig.</p>
                      'sexuell läggning och oavsett om ni lever tillsammans eller inte.',
                 lede='Vi erbjuder evidensbaserad parterapi för alla typer av par, oavsett '
                      'sexuell läggning och oavsett om ni lever tillsammans eller inte.',
-                people=['aksel-reppling'],
+                people=['aksel-reppling', 'angeli-holmstedt'],
                 also=[('Relationsproblem', 'vuxna/behandling/relationer/'),
                       ('Priser för parterapi', 'priser/index.html'),
                       ('Låg självkänsla', 'vuxna/behandling/sjalvkansla/')],
@@ -2398,7 +2391,8 @@ fullt legitimt mål för en parterapi.</p>
 
 <h2>Tider och pris</h2>
 <p>Parterapi bokas i 60-minuterspass, eller som 2 × 45 minuter — ofta behövs minst 60
-minuter per besök för att båda ska hinna komma till tals. Aksel Reppling tar emot par.
+minuter per besök för att båda ska hinna komma till tals. Aksel Reppling och Angeli
+Holmstedt tar emot par.
 Se <a href="{base}priser/index.html">priser</a>.</p>
 
 <p>Söker du hjälp med relationer men kommer ensam, se
@@ -2435,9 +2429,9 @@ drogproblem eller läkemedelsberoende.</p>
   <li>motiverande samtal (MI)</li>
   <li>KBT-behandling vid alkohol, droger och spel om pengar</li>
   <li>mindfulnessbaserad återfallsprevention (MBRP)</li>
-  <li>12-stegsbehandling / Minnesotamodellen, för olika typer av beroenden och för
-  anhöriga</li>
 </ul>
+<p>Vi har också god kännedom om 12-stegsmodellen (Minnesotamodellen) och ser den som en
+positiv möjlighet för många, både vid olika typer av beroenden och för anhöriga.</p>
 
 <h2>Alkohol</h2>
 <p>För många är alkohol en del av livet som förgyller vardagen vid speciella tillfällen
@@ -2674,9 +2668,8 @@ utveckling tidigt, och ett bedömningssamtal kan lika gärna landa i att det int
 någon behandling.</p>
 
 <h2>Hur vi arbetar med barn</h2>
-<p>Behandlingen anpassas efter ålder och mognad. Med yngre barn arbetar vi konkret och
-lekfullt, med bilder och material snarare än långa resonemang, och en stor del av arbetet
-sker via föräldrarna. Med tonåringar ser samtalen mer ut som med vuxna, och ungdomen får
+<p>Behandlingen anpassas efter ålder och mognad. Med yngre barn sker en stor del av arbetet
+via föräldrarna. Med tonåringar ser samtalen mer ut som med vuxna, och ungdomen får
 större utrymme att själv formulera vad hen vill ha hjälp med.</p>
 
 <p>Gemensamt är att KBT för barn och unga är konkret och inriktat på vad som ska bli
