@@ -1933,8 +1933,8 @@ varannan till var fjärde vecka över en längre period. Kontinuiteten är en st
 värdet.</p>
 
 <h2>Praktiskt</h2>
-<p>Vi arbetar hos er, hos oss i centrala Uppsala eller via video, i hela landet. Tre av
-oss är utbildade handledare. Priser lämnas på förfrågan; moms tillkommer. Hör av er via
+<p>Vi arbetar hos er, hos oss i centrala Uppsala eller via video, i hela landet.
+Priser lämnas på förfrågan; moms tillkommer. Hör av er via
 <a href="{base}organisationer/kontakt/">kontakt för uppdrag</a>.</p>
 ''',
     ),

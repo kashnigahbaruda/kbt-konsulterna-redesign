@@ -769,11 +769,17 @@ button { font: inherit; }
 .akut a:not(.btn) { color: var(--deep-deeper); }
 
 /* --- Credential marks ----------------------------------------------------- */
-.marks { display: flex; flex-wrap: wrap; align-items: center; gap: clamp(1.75rem, 5vw, 3.75rem); list-style: none; margin: 0; padding: 0; }
+/* A grid, not a wrapping flex row: six marks of very different aspect ratios
+   wrapped one orphan onto a second line. Column counts divide six evenly, and
+   each mark is capped by height and by its cell, so the long wordmarks shrink
+   instead of pushing the row apart. */
+.marks { display: grid; grid-template-columns: repeat(2, 1fr); align-items: center; gap: clamp(1.75rem, 4vw, 2.5rem) clamp(1.75rem, 3vw, 2.5rem); list-style: none; margin: 0; padding: 0; }
 .marks li { margin: 0; }
-.marks img { height: 2rem; width: auto; opacity: 0.55; filter: grayscale(1); transition: opacity 0.25s var(--ease), filter 0.25s var(--ease); }
+.marks img { width: auto; height: auto; max-width: 100%; max-height: 2rem; opacity: 0.55; filter: grayscale(1); transition: opacity 0.25s var(--ease), filter 0.25s var(--ease); }
 .marks li:hover img { opacity: 1; filter: grayscale(0); }
-.marks img.marks__tall { height: 2.9rem; }
+.marks img.marks__tall { max-height: 2.9rem; }
+@media (min-width: 40rem) { .marks { grid-template-columns: repeat(3, 1fr); } }
+@media (min-width: 70rem) { .marks { grid-template-columns: repeat(6, 1fr); } }
 
 /* --- Form ----------------------------------------------------------------- */
 .form { display: grid; gap: 1.15rem; max-width: 34rem; }

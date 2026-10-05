@@ -1,21 +1,28 @@
 """Build the logo files in assets/brand/ from the client's outlined lockup
 (heart-source.svg): the heart mark plus "KBT Konsulterna" as glyph outlines.
-The tagline group in that file is dropped, the type is re-centred on the
+The tagline group in that file ("evidensbaserad praktik") is dropped and
+replaced by TAGLINE, set in the site's Familjen Grotesk and justified to the
+width of "Konsulterna" — the practice asked for the lockup to read "KBT
+Konsulterna psykologmottagning". Name and tagline are centred together on the
 heart, everything is recoloured to the site's deep green, and the heart alone
 is rasterised for the PNG favicons.
 
-Not part of the normal build. Run it only when the client's file changes:
+Not part of the normal build. Run it only when the client's file or the
+tagline changes:
 
-    python3 -m venv .venv && .venv/bin/pip install fonttools pillow
+    python3 -m venv .venv && .venv/bin/pip install fonttools brotli uharfbuzz pillow
     .venv/bin/python tools/build-logo.py
 """
-import os, re
+import io, os, re
 from fontTools.pens.boundsPen import BoundsPen
-from fontTools.pens.recordingPen import RecordingPen
+from fontTools.pens.recordingPen import DecomposingRecordingPen, RecordingPen
 from fontTools.pens.svgPathPen import SVGPathPen
 from fontTools.pens.transformPen import TransformPen
 from fontTools.svgLib.path import SVGPath
+from fontTools.ttLib import TTFont
+from fontTools.varLib.instancer import instantiateVariableFont
 from PIL import Image, ImageDraw
+import uharfbuzz as hb
 
 HERE = os.path.dirname(os.path.abspath(__file__))
 PROJ = os.path.dirname(HERE)
@@ -23,6 +30,9 @@ BRAND = f'{PROJ}/assets/brand'
 DEEP = '#1B3A38'
 DEEP_RGB = (0x1B, 0x3A, 0x38)
 H = 100                                   # output canvas height, logo units
+TAGLINE = 'psykologmottagning'
+TAG_FONT = f'{PROJ}/assets/fonts/_src/familjen-grotesk-latin-wght-normal.woff2'
+TAG_WGHT = 500
 
 src = open(f'{BRAND}/heart-source.svg').read()
 
@@ -67,18 +77,57 @@ nx0, ny0 = min(b[0] for b in nb), min(b[1] for b in nb)
 nx1, ny1 = max(b[2] for b in nb), max(b[3] for b in nb)
 print(f'heart {hw:.0f}×{hh:.0f}, name {nx1-nx0:.0f}×{ny1-ny0:.0f} at x={nx0:.0f}')
 
+# --- tagline -----------------------------------------------------------------
+# Shaped with HarfBuzz so the font's kerning applies, then drawn as outlines in
+# source-file units (y down) so it lines up with the name's glyphs.
+def tagline():
+    font = TTFont(TAG_FONT)
+    instantiateVariableFont(font, {'wght': TAG_WGHT}, inplace=True)
+    font.flavor = None                       # HarfBuzz reads TTF, not WOFF2
+    data = io.BytesIO(); font.save(data)
+    hbfont = hb.Font(hb.Face(hb.Blob(data.getvalue())))
+    buf = hb.Buffer(); buf.add_str(TAGLINE); buf.guess_segment_properties()
+    hb.shape(hbfont, buf, {'kern': True, 'liga': True})
+    gs, order = font.getGlyphSet(), font.getGlyphOrder()
+    recs, x = [], 0
+    for info, pos in zip(buf.glyph_infos, buf.glyph_positions):
+        rec = DecomposingRecordingPen(gs)       # some glyphs are composites
+        # Font units are y-up; flip into the source file's y-down space.
+        gs[order[info.codepoint]].draw(TransformPen(rec, (1, 0, 0, -1, x + pos.x_offset, -pos.y_offset)))
+        if rec.value:
+            recs.append(rec)
+        x += pos.x_advance
+    return recs
+
+tag = tagline()
+tb = [bounds(g) for g in tag]
+tx0, ty0 = min(b[0] for b in tb), min(b[1] for b in tb)
+tx1 = max(b[2] for b in tb)
+# Justify to the name block: same left edge and the same width as "Konsulterna".
+ts = (nx1 - nx0) / (tx1 - tx0)
+# Ascender top sits below the name's baseline by the gap the client's own
+# tagline used (60 units in a 195-unit cap height).
+NAME_BASE = max(b[3] for b in nb if b[1] > ny0 + (ny1 - ny0) * 0.3 and b[3] - b[1] < (ny1 - ny0) * 0.6)
+tag_dx = nx0 - tx0 * ts
+tag_dy = NAME_BASE + 60 - ty0 * ts
+tag = [(g, ts) for g in tag]
+ty1 = max(b[3] for b in tb) * ts + tag_dy
+print(f'tagline "{TAGLINE}" scale {ts:.3f}, block {ny0:.0f}–{ty1:.0f}')
+
 # --- lockup ------------------------------------------------------------------
 s = H / hh                                 # heart fills the canvas height
-# Without the tagline the name sits high; centre it on the heart instead.
-dy = ((hy0 + hy1) / 2 - (ny0 + ny1) / 2) * s
+# Centre the name and tagline together on the heart.
+dy = ((hy0 + hy1) / 2 - (ny0 + ty1) / 2) * s
 W = int(round(nx1 * s + 0.5))
 
 def lockup(color):
     paths = [f'    <path d="{to_d(heart, s, -hx0 * s, -hy0 * s)}"/>']
     paths += [f'    <path d="{to_d(g, s, -hx0 * s, dy - hy0 * s)}"/>' for g in name]
+    paths += [f'    <path d="{to_d(g, s * k, (tag_dx - hx0) * s, (tag_dy - hy0) * s + dy)}"/>'
+              for g, k in tag]
     body = '\n'.join(paths)
     return (f'<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 {W} {H}" '
-            f'width="{W}" height="{H}" role="img" aria-label="KBT-Konsulterna">\n'
+            f'width="{W}" height="{H}" role="img" aria-label="KBT-Konsulterna psykologmottagning">\n'
             f'  <g fill="{color}">\n{body}\n  </g>\n</svg>\n')
 
 open(f'{BRAND}/logo.svg', 'w').write(lockup(DEEP))

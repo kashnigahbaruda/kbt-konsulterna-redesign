@@ -104,7 +104,7 @@ TEAM = [
     dict(slug='karin-holmstrom', name='Karin Holmström',
          role='Leg. psykolog',
          note='Neuropsykiatriska utredningar av barn, ungdomar och vuxna. '
-              'Femton år inom BUP. Arbetar även genom tolk.'),
+              'Femton år inom BUP.'),
     dict(slug='aksel-reppling', name='Aksel Reppling',
          role='Leg. psykolog',
          note='Oro och ångest, fobier och nedstämdhet. Parterapi och föräldrastöd. '
@@ -177,7 +177,7 @@ def team_cta(href):
     return f'''<a class="person person--cta" href="{href}" data-reveal>
         <div class="person__media">
           <span class="person__cta-title">Osäker på vem du ska vända dig till?</span>
-          <span class="person__cta-go">Hör av dig till mottagningen {ARROW}</span>
+          <span class="person__cta-go">Hör av dig till oss {ARROW}</span>
         </div>
       </a>'''
 
@@ -290,7 +290,7 @@ HEAD_TPL = '''<!doctype html>
 <header class="site-head">
   <div class="wrap site-head__inner">
     <a class="site-head__logo" href="{base}index.html">
-      <img src="{base}assets/brand/logo.svg" alt="KBT-Konsulterna i Uppsala" width="{logo_w}" height="{logo_h}">
+      <img src="{base}assets/brand/logo.svg" alt="KBT-Konsulterna psykologmottagning" width="{logo_w}" height="{logo_h}">
     </a>
     <nav class="nav" aria-label="Huvudmeny">
         {nav}
@@ -327,7 +327,7 @@ FOOT_TPL = '''</main>
     <div class="site-foot__grid">
       <div>
         <div class="site-foot__logo">
-          <img src="{base}assets/brand/logo-white.svg" alt="KBT-Konsulterna i Uppsala" width="{logo_w}" height="{logo_h}">
+          <img src="{base}assets/brand/logo-white.svg" alt="KBT-Konsulterna psykologmottagning" width="{logo_w}" height="{logo_h}">
         </div>
         <address class="site-foot__addr">
           {addr}<br>
@@ -483,10 +483,8 @@ def hero(base, slug, eyebrow, h1, lede, alt, full=False, crumb=None,
 '''
 
 
-def cta_band(base, heading='Ta första steget när du är klar för det.',
-             text='Skriv eller ring. Vi hör vanligen av oss samma dag. Du '
-                  'behöver inte veta på förhand vad du vill ha hjälp med, men '
-                  'om du vet — berätta gärna för oss.'):
+def cta_band(base, heading='Ta första steget och kontakta oss.',
+             text='Skriv eller ring. Vi hör vanligen av oss samma dag.'):
     return f'''<section class="bleed">
   <div class="bleed__media">{pic_wide(base, 'samtal', 'Två personer sitter mitt emot varandra med en kopp kaffe var')}</div>
   <div class="bleed__scrim"></div>
@@ -513,6 +511,8 @@ def marks_band(base):
       <li><img src="{base}assets/brand/psykologforbundet.png" alt="Sveriges Psykologförbund" width="360" height="35" loading="lazy"></li>
       <li><img class="marks__tall" src="{base}assets/brand/mint.png" alt="MINT — Motivational Interviewing Network of Trainers" width="313" height="135" loading="lazy"></li>
       <li><img class="marks__tall" src="{base}assets/brand/btf.png" alt="Beteendeterapeutiska föreningen" width="360" height="129" loading="lazy"></li>
+      <li><img class="marks__tall" src="{base}assets/brand/swaba.jpg" alt="SWABA — Svenska föreningen för beteendeanalys" width="390" height="144" loading="lazy"></li>
+      <li><img src="{base}assets/brand/attention.svg" alt="Riksförbundet Attention" width="205" height="40" loading="lazy"></li>
     </ul>
   </div>
 </section>
@@ -694,7 +694,7 @@ def build_home():
       <div><p class="eyebrow">Medarbetare</p></div>
       <div class="prose--wide" data-reveal>
         <h2 style="margin-bottom:1.1rem">En mottagning, sju personer.</h2>
-        <p style="margin-bottom:0">Hör av dig till mottagningen, så hjälper vi dig till den
+        <p style="margin-bottom:0">Hör av dig till oss, så hjälper vi dig till den
         av oss som passar bäst. Vill du kontakta någon av oss direkt går det också bra.</p>
       </div>
     </div>
@@ -860,13 +860,14 @@ def hub_section(anchor, eyebrow, heading, intro, content, tone='', more=None):
         mbase, mpath, mlabel = more
         more_html = (f'\n      <p class="hub__more"><a class="a-link" '
                      f'href="{to_href(mbase, mpath)}">{mlabel} {ARROW}</a></p>')
+    intro_html = (f'\n        <div class="prose prose--wide" '
+                  f'style="margin-bottom:clamp(2rem,4vw,3rem)">{intro}</div>' if intro else '')
     return f'''<section class="{cls} anchor" id="{anchor}">
   <div class="wrap split">
     <div><p class="eyebrow">{eyebrow}</p></div>
     <div>
       <div data-reveal>
-        <h2 style="max-width:32rem;margin-bottom:1.2rem">{heading}</h2>
-        <div class="prose prose--wide" style="margin-bottom:clamp(2rem,4vw,3rem)">{intro}</div>
+        <h2 style="max-width:32rem;margin-bottom:{'1.2rem' if intro else 'clamp(2rem,4vw,3rem)'}">{heading}</h2>{intro_html}
       </div>
       {content}{more_html}
     </div>
@@ -1260,10 +1261,7 @@ def build_org():
 
 {hub_section('handledning', 'Handledning &amp; coaching',
              'Handledning för personalgrupper och studenter.',
-             '<p style="margin-bottom:0">Tre av oss är utbildade handledare med lång '
-             'erfarenhet från psykiatri, primärvård, beroendevård, skola och företag. '
-             'Barry Karlsson handleder med särskilt fokus på LSS, neuropsykiatri och '
-             'kollegialt stöd.</p>',
+             '',
              handledning, tone='band--hi',
              more=(b, 'organisationer/handledning/', 'Om handledning och coaching'))}
 
@@ -1310,7 +1308,7 @@ def build_org():
 
 {team_subset(b, ['angeli-holmstedt', 'thomas-alm', 'barry-karlsson'],
              'Handledare',
-             'Tre utbildade handledare.',
+             'Våra handledare.',
              'Angeli Holmstedt är dessutom MI-utbildare via MINT och lärare i '
              'mindfulnessbaserade program.')}
 {marks_band(b)}
@@ -1334,7 +1332,7 @@ def build_medarbetare():
       'En mottagning, sju personer',
       'Alla legitimerade psykologer. Flera är dessutom legitimerade '
       'psykoterapeuter, specialister och handledare. Hör av dig till '
-      'mottagningen, så hjälper vi dig till den av oss som passar bäst.',
+      'oss, så hjälper vi dig till den av oss som passar bäst.',
       'Krukväxter i ett motljust fönster på mottagningen',
       crumb=f'<a href="{b}index.html">Hem</a><span>/</span>Medarbetare')}
 
@@ -1350,7 +1348,7 @@ def build_medarbetare():
   <div class="wrap split">
     <div><p class="eyebrow">Kontakt</p></div>
     <div class="prose--wide" data-reveal>
-      <h2 style="margin-bottom:1.2rem">Hör av dig till mottagningen.</h2>
+      <h2 style="margin-bottom:1.2rem">Hör av dig till oss.</h2>
       <p>Använd <a class="a-link" href="{b}kontakt/index.html">kontaktformuläret</a>, mejla
       <a class="a-link" href="mailto:{MAIL}">{MAIL}</a> eller ring
       <a class="a-link" href="{TEL_HREF}">{TEL}</a>. Vi ser till att du får träffa den av oss
@@ -1367,8 +1365,8 @@ def build_medarbetare():
       <h2 style="margin-bottom:1.2rem">Ett paraplyföretag som vi äger tillsammans.</h2>
       <p style="margin-bottom:0">KBT-Konsulterna är ett paraplyföretag som vi äger gemensamt,
       och inom ramen för det arbetar vi också i våra individuella aktiebolag. Det är vanligt
-      i vår bransch. I praktiken betyder det att du har en behandlare — och en mottagning
-      med kollegor att rådgöra med.</p>
+      i vår bransch. I praktiken betyder det att du har en behandlare som ingår i en grupp
+      kollegor som kan samarbeta.</p>
     </div>
   </div>
 </section>
@@ -1392,6 +1390,31 @@ def build_medarbetare():
 # ==========================================================================
 import json
 
+# Corrections the practitioners have asked for since the crawl, as
+# (old, new) substring replacements; new=None drops the whole paragraph.
+BIO_EDITS = {
+    'karin-holmstrom': [
+        ('psykisk ohälsa och psykisk sjukdom', 'psykisk ohälsa och psykiatrisk sjukdom'),
+        ('ensamkommande asylsökande ungdomar', None),
+        ('inlärningsteori och tillämpad beteendeanalys',
+         'inlärningsteori/tillämpad beteendeanalys'),
+    ],
+}
+
+
+def apply_bio_edits(slug, paras):
+    for old, new in BIO_EDITS.get(slug, []):
+        hits = [i for i, p in enumerate(paras) if old in p]
+        # Fail loudly if a re-crawl moves the text: a silent miss would
+        # republish something the client asked us to remove.
+        assert len(hits) == 1, f'bio edit for {slug} matched {len(hits)}×: {old!r}'
+        i = hits[0]
+        if new is None:
+            del paras[i]
+        else:
+            paras[i] = paras[i].replace(old, new)
+    return paras
+
 
 def bio_paragraphs(slug):
     with open('research/crawl-pages.json', encoding='utf-8') as f:
@@ -1410,7 +1433,8 @@ def bio_paragraphs(slug):
             merged[-1] = merged[-1] + ' ' + p
         else:
             merged.append(p)
-    return [H.escape(p) for p in merged if p and p != '-']
+    merged = apply_bio_edits(slug, [p for p in merged if p and p != '-'])
+    return [H.escape(p) for p in merged]
 
 
 def build_bio(p):
