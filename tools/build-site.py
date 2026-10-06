@@ -681,7 +681,7 @@ def build_home():
     body = f'''
 {hero(b, 'slottskallan-poster',
       'Privat psykologmottagning i Uppsala',
-      'Vi kan kognitiv beteendeterapi',
+      'Psykologisk behandling och utredning du kan lita på',
       'Sju legitimerade psykologer och psykoterapeuter i Gårdshuset vid '
       'Slottskällan, tio minuter från Uppsala&nbsp;C. Vi tar emot på mottagningen '
       'och online i hela Sverige.',
@@ -1398,6 +1398,7 @@ BIO_EDITS = {
         ('ensamkommande asylsökande ungdomar', None),
         ('inlärningsteori och tillämpad beteendeanalys',
          'inlärningsteori/tillämpad beteendeanalys'),
+        ('väl förtrogen aktuell', 'väl förtrogen med aktuell'),
     ],
 }
 
