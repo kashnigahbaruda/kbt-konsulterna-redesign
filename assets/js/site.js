@@ -54,15 +54,28 @@
   var head = document.querySelector('.site-head');
   if (head) {
     var scrolled = null;
+    /* On pages where the header lies over the hero (site.css decides, and
+       makes it fixed), it turns solid once the hero has passed up behind it. */
+    var hero = document.querySelector('main > .hero:first-child');
+    var over = hero && getComputedStyle(head).position === 'fixed';
+    var solid = null;
     var onScroll = function () {
       var now = window.scrollY > 12;
       if (now !== scrolled) {
         scrolled = now;
         head.classList.toggle('is-scrolled', now);
       }
+      if (over) {
+        var past = hero.getBoundingClientRect().bottom <= head.offsetHeight;
+        if (past !== solid) {
+          solid = past;
+          head.classList.toggle('is-solid', past);
+        }
+      }
     };
     onScroll();
     window.addEventListener('scroll', onScroll, { passive: true });
+    if (over) window.addEventListener('resize', onScroll);
   }
 
   /* Homepage hero clip. Started from here rather than with `autoplay` so that

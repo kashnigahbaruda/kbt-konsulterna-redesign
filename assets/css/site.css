@@ -358,6 +358,45 @@ button { font: inherit; }
 .burger[aria-expanded="true"] .burger__bars { opacity: 0; transform: rotate(90deg); }
 .burger[aria-expanded="true"] .burger__x { opacity: 1; transform: none; }
 
+/* Over a hero. On pages that open with one, the header is fixed and lies on
+   the photo: transparent, light type, with a soft shade from the top so the
+   right-hand links stay legible over bright sky. site.js adds .is-solid once
+   the hero has scrolled up behind it, and the header turns back into the
+   paper one above. An open mobile menu does the same, so the panel and header
+   read as one sheet.
+   Gated on .js (set inline in <head>): without JS the header stays sticky and
+   in flow, which the static no-JS mobile menu depends on. Browsers without
+   :has() get the ordinary header too. The hero grows by the header's 5rem and
+   pads its top by the same, so its content sits exactly where it did. */
+@supports selector(:has(*)) {
+  .js .site-head:has(~ main > .hero:first-child) { position: fixed; left: 0; right: 0; }
+  .js main > .hero:first-child { padding-top: 5rem; }
+  .js main > .hero--full:first-child { min-height: calc(min(92svh, 54rem) + 5rem); }
+  .js main > .hero--page:first-child { min-height: calc(min(62svh, 34rem) + 5rem); }
+
+  .site-head::before {
+    content: ''; position: absolute; inset: 0 0 -3rem; z-index: -1;
+    background: linear-gradient(to bottom, rgba(19,41,40,0.55), rgba(19,41,40,0));
+    opacity: 0; pointer-events: none;
+    transition: opacity 0.3s var(--ease);
+  }
+  .site-head__logo img { transition: filter 0.3s var(--ease); }
+  .nav a, .head-tel, .head-akut, .burger { transition: color 0.3s var(--ease); }
+
+  /* Written out flat rather than nested: some browsers with :has() predate
+     CSS nesting. */
+  .js .site-head:has(~ main > .hero:first-child):not(.is-solid):not(:has(.burger[aria-expanded="true"])) { background: transparent; box-shadow: none; }
+  .js .site-head:has(~ main > .hero:first-child):not(.is-solid):not(:has(.burger[aria-expanded="true"]))::before { opacity: 1; }
+  .js .site-head:has(~ main > .hero:first-child):not(.is-solid):not(:has(.burger[aria-expanded="true"])) .site-head__logo img { filter: brightness(0) invert(1); }
+  .js .site-head:has(~ main > .hero:first-child):not(.is-solid):not(:has(.burger[aria-expanded="true"])) :is(.nav a, .head-tel, .burger) { color: #fff; }
+  .js .site-head:has(~ main > .hero:first-child):not(.is-solid):not(:has(.burger[aria-expanded="true"])) .nav a::after { background: var(--sand); }
+  .js .site-head:has(~ main > .hero:first-child):not(.is-solid):not(:has(.burger[aria-expanded="true"])) .head-akut { color: var(--sand); }
+  .js .site-head:has(~ main > .hero:first-child):not(.is-solid):not(:has(.burger[aria-expanded="true"])) .head-akut:hover { color: #fff; }
+  .js .site-head:has(~ main > .hero:first-child):not(.is-solid):not(:has(.burger[aria-expanded="true"])) .btn--primary { background: var(--sand); color: var(--deep-deeper); }
+  .js .site-head:has(~ main > .hero:first-child):not(.is-solid):not(:has(.burger[aria-expanded="true"])) .btn--primary:is(:hover, :focus-visible) { background: #fff; }
+  .js .site-head:has(~ main > .hero:first-child):not(.is-solid):not(:has(.burger[aria-expanded="true"])) :focus-visible { outline-color: var(--sand); }
+}
+
 /* The menu holds ~1370px of content, more than a phone viewport. It must not
    grow the sticky header to do that: a header taller than the screen puts its
    own overflow out of reach.

@@ -258,6 +258,7 @@ HEAD_TPL = '''<!doctype html>
 <link rel="icon" href="{base}assets/brand/logo-mark.svg" type="image/svg+xml">
 <link rel="icon" href="{base}assets/brand/icon-512.png" type="image/png" sizes="512x512">
 <link rel="apple-touch-icon" href="{base}assets/brand/apple-touch-icon.png">
+<script>document.documentElement.classList.add('js')</script>
 <link rel="stylesheet" href="{base}assets/css/site.css">
 <link rel="preload" href="{base}assets/fonts/familjen-grotesk-latin.woff2" as="font" type="font/woff2" crossorigin>
 <link rel="preload" href="{base}assets/fonts/newsreader-latin.woff2" as="font" type="font/woff2" crossorigin>
