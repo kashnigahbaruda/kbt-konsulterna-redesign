@@ -456,6 +456,18 @@ button { font: inherit; }
   margin-bottom: 1.1rem;
 }
 .hero--page h1 { font-size: var(--step-4); }
+/* Homepage headline: smaller and tighter than --step-5 so it sets in two
+   lines on wider screens. 11.6em lets it run past the 40rem text column, just
+   wide enough for "Psykologisk behandling och" on one line. */
+.hero--full h1 {
+  font-size: clamp(2.5rem, 1.6rem + 3.6vw, 4.9rem);
+  line-height: 1;
+  letter-spacing: -0.035em;
+  width: 11.6em;
+  max-width: 100%;
+  margin-bottom: 1.6rem;
+}
+@media (min-width: 52rem) { .hero--full h1 { max-width: calc(100vw - 2 * var(--gutter)); } }
 .hero__eyebrow {
   font-family: var(--display); font-size: var(--step--1); font-weight: 600;
   text-transform: uppercase; letter-spacing: 0.14em;
