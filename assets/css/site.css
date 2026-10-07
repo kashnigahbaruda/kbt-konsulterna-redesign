@@ -496,8 +496,8 @@ button { font: inherit; }
 }
 .hero--page h1 { font-size: var(--step-4); }
 /* Homepage headline: smaller and tighter than --step-5 so it sets in two
-   lines on wider screens. 11.6em lets it run past the 40rem text column, just
-   wide enough for "Psykologisk behandling och" on one line. */
+   lines on wider screens. 11.6em lets it run past the 40rem text column, so
+   it sets as "Psykologisk behandling / & utredning du kan lita på". */
 .hero--full h1 {
   font-size: clamp(2.5rem, 1.6rem + 3.6vw, 4.9rem);
   line-height: 1;

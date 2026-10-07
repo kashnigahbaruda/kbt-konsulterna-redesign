@@ -682,7 +682,7 @@ def build_home():
     body = f'''
 {hero(b, 'slottskallan-poster',
       'Privat psykologmottagning i Uppsala',
-      'Psykologisk behandling och utredning du kan lita på',
+      'Psykologisk behandling &amp; utredning du kan lita på',
       'Sju legitimerade psykologer och psykoterapeuter i Gårdshuset vid '
       'Slottskällan, tio minuter från Uppsala&nbsp;C. Vi tar emot på mottagningen '
       'och online i hela Sverige.',
