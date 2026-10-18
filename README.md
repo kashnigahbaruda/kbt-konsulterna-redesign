@@ -26,7 +26,7 @@ index.html                    Homepage
 vuxna/                        Adults — hub
   behandling/                   + 10 treatment topics (anxiety, depression, sleep …)
   utredning/                    + 3 assessment topics (adhd, autism, re-assessment)
-  parterapi/ beroende/ psykiatri/
+  parterapi/ beroende/ psykiatri/ anhorigstod/
 barn-och-ungdom/              Children & young people — hub
   behandling/                   + 5 treatment topics
   utredning/                    + 3 assessment topics
@@ -36,10 +36,10 @@ organisationer/               Employers — hub
 medarbetare/                  Team index + 7 individual bio pages
 priser/                       Prices, terms, region referrals
 kontakt/                      Contact, both forms, directions
-om-oss/                       About, what KBT is, evidence base, online, licensing
+om-oss/                       About, what KBT is, evidence base, video calls, licensing
 om-oss/vanliga-fragor.html    All 16 FAQs
 akut-hjalp/                   Emergency help
-sitemap.xml                   Generated — all 55 canonical URLs
+sitemap.xml                   Generated — all 56 canonical URLs
 robots.txt                    Generated — allows everything, points at the sitemap
 
 assets/css/site.css           The whole design system, ~880 lines
@@ -48,12 +48,12 @@ assets/img/                   Generated responsive WebP + JPEG
 assets/team/                  The client's own photography
 assets/brand/                 Logo and accreditation marks
 assets/fonts/                 Self-hosted variable fonts + their OFL licences (generated)
-tools/articles.py             The topic tree: copy for all 38 sub-pages
+tools/articles.py             The topic tree: copy for all 39 sub-pages
 tools/build-fonts.py          Fetches the OFL fonts and cuts Newsreader down
 tools/build-site.py           Shared shell + every page builder
 ```
 
-55 pages, restructured from the current site's 108. The current site runs two complete
+56 pages, restructured from the current site's 108. The current site runs two complete
 parallel content trees at once — seven page pairs are byte-identical at two indexable URLs —
 and buries booking and prices inside a 12-item "OM OSS & INFO" menu.
 
@@ -66,7 +66,8 @@ sidebar navigator. The client added them for SEO, and they are the pages that ra
 long-tail queries — "flygfobi behandling uppsala", "adhd utredning vuxen privat".
 
 They are rebuilt here as **38 real pages** rather than folded into anchors on the hubs.
-Each one carries what the originals did not:
+A 39th, `vuxna/anhorigstod/`, was added in October 2026 at the client's request, ported
+from the old site's "Anhöriga" page. Each one carries what the originals did not:
 
 - **A sticky sibling navigator** — the level-2 pages of the section, with the active branch's
   children nested under it. Below 62rem it moves under the article rather than disappearing.
@@ -171,7 +172,9 @@ they describe how the practice works:
 
 ## Quality
 
-Checked across all 55 pages:
+Checked across all 55 pages before the Anhörigstöd page was added in October 2026. Internal
+links, titles, meta descriptions and one-`<h1>`-per-page were re-checked on all 56 after it;
+the contrast, icon and Lighthouse figures below are from the 55-page run:
 
 - No broken internal links or dangling anchors — 4 073 checked, each resolving to a real
   file rather than a directory, so the build works over `file://` as promised
@@ -201,7 +204,7 @@ Checked across all 55 pages:
   burger, and scroll reveals only hide content once JS is present. The hero load sequence is
   opt-in via `prefers-reduced-motion: no-preference`, so content is never hidden waiting on
   an animation that may not run
-- Every one of the 55 pages has a unique `<title>`, meta description and canonical URL —
+- Every one of the 56 pages has a unique `<title>`, meta description and canonical URL —
   verified, no duplicates
 - `MedicalBusiness`, `FAQPage`, `BreadcrumbList`, `MedicalWebPage` and `ProfilePage`/`Person`
   structured data; every JSON-LD block parses. `BreadcrumbList` is read back out of each
@@ -223,13 +226,13 @@ fetch the 1000/900 file at nearly twice the bytes. On heroes and bios that file 
 ## Regenerating
 
 The pages are plain static HTML and can be edited directly. They were *generated* from
-`tools/build-site.py`, which holds the shared header, footer and navigation so 55 pages
+`tools/build-site.py`, which holds the shared header, footer and navigation so 56 pages
 couldn't drift apart. The topic copy lives in `tools/articles.py`, and the hubs link into it
 from the same data, so a hub card and its page cannot disagree. If you take over the HTML by hand, retire the generator rather than
 running both.
 
 ```bash
-python3 tools/build-site.py     # regenerate all 55 pages + sitemap.xml
+python3 tools/build-site.py     # regenerate all 56 pages + sitemap.xml
 python3 tools/fetch-images.py   # re-download source imagery
 python3 tools/build-images.py   # regenerate responsive variants + keyed brand marks
 python3 tools/build-logo.py     # regenerate the logo SVGs + favicons from the client's file
