@@ -292,5 +292,6 @@ invoice later.
 
 No identifiable faces appear in any stock image — on a psychology practice's site a
 recognisable face invites the reader to assume they are looking at a patient. Every selection
-is an empty interior, a landscape, hands only, or a figure turned away. The only faces on the
-site are the seven practitioners.
+is an empty interior, a landscape, hands only, or a figure turned away. Apart from the seven
+practitioners, the only faces on the site are two people in the client's own October 2026
+photographs, published with their consent (see `docs/IMAGE-CREDITS.md`).

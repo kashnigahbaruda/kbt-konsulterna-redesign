@@ -25,6 +25,12 @@ OUT = 'assets/img'
 # instead of a fixed quality: the scrim hides the difference either way.
 BUDGET = {2400: 300 * 1024, 1600: 165 * 1024, 1000: 80 * 1024, 800: 55 * 1024}
 
+# Photographs set inline in the text column rather than behind a scrim. They
+# are seen unmodified at no more than 44rem wide, so they skip the budget
+# (and its blur fallback) and stop at 1600px.
+INLINE = {'gruppbild', 'missbrukspsykologi', 'kidnappad-hjarna', 'bocker-fonster',
+          'kok-samtal', 'spel'}
+
 
 def variants(im, base, widths, jpg_width, quality=80, budget=False):
     made = []
@@ -84,8 +90,14 @@ def main():
         slug = os.path.splitext(os.path.basename(src))[0]
         im = ImageOps.exif_transpose(Image.open(src)).convert('RGB')
         widths = [w for w in (2400, 1600, 1000, 800) if w <= im.width]
-        made = variants(im, f'{OUT}/{slug}', widths, min(1600, im.width),
-                        quality=72, budget=True)
+        if slug in INLINE:
+            # Shown as-is in the page, never under a scrim: no byte budget, no blur.
+            widths = [w for w in widths if w <= 1600]
+            made = variants(im, f'{OUT}/{slug}', widths,
+                            min(1600, im.width), quality=80)
+        else:
+            made = variants(im, f'{OUT}/{slug}', widths, min(1600, im.width),
+                            quality=72, budget=True)
         for p in made:
             total += os.path.getsize(p)
         kb = sum(os.path.getsize(x) for x in made) // 1024

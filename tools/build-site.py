@@ -148,6 +148,17 @@ def pic_wide(base, slug, alt, sizes='100vw', cls='', eager=False):
       </picture>'''
 
 
+# An inline photograph in a text column (.photo), never wider than 44rem.
+PHOTO_SIZES = '(min-width: 62rem) 44rem, 92vw'
+
+
+def photo(base, slug, alt, caption='', cls=''):
+    cap = f'\n        <figcaption>{caption}</figcaption>' if caption else ''
+    return f'''<figure class="{f'photo {cls}'.strip()}">
+        {pic_wide(base, slug, alt, sizes=PHOTO_SIZES)}{cap}
+      </figure>'''
+
+
 def pic_person(base, slug, alt, sizes='(min-width: 76rem) 20vw, (min-width: 56rem) 30vw, (min-width: 34rem) 45vw, 90vw', eager=False):
     p = f'assets/img/team/{slug}.jpg'
     w, h = dim(p)
@@ -484,10 +495,13 @@ def hero(base, slug, eyebrow, h1, lede, alt, full=False, crumb=None,
 '''
 
 
+CTA_IMG = ('samtalsrum', 'Ett av mottagningens samtalsrum, med två fåtöljer vid fönstret')
+
+
 def cta_band(base, heading='Ta första steget och kontakta oss.',
-             text='Skriv eller ring. Vi hör vanligen av oss samma dag.'):
+             text='Skriv eller ring. Vi hör vanligen av oss samma dag.', img=CTA_IMG):
     return f'''<section class="bleed">
-  <div class="bleed__media">{pic_wide(base, 'samtal', 'Två personer sitter mitt emot varandra med en kopp kaffe var')}</div>
+  <div class="bleed__media">{pic_wide(base, *img)}</div>
   <div class="bleed__scrim"></div>
   <div class="wrap bleed__inner">
     <div class="prose--wide" data-reveal>
@@ -648,19 +662,19 @@ def build_home():
       </a></li>''' for say, to, href in ROUTER)
 
     doors = [
-        ('vuxna', 'Vuxna', 'Från 18 år', 'vuxna/index.html',
+        ('fatolj-bocker', 'Vuxna', 'Från 18 år', 'vuxna/index.html',
          'Terapi, parterapi, neuropsykiatriska utredningar av adhd och autism, '
          'och behandling vid substansproblem. För dig som är över 18.',
-         'Ett ljust rum med en soffa och en fåtölj'),
+         'En fåtölj vid ett fönster med KBT-litteratur på fönsterbrädan'),
         ('barn', 'Barn &amp; ungdom', 'Upp till 18 år', 'barn-och-ungdom/index.html',
          'Behandling och utredning för barn och unga — och stöd till dig som är '
          'förälder, lärare eller socialsekreterare.',
          'Ett barn som leker i snön'),
-        ('foretag', 'För organisationer', 'Uppdrag &amp; utbildning',
+        ('motesrum', 'För organisationer', 'Uppdrag &amp; utbildning',
          'organisationer/index.html',
          'Handledning, coaching, föreläsningar och utbildning för arbetsgivare, '
          'skola, vård och socialtjänst.',
-         'Ett tomt, ljust mötesrum'),
+         'Mottagningens mötesrum, sett genom en öppen dörr'),
     ]
     doors_html = '\n      '.join(
         f'''<a class="door" href="{b}{href}" data-reveal>
@@ -957,11 +971,11 @@ def build_vuxna():
     ], three=True)
 
     body = f'''
-{hero(b, 'vuxna', 'Vuxna',
+{hero(b, 'samtalsrum', 'Vuxna',
       'Från psykisk ohälsa till ett bättre mående',
       'Terapi, parterapi, utredning och behandling — hos legitimerade '
       'psykologer och legitimerade psykoterapeuter med lång erfarenhet.',
-      'Ett ljust rum med en soffa, en fåtölj och tegelvägg',
+      'Ett av mottagningens samtalsrum, med två fåtöljer vid fönstret',
       crumb=f'<a href="{b}index.html">Hem</a><span>/</span>Vuxna')}
 
 <section class="band">
@@ -1047,7 +1061,7 @@ def build_vuxna():
 
 {process_band(b)}
 {price_band(b)}
-{cta_band(b)}
+{cta_band(b, img=('motesrum', 'Mottagningens mötesrum, sett genom en öppen dörr'))}
 {akut_strip(b)}
 '''
     return page('vuxna/index.html',
@@ -1055,7 +1069,7 @@ def build_vuxna():
                 'KBT för vuxna i Uppsala och online. Behandling vid ångest, depression, '
                 'stress, sömnproblem och trauma. Parterapi och utredning av adhd '
                 'och autism.',
-                body, ogimg='vuxna')
+                body, ogimg='samtalsrum')
 
 
 # ==========================================================================
@@ -1227,11 +1241,11 @@ def build_org():
     ], three=True)
 
     body = f'''
-{hero(b, 'foretag', 'För organisationer',
+{hero(b, 'grupp-whiteboard', 'För organisationer',
       'Kompetens att låna in',
       'Handledning, coaching, föreläsningar och utbildning för arbetsgivare, '
       'skola, vård och socialtjänst. På plats hos er, hos oss eller online.',
-      'Ett tomt, ljust mötesrum med stora fönster',
+      'Karin Holmström håller en genomgång vid whiteboardtavlan för en grupp i mottagningens mötesrum',
       crumb=f'<a href="{b}index.html">Hem</a><span>/</span>För organisationer')}
 
 <section class="band">
@@ -1318,7 +1332,7 @@ def build_org():
                 'Handledning och utbildning för organisationer | KBT-Konsulterna',
                 'Handledning, coaching, föreläsningar och utbildning i KBT, MI och '
                 'mindfulness för arbetsgivare, skola, vård och socialtjänst.',
-                body, ogimg='foretag')
+                body, ogimg='grupp-whiteboard')
 
 
 # ==========================================================================
@@ -1329,12 +1343,12 @@ def build_medarbetare():
     cards = '\n      '.join([person_card(b, p) for p in TEAM] + [team_cta(f'{b}kontakt/index.html')])
 
     body = f'''
-{hero(b, 'fonster-plantor', 'Medarbetare',
+{hero(b, 'samtalsrum-samtal', 'Medarbetare',
       'En mottagning, sju personer',
       'Alla legitimerade psykologer. Flera är dessutom legitimerade '
       'psykoterapeuter, specialister och handledare. Hör av dig till '
       'oss, så hjälper vi dig till den av oss som passar bäst.',
-      'Krukväxter i ett motljust fönster på mottagningen',
+      'Karin Holmström och Aksel Reppling i samtal i ett av mottagningens samtalsrum',
       crumb=f'<a href="{b}index.html">Hem</a><span>/</span>Medarbetare')}
 
 <section class="band">
@@ -1372,14 +1386,14 @@ def build_medarbetare():
   </div>
 </section>
 
-{cta_band(b)}
+{cta_band(b, img=('motesrum', 'Mottagningens mötesrum, sett genom en öppen dörr'))}
 {marks_band(b)}
 '''
     return page('medarbetare/index.html',
                 'Medarbetare – psykologer i Uppsala | KBT-Konsulterna',
                 'Sju legitimerade psykologer och psykoterapeuter på en mottagning i '
                 'Uppsala. Hör av dig så hjälper vi dig till rätt person.',
-                body, ogimg='fonster-plantor')
+                body, ogimg='samtalsrum-samtal')
 
 
 # ==========================================================================
@@ -1513,7 +1527,7 @@ def build_bio(p):
     return page(f'medarbetare/{slug}.html',
                 f'{name} – {p["role"].split(" · ")[0]} i Uppsala | KBT-Konsulterna',
                 desc,
-                body, ogimg='stillhet', ogtitle=f'{name} | KBT-Konsulterna', extra=extra)
+                body, ogimg='bocker-fonster', ogtitle=f'{name} | KBT-Konsulterna', extra=extra)
 
 
 # ==========================================================================
@@ -1716,12 +1730,12 @@ def build_om_oss():
     ], three=True)
 
     body = f'''
-{hero(b, 'stillhet', 'Om oss',
+{hero(b, 'motesrum', 'Om oss',
       'Gedigen kompetens, varmt bemötande',
       'KBT-Konsulterna är en privat psykologmottagning i centrala Uppsala. Vi är '
       'legitimerade psykologer och psykoterapeuter, och specialister i kognitiv '
       'beteendeterapi.',
-      'Ett fönster med en krukväxt i mjukt motljus',
+      'Mottagningens mötesrum med bokhyllor, sett genom en öppen dörr',
       crumb=f'<a href="{b}index.html">Hem</a><span>/</span>Om oss')}
 
 <section class="band">
@@ -1740,6 +1754,10 @@ def build_om_oss():
       <p>Vår mottagning ligger i Gårdshuset vid Slottskällan på Sjukhusvägen 3, tio minuter
       från Centralstationen. Vi tar emot här, och online i hela Sverige.</p>
       <p style="margin-bottom:0"><a class="a-link" href="{b}medarbetare/index.html">Läs om var och en av oss {ARROW}</a></p>
+      <figure class="photo" data-reveal>
+        {pic_wide(b, 'gruppbild', 'Thomas Alm, Karin Holmström, Angeli Holmstedt och Aksel Reppling', sizes=PHOTO_SIZES)}
+        <figcaption>Thomas Alm, Karin Holmström, Angeli Holmstedt och Aksel Reppling.</figcaption>
+      </figure>
     </div>
   </div>
 </section>
@@ -1772,7 +1790,8 @@ def build_om_oss():
              'psykoterapeuter har vi en gedigen kompetens i att värdera forskning.</p>'
              '<p style="margin-bottom:0">Socialstyrelsens nationella riktlinjer vägleder oss '
              'inom många av de problemområden vi arbetar med.</p>',
-             '')}
+             photo(b, 'bocker-fonster', 'KBT-litteratur och en krukväxt i ett fönster på mottagningen',
+                   cls='photo--flush'))}
 
 {hub_section('online', 'Onlinesamtal',
              'När det inte passar att ses på plats.',
@@ -1835,7 +1854,7 @@ def build_om_oss():
                 'Om oss – psykologmottagning i centrala Uppsala | KBT-Konsulterna',
                 'Om KBT-Konsulterna i Uppsala: vilka vi är, vad KBT är, vår '
                 'evidensbaserade praktik och vad legitimation betyder.',
-                body, ogimg='stillhet')
+                body, ogimg='motesrum')
 
 
 # ==========================================================================
@@ -2254,7 +2273,9 @@ def build_topic_page(section, parent, node=None):
         trail.append((parent['label'], node_path(section['slug'], parent['slug'])))
         trail.append((node['label'], None))
 
-    body_html = n['body'].replace('{base}', base)
+    body_html = re.sub(r'\{photo:([a-z0-9-]+)\|([^}]+)\}',
+                       lambda m: photo(base, m.group(1), m.group(2)),
+                       n['body'].replace('{base}', base))
     extra = (breadcrumb_ld([(l, p or path) for l, p in trail])
              + article_ld(n['title'], n['desc'], path, n.get('people') or []))
 
@@ -2262,6 +2283,7 @@ def build_topic_page(section, parent, node=None):
     <p class="crumb">{crumbs(base, trail)}</p>
     <h1>{H.escape(n['h1'])}</h1>
     <p class="article__lede">{H.escape(n['lede'])}</p>
+    {photo(base, *n['img']) if n.get('img') else ''}
     <div class="prose article__body">{body_html}</div>
     {child_cards(base, section, parent) if is_hub else ''}
     {also_block(base, n.get('also') or [])}
@@ -2283,7 +2305,8 @@ def build_topic_page(section, parent, node=None):
 {akut_strip(base)}
 '''
     return page(path, n['title'], n['desc'], body,
-                ogimg=section.get('img', 'hero-room'), extra=extra)
+                ogimg=n['img'][0] if n.get('img') else section.get('img', 'hero-room'),
+                extra=extra)
 
 
 def build_topics():

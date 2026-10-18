@@ -1597,6 +1597,7 @@ B_STOD = [
         lede='Att vara förälder eller nära anhörig till ett barn är ibland utmanande och '
              'svårt. Det uppstår ständigt nya situationer och frågor.',
         people=['aksel-reppling', 'angeli-holmstedt'],
+        img=('kok-samtal', 'Två föräldrar i samtal med en psykolog vid ett bord på mottagningen'),
         also=[('Beteenden som utmanar', 'barn-och-ungdom/behandling/beteende/'),
               ('Stöd för skolpersonal', 'barn-och-ungdom/stod/skola/'),
               ('Anhörig vid beroende', 'vuxna/beroende/')],
@@ -1947,6 +1948,7 @@ Priser lämnas på förfrågan; moms tillkommer. Hör av er via
         lede='Allt från kortare workshops och seminarier till orienteringsutbildningar '
              'på 4–5 dagar och längre grundläggande psykoterapiutbildningar.',
         people=['angeli-holmstedt', 'thomas-alm', 'barry-karlsson'],
+        img=('grupp-whiteboard', 'Karin Holmström håller en genomgång vid whiteboardtavlan för en grupp'),
         also=[('Handledning och coaching', 'organisationer/handledning/'),
               ('Kontakt för uppdrag', 'organisationer/kontakt/'),
               ('Vad är KBT?', 'om-oss/index.html#kbt')],
@@ -2112,6 +2114,7 @@ socialtjänst betalar. Hör av er via
         lede='Vi hjälper till att identifiera problemen och stödjer chefer i att samtala '
              'med medarbetare om dem.',
         people=['thomas-alm', 'angeli-holmstedt'],
+        img=('missbrukspsykologi', 'Handbok i missbrukspsykologi och vinglas i solljus på ett bord'),
         also=[('Rehabilitering', 'organisationer/rehabilitering/'),
               ('Skadligt bruk och beroende för privatpersoner', 'vuxna/beroende/'),
               ('Handledning och coaching', 'organisationer/handledning/')],
@@ -2251,7 +2254,7 @@ insatsen ska göra nytta.</p>
 # --------------------------------------------------------------------------
 TREE = [
     dict(
-        slug='vuxna', label='Vuxna', img='vuxna',
+        slug='vuxna', label='Vuxna', img='fatolj-bocker',
         children=[
             dict(
                 slug='behandling', label='Psykologisk behandling',
@@ -2409,6 +2412,7 @@ Se <a href="{base}priser/index.html">priser</a>.</p>
                      'följer Socialstyrelsens rekommendationer. Du är välkommen även som '
                      'anhörig.',
                 people=['thomas-alm', 'angeli-holmstedt'],
+                img=('kidnappad-hjarna', 'Boken Kidnappad hjärna och två vinglas i solljus på ett bord'),
                 also=[('Skadligt bruk på arbetsplatsen', 'organisationer/skadligt-bruk/'),
                       ('Stress och utmattning', 'vuxna/behandling/stress-utmattning/'),
                       ('Behandling vid NPF', 'vuxna/behandling/npf/')],
@@ -2474,6 +2478,8 @@ Tecken kan vara tankar som ofta kretsar kring alkohol, en längtan efter att dri
 abstinenssymtom, toleransökning eller kontrollförlust.</p>
 
 <h2>Spelberoende (hasardspelsyndrom)</h2>
+
+{photo:spel|En man, sedd bakifrån, spelar på ett onlinekasino på sin dator}
 <p>Att spela om pengar har blivit en allt vanligare del av kulturen, och vi möts dagligen
 av reklam för olika spel. För de flesta håller sig spelandet inom rimliga gränser, men
 drygt fyra procent av befolkningen mellan 16 och 84 år har någon form av spelproblem.</p>
@@ -2819,7 +2825,7 @@ en kartläggning av barnets förutsättningar, se
         ],
     ),
     dict(
-        slug='organisationer', label='För organisationer', img='foretag',
+        slug='organisationer', label='För organisationer', img='grupp-whiteboard',
         children=ORG,
     ),
 ]

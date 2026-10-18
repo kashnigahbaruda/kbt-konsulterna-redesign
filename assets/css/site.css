@@ -1059,6 +1059,17 @@ button { font: inherit; }
   .sidenav { margin-top: clamp(2rem, 5vw, 3rem); }
 }
 
+/* Inline photograph in a text column: the client's own pictures, shown
+   unscrimmed. No frame or shadow, in keeping with the rest of the system. */
+.photo { margin: clamp(2rem, 4vw, 2.75rem) 0 0; max-width: 44rem; }
+.article .photo { margin: 0 0 2.4rem; }
+.photo--flush { margin-top: 0; }
+.photo img { width: 100%; height: auto; }
+.photo figcaption {
+  margin-top: 0.7rem;
+  font-family: var(--display); font-size: var(--step--1); color: var(--muted);
+}
+
 .article { max-width: 42rem; }
 .article h1 { font-size: var(--step-3); margin-bottom: 1.1rem; }
 .article__lede {
