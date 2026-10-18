@@ -13,14 +13,8 @@ UA = {'User-Agent': 'kbt-konsulterna-redesign/1.0 (asset fetch)'}
 
 # CC0 stock, by Commons file name
 STOCK = {
-    'hero-room':   'Breather_Montreal_interior_(Unsplash).jpg',
-    'band-forest': 'Forest_tree_shadows_(Unsplash).jpg',
-    'vuxna':       'Budapest_Apartment_(Unsplash).jpg',
     'barn':        'Girl_in_Snow_(Unsplash).jpg',
     'barn-play':   'Playing_jenga_with_my_6_year_old_(Unsplash).jpg',
-    'foretag':     'Minimalist_meeting_room_(Unsplash).jpg',
-    'par':         'Seated_couple_snuggling_(Unsplash).jpg',
-    'samtal':      'Coffee_Talks_(Unsplash).jpg',
     'stillhet':    'Wicker_plant_and_big_window_(Unsplash).jpg',
     'kunskap':     'Uppsala_Library_(Unsplash).jpg',
     'bjork':       'Birch_trees_in_a_grove_(Unsplash).jpg',

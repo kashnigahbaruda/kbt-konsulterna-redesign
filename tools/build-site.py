@@ -407,7 +407,7 @@ def crumb_trail(body, base, path):
     return trail
 
 
-def page(path, title, desc, body, ogimg='hero-room', extra='', ogtitle=None):
+def page(path, title, desc, body, ogimg='samtalsrum', extra='', ogtitle=None):
     depth = path.count('/')
     base = '../' * depth
     current = path
@@ -2305,7 +2305,7 @@ def build_topic_page(section, parent, node=None):
 {akut_strip(base)}
 '''
     return page(path, n['title'], n['desc'], body,
-                ogimg=n['img'][0] if n.get('img') else section.get('img', 'hero-room'),
+                ogimg=n['img'][0] if n.get('img') else section.get('img', 'samtalsrum'),
                 extra=extra)
 
 
