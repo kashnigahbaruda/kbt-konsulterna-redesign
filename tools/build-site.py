@@ -62,6 +62,7 @@ NAV = [
         ('Skadligt bruk & beroende', 'vuxna/beroende/index.html'),
         ('Utredning & bedömning', 'vuxna/utredning/index.html'),
         ('Psykiatrisk bedömning', 'vuxna/psykiatri/index.html'),
+        ('Anhörigstöd', 'vuxna/anhorigstod/index.html'),
     ]),
     ('Barn & ungdom', 'barn-och-ungdom/index.html', [
         ('Psykologisk behandling', 'barn-och-ungdom/behandling/index.html'),
@@ -79,7 +80,7 @@ NAV = [
     ('Om oss', 'om-oss/index.html', [
         ('Vad är KBT?', 'om-oss/index.html#kbt'),
         ('Evidensbaserad praktik', 'om-oss/index.html#evidens'),
-        ('Onlinesamtal', 'om-oss/index.html#online'),
+        ('Videosamtal', 'om-oss/index.html#videosamtal'),
         ('Vanliga frågor', 'om-oss/vanliga-fragor.html'),
     ]),
     ('Priser', 'priser/index.html', []),
@@ -97,7 +98,7 @@ TEAM = [
               'Utbildare i motiverande samtal och lärare i mindfulnessbaserade program.',
          lowres=True),
     dict(slug='thomas-alm', name='Thomas Alm',
-         role='Leg. psykolog · Leg. psykoterapeut · Specialist i klinisk psykologi',
+         role='Leg. psykolog · Leg. psykoterapeut · Specialist i klinisk psykologi · Handledare',
          note='Legitimerad psykolog sedan 1978. Missbruk och beroende, ångest och '
               'depression. Handledare inom psykiatri, primärvård och beroendevård.',
          lowres=True),
@@ -366,7 +367,7 @@ FOOT_TPL = '''</main>
           <li><a href="{base}priser/index.html">Priser</a></li>
           <li><a href="{base}kontakt/index.html">Kontakt &amp; bokning</a></li>
           <li><a href="{base}om-oss/vanliga-fragor.html">Vanliga frågor</a></li>
-          <li><a href="{base}om-oss/index.html#online">Onlinesamtal</a></li>
+          <li><a href="{base}om-oss/index.html#videosamtal">Videosamtal</a></li>
           <li><a href="{base}akut-hjalp/index.html">Akut hjälp</a></li>
         </ul>
       </div>
@@ -699,7 +700,7 @@ def build_home():
       'Psykologisk behandling &amp; utredning du kan lita på',
       'Sju legitimerade psykologer och psykoterapeuter i Gårdshuset vid '
       'Slottskällan, tio minuter från Uppsala&nbsp;C. Vi tar emot på mottagningen '
-      'och online i hela Sverige.',
+      'och via videosamtal oavsett var du bor.',
       'Fontänen i parken vid Slottskällan',
       full=True, trust=True, video='slottskallan')}
 
@@ -798,13 +799,12 @@ def build_home():
         </div>
         <div>
           <dt>Öppettider</dt>
-          <dd>Måndag–fredag 09–17. Vi kan erbjuda kvällstider ett par gånger per vecka,
-          både digitalt och på mottagningen.</dd>
+          <dd>Måndag–fredag 09–17. Kvällstid enligt överenskommelse.</dd>
         </div>
         <div>
-          <dt>Online</dt>
-          <dd>Videosamtal i hela Sverige via Kaddio, med BankID och samma sekretess som
-          på mottagningen. <a class="a-link" href="{b}om-oss/index.html#online">Mer om onlinesamtal</a></dd>
+          <dt>Videosamtal</dt>
+          <dd>Vi tar emot via videosamtal oavsett var du bor, via Kaddio med BankID och samma
+          sekretess som på mottagningen. <a class="a-link" href="{b}om-oss/index.html#videosamtal">Mer om videosamtal</a></dd>
         </div>
         <div>
           <dt>Remiss och högkostnadsskydd</dt>
@@ -826,7 +826,7 @@ def build_home():
 '''
     return page('index.html',
                 'KBT-Konsulterna – privat psykologmottagning i Uppsala',
-                'Privat psykologmottagning i centrala Uppsala och online. Sju '
+                'Psykologmottagning i centrala Uppsala och via videosamtal. Sju '
                 'legitimerade psykologer. Terapi för barn, ungdomar, vuxna och par, '
                 'utredning av adhd och autism.',
                 body, ogimg='og-home', extra=HOME_LD,
@@ -951,6 +951,13 @@ def build_vuxna():
          'Specifika fobier — sprutor, blod, höjder, hissar, flygplan. '
          'Exponeringsbehandling har bland de bästa resultaten inom psykologin.',
          'vuxna/behandling/fobier/'),
+        ('Anhörigstöd',
+         'Stöd till dig som är anhörig till någon med psykisk ohälsa, sjukdom eller '
+         'beroende — även om du själv inte har något eget psykiskt problem.',
+         'vuxna/anhorigstod/'),
+        ('Skadligt bruk och beroende',
+         'Alkohol, läkemedel, droger och spel om pengar. Bedömning och behandling med '
+         'evidensbaserade metoder.', 'vuxna/beroende/'),
         ('Neuropsykiatriska funktionsnedsättningar',
          'Behandling och anpassat stöd vid adhd och autism i vuxen ålder — med eller '
          'utan färdig diagnos.', 'vuxna/behandling/npf/'),
@@ -972,7 +979,7 @@ def build_vuxna():
 
     body = f'''
 {hero(b, 'samtalsrum', 'Vuxna',
-      'Från psykisk ohälsa till ett bättre mående',
+      'Från psykisk ohälsa till ett bättre mående och ökad livskvalitet',
       'Terapi, parterapi, utredning och behandling — hos legitimerade '
       'psykologer och legitimerade psykoterapeuter med lång erfarenhet.',
       'Ett av mottagningens samtalsrum, med två fåtöljer vid fönstret',
@@ -1000,15 +1007,17 @@ def build_vuxna():
         ('Skadligt bruk &amp; beroende', 'vuxna/beroende/'),
         ('Utredning &amp; bedömning', 'vuxna/utredning/'),
         ('Psykiatrisk bedömning', 'vuxna/psykiatri/'),
+        ('Anhörigstöd', 'vuxna/anhorigstod/'),
       ])}
     </div>
   </div>
 </section>
 
 {hub_section('behandling', 'Psykologisk behandling',
-             'Samtalsterapi och KBT för vuxna.',
-             '<p style="margin-bottom:0">Vi börjar med en gemensam bedömning och formulerar '
-             'därefter en plan utifrån dina mål och värderingar. För det mesta arbetar vi '
+             'Psykologisk behandling och KBT för vuxna.',
+             '<p style="margin-bottom:0">Vi börjar med utredning som leder fram till en '
+             'bedömning och formulerar därefter gemensamt en plan utifrån dina mål och '
+             'värderingar. För det mesta arbetar vi '
              '&rdquo;här och nu&rdquo;, men om din tidigare historia påverkar hur du mår i dag '
              'finns även den med i samtalen.</p>',
              behandling, tone='band--hi',
@@ -1066,7 +1075,7 @@ def build_vuxna():
 '''
     return page('vuxna/index.html',
                 'Psykolog för vuxna i Uppsala – terapi och utredning | KBT-Konsulterna',
-                'KBT för vuxna i Uppsala och online. Behandling vid ångest, depression, '
+                'KBT för vuxna i Uppsala och via videosamtal. Behandling vid ångest, depression, '
                 'stress, sömnproblem och trauma. Parterapi och utredning av adhd '
                 'och autism.',
                 body, ogimg='samtalsrum')
@@ -1244,7 +1253,7 @@ def build_org():
 {hero(b, 'grupp-whiteboard', 'För organisationer',
       'Kompetens att låna in',
       'Handledning, coaching, föreläsningar och utbildning för arbetsgivare, '
-      'skola, vård och socialtjänst. På plats hos er, hos oss eller online.',
+      'skola, vård och socialtjänst. På plats hos er, hos oss eller via videosamtal.',
       'Karin Holmström håller en genomgång vid whiteboardtavlan för en grupp i mottagningens mötesrum',
       crumb=f'<a href="{b}index.html">Hem</a><span>/</span>För organisationer')}
 
@@ -1261,7 +1270,7 @@ def build_org():
         BUP, primärvården, psykiatrin, behandlingshem och HVB, universitet, socialtjänst,
         Statens institutionsstyrelse, alla skolformer samt företagshälsovård.</p>
         <p style="margin-bottom:0">Vår bas är i centrala Uppsala. Vi tar emot här, arbetar
-        online och kommer ut till arbetsgivare runt om i landet.</p>
+        via videosamtal och kommer ut till arbetsgivare runt om i landet.</p>
       </div>
       {contents_list(b, [
         ('Handledning &amp; coaching', 'organisationer/handledning/'),
@@ -1634,8 +1643,36 @@ def faq_pairs():
         body = '\n'.join(lines[1:]).strip()
         paras = [p.replace('\n', ' ').strip()
                  for p in re.split(r'\n\s*\n', body) if p.strip()]
+        q, paras = apply_faq_edits(q, paras)
         out.append((q, paras))
     return out
+
+
+# Changes the practice has asked for since the crawl, as (old, new) substring
+# replacements over the question and its answer.
+FAQ_EDITS = [
+    ('lyckas vi med det. Kontakta oss',
+     'lyckas vi med det. Vi svarar oftast samma dag. Kontakta oss'),
+    ('Erbjuder er psykologmottagning digitala möten?',
+     'Erbjuder er psykologmottagning videosamtal?'),
+    ('och stöd digitalt för klienter över hela Sverige',
+     'och stöd för klienter oavsett var de bor'),
+    ('Läs mer på vår sida om onlinebesök.', 'Läs mer under Videosamtal på sidan Om oss.'),
+    ('så påbörjar vi behandlingen.',
+     'så påbörjar vi behandlingen. All planering görs självklart i samarbete med dig.'),
+    ('Vi kan erbjuda kvällstider ett par gånger per vecka, både digitalt och på '
+     'mottagningen i Uppsala, men de flesta tider vi erbjuder är på dagtid.',
+     'Ja, kvällstid enligt överenskommelse, både på mottagningen i Uppsala och via '
+     'videosamtal. De flesta tider vi erbjuder är dock på dagtid.'),
+    ('i Uppsala eller online.', 'i Uppsala eller via videosamtal.'),
+]
+
+
+def apply_faq_edits(q, paras):
+    for old, new in FAQ_EDITS:
+        q = q.replace(old, new)
+        paras = [p.replace(old, new) for p in paras]
+    return q, paras
 
 
 def build_faq():
@@ -1692,7 +1729,7 @@ def build_faq():
     return page('om-oss/vanliga-fragor.html',
                 'Vanliga frågor om vår psykologmottagning | KBT-Konsulterna',
                 'Svar på vanliga frågor om väntetider, högkostnadsskydd och remiss, '
-                'digitala möten, kvällstider och utredningar hos KBT-Konsulterna.',
+                'videosamtal, kvällstider och utredningar hos KBT-Konsulterna.',
                 body, ogimg='kunskap', extra=extra)
 
 
@@ -1752,7 +1789,7 @@ def build_om_oss():
       <p>Psykoterapeututbildningen är tre år på halvfart. Dessutom vidareutbildar vi oss
       kontinuerligt och håller oss uppdaterade kring den senaste forskningen.</p>
       <p>Vår mottagning ligger i Gårdshuset vid Slottskällan på Sjukhusvägen 3, tio minuter
-      från Centralstationen. Vi tar emot här, och online i hela Sverige.</p>
+      från Centralstationen. Vi tar emot här, och via videosamtal oavsett var du bor.</p>
       <p style="margin-bottom:0"><a class="a-link" href="{b}medarbetare/index.html">Läs om var och en av oss {ARROW}</a></p>
       <figure class="photo" data-reveal>
         {pic_wide(b, 'gruppbild', 'Thomas Alm, Karin Holmström, Angeli Holmstedt och Aksel Reppling', sizes=PHOTO_SIZES)}
@@ -1793,14 +1830,14 @@ def build_om_oss():
              photo(b, 'bocker-fonster', 'KBT-litteratur och en krukväxt i ett fönster på mottagningen',
                    cls='photo--flush'))}
 
-{hub_section('online', 'Onlinesamtal',
+{hub_section('videosamtal', 'Videosamtal',
              'När det inte passar att ses på plats.',
-             '<p>Om du inte har möjlighet att komma till mottagningen erbjuder vi samtal '
-             'online via dator eller mobiltelefon. Du kan ha hela din kontakt med oss på '
-             'distans, eller bara vid de tillfällen du är bortrest eller sjuk.</p>'
+             '<p>Om du inte har möjlighet att komma till mottagningen erbjuder vi '
+             'videosamtal via dator eller mobiltelefon. Du kan ha hela din kontakt med oss '
+             'via videosamtal, eller bara vid de tillfällen du är bortrest eller sjuk.</p>'
              '<p>För privatpersoner erbjuder vi bedömning, behandling, rådgivning och stöd '
-             'online, i hela Sverige. För företag och offentlig verksamhet erbjuder vi '
-             'handledning och andra insatser online.</p>'
+             'via videosamtal, oavsett var du bor. För företag och offentlig verksamhet '
+             'erbjuder vi handledning och andra insatser via videosamtal.</p>'
              '<p style="margin-bottom:0"><strong>Säkerhet:</strong> vi använder Kaddios system '
              'för säkra videosamtal, som uppfyller Socialstyrelsens krav på stark '
              'autentisering. Inloggning sker med BankID. Samma lagar om sekretess och '
@@ -1918,8 +1955,12 @@ def build_kontakt():
         </div>
         <div>
           <dt>Öppettider</dt>
-          <dd>Måndag–fredag 09–17. Kvällstider ett par gånger per vecka, både digitalt och
-          på mottagningen.</dd>
+          <dd>Måndag–fredag 09–17. Kvällstid enligt överenskommelse.</dd>
+        </div>
+        <div>
+          <dt>Videosamtal</dt>
+          <dd>Vi tar emot både på mottagningen och via videosamtal, oavsett var du bor.
+          <a class="a-link" href="{b}om-oss/index.html#videosamtal">Mer om videosamtal</a></dd>
         </div>
       </dl>
     </div>
@@ -2020,6 +2061,10 @@ def build_akut():
         <h1 style="font-size:var(--step-4);margin-bottom:1.2rem">Behöver du hjälp direkt?</h1>
         <p class="lede" style="color:var(--deep);margin-bottom:1.6rem">KBT-Konsulterna är en
         mottagning med bokade tider. Vi kan inte ta emot akut och har ingen jour.</p>
+        <p>Går du redan hos oss får du gärna höra av dig om något brådskande dyker upp, men
+        vi kan inte alltid svara direkt. Handlar det om något mycket akut, eller om du har
+        tankar på eller planer att ta ditt liv, behöver du vända dig till någon av
+        kontaktvägarna nedan.</p>
         <p style="margin-bottom:0">Om det uppstår akuta besvär kan du få stöd på något av
         följande sätt, dygnet runt.</p>
       </div>

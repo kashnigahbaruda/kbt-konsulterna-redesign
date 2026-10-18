@@ -288,7 +288,10 @@ button { font: inherit; }
   margin-right: auto; display: flex; align-items: center; text-decoration: none;
   flex: 0 0 auto;              /* never let the logo shrink below its size */
 }
-.site-head__logo img { width: 168px; max-width: none; height: auto; }
+.site-head__logo img { width: 200px; max-width: none; height: auto; }
+/* The desktop nav arrives at 66rem with little room to spare: keep the
+   logo at its old size until the bar has space again. */
+@media (min-width: 66rem) and (max-width: 77.99rem) { .site-head__logo img { width: 168px; } }
 
 .nav { display: none; }
 @media (min-width: 66rem) { .nav { display: flex; align-items: center; gap: clamp(0.85rem, 1.5vw, 1.5rem); flex: 0 0 auto; } }
@@ -911,7 +914,7 @@ button { font: inherit; }
 .site-foot__akut a { color: var(--sand); text-decoration: underline; text-underline-offset: 0.2em; }
 .site-foot__base { margin-top: clamp(2.5rem, 6vw, 4rem); font-size: 0.88rem; color: #8FA29D; display: flex; flex-wrap: wrap; gap: 0.5rem 1.75rem; }
 .site-foot__base a { color: #8FA29D; }
-.site-foot__logo img { width: 180px; height: auto; margin-bottom: 1.4rem; opacity: 0.9; }
+.site-foot__logo img { width: 220px; height: auto; margin-bottom: 1.4rem; opacity: 0.9; }
 
 /* --- Motion --------------------------------------------------------------
    One orchestrated moment on load, then section headings fade up once.

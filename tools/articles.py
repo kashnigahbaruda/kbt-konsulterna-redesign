@@ -29,7 +29,7 @@ V_BEHANDLING = [
         h1='Oro och ångest',
         title='Behandling vid oro och ångest i Uppsala | KBT-Konsulterna',
         desc='KBT vid ångest, panikångest, social ångest, OCD, hälsoångest och '
-             'fobier. Legitimerade psykologer i centrala Uppsala och online.',
+             'fobier. Legitimerade psykologer i centrala Uppsala och via videosamtal.',
         lede='Oro eller ångest känner de flesta ibland. När känslan är mer eller '
              'mindre ständigt närvarande — anspänning, hot, fara — påverkar den '
              'livskvaliteten. Det går att behandla.',
@@ -108,7 +108,7 @@ platser, relationer och till och med känslor och tankar. Läs mer på sidan om
         h1='Nedstämdhet och depression',
         title='Behandling vid depression och nedstämdhet i Uppsala | KBT-Konsulterna',
         desc='KBT vid depression, långvarig nedstämdhet och utmattningsdepression. '
-             'Legitimerade psykologer i Uppsala och online, utan väntetid.',
+             'Legitimerade psykologer i Uppsala och via videosamtal, utan väntetid.',
         lede='Tillfällig nedstämdhet är vanlig, och många depressioner går över av sig '
              'själva. Andra gånger är det viktigt att söka hjälp.',
         people=['thomas-alm', 'aksel-reppling'],
@@ -150,7 +150,7 @@ man drar ner mer. Det är den nedåtgående spiralen behandlingen riktar sig mot
 
 <h2>Så arbetar vi</h2>
 <p>Vi börjar med en gemensam bedömning för att skilja depression från exempelvis
-utmattningssyndrom, eftersom behandlingen skiljer sig åt. Därefter arbetar vi vanligen
+stressrelaterad utmattning, eftersom behandlingen skiljer sig åt. Därefter arbetar vi vanligen
 med:</p>
 <ul>
   <li><strong>Beteendeaktivering.</strong> Att stegvis och planerat föra tillbaka
@@ -184,10 +184,10 @@ söka hjälp direkt — kontakta en anhörig, en vän, din vårdcentral eller di
     dict(
         slug='stress-utmattning', label='Stress & utmattning',
         h1='Stress och utmattning',
-        title='Stress och utmattningssyndrom i Uppsala | KBT-Konsulterna',
-        desc='KBT vid långvarig stress, utmattningssyndrom och utmattningsdepression. '
+        title='Stress och utmattning i Uppsala | KBT-Konsulterna',
+        desc='KBT vid långvarig stress, stressrelaterad utmattning och depression. '
              'Noggrann bedömning först — behandlingen skiljer sig åt.',
-        lede='Långvarig stress utan återhämtning kan leda till utmattningssyndrom och '
+        lede='Långvarig stress utan återhämtning kan leda till utmattning och '
              'ibland sjukskrivning. Insatserna anpassas efter din situation.',
         people=['thomas-alm', 'angeli-holmstedt'],
         also=[('Nedstämdhet och depression', 'vuxna/behandling/depression/'),
@@ -206,8 +206,8 @@ omgivningens krav blir för höga och du samtidigt upplever att du inte har kont
 dem, kan det leda till trötthet, nedstämdhet och koncentrationssvårigheter.</p>
 
 <h2>Tecken på utmattning</h2>
-<p>Utmattningssyndrom kännetecknas av fysiska och psykiska symtom som funnits i minst
-två veckor, och brukar innebära brist på energi, minskad ork och uthållighet, samt ett
+<p>Stressrelaterad utmattning kännetecknas av fysiska och psykiska symtom som funnits i
+minst två veckor, och brukar innebära brist på energi, minskad ork och uthållighet, samt ett
 behov av längre återhämtningstid efter belastning än tidigare.</p>
 
 <p>Det som ofta oroar mest är kognitionen: att inte hitta ord, tappa tråden, läsa samma
@@ -216,10 +216,15 @@ något är allvarligt fel med hjärnan. Det är en väntad del av bilden vid utm
 den delen brukar förbättras — men långsammare än man hoppas.</p>
 
 <h2>Varför bedömningen kommer först</h2>
-<p>Utmattningsdepression är en form av utmattningssyndrom, och begreppen används ibland
-synonymt. Men det är viktigt att skilja mellan depression, utmattningssyndrom och
-utmattningsdepression — framför allt för att behandlingen ser olika ut. Därför gör vi
-alltid en noggrann bedömning innan behandlingen börjar.</p>
+<p>Utmattning och depression kan likna varandra, och de förekommer ofta samtidigt. Ord som
+utmattningssyndrom och utmattningsdepression används också på olika sätt. Det viktiga är
+inte vad tillståndet kallas, utan att skilja ut vad som är vad — framför allt för att
+behandlingen ser olika ut. Därför gör vi alltid en noggrann bedömning innan behandlingen
+börjar.</p>
+
+<p>Utmattningssyndrom finns i dag som diagnos i svensk vård, men bara i Sverige, och den
+försvinner när vården går över till den nya diagnosmanualen ICD-11. Därför talar vi hellre
+om stressrelaterad utmattning.</p>
 
 <p>Skillnaden är inte akademisk. Vid depression är beteendeaktivering — att stegvis göra
 mer — en central del av behandlingen. Vid utmattning i ett tidigt skede kan samma
@@ -264,7 +269,7 @@ takten är rimlig.</p>
         h1='Sömnproblem',
         title='KBT vid sömnproblem och insomni i Uppsala | KBT-Konsulterna',
         desc='KBT för insomni har starkt forskningsstöd och är förstahandsvalet vid '
-             'långvariga sömnbesvär. Behandling i Uppsala och online.',
+             'långvariga sömnbesvär. Behandling i Uppsala och via videosamtal.',
         lede='Svårt att somna? Vaknar du mitt i natten, eller utan att känna dig '
              'utvilad? Sömnstörningar är mycket vanliga och skapar stort lidande.',
         people=['thomas-alm', 'aksel-reppling'],
@@ -328,7 +333,7 @@ depression eller utmattning arbetar vi vanligen med sömnen parallellt med det a
 
 <h2>Vanliga frågor</h2>
 
-<h3>Fungerar behandlingen via video?</h3>
+<h3>Fungerar behandlingen via videosamtal?</h3>
 <p>Ja. Sömnbehandling lämpar sig väl för videosamtal, eftersom arbetet till stor del bygger
 på dagboken och på det du provar hemma mellan samtalen.</p>
 
@@ -425,7 +430,8 @@ vanligen med ett stabiliserande arbete först.</p>
 
 <h3>Tar ni emot remisser?</h3>
 <p>Jens Karström, leg. psykolog, leg. psykoterapeut och specialist i klinisk psykologi,
-arbetar särskilt med trauma och tar emot remisser från Regionen.</p>
+arbetar särskilt med trauma och tar emot remisser från Regionen. Du behöver vara patient
+hos psykiatrin för att ha möjlighet att få privat terapi på detta sätt.</p>
 ''',
     ),
     dict(
@@ -442,7 +448,7 @@ arbetar särskilt med trauma och tar emot remisser från Regionen.</p>
               ('Trauma och PTSD', 'vuxna/behandling/trauma-ptsd/'),
               ('Relationsproblem', 'vuxna/behandling/relationer/')],
         body='''
-<p>Sorg är en del av livet. Vi drabbas alla någon gång, och för många händer det många
+<p>Sorg är en del av livet. Vi drabbas alla någon gång, och för en del av oss händer det många
 gånger. Sorgeprocessen leder ofta till svåra känslor, och vanligen förknippar vi sorg
 med förlusten av en anhörig eller vän.</p>
 
@@ -504,7 +510,7 @@ passa bättre. Har förlusten skett plötsligt eller under skrämmande omständi
         h1='Låg självkänsla',
         title='KBT vid låg självkänsla i Uppsala | KBT-Konsulterna',
         desc='Behandling vid låg självkänsla, självkritik och perfektionism. KBT hos '
-             'legitimerade psykologer i centrala Uppsala och online.',
+             'legitimerade psykologer i centrala Uppsala och via videosamtal.',
         lede='Låg självkänsla kan påverka en människas liv i grunden och bli ett hinder '
              'för det som är väsentligt. Den går att arbeta med.',
         people=['aksel-reppling', 'angeli-holmstedt'],
@@ -564,6 +570,8 @@ tanken i sig.</p>
   erfarenheten, inte argumentet, som förändrar en grundläggande uppfattning.</li>
   <li><strong>Att arbeta med självkritiken.</strong> Att känna igen den inre rösten och möta
   den med något annat än att antingen tro på den eller bråka med den.</li>
+  <li><strong>Självmedkänsla.</strong> Metoder för att öka din självmedkänsla — att kunna
+  möta dig själv med samma vänlighet som du skulle möta en vän.</li>
   <li><strong>Att sluta undvika.</strong> Perfektionism och undvikande är två sidor av
   samma sak, och båda behöver minska för att bilden av dig själv ska kunna ändras.</li>
   <li><strong>Värderingar.</strong> Vad vill du använda ditt liv till, om du slutar
@@ -588,7 +596,7 @@ en gemensam bedömning av vad som är mest angeläget att arbeta med först.</p>
         h1='Relationsproblem',
         title='Hjälp vid relationsproblem i Uppsala | KBT-Konsulterna',
         desc='Samtal och KBT vid svårigheter i relationer — till partner, familj, '
-             'vänner, kollegor eller till dig själv. Uppsala och online.',
+             'vänner, kollegor eller till dig själv. Uppsala och via videosamtal.',
         lede='Vissa upplever att de har för få relationer, andra att det är svårt att '
              'vara i relation med andra. Båda går att arbeta med.',
         people=['aksel-reppling', 'angeli-holmstedt'],
@@ -746,7 +754,7 @@ med.</p>
         h1='Neuropsykiatriska funktionsnedsättningar (NPF)',
         title='Behandling vid adhd och autism i vuxen ålder | KBT-Konsulterna Uppsala',
         desc='KBT-behandling och anpassat stöd vid adhd, add och autism hos vuxna — '
-             'med eller utan färdig diagnos. Uppsala och online.',
+             'med eller utan färdig diagnos. Uppsala och via videosamtal.',
         lede='Vi tar särskild hänsyn till både hindren och styrkorna som följer med en '
              'NPF-diagnos. Du behöver inte ha en färdig utredning för att komma.',
         people=['karin-holmstrom', 'elias-westerlund', 'barry-karlsson'],
@@ -1593,7 +1601,7 @@ B_STOD = [
         h1='Stöd till föräldrar och anhöriga',
         title='Föräldrastöd och anhörigstöd i Uppsala | KBT-Konsulterna',
         desc='Rådgivande samtal till föräldrar och anhöriga till barn och ungdomar i '
-             'alla åldrar. Psykologmottagning i centrala Uppsala och online.',
+             'alla åldrar. Psykologmottagning i centrala Uppsala och via videosamtal.',
         lede='Att vara förälder eller nära anhörig till ett barn är ibland utmanande och '
              'svårt. Det uppstår ständigt nya situationer och frågor.',
         people=['aksel-reppling', 'angeli-holmstedt'],
@@ -1640,7 +1648,7 @@ erfarenhet av det hos oss; se <a href="{base}vuxna/beroende/index.html">skadligt
 beroende</a>.</p>
 
 <h2>Praktiskt</h2>
-<p>Samtalen sker på mottagningen i centrala Uppsala eller via video. Ni kan komma en och
+<p>Samtalen sker på mottagningen i centrala Uppsala eller via videosamtal. Ni kan komma en och
 en eller tillsammans — vid gemensam vårdnad är det ofta värdefullt att båda är med, men
 det är inget krav för att boka. Aksel Reppling och Angeli Holmstedt arbetar särskilt med
 föräldra- och anhörigstöd.</p>
@@ -1708,7 +1716,7 @@ ett läsår, en utbildningsdag, eller återkommande skolpsykologiskt arbete på 
 Vi börjar alltid med ett samtal om vad ni behöver, och gör därefter en tydlig
 överenskommelse om omfattning, frekvens och ramar.</p>
 
-<p>Vi arbetar hos er, hos oss i centrala Uppsala eller via video, i hela landet. Priser
+<p>Vi arbetar hos er, hos oss i centrala Uppsala eller via videosamtal, i hela landet. Priser
 lämnas på förfrågan; moms tillkommer. För större uppdrag, ramavtal och upphandling, se
 <a href="{base}organisationer/index.html">För organisationer</a>.</p>
 ''',
@@ -1876,9 +1884,11 @@ ORG = [
               ('Rehabilitering', 'organisationer/rehabilitering/'),
               ('Stöd för skolpersonal', 'barn-och-ungdom/stod/skola/')],
         body='''
-<p>Det kan handla om komplicerade och ovanliga problem, eller om personliga reaktioner
-som påverkar arbetet. Handledning hjälper individer och grupper att utveckla sin
-kompetens, att hantera ett stressfyllt arbete, och att klara av utmanande situationer.</p>
+<p>Handledning hjälper individer och grupper att utveckla sin kompetens, att hantera ett
+stressfyllt arbete och att klara av utmanande situationer. Det kan handla om enskilda
+ärenden, om att använda en metod som avsett, om arbetsgruppens samarbete och de
+reaktioner arbetet väcker, om handledning inom en utbildning, eller om stöd till dig som
+är chef. Vi beskriver de olika formerna närmare nedan.</p>
 
 <h2>Vilka handleder vi?</h2>
 <p>Handledningen kan vara inriktad på att stödja personal i att ge den vård, behandling
@@ -1934,7 +1944,7 @@ varannan till var fjärde vecka över en längre period. Kontinuiteten är en st
 värdet.</p>
 
 <h2>Praktiskt</h2>
-<p>Vi arbetar hos er, hos oss i centrala Uppsala eller via video, i hela landet.
+<p>Vi arbetar hos er, hos oss i centrala Uppsala eller via videosamtal, i hela landet.
 Priser lämnas på förfrågan; moms tillkommer. Hör av er via
 <a href="{base}organisationer/kontakt/">kontakt för uppdrag</a>.</p>
 ''',
@@ -1954,7 +1964,8 @@ Priser lämnas på förfrågan; moms tillkommer. Hör av er via
               ('Vad är KBT?', 'om-oss/index.html#kbt')],
         body='''
 <p>Vi har lång erfarenhet av att utbilda i kognitiv beteendeterapi (KBT), motiverande
-samtal (MI) och mindfulness.</p>
+samtal (MI) och mindfulness. Angeli Holmstedt är medlem i MINT, det internationella
+nätverket av MI-utbildare.</p>
 
 <p>Utbudet sträcker sig från kortare workshops och seminarier, via orienteringsutbildningar
 på 4–5 dagar, till längre grundläggande psykoterapiutbildningar — det som tidigare kallades
@@ -1982,10 +1993,6 @@ Skadligt bruk, beroende och spel om pengar. Neuropsykiatriska funktionsnedsättn
 Oro, ångest, nedstämdhet och trauma. Ledarskap, kommunikation och bemötande.</p>
 
 <h2>Skräddarsydda uppdrag</h2>
-<p>Vi erbjuder utbildning och föredrag för företag och offentlig verksamhet om exempelvis
-stress, skadligt bruk och beroende, ledarskap och kommunikation, samtalsmetodik,
-motiverande samtal, mindfulness och många andra teman.</p>
-
 <p>De flesta uppdrag anpassas efter verksamheten. Vi börjar med ett samtal om vilka
 deltagarna är, vad de redan kan, och vad som ska vara annorlunda efteråt — det sista är
 den viktigaste frågan, och den som avgör hur dagen läggs upp. En utbildning som ska
@@ -1999,9 +2006,8 @@ rekommenderar därför ofta att en utbildningsinsats kombineras med
 att det som lärts in får stöd att bli praktik.</p>
 
 <h2>Praktiskt</h2>
-<p>Vi håller utbildningar hos er, hos oss i centrala Uppsala eller via video, i hela
-landet. Angeli Holmstedt är medlem i MINT, det internationella nätverket av
-MI-utbildare. Priser lämnas på förfrågan; moms tillkommer.</p>
+<p>Vi håller utbildningar hos er, hos oss i centrala Uppsala eller via videosamtal, i hela
+landet. Priser lämnas på förfrågan; moms tillkommer.</p>
 
 <p>Hör av er för information om uppdragsutbildningar, workshops, föreläsningsserier,
 föredrag och övrig fortbildning — se
@@ -2014,12 +2020,15 @@ föredrag och övrig fortbildning — se
 deltagarna arbetar behöver mindre grupper, eftersom den bygger på övning och
 återkoppling. Vi säger gärna vad vi tror är rimligt utifrån vad ni vill uppnå.</p>
 
-<h3>Kan utbildningen hållas på distans?</h3>
-<p>Ja, både föreläsningar och längre utbildningar fungerar via video. Moment som bygger på
+<h3>Kan utbildningen hållas via videosamtal?</h3>
+<p>Ja, både föreläsningar och längre utbildningar fungerar via videosamtal. Moment som bygger på
 rollspel och praktisk övning blir dock oftast bättre på plats.</p>
 
 <h3>Får deltagarna intyg?</h3>
-<p>Ja, vi utfärdar intyg på genomgången utbildning med omfattning och innehåll angivet.</p>
+<p>Ja, vi utfärdar intyg på genomgången utbildning med omfattning och innehåll angivet.
+Vi kallar det inte en certifiering. Ett intyg visar vad utbildningen har innehållit, men
+är inte detsamma som en legitimation från Socialstyrelsen eller ett examensbevis från
+universitet eller högskola.</p>
 
 <h3>Hur lång framförhållning behövs?</h3>
 <p>Det varierar med årstid och uppdragets storlek. Hör av er så tidigt ni kan, särskilt
@@ -2072,8 +2081,8 @@ problemen och stödjer chefer i att samtala med medarbetare om dem. Vi erbjuder 
 fördjupade utredningar och bedömningar, och ger vid behov kvalificerade behandlingar med
 evidensbaserade metoder.</p>
 
-<p>Vidare handleder och utbildar vi de nätverk som drabbas — anhöriga, vänner,
-arbetskamrater och chefer.</p>
+<p>Vidare ger vi stöd, handledning och utbildning till de nätverk som drabbas — anhöriga,
+vänner, arbetskamrater och chefer.</p>
 
 <h2>Så kan ett uppdrag se ut</h2>
 <ol class="steps steps--plain">
@@ -2099,7 +2108,7 @@ information.</p>
 litar på ramarna berättar inte det som behövs för att insatsen ska göra nytta.</p>
 
 <h2>Praktiskt</h2>
-<p>Vi arbetar på mottagningen i centrala Uppsala, hos er och via video i hela landet.
+<p>Vi arbetar på mottagningen i centrala Uppsala, hos er och via videosamtal i hela landet.
 Priser lämnas på förfrågan; moms tillkommer när arbetsgivare, försäkringsbolag eller
 socialtjänst betalar. Hör av er via
 <a href="{base}organisationer/kontakt/">kontakt för uppdrag</a>.</p>
@@ -2139,7 +2148,7 @@ innan det blir synligt hos individen.</p>
   överdrivet spelande om pengar</li>
   <li>kvalificerad behandling med evidensbaserade metoder som följer Socialstyrelsens
   rekommendationer</li>
-  <li>handledning och utbildning till de nätverk som påverkas — anhöriga, vänner,
+  <li>stöd, handledning och utbildning till de nätverk som påverkas — anhöriga, vänner,
   arbetskamrater och chefer</li>
   <li>stöd i att ta fram eller se över en alkohol- och drogpolicy, så att rutinerna är
   bestämda innan de behövs</li>
@@ -2225,7 +2234,7 @@ annorlunda när uppdraget är slut.</p>
 <h2>Var håller vi hus?</h2>
 <p>Vår bas är i centrala Uppsala, där mottagningen ligger i Gårdshuset vid Slottskällan
 på gångavstånd från Centralstationen. Där tar vi emot kunder och klienter — men vi
-arbetar också online och hos arbetsgivare runt om i landet.</p>
+arbetar också via videosamtal och hos arbetsgivare runt om i landet.</p>
 
 <h2>Priser och fakturering</h2>
 <p>Priser för handledning, utbildning, konsultation och utredning lämnas på förfrågan,
@@ -2261,7 +2270,7 @@ TREE = [
                 h1='Psykologisk behandling och terapi för vuxna',
                 title='Psykologisk behandling och KBT för vuxna i Uppsala | KBT-Konsulterna',
                 desc='KBT vid ångest, depression, stress, sömnproblem, trauma, sorg och '
-                     'låg självkänsla. Legitimerade psykologer i Uppsala och online.',
+                     'låg självkänsla. Legitimerade psykologer i Uppsala och via videosamtal.',
                 lede='Våra psykologer och psykoterapeuter har lång erfarenhet av att '
                      'behandla psykisk ohälsa i de flesta former. Du behöver inte ha en '
                      'diagnos, och du behöver inte veta vad problemet heter.',
@@ -2292,8 +2301,8 @@ för vilka de fungerar. För många problemområden har KBT den största möjlig
 och lindra psykologiskt lidande.</p>
 
 <h2>Så arbetar vi</h2>
-<p>Vi börjar med en gemensam bedömning och formulerar därefter en plan utifrån dina mål
-och värderingar. För det mesta arbetar vi ”här och nu”, men om din tidigare historia
+<p>Vi börjar med utredning som leder fram till en bedömning och formulerar därefter
+gemensamt en plan utifrån dina mål och värderingar. För det mesta arbetar vi ”här och nu”, men om din tidigare historia
 påverkar hur du mår i dag finns även den med i samtalen.</p>
 
 <h2>Hur ett samtal går till</h2>
@@ -2312,9 +2321,9 @@ går i rätt riktning och att tiden används väl.</p>
 utmattning, trauma eller långvarig nedstämdhet tar längre tid. Du binder dig aldrig till
 ett antal, och du bestämmer själv när du vill avsluta.</p>
 
-<h2>På mottagningen eller online</h2>
+<h2>På mottagningen eller via videosamtal</h2>
 <p>Vi tar emot i Gårdshuset vid Slottskällan i centrala Uppsala, tio minuters promenad
-från Centralstationen, och erbjuder videosamtal i hela Sverige. De flesta
+från Centralstationen, och via videosamtal oavsett var du bor. De flesta
 behandlingsformer fungerar lika väl på video.</p>
 
 <p>Du behöver ingen remiss, och du behöver inte veta vad problemet heter för att höra av
@@ -2329,7 +2338,7 @@ dig.</p>
                 desc='Evidensbaserad parterapi med IBCT för alla typer av par, oavsett '
                      'sexuell läggning och oavsett om ni lever tillsammans eller inte.',
                 lede='Vi erbjuder evidensbaserad parterapi för alla typer av par, oavsett '
-                     'sexuell läggning och oavsett om ni lever tillsammans eller inte.',
+                     'sexuell läggning och om ni lever tillsammans eller inte.',
                 people=['aksel-reppling', 'angeli-holmstedt'],
                 also=[('Relationsproblem', 'vuxna/behandling/relationer/'),
                       ('Priser för parterapi', 'priser/index.html'),
@@ -2359,15 +2368,18 @@ tillrättavisad.</p>
 form av KBT som syftar till att integrera förändringsarbete med acceptansstrategier.</p>
 
 <p>Varför fortsätter vi att agera och kommunicera på vissa sätt, även när det utifrån sett
-inte är särskilt hjälpsamt? Varför bråkar vi om och om igen om samma saker? Utifrån de
-frågorna arbetar man med metoder för beteendeförändring — men lägger samtidigt till
-acceptans och förståelse för sin partner. Acceptansen är en förutsättning för att
-förändringarna ska bli bestående, och för att den känslomässiga närheten ska kunna
-byggas upp igen.</p>
+inte är särskilt hjälpsamt? Varför bråkar vi om och om igen om samma saker? Utifrån
+exempelvis dessa, eller andra frågor, arbetar man med metoder för beteendeförändring samt
+acceptans och förståelse för sig själv och partnern.</p>
 
-<p>En bärande tanke i IBCT är att en del skillnader mellan två personer inte går att
-förhandla bort. Det som går att förändra är vad ni gör med dem — om de fortsätter vara
-det ni bråkar om, eller blir något ni förstår hos varandra.</p>
+<p>IBCT utgår från att vissa skillnader mellan partner är svåra att förändra eller kan vara
+bestående. Försök att förändra den andre kan då bidra till återkommande konflikter,
+frustration och ökad polarisering. Målet är inte nödvändigtvis att skillnaderna ska
+försvinna, utan att paret ska utveckla ett annat förhållningssätt och bemötande av
+dem.</p>
+
+<p>I IBCT betonar man en emotionell acceptans av varandra som en väg till förändring, och
+inte bara beteendeförändringar.</p>
 
 <h2>Hur går det till?</h2>
 <p>Vid den första kontakten börjar vi vanligen med ett gemensamt samtal där ni tillsammans
@@ -2413,9 +2425,9 @@ Se <a href="{base}priser/index.html">priser</a>.</p>
                      'anhörig.',
                 people=['thomas-alm', 'angeli-holmstedt'],
                 img=('kidnappad-hjarna', 'Boken Kidnappad hjärna och två vinglas i solljus på ett bord'),
-                also=[('Skadligt bruk på arbetsplatsen', 'organisationer/skadligt-bruk/'),
-                      ('Stress och utmattning', 'vuxna/behandling/stress-utmattning/'),
-                      ('Behandling vid NPF', 'vuxna/behandling/npf/')],
+                also=[('Anhörigstöd', 'vuxna/anhorigstod/'),
+                      ('Psykiatrisk bedömning', 'vuxna/psykiatri/index.html'),
+                      ('Skadligt bruk på arbetsplatsen', 'organisationer/skadligt-bruk/')],
                 body='''
 <p>När spelande, alkohol eller läkemedel tappat sin ursprungliga funktion — glädjen,
 förgyllandet av en god middag, lindringen av smärta — och mer och mer börjar skapa
@@ -2517,8 +2529,65 @@ misshandel, övergrepp eller skadas på andra sätt. Många anhöriga får egna 
 ångest, stressymtom, sömnproblem eller depression.</p>
 
 <p>Vi har lång erfarenhet av att stödja och behandla anhöriga, genom råd och stöd, hjälp
-med egen psykisk ohälsa, eller med andra behov som finns. Vi ger också råd, stöd och
+med egen psykisk ohälsa, eller med andra behov som finns. Läs mer om
+<a href="{base}vuxna/anhorigstod/">anhörigstöd</a>. Vi ger också råd, stöd och
 handledning till arbetsgivare, socialtjänst och behandlingshem.</p>
+''',
+            ),
+            dict(
+                slug='anhorigstod', label='Anhörigstöd',
+                h1='Stöd till dig som är anhörig',
+                title='Anhörigstöd i Uppsala – samtal och stöd för anhöriga | KBT-Konsulterna',
+                desc='Stöd och samtal för dig som är anhörig till någon med psykisk ohälsa, '
+                     'sjukdom eller problem med alkohol, droger eller spel. Uppsala och via videosamtal.',
+                lede='Att vara anhörig till någon med psykiska eller fysiska svårigheter eller '
+                     'beroendeproblem är ofta en särskild påfrestning. Du är välkommen till oss '
+                     'även om du själv inte har något eget psykiskt problem.',
+                people=['angeli-holmstedt', 'thomas-alm'],
+                also=[('Skadligt bruk och beroende', 'vuxna/beroende/'),
+                      ('Stöd till föräldrar', 'barn-och-ungdom/stod/foraldrar/'),
+                      ('Handledning för verksamheter', 'organisationer/handledning/')],
+                body='''
+<p>Att vara anhörig kan innebära stora förändringar i livet. Som anhörig vill man hjälpa
+men vet ofta inte hur. Hela livssituationen kan komma att förändras, och man kan bli
+frustrerad och ha svårt att förstå varför den drabbade kanske inte tar emot hjälp och
+fortsätter med sitt gamla beteende — beteenden som håller kvar lidandet.</p>
+
+<p>Problemen kan ha funnits hela eller stora delar av livet: en förälder som dricker för
+mycket alkohol, en partner som har återkommande depressioner, en nära vän som försvinner
+bort i demenssjukdom, ett tonårsbarn som använder droger eller tynar bort i anorexi.</p>
+
+<h2>Som anhörig hamnar man ofta i bakgrunden</h2>
+<p>Mycket energi går åt till den som är drabbad. Man försöker hjälpa till på olika sätt,
+men är osäker på om hjälpen leder framåt. Den osäkerheten är vanlig, och det gäller också
+de känslor man kan uppleva som anhörig: irritation och skuldkänslor, oro och grubbel.</p>
+
+<h2>Så kan vi hjälpa</h2>
+<p>Vi har lång erfarenhet och stort engagemang för den situation man kan befinna sig i som
+anhörig. Det är viktigt att möta anhöriga i kris och kunna erbjuda stöd och hjälp, att
+lyssna och visa medkänsla.</p>
+
+<p>Kontakterna varierar i tid — allt från ett par stödjande samtal till en längre kontakt.
+Det handlar ofta om att få hjälp att utforska förhållningssätt, lösa problem eller hitta
+strategier för att kunna hjälpa på ett mer konstruktivt sätt. Samtalen kan också handla om
+att kunna acceptera sina egna känslor och behov. Ibland behöver man som anhörig också
+hjälp med egna besvär, till exempel ångest eller sömnproblem. Vi anpassar samtalen efter
+dina behov och önskemål.</p>
+
+<h2>Anhörig till någon med beroende</h2>
+<p>Att leva nära någon som har problem med alkohol, droger eller spel om pengar är för de
+flesta en stor stress. Läs mer på sidan om
+<a href="{base}vuxna/beroende/index.html">skadligt bruk och beroende</a>.</p>
+
+<h2>Förälder till ett barn som har det svårt</h2>
+<p>Är du förälder eller anhörig till ett barn eller en ungdom, se
+<a href="{base}barn-och-ungdom/stod/foraldrar/">stöd till föräldrar och anhöriga</a>
+under Barn &amp; ungdom.</p>
+
+<h2>För dig som arbetar med andra</h2>
+<p>Vi handleder också personal på behandlingshem, inom socialtjänst, vård och skola, som
+möter anhöriga i sitt arbete. Läs mer om
+<a href="{base}organisationer/handledning/">handledning</a>.</p>
 ''',
             ),
             dict(
@@ -2539,6 +2608,16 @@ adhd eller autism, utan de långa väntetider som ofta finns i den offentliga v�
 fungerande tillvaro — oavsett om det handlar om arbetsliv, studier eller livet i övrigt.
 Våra legitimerade psykologer bedömer om symtomen uppfyller kriterierna för adhd, autism
 (autismspektrumtillstånd) eller annan neuropsykiatrisk funktionsnedsättning.</p>
+
+<h2>Psykologisk och psykiatrisk utredning</h2>
+<p>Vi gör inte bara neuropsykiatriska utredningar. Som psykologer gör vi också
+psykologiska och psykiatriska utredningar och bedömningar — till exempel när det är
+oklart vad dina besvär beror på, när ångest, nedstämdhet, trauma eller andra svårigheter
+behöver kartläggas, eller när en tidigare diagnos behöver prövas på nytt. Utredningen
+ger en grund för att välja rätt behandling.</p>
+<p>Behövs också en läkarbedömning, till exempel inför medicinering, samarbetar vi med en
+specialistläkare i psykiatri. Läs mer om
+<a href="{base}vuxna/psykiatri/index.html">psykiatrisk bedömning</a>.</p>
 
 <h2>Varför en privat utredning?</h2>
 <p>Många som vänder sig till oss söker en utredning utan de långa väntetiderna inom den
@@ -2576,10 +2655,10 @@ en tydligare karta över dina styrkor och utmaningar.</p>
                 h1='Psykiatrisk bedömning och behandling',
                 title='Psykiatrisk bedömning och behandling i Uppsala | KBT-Konsulterna',
                 desc='Kontakt med legitimerad specialistläkare i psykiatri för utredning, '
-                     'bedömning och behandling — på mottagningen eller online.',
+                     'bedömning och behandling — på mottagningen eller via videosamtal.',
                 lede='Vi erbjuder kontakt med psykiater — legitimerad specialistläkare i '
                      'psykiatri — för utredning, bedömning och behandling, vid både '
-                     'fysiska besök och onlinebesök.',
+                     'besök på mottagningen och videosamtal.',
                 people=[],
                 also=[('Behandling vid NPF', 'vuxna/behandling/npf/'),
                       ('Utredning och bedömning', 'vuxna/utredning/index.html'),
