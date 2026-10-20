@@ -28,7 +28,7 @@ BUDGET = {2400: 300 * 1024, 1600: 165 * 1024, 1000: 80 * 1024, 800: 55 * 1024}
 # Photographs set inline in the text column rather than behind a scrim. They
 # are seen unmodified at no more than 44rem wide, so they skip the budget
 # (and its blur fallback) and stop at 1600px.
-INLINE = {'gruppbild', 'missbrukspsykologi', 'kidnappad-hjarna', 'bocker-fonster',
+INLINE = {'missbrukspsykologi', 'kidnappad-hjarna', 'bocker-fonster',
           'kok-samtal', 'spel'}
 
 

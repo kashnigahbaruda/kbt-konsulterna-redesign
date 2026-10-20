@@ -2722,7 +2722,7 @@ beroende</a> för vad vi gör på det området.</p>
         ],
     ),
     dict(
-        slug='barn-och-ungdom', label='Barn & ungdom', img='barn',
+        slug='barn-och-ungdom', label='Barn & ungdom', img='utredning-klossar',
         children=[
             dict(
                 slug='behandling', label='Psykologisk behandling',

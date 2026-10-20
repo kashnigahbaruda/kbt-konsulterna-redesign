@@ -467,7 +467,7 @@ def hero_video(base, slug):
 
 
 def hero(base, slug, eyebrow, h1, lede, alt, full=False, crumb=None,
-         actions=True, trust=False, video=None):
+         actions=True, trust=False, video=None, pic_cls=''):
     kind = 'hero--full' if full else 'hero--page'
     crumb_html = f'<p class="crumb">{crumb}</p>' if crumb else ''
     trust_html = ('<ul class="hero__trust">\n        ' + '\n        '.join(
@@ -480,7 +480,7 @@ def hero(base, slug, eyebrow, h1, lede, alt, full=False, crumb=None,
           <a class="hero__tel" href="{TEL_HREF}">eller ring {TEL}</a>
         </div>''' if actions else ''
     return f'''<section class="hero {kind}">
-  <div class="hero__media">{pic_wide(base, slug, alt, eager=True)}{hero_video(base, video) if video else ''}</div>
+  <div class="hero__media">{pic_wide(base, slug, alt, cls=pic_cls, eager=True)}{hero_video(base, video) if video else ''}</div>
   <div class="hero__scrim"></div>
   <div class="wrap hero__inner">
     <div class="hero__body">
@@ -667,10 +667,10 @@ def build_home():
          'Terapi, parterapi, neuropsykiatriska utredningar av adhd och autism, '
          'och behandling vid substansproblem. För dig som är över 18.',
          'En fåtölj vid ett fönster med KBT-litteratur på fönsterbrädan'),
-        ('barn', 'Barn &amp; ungdom', 'Upp till 18 år', 'barn-och-ungdom/index.html',
+        ('samtal-portratt', 'Barn &amp; ungdom', 'Upp till 18 år', 'barn-och-ungdom/index.html',
          'Behandling och utredning för barn och unga — och stöd till dig som är '
          'förälder, lärare eller socialsekreterare.',
-         'Ett barn som leker i snön'),
+         'En psykolog i samtal med en ung person vid ett bord på mottagningen'),
         ('motesrum', 'För organisationer', 'Uppdrag &amp; utbildning',
          'organisationer/index.html',
          'Handledning, coaching, föreläsningar och utbildning för arbetsgivare, '
@@ -695,14 +695,14 @@ def build_home():
                                + [team_cta(f'{b}kontakt/index.html')])
 
     body = f'''
-{hero(b, 'slottskallan-poster',
+{hero(b, 'samtal-karin',
       'Privat psykologmottagning i Uppsala',
       'Psykologisk behandling &amp; utredning du kan lita på',
       'Sju legitimerade psykologer och psykoterapeuter i Gårdshuset vid '
       'Slottskällan, tio minuter från Uppsala&nbsp;C. Vi tar emot på mottagningen '
       'och via videosamtal oavsett var du bor.',
-      'Fontänen i parken vid Slottskällan',
-      full=True, trust=True, video='slottskallan')}
+      'Psykolog Karin Holmström i samtal vid ett bord på mottagningen',
+      full=True, trust=True)}
 
 <section class="band">
   <div class="wrap">
@@ -1137,12 +1137,13 @@ def build_barn():
     ])
 
     body = f'''
-{hero(b, 'barn', 'Barn &amp; ungdom',
+{hero(b, 'utredning-klossar', 'Barn &amp; ungdom',
       'Vi finns med under hela resan',
       'Behandling och utredning för barn och unga — och stöd till föräldrar, '
       'skola, HVB-hem och socialtjänst.',
-      'Ett barn som leker i snön en vinterdag',
-      crumb=f'<a href="{b}index.html">Hem</a><span>/</span>Barn &amp; ungdom')}
+      'En psykolog och en ung person löser en klossuppgift vid ett bord på mottagningen',
+      crumb=f'<a href="{b}index.html">Hem</a><span>/</span>Barn &amp; ungdom',
+      pic_cls='pic--right')}
 
 <section class="band">
   <div class="wrap split">
@@ -1194,9 +1195,7 @@ def build_barn():
              stod, tone='band--hi',
              more=(b, 'barn-och-ungdom/stod/', 'Om råd, stöd och handledning'))}
 
-<section class="bleed">
-  <div class="bleed__media">{pic_wide(b, 'barn-play', 'Ett barn som bygger med klossar')}</div>
-  <div class="bleed__scrim"></div>
+<section class="bleed bleed--plain">
   <div class="wrap bleed__inner">
     <blockquote class="pull" data-reveal>
       &rdquo;Föräldrastöd brukar vara extra hjälpsamt när ditt barn inte kan eller vill gå
@@ -1217,7 +1216,7 @@ def build_barn():
                 'KBT för barn och ungdomar i Uppsala. Behandling vid oro, ångest, '
                 'nedstämdhet och OCD, utredning av adhd och autism, samt stöd till '
                 'föräldrar och skola.',
-                body, ogimg='barn')
+                body, ogimg='utredning-klossar')
 
 
 # ==========================================================================
@@ -1625,7 +1624,7 @@ def build_priser():
                 'Priser – psykolog och parterapi i Uppsala | KBT-Konsulterna',
                 'Enskilt samtal 1 500 kr / 45 min, parterapi 2 400 kr / 60 min. '
                 'Villkor, remiss och högkostnadsskydd hos KBT-Konsulterna.',
-                body, ogimg='kunskap')
+                body, ogimg='gardshuset')
 
 
 # ==========================================================================
@@ -1730,7 +1729,7 @@ def build_faq():
                 'Vanliga frågor om vår psykologmottagning | KBT-Konsulterna',
                 'Svar på vanliga frågor om väntetider, högkostnadsskydd och remiss, '
                 'videosamtal, kvällstider och utredningar hos KBT-Konsulterna.',
-                body, ogimg='kunskap', extra=extra)
+                body, ogimg='samtalsrum', extra=extra)
 
 
 # ==========================================================================
@@ -1791,10 +1790,6 @@ def build_om_oss():
       <p>Vår mottagning ligger i Gårdshuset vid Slottskällan på Sjukhusvägen 3, tio minuter
       från Centralstationen. Vi tar emot här, och via videosamtal oavsett var du bor.</p>
       <p style="margin-bottom:0"><a class="a-link" href="{b}medarbetare/index.html">Läs om var och en av oss {ARROW}</a></p>
-      <figure class="photo" data-reveal>
-        {pic_wide(b, 'gruppbild', 'Thomas Alm, Karin Holmström, Angeli Holmstedt och Aksel Reppling', sizes=PHOTO_SIZES)}
-        <figcaption>Thomas Alm, Karin Holmström, Angeli Holmstedt och Aksel Reppling.</figcaption>
-      </figure>
     </div>
   </div>
 </section>
@@ -1857,9 +1852,7 @@ def build_om_oss():
              'psykologer, och vi arbetar under tystnadsplikt och med patientförsäkring.</p>',
              '')}
 
-<section class="bleed">
-  <div class="bleed__media">{pic_wide(b, 'bokhylla-kbt', 'Mottagningens bokhyllor med KBT-litteratur')}</div>
-  <div class="bleed__scrim"></div>
+<section class="bleed bleed--plain">
   <div class="wrap bleed__inner">
     <blockquote class="pull" data-reveal>
       &rdquo;Vi vill inte publicera omdömen eftersom vi arbetar under sekretess. Det bästa
@@ -1920,12 +1913,12 @@ def source_select(idx):
 def build_kontakt():
     b = '../'
     body = f'''
-{hero(b, 'mottagning', 'Kontakt &amp; bokning',
+{hero(b, 'gardshuset', 'Kontakt &amp; bokning',
       'Hör av dig',
       'Skriv eller ring. Vi återkommer för det mesta samma dag. Du behöver '
       'inte veta på förhand vad du vill ha hjälp med, men om du vet — berätta '
       'gärna för oss.',
-      'Ett av våra samtalsrum med fåtölj, bokhylla och fönster',
+      'Gårdshuset vid Slottskällan, med entrén till mottagningen',
       crumb=f'<a href="{b}index.html">Hem</a><span>/</span>Kontakt',
       actions=False)}
 
@@ -2041,7 +2034,7 @@ def build_kontakt():
                 'Kontakta KBT-Konsulterna i Uppsala. Telefon 018 – 10 40 44. '
                 'Mottagning i Gårdshuset vid Slottskällan, tio minuter från '
                 'Centralstationen.',
-                body, ogimg='mottagning')
+                body, ogimg='gardshuset')
 
 
 # ==========================================================================
@@ -2144,7 +2137,7 @@ def build_akut():
                 'Akut hjälp vid psykisk ohälsa | KBT-Konsulterna',
                 'Vid akuta psykiska besvär: ring 112, MIND Stödlinje 90 101, eller sök '
                 'psykakuten där du bor. Vi har bokade tider och ingen jour.',
-                body, ogimg='stillhet')
+                body, ogimg='samtalsrum')
 
 
 # ==========================================================================

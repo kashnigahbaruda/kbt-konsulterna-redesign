@@ -465,6 +465,8 @@ button { font: inherit; }
 .hero__media { position: absolute; inset: 0; z-index: -2; overflow: hidden; }
 .hero__media picture { display: block; width: 100%; height: 100%; }
 .hero__media img { width: 100%; height: 100%; object-fit: cover; object-position: center 46%; }
+/* Subject on the right of the frame: on a narrow screen keep it, not the middle. */
+.hero__media .pic--right img { object-position: 88% 46%; }
 /* Background clip: invisible until it is really playing, so the poster
    underneath is what paints first and what stays if it never starts. */
 .hero__video {
@@ -646,6 +648,8 @@ button { font: inherit; }
 .bleed__media { position: absolute; inset: 0; z-index: -2; overflow: hidden; }
 .bleed__media picture { display: block; width: 100%; height: 100%; }
 .bleed__media img { width: 100%; height: 100%; object-fit: cover; }
+/* No photograph: the quote sits on the deep green alone. */
+.bleed--plain { background: var(--deep-deeper); }
 /* Keep the castle and sky in frame rather than the lawn below it. */
 .bleed__media .pic--sky img { object-position: center 18%; }
 .bleed__scrim {
