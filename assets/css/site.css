@@ -467,6 +467,7 @@ button { font: inherit; }
 .hero__media img { width: 100%; height: 100%; object-fit: cover; object-position: center 46%; }
 /* Subject on the right of the frame: on a narrow screen keep it, not the middle. */
 .hero__media .pic--right img { object-position: 88% 46%; }
+.hero__media .pic--high img { object-position: center 12%; }
 /* Background clip: invisible until it is really playing, so the poster
    underneath is what paints first and what stays if it never starts. */
 .hero__video {

@@ -1544,11 +1544,11 @@ def build_bio(p):
 def build_priser():
     b = '../'
     body = f'''
-{hero(b, 'bjork', 'Priser',
+{hero(b, 'gardshuset-tradgard', 'Priser',
       'Vad det kostar',
       'Vi är en privat psykologmottagning. Här är priserna, villkoren och hur '
       'det fungerar om din arbetsgivare eller Regionen betalar.',
-      'Ljus björkskog en sommardag',
+      'Gårdshuset vid Slottskällan i sensommarsol, sett från trädgården',
       crumb=f'<a href="{b}index.html">Hem</a><span>/</span>Priser')}
 
 <section class="band">
@@ -1624,7 +1624,7 @@ def build_priser():
                 'Priser – psykolog och parterapi i Uppsala | KBT-Konsulterna',
                 'Enskilt samtal 1 500 kr / 45 min, parterapi 2 400 kr / 60 min. '
                 'Villkor, remiss och högkostnadsskydd hos KBT-Konsulterna.',
-                body, ogimg='gardshuset')
+                body, ogimg='gardshuset-tradgard')
 
 
 # ==========================================================================
@@ -1920,6 +1920,7 @@ def build_kontakt():
       'gärna för oss.',
       'Gårdshuset vid Slottskällan, med entrén till mottagningen',
       crumb=f'<a href="{b}index.html">Hem</a><span>/</span>Kontakt',
+      pic_cls='pic--high',
       actions=False)}
 
 <section class="band">

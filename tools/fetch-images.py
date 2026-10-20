@@ -13,7 +13,6 @@ UA = {'User-Agent': 'kbt-konsulterna-redesign/1.0 (asset fetch)'}
 
 # CC0 stock, by Commons file name
 STOCK = {
-    'bjork':       'Birch_trees_in_a_grove_(Unsplash).jpg',
 }
 
 # Client's own photos, from the current WordPress uploads
