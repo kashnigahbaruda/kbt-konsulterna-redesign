@@ -913,21 +913,22 @@ button { font: inherit; }
 .bio__prose h2 { font-size: var(--step-2); margin: 2.2em 0 0.6em; }
 
 /* --- Footer --------------------------------------------------------------- */
-.site-foot { background: var(--deep); color: #BCC9C5; padding-block: clamp(3.5rem, 7vw, 5.5rem) 2.5rem; }
+.site-foot { background: #4A6B5A; color: #F1F4EF; padding-block: clamp(3.5rem, 7vw, 5.5rem) 2.5rem; }
 .site-foot h2 { color: #fff; font-size: var(--step-2); margin-bottom: 0.9rem; }
 .site-foot__grid { display: grid; gap: clamp(2rem, 5vw, 3.5rem); }
 @media (min-width: 52rem) { .site-foot__grid { grid-template-columns: 1.4fr 1fr 1fr; } }
-.site-foot a { color: #DCE4E0; text-decoration: none; }
+.site-foot a { color: #fff; text-decoration: none; }
 .site-foot a:hover { color: #fff; text-decoration: underline; text-underline-offset: 0.2em; }
-.site-foot h3 { color: var(--sand); font-size: var(--step--1); font-weight: 600; text-transform: uppercase; letter-spacing: 0.12em; margin-bottom: 1.1rem; }
+.site-foot h3 { color: #F3EEE4; font-size: var(--step--1); font-weight: 600; text-transform: uppercase; letter-spacing: 0.12em; margin-bottom: 1.1rem; }
 .site-foot ul { list-style: none; margin: 0; padding: 0; }
 .site-foot li { margin-bottom: 0.6rem; }
 .site-foot__addr { font-style: normal; line-height: 1.8; }
 .site-foot__akut { margin-top: 1.5rem; font-size: 0.98rem; }
-.site-foot__akut a { color: var(--sand); text-decoration: underline; text-underline-offset: 0.2em; }
-.site-foot__base { margin-top: clamp(2.5rem, 6vw, 4rem); font-size: 0.88rem; color: #8FA29D; display: flex; flex-wrap: wrap; gap: 0.5rem 1.75rem; }
-.site-foot__base a { color: #8FA29D; }
-.site-foot__logo img { width: 220px; height: auto; margin-bottom: 1.4rem; opacity: 0.9; }
+.site-foot__akut a { color: #fff; text-decoration: underline; text-underline-offset: 0.2em; }
+.site-foot__base { margin-top: clamp(2.5rem, 6vw, 4rem); font-size: 0.88rem; color: #E8EEEA; display: flex; flex-wrap: wrap; gap: 0.5rem 1.75rem; }
+.site-foot__base a { color: #E8EEEA; }
+.site-foot__logo img { width: 220px; height: auto; margin-bottom: 1.4rem; }
+.site-foot :focus-visible { outline-color: #fff; }
 
 /* --- Motion --------------------------------------------------------------
    One orchestrated moment on load, then section headings fade up once.
