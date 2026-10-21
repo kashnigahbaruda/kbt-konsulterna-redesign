@@ -29,7 +29,7 @@ BUDGET = {2400: 300 * 1024, 1600: 165 * 1024, 1000: 80 * 1024, 800: 55 * 1024}
 # are seen unmodified at no more than 44rem wide, so they skip the budget
 # (and its blur fallback) and stop at 1600px.
 INLINE = {'missbrukspsykologi', 'kidnappad-hjarna', 'bocker-fonster',
-          'kok-samtal', 'spel'}
+          'kok-samtal', 'spel', 'fika-samtal'}
 
 
 def variants(im, base, widths, jpg_width, quality=80, budget=False):

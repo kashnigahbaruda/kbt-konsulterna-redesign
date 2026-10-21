@@ -36,6 +36,9 @@ MAIL = 'kontakt@kbt-konsulterna.se'
 ADDR = 'Gårdshuset, Slottskällan, Sjukhusvägen 3, 753 09 Uppsala'
 MAPS = ('https://www.google.com/maps/place/Sjukhusv%C3%A4gen+3,+753+09+Uppsala/'
         '@59.8536888,17.6380005,18z')
+# Keyless Google Maps embed. Loaded lazily, and only on Kontakt.
+MAP_EMBED = ('https://maps.google.com/maps?q=Sjukhusv%C3%A4gen+3,+753+09+Uppsala'
+             '&z=16&hl=sv&output=embed')
 
 _dims = {}
 
@@ -292,6 +295,7 @@ HEAD_TPL = '''<!doctype html>
 <svg class="sprite" aria-hidden="true" focusable="false" width="0" height="0"><defs>
   <symbol id="i-arrow-right" viewBox="0 0 24 24"><path d="M4 12h15"/><path d="M13 6l6 6-6 6"/></symbol>
   <symbol id="i-check" viewBox="0 0 24 24"><path d="M4 12.5l5.5 5.5L20 6.5"/></symbol>
+  <symbol id="i-pin" viewBox="0 0 24 24"><path d="M12 21s-6.5-5.6-6.5-11a6.5 6.5 0 0 1 13 0c0 5.4-6.5 11-6.5 11z"/><circle cx="12" cy="10" r="2.3"/></symbol>
   <symbol id="i-plus" viewBox="0 0 24 24"><path d="M12 5v14"/><path d="M5 12h14"/></symbol>
   <symbol id="i-chevron-down" viewBox="0 0 24 24"><path d="M6 9.5l6 6 6-6"/></symbol>
   <symbol id="i-menu" viewBox="0 0 24 24"><path d="M3.5 7h17"/><path d="M3.5 12h17"/><path d="M3.5 17h17"/></symbol>
@@ -450,13 +454,18 @@ def page(path, title, desc, body, ogimg='samtalsrum', extra='', ogtitle=None):
 # ==========================================================================
 # Shared content fragments
 # ==========================================================================
+# Encoded widths per clip, (phone, desktop). See build-video.py / build-hero-edit.py.
+VIDEO_WIDTHS = {'slottskallan': (1280, 1920), 'mottagningen': (960, 1176)}
+
+
 def hero_video(base, slug):
     """Looping background clip over its poster <picture>. No autoplay attribute:
     site.js starts it, unless the visitor prefers reduced motion or has
     Save-Data on, so without JS the poster simply stays. Phones get the 1280
     encode through <source media>."""
+    phone, desktop = VIDEO_WIDTHS[slug]
     srcs = []
-    for media, w in (('(max-width: 50rem)', 1280), (None, 1920)):
+    for media, w in (('(max-width: 50rem)', phone), (None, desktop)):
         m = f' media="{media}"' if media else ''
         for ext in ('webm', 'mp4'):
             srcs.append(f'<source{m} type="video/{ext}" '
@@ -467,7 +476,7 @@ def hero_video(base, slug):
 
 
 def hero(base, slug, eyebrow, h1, lede, alt, full=False, crumb=None,
-         actions=True, trust=False, video=None, pic_cls=''):
+         actions=True, trust=False, video=None, pic_cls='', addr=False):
     kind = 'hero--full' if full else 'hero--page'
     crumb_html = f'<p class="crumb">{crumb}</p>' if crumb else ''
     trust_html = ('<ul class="hero__trust">\n        ' + '\n        '.join(
@@ -475,6 +484,8 @@ def hero(base, slug, eyebrow, h1, lede, alt, full=False, crumb=None,
             'Leg. psykologer', 'Tystnadsplikt',
             'Mottagning i centrala Uppsala', 'Videosamtal i hela Sverige'))
         + '\n      </ul>') if trust else ''
+    addr_html = (f'<p class="hero__addr"><a href="{MAPS}">{icon("pin")}'
+                 f'<span>{ADDR}</span></a></p>') if addr else ''
     act = f'''<div class="actions">
           <a class="btn btn--on-dark" href="{base}kontakt/index.html">Boka samtal {ARROW_BTN}</a>
           <a class="hero__tel" href="{TEL_HREF}">eller ring {TEL}</a>
@@ -490,6 +501,7 @@ def hero(base, slug, eyebrow, h1, lede, alt, full=False, crumb=None,
       <p class="hero__lede">{lede}</p>
       {act}
       {trust_html}
+      {addr_html}
     </div>
   </div>
 </section>
@@ -695,14 +707,14 @@ def build_home():
                                + [team_cta(f'{b}kontakt/index.html')])
 
     body = f'''
-{hero(b, 'samtal-karin',
+{hero(b, 'mottagningen-poster',
       'Privat psykologmottagning i Uppsala',
       'Psykologisk behandling &amp; utredning du kan lita på',
       'Sju legitimerade psykologer och psykoterapeuter i Gårdshuset vid '
       'Slottskällan, tio minuter från Uppsala&nbsp;C. Vi tar emot på mottagningen '
       'och via videosamtal oavsett var du bor.',
-      'Psykolog Karin Holmström i samtal vid ett bord på mottagningen',
-      full=True, trust=True)}
+      'Gårdshuset vid Slottskällan, sett från trädgården',
+      full=True, trust=True, addr=True, video='mottagningen')}
 
 <section class="band">
   <div class="wrap">
@@ -735,6 +747,7 @@ def build_home():
       bemötande. Varmt välkommen till oss.</p>
       {ticks(['Terapi för barn, ungdomar, vuxna och par', 'Neuropsykiatriska utredningar i alla åldrar', 'Bedömning och behandling vid substansproblem: alkohol, spel om pengar', 'Stöd till föräldrar och anhöriga', 'Uppdrag för företag och offentlig verksamhet', 'Handledning, kurser och utbildningar'], two=True, extra='margin-top:2rem')}
       <p style="margin-top:2rem;margin-bottom:0"><a class="a-link" href="{b}om-oss/index.html">Mer om oss och hur vi arbetar {ARROW}</a></p>
+      {photo(b, 'fika-samtal', 'Tre personer i samtal kring ett runt bord vid fönstret på mottagningen')}
     </div>
   </div>
 </section>
@@ -1940,7 +1953,11 @@ def build_kontakt():
         </div>
         <div>
           <dt>Besöksadress</dt>
-          <dd>{ADDR}<br><a class="a-link" href="{MAPS}">Visa på karta {ARROW}</a></dd>
+          <dd>{ADDR}<br><a class="a-link" href="{MAPS}">Öppna i Google Maps {ARROW}</a>
+          <div class="map">
+            <iframe src="{MAP_EMBED}" title="Karta: KBT-Konsulterna, {ADDR}"
+              loading="lazy" referrerpolicy="no-referrer-when-downgrade" allowfullscreen></iframe>
+          </div></dd>
         </div>
         <div>
           <dt>Vägbeskrivning</dt>

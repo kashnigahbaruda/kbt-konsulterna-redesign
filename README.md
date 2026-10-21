@@ -237,11 +237,13 @@ python3 tools/fetch-images.py   # re-download source imagery
 python3 tools/build-images.py   # regenerate responsive variants + keyed brand marks
 python3 tools/build-logo.py     # regenerate the logo SVGs + favicons from the client's file
 python3 tools/build-fonts.py    # re-fetch and rebuild the self-hosted fonts
+python3 tools/build-hero-edit.py  # cut + encode the homepage hero film (then build-images.py)
 ```
 
 `build-images.py` needs Pillow (`pip install Pillow`); `build-fonts.py` needs fonttools and
 brotli; `build-logo.py` needs fonttools and Pillow, and only has to run when the client's
-logo file changes. Nothing else has dependencies.
+logo file changes. `build-hero-edit.py` needs ffmpeg and the four source clips in
+`assets/video/_src/`, which are not committed. Nothing else has dependencies.
 
 Note: `build-site.py` reads the bios and FAQs from a crawl of the current site
 (`research/crawl-pages.json`), which is not included in this repo. Re-running it needs that

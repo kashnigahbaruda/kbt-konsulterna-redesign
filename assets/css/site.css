@@ -532,6 +532,11 @@ button { font: inherit; }
 .hero__trust li { margin: 0; display: inline-flex; align-items: center; gap: 0.45em; }
 /* A check per item, so the list still reads as separate points once it wraps */
 .hero__trust .icon { width: 0.9em; height: 0.9em; color: var(--sand); }
+/* Visiting address under the trust points: one quiet line, linking to the map */
+.hero__addr { margin: 1.1rem 0 0; font-family: var(--display); font-size: 0.88rem; letter-spacing: 0.04em; }
+.hero__addr a { display: inline-flex; align-items: center; gap: 0.45em; color: #C6D1CC; text-decoration: none; }
+.hero__addr a:hover { color: #fff; text-decoration: underline; text-underline-offset: 0.2em; }
+.hero__addr .icon { flex: none; width: 1em; height: 1em; color: var(--sand); }
 .hero__tel { color: #fff; font-family: var(--display); font-weight: 600; text-decoration: none; font-size: var(--step-0); }
 .hero__tel:hover { text-decoration: underline; text-underline-offset: 0.2em; }
 
@@ -771,6 +776,9 @@ button { font: inherit; }
 .facts dt { font-family: var(--display); font-size: var(--step--1); font-weight: 600; text-transform: uppercase; letter-spacing: 0.11em; color: var(--muted); margin-bottom: 0.35rem; }
 .facts dd { margin: 0; color: var(--body); }
 .facts a { color: var(--deep); }
+/* Embedded map on Kontakt */
+.map { margin-top: 1rem; aspect-ratio: 4 / 3; background: var(--paper-hi); }
+.map iframe { display: block; width: 100%; height: 100%; border: 0; }
 
 /* --- Checklist ------------------------------------------------------------ */
 .ticks { list-style: none; margin: 0; padding: 0; display: grid; gap: 0.7rem; }
@@ -938,7 +946,7 @@ button { font: inherit; }
   .hero h1 { animation: rise 0.85s var(--ease) 0.28s backwards; }
   .hero__lede { animation: rise 0.85s var(--ease) 0.42s backwards; }
   .hero .actions { animation: rise 0.85s var(--ease) 0.54s backwards; }
-  .hero__trust { animation: rise 0.85s var(--ease) 0.66s backwards; }
+  .hero__trust, .hero__addr { animation: rise 0.85s var(--ease) 0.66s backwards; }
 }
 
 .reveal { opacity: 0; transform: translateY(1.4rem); transition: opacity 0.7s var(--ease), transform 0.7s var(--ease); }
