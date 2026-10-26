@@ -34,11 +34,14 @@ TEL = '018 – 10 40 44'
 TEL_HREF = 'tel:+4618104044'
 MAIL = 'kontakt@kbt-konsulterna.se'
 ADDR = 'Gårdshuset, Slottskällan, Sjukhusvägen 3, 753 09 Uppsala'
-MAPS = ('https://www.google.com/maps/place/Sjukhusv%C3%A4gen+3,+753+09+Uppsala/'
-        '@59.8536888,17.6380005,18z')
+MAPS = ('https://www.google.com/maps/place/KBT-Konsulterna,+Psykologmottagning+i+Uppsala+AB/'
+        '@59.8542382,17.63648,299m/data=!3m2!1e3!4b1!4m15!1m8!3m7!1s0x465fcbfa9958d539:'
+        '0x7ea4438b25a60c75!2sSjukhusv%C3%A4gen+3,+753+09+Uppsala,+Sweden!3b1!8m2!3d59.853649'
+        '!4d17.6383759!16s%2Fg%2F11c43yl_0l!3m5!1s0x465fcbd394df5563:0xcd6a31f09b7b64b7!8m2'
+        '!3d59.8542382!4d17.6377701!16s%2Fg%2F11hzcjjddk')
 # Keyless Google Maps embed. Loaded lazily, and only on Kontakt.
-MAP_EMBED = ('https://maps.google.com/maps?q=Sjukhusv%C3%A4gen+3,+753+09+Uppsala'
-             '&z=16&hl=sv&output=embed')
+MAP_EMBED = ('https://maps.google.com/maps?q=KBT-Konsulterna,+Psykologmottagning+i+Uppsala+AB,'
+             '+Sjukhusv%C3%A4gen+3,+753+09+Uppsala&z=16&hl=sv&output=embed')
 
 _dims = {}
 
@@ -1210,11 +1213,10 @@ def build_barn():
 
 <section class="bleed bleed--plain">
   <div class="wrap bleed__inner">
-    <blockquote class="pull" data-reveal>
-      &rdquo;Föräldrastöd brukar vara extra hjälpsamt när ditt barn inte kan eller vill gå
-      i psykologisk behandling.&rdquo;
-      <cite>Jens Karström, leg. psykolog och leg. psykoterapeut</cite>
-    </blockquote>
+    <p class="pull" data-reveal>
+      För yngre barn är stödet till de vuxna runt barnet ofta den mest effektiva
+      insatsen.
+    </p>
   </div>
 </section>
 
@@ -1435,6 +1437,10 @@ BIO_EDITS = {
         ('inlärningsteori och tillämpad beteendeanalys',
          'inlärningsteori/tillämpad beteendeanalys'),
         ('väl förtrogen aktuell', 'väl förtrogen med aktuell'),
+    ],
+    'jens-karstrom': [
+        (' Föräldrastöd brukar dessutom vara extra hjälpsamt när ditt barn inte kan '
+         'eller vill gå i psykologisk behandling.', ''),
     ],
 }
 
