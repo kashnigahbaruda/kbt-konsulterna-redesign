@@ -1884,16 +1884,12 @@ ORG = [
               ('Rehabilitering', 'organisationer/rehabilitering/'),
               ('Stöd för skolpersonal', 'barn-och-ungdom/stod/skola/')],
         body='''
-<p>Handledning hjälper individer och grupper att utveckla sin kompetens, att hantera ett
-stressfyllt arbete och att klara av utmanande situationer. Det kan handla om enskilda
-ärenden, om att använda en metod som avsett, om arbetsgruppens samarbete och de
-reaktioner arbetet väcker, om handledning inom en utbildning, eller om stöd till dig som
-är chef. Vi beskriver de olika formerna närmare nedan.</p>
+<p>Handledningens syfte är att hjälpa individer och grupper att utveckla sin kompetens och
+att klara av utmanande och stressfyllda situationer. Handledningen kan handla om enskilda
+ärenden, så att behandling eller stöd anpassas till patientens eller klientens behov.
+Handledning i grupp berör arbetsgruppens samarbete och de reaktioner arbetet väcker.</p>
 
-<h2>Vilka handleder vi?</h2>
-<p>Handledningen kan vara inriktad på att stödja personal i att ge den vård, behandling
-eller det stöd som deras klienter och patienter behöver. Vi har lång erfarenhet av att
-handleda anställda inom bland annat:</p>
+<p>Vi har lång erfarenhet av att handleda anställda inom:</p>
 <ul>
   <li>primärvård</li>
   <li>psykiatrisk verksamhet</li>
@@ -1905,43 +1901,32 @@ handleda anställda inom bland annat:</p>
 
 <h2>Olika slags handledning</h2>
 <ul>
-  <li><strong>Ärendehandledning</strong> — enskilda ärenden, som stöd för medarbetarnas
-  egna bedömningar.</li>
-  <li><strong>Metodhandledning</strong> — att använda en metod som avsett, exempelvis KBT
-  eller motiverande samtal.</li>
-  <li><strong>Processhandledning</strong> — arbetsgruppens samarbete, förhållningssätt och
-  de reaktioner arbetet väcker.</li>
-  <li><strong>Utbildningshandledning</strong> — inom ramen för formella utbildningar, se
-  nedan.</li>
-  <li><strong>Chefshandledning och coaching</strong> — enskilt stöd i en roll där man
-  ofta står ensam med besluten.</li>
+  <li><strong>Ärendehandledning/fallhandledning</strong> — när fokus ligger på ett
+  specifikt klient- eller patientfall, som stöd för medarbetarnas bedömningar.</li>
+  <li><strong>Metodhandledning</strong> — när fokus ligger på val av metod efter
+  professionell bedömning.</li>
+  <li><strong>Processhandledning</strong> — när fokus ligger på att förstå och utveckla
+  själva arbetsprocessen, arbetsgruppens samarbete, förhållningssätt och de reaktioner
+  arbetet väcker.</li>
+  <li><strong>Utbildningshandledning</strong> — när fokus ligger på handledning inom ramen
+  för en utbildning. Vi har under många år handlett blivande psykologer, psykoterapeuter
+  och andra yrkesgrupper — enskilt eller i grupp — inom ramen för utbildningar i KBT.
+  Fokus här ligger på att handledaren bidrar till utvecklingen av terapeutisk
+  kompetens.</li>
+  <li><strong>Chefshandledning</strong> — när fokus ligger på stöd för chefen i sin
+  yrkesroll, ledarskap och hantering av komplexa situationer i sin verksamhet.</li>
 </ul>
 
-<h2>Utbildningshandledning</h2>
-<p>Vi har under många år handlett blivande psykologer, psykoterapeuter och andra
-yrkesgrupper — enskilt eller i grupp — inom ramen för utbildningar i KBT. Av tradition
-finns ett gap mellan forskning och klinisk praktik, och handledningen syftar till att
-överbrygga det. Handledaren har både uppgiften att bidra till utvecklingen av den
-terapeutiska kompetensen och till inskolningen i yrket.</p>
+<h2>Så går det till</h2>
+<p>Vi börjar med ett inledande samtal där ni klargör vad ni behöver och vad handledningen
+ska leda till. Därefter gör vi en överenskommelse som specificerar syfte, deltagare,
+frekvens, omfattning, sekretess och hur uppdraget ska följas upp.</p>
 
 <h2>Coaching</h2>
-<p>Coaching handlar om att få stöd och vägledning i att utvecklas och nå mål, både
-individuellt och i grupp. I psykologens och psykoterapeutens utbildningar ingår teorier
-och metoder som är användbara för det.</p>
-<p>Vi har bred erfarenhet av att ge stöd och vägledning baserad på beteendeanalys,
-formulerande av värderingar och mål, beteendeförändringar, samt analys och utveckling av
-hjälpsammare tankemönster och förhållningssätt till tankar som kan upplevas hindrande.
-Även känslohantering ingår.</p>
-
-<h2>Så går det till</h2>
-<p>Vi inleder med ett samtal om vad ni behöver och vad ni vill att handledningen ska leda
-till. Därefter gör vi en överenskommelse som reglerar syfte, deltagare, frekvens,
-omfattning, sekretess och hur uppdraget följs upp — en tydlig ram är en förutsättning för
-att handledningen ska bli något annat än ett trevligt samtal.</p>
-
-<p>Grupphandledning sker vanligen med en grupp om några få till ett tiotal deltagare, ofta
-varannan till var fjärde vecka över en längre period. Kontinuiteten är en stor del av
-värdet.</p>
+<p>Coaching är aktuellt när fokus ligger på att stödja lärande, med betoning på personlig
+och professionell utveckling. Coaching betonar reflektion och vägledning i att
+utvecklas.</p>
+<p>Vi har bred erfarenhet av att ge stöd och vägledning utifrån värderingar och mål.</p>
 
 <h2>Praktiskt</h2>
 <p>Vi arbetar hos er, hos oss i centrala Uppsala eller via videosamtal, i hela landet.
