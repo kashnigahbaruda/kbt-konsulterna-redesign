@@ -23,3 +23,6 @@ assets/fonts/_src/
 __pycache__/
 
 tmp/
+
+# FTP login for tools/deploy.sh
+tools/deploy-*.env

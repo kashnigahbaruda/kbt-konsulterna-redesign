@@ -850,6 +850,8 @@ button { font: inherit; }
 
 /* --- Form ----------------------------------------------------------------- */
 .form { display: grid; gap: 1.15rem; max-width: 34rem; }
+/* Spam trap: off-screen rather than display:none, which some bots skip. */
+.form__hp { position: absolute; left: -9999px; width: 1px; height: 1px; overflow: hidden; }
 .field { display: grid; gap: 0.4rem; }
 .field label { font-family: var(--display); font-size: var(--step--1); font-weight: 600; text-transform: uppercase; letter-spacing: 0.09em; color: var(--muted); }
 .field input, .field textarea, .field select {

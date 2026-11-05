@@ -8,6 +8,7 @@ Links use explicit index.html so the site works from file:// as well as a server
 
 Usage:  python3 tools/build-site.py
 """
+import hashlib
 import html as H
 import os
 import re
@@ -23,8 +24,9 @@ SITE = 'https://kbt-konsulterna.se'
 ORG_ID = SITE + '/#organisation'
 
 # True while this build is being published as a shareable preview (GitHub Pages).
-# Set to False for the real launch — noindex on production would be catastrophic.
-PREVIEW = True
+# tools/deploy.sh builds with KBT_LIVE=1 in a temporary copy, so the files in
+# this repo stay the preview and the live site never gets noindex.
+PREVIEW = os.environ.get('KBT_LIVE') != '1'
 # Where the preview is actually served. Share cards need an absolute image URL
 # that resolves, and kbt-konsulterna.se does not host these files yet, so while
 # PREVIEW is on og:image points here instead.
@@ -44,6 +46,17 @@ MAP_EMBED = ('https://maps.google.com/maps?q=KBT-Konsulterna,+Psykologmottagning
              '+Sjukhusv%C3%A4gen+3,+753+09+Uppsala&z=16&hl=sv&output=embed')
 
 _dims = {}
+
+
+def asset_version(path):
+    """Short content hash for ?v=, so the host can cache CSS/JS for a year and a
+    changed file still reaches returning visitors on the next page load."""
+    with open(path, 'rb') as f:
+        return hashlib.md5(f.read()).hexdigest()[:8]
+
+
+CSS_V = asset_version('assets/css/site.css')
+JS_V = asset_version('assets/js/site.js')
 
 
 def dim(path):
@@ -262,7 +275,7 @@ HEAD_TPL = '''<!doctype html>
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>{title}</title>
 <meta name="description" content="{desc}">
-{robots}<link rel="canonical" href="{canonical}">
+{robots}{canon}
 <meta property="og:type" content="website">
 <meta property="og:locale" content="sv_SE">
 <meta property="og:site_name" content="KBT-Konsulterna i Uppsala">
@@ -277,7 +290,7 @@ HEAD_TPL = '''<!doctype html>
 <link rel="icon" href="{base}assets/brand/icon-512.png" type="image/png" sizes="512x512">
 <link rel="apple-touch-icon" href="{base}assets/brand/apple-touch-icon.png">
 <script>document.documentElement.classList.add('js')</script>
-<link rel="stylesheet" href="{base}assets/css/site.css">
+<link rel="stylesheet" href="{base}assets/css/site.css?v={css_v}">
 <link rel="preload" href="{base}assets/fonts/familjen-grotesk-latin.woff2" as="font" type="font/woff2" crossorigin>
 <link rel="preload" href="{base}assets/fonts/newsreader-latin.woff2" as="font" type="font/woff2" crossorigin>
 <noscript><style>
@@ -387,7 +400,7 @@ FOOT_TPL = '''</main>
   </div>
 </footer>
 
-<script src="{base}assets/js/site.js" defer></script>
+<script src="{base}assets/js/site.js?v={js_v}" defer></script>
 </body>
 </html>
 '''
@@ -415,13 +428,20 @@ def crumb_trail(body, base, path):
     return trail
 
 
-def page(path, title, desc, body, ogimg='samtalsrum', extra='', ogtitle=None):
+def page(path, title, desc, body, ogimg='samtalsrum', extra='', ogtitle=None,
+         noindex=False, base=None):
+    """noindex: utility pages (thank-you, error, 404) that must never be indexed,
+    preview or not. base: override the relative prefix — the 404 page is served
+    at whatever URL was missing, so its links must be absolute."""
     depth = path.count('/')
-    base = '../' * depth
+    if base is None:
+        base = '../' * depth
     current = path
     canonical = SITE + '/' + re.sub(r'index\.html$', '', path)
     robots = ('<meta name="robots" content="noindex, nofollow">\n'
-              if PREVIEW else '')
+              if PREVIEW else
+              '<meta name="robots" content="noindex">\n' if noindex else '')
+    canon = '' if noindex else f'<link rel="canonical" href="{canonical}">'
     if 'BreadcrumbList' not in extra:
         trail = crumb_trail(body, base, path)
         if trail:
@@ -429,7 +449,7 @@ def page(path, title, desc, body, ogimg='samtalsrum', extra='', ogtitle=None):
     assert os.path.exists(f'assets/img/{ogimg}.jpg'), f'{path}: no og image {ogimg}.jpg'
     ogw, ogh = dim(f'assets/img/{ogimg}.jpg')
     head = HEAD_TPL.format(
-        robots=robots, ogw=ogw, ogh=ogh,
+        robots=robots, canon=canon, ogw=ogw, ogh=ogh, css_v=CSS_V,
         title=H.escape(title), desc=H.escape(desc), canonical=canonical,
         ogtitle=H.escape(ogtitle or title), site=SITE, ogimg=ogimg, base=base,
         assets=PREVIEW_SITE if PREVIEW else SITE,
@@ -438,7 +458,7 @@ def page(path, title, desc, body, ogimg='samtalsrum', extra='', ogtitle=None):
         ogurl=canonical.replace(SITE, PREVIEW_SITE, 1) if PREVIEW else canonical,
         nav=nav_html(base, current), mnav=mobile_nav_html(base, current),
         tel=TEL, tel_href=TEL_HREF, extra=extra, logo_w=LOGO_W, logo_h=LOGO_H)
-    foot = FOOT_TPL.format(base=base, addr=ADDR, tel=TEL, tel_href=TEL_HREF, mail=MAIL,
+    foot = FOOT_TPL.format(base=base, js_v=JS_V, addr=ADDR, tel=TEL, tel_href=TEL_HREF, mail=MAIL,
                            logo_w=LOGO_W, logo_h=LOGO_H)
     # A relative href ending in "/" resolves over HTTP but 404s over file://,
     # which this build promises works. Normalise them all rather than relying on
@@ -1929,6 +1949,21 @@ def source_select(idx):
         </div>'''
 
 
+# Both forms post to kontakt/skicka.php, which mails them to the practice.
+# GitHub Pages cannot run PHP and answers a POST with 405, so the preview keeps "#".
+FORM_ACTION = '#' if PREVIEW else 'skicka.php'
+
+
+def form_hidden(kind, idx):
+    """Which form this is, plus a honeypot field. People never see or fill the
+    honeypot; spam bots fill every field, and skicka.php drops anything that has it."""
+    return (f'<input type="hidden" name="formular" value="{kind}">\n'
+            f'        <div class="form__hp" aria-hidden="true">'
+            f'<label for="webbplats{idx}">Lämna tomt</label>'
+            f'<input id="webbplats{idx}" name="webbplats" type="text" tabindex="-1" autocomplete="off">'
+            f'</div>')
+
+
 def build_kontakt():
     b = '../'
     body = f'''
@@ -1984,7 +2019,8 @@ def build_kontakt():
     <div data-reveal>
       <p class="eyebrow">Kontaktformulär</p>
       <h2 style="font-size:var(--step-2);margin-bottom:1.6rem">Frågor eller förfrågan om tid</h2>
-      <form class="form" method="post" action="#">
+      <form class="form" method="post" action="{FORM_ACTION}">
+        {form_hidden('privat', 1)}
         <div class="field">
           <label for="namn">Namn <span class="field__req">*</span></label>
           <input id="namn" name="namn" type="text" autocomplete="name" required>
@@ -2022,7 +2058,8 @@ def build_kontakt():
       </div>
     </div>
     <div>
-      <form class="form" method="post" action="#">
+      <form class="form" method="post" action="{FORM_ACTION}">
+        {form_hidden('foretag', 2)}
         <div class="field">
           <label for="foretagsnamn">Företag / organisation <span class="field__req">*</span></label>
           <input id="foretagsnamn" name="foretag" type="text" autocomplete="organization" required>
@@ -2059,6 +2096,77 @@ def build_kontakt():
                 'Mottagning i Gårdshuset vid Slottskällan, tio minuter från '
                 'Centralstationen.',
                 body, ogimg='gardshuset')
+
+
+def build_form_results():
+    """Where skicka.php sends the visitor after a submit. Never indexed."""
+    b = '../'
+    crumb = (f'<a href="{b}index.html">Hem</a><span>/</span>'
+             f'<a href="{b}kontakt/index.html">Kontakt</a><span>/</span>')
+    pages = (
+        ('kontakt/tack.html', 'Tack för ditt meddelande',
+         'Tack, vi har fått ditt meddelande',
+         'Vi hör av oss så snart vi kan, för det mesta samma dag. Brådskar det? '
+         f'Ring oss på {TEL}.',
+         'Tack för ditt meddelande till KBT-Konsulterna i Uppsala. Vi återkommer '
+         'för det mesta samma dag.'),
+        ('kontakt/fel.html', 'Meddelandet kunde inte skickas',
+         'Något gick fel',
+         'Ditt meddelande kom inte fram. Försök gärna igen, eller ring oss på '
+         f'{TEL} eller mejla <a href="mailto:{MAIL}">{MAIL}</a>.',
+         'Meddelandet till KBT-Konsulterna kunde inte skickas. Ring oss eller '
+         'skicka ett mejl i stället.'),
+    )
+    total = 0
+    for path, short, h1, lede, desc in pages:
+        body = f'''
+{hero(b, 'gardshuset', 'Kontakt', h1, lede,
+      'Gårdshuset vid Slottskällan, med entrén till mottagningen',
+      crumb=crumb + short, pic_cls='pic--high', actions=False)}
+
+<section class="band">
+  <div class="wrap prose">
+    <p><a class="a-link" href="{b}kontakt/index.html">Tillbaka till kontaktsidan {ARROW}</a></p>
+    <p><a class="a-link" href="{b}index.html">Till startsidan {ARROW}</a></p>
+  </div>
+</section>
+'''
+        total += page(path, f'{short} | KBT-Konsulterna', desc, body,
+                      ogimg='gardshuset', noindex=True)
+    return total
+
+
+def build_404():
+    """Apache serves this at the missing URL itself, so every link is absolute.
+    On the preview the site lives under a sub-path, which GitHub Pages also
+    serves 404.html for."""
+    base = (PREVIEW_SITE.split('github.io', 1)[1] + '/') if PREVIEW else '/'
+    links = (('Vuxna', 'vuxna/index.html'), ('Barn & ungdom', 'barn-och-ungdom/index.html'),
+             ('För organisationer', 'organisationer/index.html'),
+             ('Medarbetare', 'medarbetare/index.html'), ('Priser', 'priser/index.html'),
+             ('Kontakt & bokning', 'kontakt/index.html'))
+    items = '\n      '.join(f'<li><a class="a-link" href="{base}{h}">{H.escape(t)} {ARROW}</a></li>'
+                            for t, h in links)
+    body = f'''
+{hero(base, 'gardshuset', 'Sidan finns inte', 'Den här sidan finns inte längre',
+      'Vår hemsida är ny och många adresser har ändrats. Börja på startsidan, '
+      'välj ett område nedan eller ring oss på ' + TEL + '.',
+      'Gårdshuset vid Slottskällan, med entrén till mottagningen',
+      pic_cls='pic--high', actions=False)}
+
+<section class="band">
+  <div class="wrap prose">
+    <ul>
+      <li><a class="a-link" href="{base}index.html">Startsidan {ARROW}</a></li>
+      {items}
+    </ul>
+  </div>
+</section>
+'''
+    return page('404.html', 'Sidan finns inte | KBT-Konsulterna',
+                'Sidan du letade efter finns inte längre på KBT-Konsulternas hemsida. '
+                'Börja på startsidan eller ring oss.',
+                body, ogimg='gardshuset', noindex=True, base=base)
 
 
 # ==========================================================================
@@ -2411,19 +2519,224 @@ def build_sitemap():
     return len(out)
 
 
+# ==========================================================================
+# .htaccess — redirects from the old WordPress URLs, caching, https
+# ==========================================================================
+# Every URL in the crawl of the old site (research/crawl-urls.txt), old → new.
+# One hop, always 301. Unchanged URLs (/, /vuxna/, /vuxna/parterapi/,
+# /medarbetare/) are left out. This list supersedes docs/08-REDIRECTS.md.
+_BU = 'barn-ungdom/'
+_BB = _BU + 'psykologisk-behandling-terapi-barn/'
+_BS = _BU + 'rad-stod-handledning-barn-ungdom/'
+_BX = _BU + 'utredning-bedomning-barn-ungdom/'
+_VB = 'vuxna/psykologisk-behandling-terapi/'
+_VU = 'vuxna/utredning-bedomning/'
+_FO = 'foretag-offentlig-verksamhet/'
+REDIRECTS = [
+    # Vuxna — behandling
+    (_VB, 'vuxna/behandling/'),
+    (_VB + 'oro-angest/', 'vuxna/behandling/oro-angest/'),
+    (_VB + 'nedstamdhet-depression/', 'vuxna/behandling/depression/'),
+    (_VB + 'stress-utmattning/', 'vuxna/behandling/stress-utmattning/'),
+    (_VB + 'somnproblem/', 'vuxna/behandling/somn/'),
+    (_VB + 'trauma-posttraumatisk-stress-ptsd/', 'vuxna/behandling/trauma-ptsd/'),
+    (_VB + 'sorg/', 'vuxna/behandling/sorg/'),
+    (_VB + 'lag-sjalvkansla/', 'vuxna/behandling/sjalvkansla/'),
+    (_VB + 'relationsproblem/', 'vuxna/behandling/relationer/'),
+    (_VB + 'flygfobi/', 'vuxna/behandling/fobier/'),
+    (_VB + 'npf-neuropsykiatrisk-funktionsnedsattning/', 'vuxna/behandling/npf/'),
+    ('terapi/', 'vuxna/behandling/'),
+    ('terapi/angest/', 'vuxna/behandling/oro-angest/'),
+    ('terapi/nedstamdhet-depression-2/', 'vuxna/behandling/depression/'),
+    ('terapi/stress-och-utmattning/', 'vuxna/behandling/stress-utmattning/'),
+    ('terapi/somn/somnbrist/', 'vuxna/behandling/somn/'),
+    ('terapi/livstilssproblem/', 'vuxna/behandling/'),
+    # Vuxna — utredning, beroende, psykiatri, anhöriga
+    (_VU, 'vuxna/utredning/'),
+    (_VU + 'psykologutredning-av-adhd/', 'vuxna/utredning/adhd/'),
+    (_VU + 'psykologutredning-av-autism/', 'vuxna/utredning/autism/'),
+    (_VU + 'omprovning-av-diagnoser-adhd-och-autism/', 'vuxna/utredning/omprovning/'),
+    ('psykologisk-neuropsykiatrisk-utredning/', 'vuxna/utredning/'),
+    ('vara-specialomraden/utredning-bedomning/', 'vuxna/utredning/'),
+    ('parterapi/', 'vuxna/parterapi/'),
+    ('vara-specialomraden/kbt-par/', 'vuxna/parterapi/'),
+    ('vuxna/skadligt-bruk/', 'vuxna/beroende/'),
+    ('riskbruk-beroende/alkohol/', 'vuxna/beroende/'),
+    ('riskbruk-beroende/lakemedelsberoende/', 'vuxna/beroende/'),
+    ('spelmissbruk-spelberoende/', 'vuxna/beroende/'),
+    ('vara-specialomraden/skadligt-bruk-beroende/', 'vuxna/beroende/'),
+    ('vuxna/psykiatrisk-behandling/', 'vuxna/psykiatri/'),
+    ('psykiatrisk-bedomning-behandling/', 'vuxna/psykiatri/'),
+    ('vara-specialomraden/kbt-vuxna/', 'vuxna/'),
+    ('anhoriga/', 'vuxna/anhorigstod/'),
+    # Barn & ungdom
+    (_BU, 'barn-och-ungdom/'),
+    ('kbt-for-barn-och-ungdom/', 'barn-och-ungdom/'),
+    ('vara-specialomraden/kbt-barn-unga/', 'barn-och-ungdom/'),
+    (_BB, 'barn-och-ungdom/behandling/'),
+    (_BB + 'oro-angslan-angest-barn-ungdomar/', 'barn-och-ungdom/behandling/oro-angest/'),
+    (_BB + 'nedstamdhet-depression-barn-ungdom/', 'barn-och-ungdom/behandling/depression/'),
+    (_BB + 'tvangstankar-tvangstankar-ocd-barn-ungdomar/', 'barn-och-ungdom/behandling/ocd/'),
+    (_BB + 'somnproblem-barn-ungdomar/', 'barn-och-ungdom/behandling/somn/'),
+    (_BB + 'beteenden-som-utmanar-barn-ungdomar/', 'barn-och-ungdom/behandling/beteende/'),
+    (_BX, 'barn-och-ungdom/utredning/'),
+    (_BX + 'utredning-av-adhd-barn-ungdom/', 'barn-och-ungdom/utredning/adhd/'),
+    (_BX + 'utredning-av-autism-barn/', 'barn-och-ungdom/utredning/autism/'),
+    (_BX + 'psykologutredning-av-intellektuell-funktion/', 'barn-och-ungdom/utredning/intellektuell-funktion/'),
+    (_BS, 'barn-och-ungdom/stod/'),
+    (_BS + 'stod-till-foraldrar-anhoriga/', 'barn-och-ungdom/stod/foraldrar/'),
+    (_BS + 'stod-for-skolpersonal/', 'barn-och-ungdom/stod/skola/'),
+    (_BS + 'stod-till-hvbhem-familjehem/', 'barn-och-ungdom/stod/hvb-familjehem/'),
+    (_BS + 'stod-till-socialtjanst/', 'barn-och-ungdom/stod/socialtjanst/'),
+    # För organisationer
+    (_FO, 'organisationer/'),
+    (_FO + 'handledning-coaching/', 'organisationer/handledning/'),
+    (_FO + 'forelasningar-kurser/', 'organisationer/utbildning/'),
+    (_FO + 'rehabilitering/', 'organisationer/rehabilitering/'),
+    (_FO + 'skadligt-bruk/', 'organisationer/skadligt-bruk/'),
+    (_FO + 'information-kontakt/', 'organisationer/kontakt/'),
+    ('forelasningar-workshops-kurser-utbildningar/', 'organisationer/utbildning/'),
+    ('organisationsutveckling/', 'organisationer/handledning/'),
+    ('vara-specialomraden/handledning-coaching/', 'organisationer/handledning/'),
+    ('var-varksamhet/handledning/utbildningshandledning/', 'organisationer/handledning/'),
+    ('var-varksamhet/handledning/verksamhetshandledning/', 'organisationer/handledning/'),
+    ('var-varksamhet/utbildningar-i-kbt/', 'organisationer/utbildning/'),
+    ('var-varksamhet/utbildningar-i-kbt/forelasningar-och-workshops/', 'organisationer/utbildning/'),
+    ('var-varksamhet/utbildningar-i-kbt/grundlaggande-psykoterapiutbildning-steg-1/', 'organisationer/utbildning/'),
+    ('var-varksamhet/utbildningar-i-kbt/motiverande-samtal-mi/', 'organisationer/utbildning/'),
+    ('vara-specialomraden/motiverade-samtal-mi/vad-ar-mint/', 'organisationer/utbildning/'),
+    ('vad-ar-en-psykolog/vad-ar-en-handledare/', 'organisationer/handledning/'),
+    # Om oss, medarbetare, praktiskt
+    ('om-oss-kbt/', 'om-oss/'),
+    ('detta-ar-vi/', 'om-oss/'),
+    ('om-oss-kbt/vad-ar-kbt-vara-arbetssatt/', 'om-oss/#kbt'),
+    ('kognitiv-beteendeterapi/', 'om-oss/#kbt'),
+    ('om-oss-kbt/mindfulness/', 'om-oss/#kbt'),
+    ('om-oss-kbt/motiverande-samtal-mi/', 'om-oss/#kbt'),
+    ('vara-specialomraden/mindfulness/vad-ar-mindfulness/', 'om-oss/#kbt'),
+    ('vara-specialomraden/mindfulness/paralleller-mellan-mindfulness-och-kbt/', 'om-oss/#kbt'),
+    ('vara-specialomraden/mindfulness/mindfulness-based-relapse-prevention-mbrp/', 'om-oss/#kbt'),
+    ('om-oss-kbt/evidensbaserad-praktik/', 'om-oss/#evidens'),
+    ('om-oss-kbt/videosamtal-online/', 'om-oss/#videosamtal'),
+    ('om-oss-kbt/vem-far-ge-behandling-vid-psykisk-ohalsa/', 'om-oss/#legitimation'),
+    ('vad-ar-en-psykolog/', 'om-oss/#legitimation'),
+    ('vad-ar-en-psykolog/vad-ar-en-psykoterapeut/', 'om-oss/#legitimation'),
+    ('vad-ar-en-psykolog/vem-kan-ge-behandling-vid-psykisk-ohalsa/', 'om-oss/#legitimation'),
+    ('vad-ar-en-psykolog/patientforsakring/', 'om-oss/'),
+    ('samarbetspartners/', 'om-oss/'),
+    # TODO: the new site has no privacy page yet. Point this at it once it exists.
+    ('behandling-av-personuppgifter/', 'om-oss/'),
+    ('om-oss-kbt/kbt-konsulternas-medarbetare/', 'medarbetare/'),
+    ('om-oss-kbt/info-priser/', 'priser/'),
+    ('om-oss-kbt/kontakt-bokning/', 'kontakt/'),
+    ('tack-for-din-forfragan/', 'kontakt/'),
+    ('om-oss-kbt/psykakut-nara-dig/', 'akut-hjalp/'),
+    ('vanliga-fragor/', 'om-oss/vanliga-fragor.html'),
+    ('vara-specialomraden/', ''),
+    # Old SEO landing pages with no direct equivalent. The client's call whether
+    # they deserve pages of their own; until then the homepage answers them.
+    ('psykolog-i-uppsala/', ''),
+    ('psykoterapeut-i-uppsala/', ''),
+    ('allt-du-behover-veta-om-att-valja-en-privat-psykolog-i-uppsala/', ''),
+]
+
+
+def build_htaccess():
+    """Apache config for the live host. GitHub Pages ignores it."""
+    team = [(f'medarbetare/{p["slug"]}/', f'medarbetare/{p["slug"]}.html') for p in TEAM]
+    rules = REDIRECTS + team
+    olds = [o for o, _ in rules]
+    assert len(olds) == len(set(olds)), 'duplicate old URL in REDIRECTS'
+    for old, new in rules:
+        target = new.split('#')[0]
+        f = (target + 'index.html') if (not target or target.endswith('/')) else target
+        assert os.path.exists(f), f'redirect {old} -> {new}: no {f}'
+        assert not os.path.exists(old + 'index.html'), f'redirect {old} shadows a real page'
+    lines = '\n'.join(
+        f'RewriteRule ^{re.escape(old.rstrip("/"))}/?$ %{{ENV:CANON}}/{new} [R=301,L,NE]'
+        for old, new in rules)
+    live = '^(www\\.)?' + re.escape(SITE.split('//', 1)[1]) + '$'
+    out = f"""# Generated by tools/build-site.py — edit REDIRECTS there, not here.
+#
+# Works unchanged on the live domain and on a test host (another document root
+# on the same server): only the live domain is forced to https and the bare
+# domain, and a test host gets redirects to itself plus a noindex header.
+
+DirectoryIndex index.html
+Options -Indexes
+ErrorDocument 404 /404.html
+AddDefaultCharset utf-8
+
+<IfModule mod_rewrite.c>
+RewriteEngine On
+
+# Where redirects point: the canonical live address, or the test host itself.
+RewriteCond %{{HTTP_HOST}} {live} [NC]
+RewriteRule ^ - [E=CANON:{SITE}]
+RewriteCond %{{HTTP_HOST}} !{live} [NC]
+RewriteRule ^ - [E=CANON:%{{REQUEST_SCHEME}}://%{{HTTP_HOST}}]
+
+# Old WordPress addresses, {len(rules)} of them. On the live domain each goes
+# straight to https and the bare domain, so an old http://www. link is one hop.
+{lines}
+
+# Live domain only: https, no www.
+RewriteCond %{{HTTP_HOST}} {live} [NC]
+RewriteCond %{{HTTPS}} off [OR]
+RewriteCond %{{HTTP_HOST}} ^www\\. [NC]
+RewriteRule ^ {SITE}%{{REQUEST_URI}} [R=301,L,NE]
+</IfModule>
+
+# A test host must never be indexed.
+<If "%{{HTTP_HOST}} !~ /{live}/i">
+<IfModule mod_headers.c>
+Header always set X-Robots-Tag "noindex, nofollow"
+</IfModule>
+</If>
+
+<IfModule mod_deflate.c>
+AddOutputFilterByType DEFLATE text/html text/css text/plain text/xml application/javascript application/xml image/svg+xml
+</IfModule>
+
+<IfModule mod_headers.c>
+Header always set X-Content-Type-Options "nosniff"
+Header always set Referrer-Policy "strict-origin-when-cross-origin"
+
+# Fonts never change under the same name; CSS/JS are linked with ?v=<hash>.
+<FilesMatch "\\.(woff2|css|js)$">
+Header set Cache-Control "public, max-age=31536000, immutable"
+</FilesMatch>
+# Images and video keep their names when a photo is swapped, so a month, not a year.
+<FilesMatch "\\.(jpe?g|png|webp|svg|mp4|webm|ico)$">
+Header set Cache-Control "public, max-age=2592000"
+</FilesMatch>
+# Pages are checked on every visit, so text changes show up at once.
+<FilesMatch "\\.(html|xml|txt)$">
+Header set Cache-Control "no-cache"
+</FilesMatch>
+</IfModule>
+"""
+    with open('.htaccess', 'w', encoding='utf-8') as f:
+        f.write(out)
+    print(f'  .htaccess: {len(rules)} redirects')
+
+
 def main():
     total = 0
     pages = 0
     for fn in (build_home, build_vuxna, build_barn, build_org,
                build_medarbetare, build_priser, build_kontakt,
-               build_om_oss, build_faq, build_akut):
+               build_om_oss, build_faq, build_akut, build_form_results,
+               build_404):
         total += fn()
         pages += 1
+    pages += 2                                    # tack + fel, built by one function
     for p in TEAM:
         total += build_bio(p)
         pages += 1
     total += build_topics()
     build_sitemap()
+    build_htaccess()
     pages += sum(1 + len(c.get('children') or [])
                  for s in TREE for c in s['children'])
     print(f'Built {pages} pages, {total // 1024} KB of HTML.')

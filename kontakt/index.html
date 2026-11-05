@@ -21,7 +21,7 @@
 <link rel="icon" href="../assets/brand/icon-512.png" type="image/png" sizes="512x512">
 <link rel="apple-touch-icon" href="../assets/brand/apple-touch-icon.png">
 <script>document.documentElement.classList.add('js')</script>
-<link rel="stylesheet" href="../assets/css/site.css">
+<link rel="stylesheet" href="../assets/css/site.css?v=0e1f4ff8">
 <link rel="preload" href="../assets/fonts/familjen-grotesk-latin.woff2" as="font" type="font/woff2" crossorigin>
 <link rel="preload" href="../assets/fonts/newsreader-latin.woff2" as="font" type="font/woff2" crossorigin>
 <noscript><style>
@@ -193,6 +193,8 @@
       <p class="eyebrow">Kontaktformulär</p>
       <h2 style="font-size:var(--step-2);margin-bottom:1.6rem">Frågor eller förfrågan om tid</h2>
       <form class="form" method="post" action="#">
+        <input type="hidden" name="formular" value="privat">
+        <div class="form__hp" aria-hidden="true"><label for="webbplats1">Lämna tomt</label><input id="webbplats1" name="webbplats" type="text" tabindex="-1" autocomplete="off"></div>
         <div class="field">
           <label for="namn">Namn <span class="field__req">*</span></label>
           <input id="namn" name="namn" type="text" autocomplete="name" required>
@@ -246,6 +248,8 @@
     </div>
     <div>
       <form class="form" method="post" action="#">
+        <input type="hidden" name="formular" value="foretag">
+        <div class="form__hp" aria-hidden="true"><label for="webbplats2">Lämna tomt</label><input id="webbplats2" name="webbplats" type="text" tabindex="-1" autocomplete="off"></div>
         <div class="field">
           <label for="foretagsnamn">Företag / organisation <span class="field__req">*</span></label>
           <input id="foretagsnamn" name="foretag" type="text" autocomplete="organization" required>
@@ -365,6 +369,6 @@
   </div>
 </footer>
 
-<script src="../assets/js/site.js" defer></script>
+<script src="../assets/js/site.js?v=b151a3d0" defer></script>
 </body>
 </html>

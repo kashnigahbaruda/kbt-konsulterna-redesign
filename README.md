@@ -232,7 +232,7 @@ from the same data, so a hub card and its page cannot disagree. If you take over
 running both.
 
 ```bash
-python3 tools/build-site.py     # regenerate all 56 pages + sitemap.xml
+python3 tools/build-site.py     # regenerate all pages, sitemap.xml and .htaccess
 python3 tools/fetch-images.py   # re-download source imagery
 python3 tools/build-images.py   # regenerate responsive variants + keyed brand marks
 python3 tools/build-logo.py     # regenerate the logo SVGs + favicons from the client's file
@@ -251,12 +251,17 @@ file; the generated HTML here is complete and standalone without it.
 
 ## Going live
 
-1. **Set `PREVIEW = False`** in `tools/build-site.py` and rebuild. That flag is what emits the
-   `noindex, nofollow` tag — leaving it on would keep the real site out of Google entirely It also
-   points `og:image` and `og:url` at the GitHub Pages preview; switched off, they go back to
-   kbt-konsulterna.se.
-2. **Wire up the contact forms.** Both have `action="#"` and do nothing. They need a backend
-   or a form service.
+1. **`PREVIEW` is switched off by the deploy script**, which builds with `KBT_LIVE=1`.
+   The flag emits `noindex, nofollow` and points `og:image` and `og:url` at the GitHub Pages
+   preview; in the live build they go back to kbt-konsulterna.se. After launch, check that
+   the live pages carry no `noindex`.
+2. **The contact forms post to `kontakt/skicka.php`** once `PREVIEW` is off (the preview
+   keeps `action="#"`, because GitHub Pages cannot run PHP). The script mails each message
+   to `kontakt@kbt-konsulterna.se` through the host's own `mail()`, from an address on the
+   domain so SPF passes, with the visitor in Reply-To. A hidden honeypot field drops bot
+   submissions. Visitors land on `kontakt/tack.html` or `kontakt/fel.html`. Change the
+   recipient at the top of `skicka.php`. **Send a test message from the live site after
+   every move.**
 3. **Confirm the prices** — 1 500 kr / 45 min, 2 400 kr / 60 min and 1 800 kr / 45 min are
    carried over from the current site and need checking against 2026 rates.
 4. **Confirm the opening hours** — Mon–Fri 09:00–17:00 comes from the current site's schema
@@ -264,19 +269,17 @@ file; the generated HTML here is complete and standalone without it.
 5. **Confirm the right to display the accreditation marks** (Socialstyrelsen,
    Psykologförbundet, MINT, BTF). They are third-party trademarks, and Socialstyrelsen in
    particular is a government authority with rules about implying endorsement.
-6. **Set up the redirects.** 69 old URLs need to 301 to a single canonical target, one hop
-   only — the explicit 69-row map is held with the working documents outside this repo
-   (`08-REDIRECTS.md`). Wildcards will not do: seven of the
-   ten treatment slugs change. Every target in that map has been verified to exist.
+6. **Redirects are generated.** `build-site.py` writes `.htaccess` from its `REDIRECTS`
+   list: every URL in the old-site crawl 301s, in one hop, to a page that exists (the build
+   asserts it), plus https and no-www. It replaces the map in `docs/08-REDIRECTS.md`. Open
+   question: the old privacy page `/behandling-av-personuppgifter/` has no counterpart yet
+   and points at `/om-oss/` for now.
 7. **Submit the new `sitemap.xml`** in the same release as the redirects, and retire the old
    sitemap entries at the same time.
-8. **Set long cache lifetimes on the real host.** GitHub Pages sends `max-age=600` on
-   everything and cannot be changed, which is why Lighthouse flags ~250 KB of short-cached
-   files on the preview. On production, give `assets/fonts/`, `assets/img/`, `assets/brand/`
-   and `assets/team/` a year (`Cache-Control: public, max-age=31536000, immutable`). Keep
-   `site.css` and `site.js` short-cached, or add a version to their URLs first: they keep the
-   same filename when they change, so a long cache would serve returning visitors stale styles.
-   HTML should stay short-cached.
+8. **Cache lifetimes are in `.htaccess`.** Fonts, `site.css` and `site.js` get a year,
+   which is safe because the pages link CSS and JS with a `?v=<content hash>`. Images and
+   video get a month, since a swapped photo keeps its filename. HTML is revalidated on every
+   visit.
 9. **Minify the CSS.** `site.css` is served as the commented source: 11.6 KB gzipped, 6.9 KB
    minified — a ~4.7 KB saving on a render-blocking file, which Lighthouse lists under
    "Minify CSS". Do it in `build-site.py` (write `site.min.css` and point the pages at it) so
@@ -286,6 +289,36 @@ file; the generated HTML here is complete and standalone without it.
 10. **Re-run Lighthouse against the live domain in an incognito window.** Browser extensions
     inject scripts that Lighthouse counts — React Developer Tools shows up as ~51 KB of
     "unused JavaScript" that is not the site's. The site's only script is `site.js`, 1.5 KB.
+
+## Deploying
+
+The live host is a Misshosting cPanel account (Apache, PHP 8.3, mail on the same server),
+run for the practice by their web host. Testing happens on
+`staging.kbt-konsulterna.se`, which is password-protected; at launch the site moves to the
+main document root (`public_html`) with its own FTP account. Uploads go over FTP to
+`ftp.kbt-konsulterna.se`. The script requires TLS. As of 6 November 2026 the server still
+answered `AUTH TLS` with 504, so encrypted FTP has to be switched on before it can connect.
+
+`tools/deploy.sh` builds the live version in a temporary copy (`KBT_LIVE=1`, so this repo
+stays the noindexed preview), copies only the public files (no tools, docs, source photos
+or video originals) and uploads new and changed files with `lftp`. Before uploading, it
+reads the server's own `.htaccess` and carries over cPanel's password-protection lines and
+PHP-version block, which our file would otherwise overwrite. On staging it refuses to
+upload if it cannot find the password protection.
+
+```bash
+sudo apt install lftp
+# create tools/deploy-test.env / deploy-live.env (not committed) — see tools/deploy.sh
+tools/deploy.sh test --dry-run
+tools/deploy.sh test             # staging.kbt-konsulterna.se, noindexed by .htaccess
+tools/deploy.sh live             # asks before uploading
+```
+
+`.htaccess` behaves on both: on the live domain it forces https and the bare domain; on
+any other host name the redirects stay on that host and every response carries
+`X-Robots-Tag: noindex`.
+
+It never deletes anything on the server. Remove retired files there by hand.
 
 ## Images and licensing
 
