@@ -468,6 +468,12 @@ def page(path, title, desc, body, ogimg='samtalsrum', extra='', ogtitle=None,
     assert len(title) <= 70, f'{path}: title is {len(title)} chars — {title}'
     assert 50 <= len(desc) <= 165, f'{path}: description is {len(desc)} chars'
     out = head + body + foot
+    if not PREVIEW:
+        # On the real server, link to clean addresses (/kontakt/, not
+        # /kontakt/index.html), so the address bar shows the canonical URL.
+        # The preview keeps index.html because it must also work over file://.
+        out = re.sub(r'(href=")((?!https?:|tel:|mailto:)[^"#?]*?)index\.html(?=["#?])',
+                     lambda m: m.group(1) + (m.group(2) or './'), out)
     os.makedirs(os.path.dirname(path) or '.', exist_ok=True)
     with open(path, 'w', encoding='utf-8') as f:
         f.write(out)
