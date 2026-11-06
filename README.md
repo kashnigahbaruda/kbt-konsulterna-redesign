@@ -296,8 +296,11 @@ The live host is a Misshosting cPanel account (Apache, PHP 8.3, mail on the same
 run for the practice by their web host. Testing happens on
 `staging.kbt-konsulterna.se`, which is password-protected; at launch the site moves to the
 main document root (`public_html`) with its own FTP account. Uploads go over FTP to
-`ftp.kbt-konsulterna.se`. The script requires TLS. As of 6 November 2026 the server still
-answered `AUTH TLS` with 504, so encrypted FTP has to be switched on before it can connect.
+`cpsrv02.misshosting.com` (port 21, explicit TLS, passive; `ftp.kbt-konsulterna.se` is the same server, but the certificate only carries the server name). The script requires TLS. Some
+networks filter FTP on port 21 and answer `AUTH TLS` themselves with
+`504 Command not implemented`, even though the server supports it. If that happens,
+deploy from another connection, for example a phone hotspot. To check a network, see
+whether `AUTH TLS` to the public test server `test.rebex.net:21` also gets 504.
 
 `tools/deploy.sh` builds the live version in a temporary copy (`KBT_LIVE=1`, so this repo
 stays the noindexed preview), copies only the public files (no tools, docs, source photos

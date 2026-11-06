@@ -8,7 +8,7 @@
 # Needs lftp (apt install lftp) and one file per target, tools/deploy-test.env
 # and tools/deploy-live.env. Neither is committed:
 #
-#   FTP_HOST=ftp.kbt-konsulterna.se
+#   FTP_HOST=cpsrv02.misshosting.com   # the name on the FTP certificate
 #   FTP_USER=[ftp-user-from-niclas]
 #   FTP_PASS=[ftp-password]
 #   FTP_DIR=/                        # the site's web root as that FTP account sees it
@@ -94,11 +94,14 @@ remote, ours, target = sys.argv[1:4]
 text = open(remote, encoding='utf-8', errors='replace').read() if os.path.exists(remote) else ''
 kept, inside = [], False
 for line in text.splitlines():
-    if re.match(r'\s*#.*BEGIN cPanel-generated', line):
+    # cPanel marks its sections either "BEGIN/END cPanel-generated ..." or
+    # "Section managed by cPanel ..." with "-cp:xxx" at the end of each marker line.
+    if re.match(r'\s*#.*(BEGIN cPanel-generated|Section managed by cPanel)', line):
         inside = True
-    if inside or re.match(r'\s*(AuthType|AuthName|AuthUserFile|AuthGroupFile)\b|\s*require\s+valid-user', line, re.I):
+    if (inside or re.search(r'cp:\w+\s*$', line)
+            or re.match(r'\s*(AuthType|AuthName|AuthUserFile|AuthGroupFile)\b|\s*require\s+valid-user', line, re.I)):
         kept.append(line)
-    if re.match(r'\s*#.*END cPanel-generated', line):
+    if re.match(r'\s*#.*(END cPanel-generated|End section managed by cPanel)', line):
         inside = False
 if target == 'test' and not any(re.match(r'\s*AuthType', l, re.I) for l in kept):
     sys.exit("Could not read the password protection from staging's .htaccess. "
