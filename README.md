@@ -32,14 +32,15 @@ barn-och-ungdom/              Children & young people — hub
   utredning/                    + 3 assessment topics
   stod/                         + 4 pages for the adults around the child
 organisationer/               Employers — hub
-  handledning/ utbildning/ rehabilitering/ skadligt-bruk/ kontakt/
+  handledning/ utbildning/ rehabilitering/ skadligt-bruk/
+  sexuella-beteendeproblem/ kontakt/
 medarbetare/                  Team index + 7 individual bio pages
 priser/                       Prices, terms, region referrals
 kontakt/                      Contact, both forms, directions
 om-oss/                       About, what KBT is, evidence base, video calls, licensing
 om-oss/vanliga-fragor.html    All 16 FAQs
 akut-hjalp/                   Emergency help
-sitemap.xml                   Generated — all 56 canonical URLs
+sitemap.xml                   Generated — all 57 canonical URLs
 robots.txt                    Generated — allows everything, points at the sitemap
 
 assets/css/site.css           The whole design system, ~880 lines
@@ -53,7 +54,7 @@ tools/build-fonts.py          Fetches the OFL fonts and cuts Newsreader down
 tools/build-site.py           Shared shell + every page builder
 ```
 
-56 pages, restructured from the current site's 108. The current site runs two complete
+57 pages, restructured from the current site's 108. The current site runs two complete
 parallel content trees at once — seven page pairs are byte-identical at two indexable URLs —
 and buries booking and prices inside a 12-item "OM OSS & INFO" menu.
 
@@ -204,7 +205,7 @@ the contrast, icon and Lighthouse figures below are from the 55-page run:
   burger, and scroll reveals only hide content once JS is present. The hero load sequence is
   opt-in via `prefers-reduced-motion: no-preference`, so content is never hidden waiting on
   an animation that may not run
-- Every one of the 56 pages has a unique `<title>`, meta description and canonical URL —
+- Every one of the 57 pages has a unique `<title>`, meta description and canonical URL —
   verified, no duplicates
 - `MedicalBusiness`, `FAQPage`, `BreadcrumbList`, `MedicalWebPage` and `ProfilePage`/`Person`
   structured data; every JSON-LD block parses. `BreadcrumbList` is read back out of each
@@ -226,7 +227,7 @@ fetch the 1000/900 file at nearly twice the bytes. On heroes and bios that file 
 ## Regenerating
 
 The pages are plain static HTML and can be edited directly. They were *generated* from
-`tools/build-site.py`, which holds the shared header, footer and navigation so 56 pages
+`tools/build-site.py`, which holds the shared header, footer and navigation so 57 pages
 couldn't drift apart. The topic copy lives in `tools/articles.py`, and the hubs link into it
 from the same data, so a hub card and its page cannot disagree. If you take over the HTML by hand, retire the generator rather than
 running both.

@@ -1868,7 +1868,7 @@ vad som får delas mellan dem och vad som stannar i respektive handledning.</p>
 ]
 
 # --------------------------------------------------------------------------
-# För organisationer — five level-2 pages, no children
+# För organisationer — six level-2 pages, no children
 # --------------------------------------------------------------------------
 ORG = [
     dict(
@@ -2170,6 +2170,78 @@ anhöriga, och med arbetsgrupper som påverkats.</p>
 beroende och spelberoende — finns på sidan
 <a href="{base}vuxna/beroende/index.html">skadligt bruk och beroende</a>. Priser lämnas
 på förfrågan; moms tillkommer.</p>
+''',
+    ),
+    dict(
+        # The client's own text (November 2026), kept verbatim.
+        slug='sexuella-beteendeproblem', label='Sexuella beteendeproblem',
+        h1='Konsultation, riskbedömning och behandling vid sexuella beteendeproblem '
+           'hos ungdomar',
+        title='Sexuella beteendeproblem hos ungdomar | KBT-Konsulterna Uppsala',
+        desc='Riskbedömning (ERASOR), övergreppsspecifik behandling, konsultation, '
+             'handledning och utbildning för socialtjänst, HVB, skola och LSS.',
+        lede='KBT-konsulterna erbjuder konsultativa insatser till socialtjänst, HVB, '
+             'skolor, LSS-verksamheter och andra aktörer som möter ungdomar med sexuella '
+             'beteendeproblem.',
+        people=['elias-westerlund'],
+        also=[('Handledning och coaching', 'organisationer/handledning/'),
+              ('Föreläsningar och utbildning', 'organisationer/utbildning/'),
+              ('Kontakt för uppdrag', 'organisationer/kontakt/')],
+        body='''
+<p>Insatserna utförs av legitimerad psykolog med särskild kompetens inom området och
+erfarenhet av arbete inom HVB-verksamhet, riskbedömning, övergreppsspecifik behandling,
+handledning och metodutveckling.</p>
+
+<p>Uppdragen kan omfatta riskbedömningar, psykologiska bedömningar, individuell
+behandling, konsultation, handledning och utbildning. Insatserna anpassas efter
+verksamhetens behov och den aktuella frågeställningen.</p>
+
+<h2>Riskbedömningar och psykologiska bedömningar</h2>
+<p>Strukturerade riskbedömningar erbjuds av ungdomar med sexuella beteendeproblem med
+hjälp av ERASOR (Estimate of Risk of Adolescent Sexual Offense Recidivism). Bedömningarna
+utgör underlag för riskhantering, behandlingsplanering och beslut om lämpliga insatser.
+Även andra psykologiska bedömningar kan erbjudas utifrån uppdragets frågeställning och
+ungdomens behov.</p>
+
+<h2>Individuell behandling</h2>
+<p>Individuell, övergreppsspecifik behandling erbjuds för ungdomar med sexuella
+beteendeproblem på uppdrag av socialtjänst eller annan ansvarig verksamhet. Behandlingen
+anpassas efter ungdomens behov och förutsättningar och kan bland annat fokusera på att
+förstå och förändra problematiska beteendemönster, utveckla känsloreglering och stärka
+förmågan att etablera trygga och respektfulla relationer.</p>
+
+<h2>Konsultation och handledning</h2>
+<p>Konsultation och handledning erbjuds till socialtjänst, behandlingspersonal och andra
+yrkesverksamma som möter målgruppen. Det kan exempelvis handla om att fördjupa
+förståelsen för problematiken, identifiera risk- och skyddsfaktorer, utveckla
+behandlingsplanering och bemötande samt stärka kvaliteten i det praktiska
+behandlingsarbetet.</p>
+
+<h2>Föreläsningar och kompetensutveckling</h2>
+<p>Föreläsningar och utbildningsinsatser erbjuds till verksamheter som vill stärka sin
+kompetens inom området. Innehållet anpassas efter målgrupp, verksamhet och önskemål och
+kan exempelvis omfatta:</p>
+<ul>
+  <li><strong>Förståelse för sexuella beteendeproblem hos ungdomar</strong> —
+  bakomliggande faktorer, varningssignaler och när vuxna behöver agera.</li>
+  <li><strong>Riskbedömning och riskhantering</strong> — strukturerad bedömning och
+  omsättning av bedömningen i praktiskt arbete.</li>
+  <li><strong>Bemötande och övergreppsspecifik behandling</strong> — förhållningssätt och
+  behandlingsprinciper i arbetet med målgruppen.</li>
+  <li><strong>Beslutsstöd för socialtjänsten</strong> — kunskap och vägledning vid
+  bedömning av ärenden och val av insatser.</li>
+  <li><strong>Utveckling av behandlingsinsatser och arbetssätt</strong> — stöd till
+  verksamheter som vill utveckla sitt arbete med ungdomar med sexuella
+  beteendeproblem.</li>
+</ul>
+
+<p>Målet är att bidra till ökad kunskap och trygghet hos professionella, välgrundade
+bedömningar och mer ändamålsenliga insatser för ungdomar med sexuella
+beteendeproblem.</p>
+
+<h2>Praktiskt</h2>
+<p>Priser lämnas på förfrågan; moms tillkommer. Hör av er via
+<a href="{base}organisationer/kontakt/">kontakt för uppdrag</a>.</p>
 ''',
     ),
     dict(

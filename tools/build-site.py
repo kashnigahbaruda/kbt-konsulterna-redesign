@@ -93,6 +93,7 @@ NAV = [
         ('Föreläsningar & utbildning', 'organisationer/utbildning/index.html'),
         ('Rehabilitering', 'organisationer/rehabilitering/index.html'),
         ('Skadligt bruk', 'organisationer/skadligt-bruk/index.html'),
+        ('Sexuella beteendeproblem', 'organisationer/sexuella-beteendeproblem/index.html'),
         ('Kontakt för uppdrag', 'organisationer/kontakt/index.html'),
     ]),
     ('Medarbetare', 'medarbetare/index.html', []),
@@ -131,8 +132,9 @@ TEAM = [
               'Tidigare BUP och Studenthälsan vid Uppsala universitet.'),
     dict(slug='elias-westerlund', name='Elias Westerlund',
          role='Leg. psykolog',
-         note='Psykologisk utredning och bedömning, inklusive omprövning av '
-              'tidigare ställda diagnoser.'),
+         note='Neuropsykiatriska utredningar och psykologiska bedömningar. '
+              'Behandling av ungdomar och unga vuxna, och riskbedömning vid '
+              'sexuella beteendeproblem.'),
     dict(slug='jens-karstrom', name='Jens Karström',
          role='Leg. psykolog · Leg. psykoterapeut · Specialist i klinisk psykologi',
          note='Trauma och traumabehandling. Prolonged exposure, schematerapi och ACT. '
@@ -1317,6 +1319,7 @@ def build_org():
         ('Föreläsningar &amp; utbildning', 'organisationer/utbildning/'),
         ('Rehabilitering', 'organisationer/rehabilitering/'),
         ('Skadligt bruk på arbetsplatsen', 'organisationer/skadligt-bruk/'),
+        ('Sexuella beteendeproblem hos ungdomar', 'organisationer/sexuella-beteendeproblem/'),
         ('Kontakt för uppdrag', 'organisationer/kontakt/'),
       ])}
     </div>
@@ -1354,6 +1357,17 @@ def build_org():
              'decennier, kliniskt och i forskning.</p>',
              '',
              more=(b, 'organisationer/skadligt-bruk/', 'Om skadligt bruk i arbetslivet'))}
+
+{hub_section('sexuella-beteendeproblem', 'Sexuella beteendeproblem hos ungdomar',
+             'Riskbedömning, behandling och konsultation.',
+             '<p style="margin-bottom:0">För socialtjänst, HVB, skolor och LSS-verksamheter '
+             'som möter ungdomar med sexuella beteendeproblem: strukturerade '
+             'riskbedömningar med ERASOR, övergreppsspecifik behandling, konsultation, '
+             'handledning och utbildning. Elias Westerlund har lång erfarenhet av '
+             'området från HVB-verksamhet.</p>',
+             '', tone='band--hi',
+             more=(b, 'organisationer/sexuella-beteendeproblem/',
+                   'Om sexuella beteendeproblem hos ungdomar'))}
 
 <section class="band band--deep">
   <div class="wrap split">
@@ -1471,6 +1485,39 @@ BIO_EDITS = {
 }
 
 
+# Bios the practitioner has rewritten in full since the crawl. These replace
+# the crawled text entirely.
+BIO_REPLACE = {
+    # Elias's updated presentation, November 2026.
+    'elias-westerlund': [
+        'Jag heter Elias Westerlund och är legitimerad psykolog med examen från Uppsala '
+        'universitet. Jag har över tio års erfarenhet av arbete inom HVB-verksamhet, där '
+        'jag haft olika roller som behandlingspedagog, verksamhetschef och psykolog.',
+        'Jag har gedigen erfarenhet av neuropsykiatriska utredningar av både ungdomar och '
+        'vuxna, med frågeställningar kring ADHD, autism och intellektuell '
+        'funktionsnedsättning. Jag har även erfarenhet av andra psykologiska bedömningar '
+        'och utredningar, exempelvis vid trauma, stress och affektiva tillstånd, samt '
+        'omprövning av tidigare ställda diagnoser.',
+        'Inom psykologisk behandling har jag framför allt arbetat med ungdomar och unga '
+        'vuxna med komplex psykologisk och social problematik, bland annat kopplad till '
+        'neuropsykiatriska funktionsnedsättningar, trauma, stress, depression, ångest och '
+        'sexuella beteendeproblem. Jag har även erfarenhet av att arbeta med vuxna och '
+        'högpresterande personer som upplever psykisk ohälsa, exempelvis i form av '
+        'stress, ångest eller svårigheter att hantera höga krav och förväntningar.',
+        'Utöver det direkta behandlingsarbetet har jag erfarenhet av handledning av '
+        'personal, arbete med familj och nätverk samt utveckling och ledning av '
+        'behandlingsverksamheter. Jag har även särskild kompetens inom riskbedömning av '
+        'ungdomar med normbrytande beteenden (YLS-CMI), sexuella beteendeproblem (ERASOR) '
+        'och övergreppsspecifik behandling av ungdomar med sexuella beteendeproblem. '
+        'Arbetet innefattar även samverkan med exempelvis familjer, BUP, skola och '
+        'socialtjänst.',
+        'I mitt arbete lägger jag stor vikt vid att förstå individens samlade '
+        'livssituation, identifiera både svårigheter och styrkor samt utforma insatser '
+        'utifrån individuella behov och förutsättningar.',
+    ],
+}
+
+
 def apply_bio_edits(slug, paras):
     for old, new in BIO_EDITS.get(slug, []):
         hits = [i for i, p in enumerate(paras) if old in p]
@@ -1486,6 +1533,8 @@ def apply_bio_edits(slug, paras):
 
 
 def bio_paragraphs(slug):
+    if slug in BIO_REPLACE:
+        return [H.escape(p) for p in BIO_REPLACE[slug]]
     with open('research/crawl-pages.json', encoding='utf-8') as f:
         pages = json.load(f)
     raw = pages[f'medarbetare__{slug}']['text']
