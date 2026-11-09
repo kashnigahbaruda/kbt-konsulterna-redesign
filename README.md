@@ -52,6 +52,8 @@ assets/fonts/                 Self-hosted variable fonts + their OFL licences (g
 tools/articles.py             The topic tree: copy for all 39 sub-pages
 tools/build-fonts.py          Fetches the OFL fonts and cuts Newsreader down
 tools/build-site.py           Shared shell + every page builder
+tools/old-site-text.json      The bios and FAQ from the old site, which the build reads
+.github/workflows/deploy.yml  Builds and uploads to staging on every push
 ```
 
 57 pages, restructured from the current site's 108. The current site runs two complete
@@ -309,6 +311,33 @@ or video originals) and uploads new and changed files with `lftp`. Before upload
 reads the server's own `.htaccess` and carries over cPanel's password-protection lines and
 PHP-version block, which our file would otherwise overwrite. On staging it refuses to
 upload if it cannot find the password protection.
+
+**Uploads run on GitHub Actions** (`.github/workflows/deploy.yml`), because the
+office's wired network blocks FTPS and tethering a phone took the rest of the
+connection down with it:
+
+- every push to `master` uploads to staging;
+- the live site only goes up when started by hand: *Actions → Deploy → Run workflow*,
+  target `live`.
+
+The logins are stored in two GitHub environments (*Settings → Environments*), `staging`
+and `live`, each with:
+
+| Name | Kind | Value |
+|---|---|---|
+| `FTP_HOST` | variable | `cpsrv02.misshosting.com` |
+| `FTP_DIR` | variable | the web root as that FTP account sees it, usually `/` |
+| `FTP_USER` | secret | the FTP account from the web host |
+| `FTP_PASS` | secret | its password |
+
+`FTP_HOST` and `FTP_DIR` are variables rather than secrets because GitHub masks every
+occurrence of a secret's value in the logs, and a secret of `/` would turn every path into
+`***`. Add yourself as a required reviewer on the `live` environment so a live upload
+waits for a click.
+
+A fresh checkout uploads every file (the timestamps are all new), about 33 MB.
+
+To run it by hand instead:
 
 ```bash
 sudo apt install lftp

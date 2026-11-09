@@ -5,8 +5,10 @@
 #   tools/deploy.sh test             # upload to staging.kbt-konsulterna.se
 #   tools/deploy.sh live             # upload to the live site (asks first)
 #
-# Needs lftp (apt install lftp) and one file per target, tools/deploy-test.env
-# and tools/deploy-live.env. Neither is committed:
+# Normally run by GitHub Actions (.github/workflows/deploy.yml), which passes the
+# login as environment variables. To run it by hand instead, it needs lftp
+# (apt install lftp) and one file per target, tools/deploy-test.env and
+# tools/deploy-live.env. Neither is committed:
 #
 #   FTP_HOST=cpsrv02.misshosting.com   # the name on the FTP certificate
 #   FTP_USER=[ftp-user-from-niclas]
@@ -36,9 +38,12 @@ esac
 ENV_FILE="tools/deploy-$TARGET.env"
 
 command -v lftp >/dev/null || { echo "lftp is missing: sudo apt install lftp" >&2; exit 1; }
-[ -f "$ENV_FILE" ] || { echo "$ENV_FILE is missing (see the top of this script)" >&2; exit 1; }
-# shellcheck disable=SC1090
-source "$ENV_FILE"
+if [ -f "$ENV_FILE" ]; then
+  # shellcheck disable=SC1090
+  source "$ENV_FILE"
+elif [ -z "${FTP_USER:-}" ]; then
+  echo "$ENV_FILE is missing and FTP_* are not set (see the top of this script)" >&2; exit 1
+fi
 : "${FTP_HOST:?}" "${FTP_USER:?}" "${FTP_PASS:?}" "${FTP_DIR:?}"
 
 WORK=$(mktemp -d)
@@ -116,8 +121,13 @@ print(f"Kept {len(kept)} line(s) from the server's .htaccess." if kept
 PY
 
 if [ "$TARGET" = live ] && [ -z "$DRY" ]; then
-  read -r -p "Upload to the LIVE site kbt-konsulterna.se? [y/N] " ok
-  [ "$ok" = y ] || { echo "Cancelled."; exit 1; }
+  if [ -t 0 ]; then
+    read -r -p "Upload to the LIVE site kbt-konsulterna.se? [y/N] " ok
+    [ "$ok" = y ] || { echo "Cancelled."; exit 1; }
+  elif [ "${DEPLOY_CONFIRM:-}" != live ]; then
+    # No one to ask (GitHub Actions): the workflow must say so explicitly.
+    echo "Live upload needs DEPLOY_CONFIRM=live when not run from a terminal." >&2; exit 1
+  fi
 fi
 
 # 4. Upload new and changed files.

@@ -1483,19 +1483,19 @@ def build_medarbetare():
 # ==========================================================================
 import json
 
+# The client's own words from the old site: the bios and the FAQ, extracted from
+# the full crawl (research/, kept out of the public repo). Text the practice
+# asked to have removed is already taken out of this file.
+OLD_SITE_TEXT = 'tools/old-site-text.json'
+
 # Corrections the practitioners have asked for since the crawl, as
 # (old, new) substring replacements; new=None drops the whole paragraph.
 BIO_EDITS = {
     'karin-holmstrom': [
         ('psykisk ohälsa och psykisk sjukdom', 'psykisk ohälsa och psykiatrisk sjukdom'),
-        ('ensamkommande asylsökande ungdomar', None),
         ('inlärningsteori och tillämpad beteendeanalys',
          'inlärningsteori/tillämpad beteendeanalys'),
         ('väl förtrogen aktuell', 'väl förtrogen med aktuell'),
-    ],
-    'jens-karstrom': [
-        (' Föräldrastöd brukar dessutom vara extra hjälpsamt när ditt barn inte kan '
-         'eller vill gå i psykologisk behandling.', ''),
     ],
 }
 
@@ -1550,7 +1550,7 @@ def apply_bio_edits(slug, paras):
 def bio_paragraphs(slug):
     if slug in BIO_REPLACE:
         return [H.escape(p) for p in BIO_REPLACE[slug]]
-    with open('research/crawl-pages.json', encoding='utf-8') as f:
+    with open(OLD_SITE_TEXT, encoding='utf-8') as f:
         pages = json.load(f)
     raw = pages[f'medarbetare__{slug}']['text']
     paras = [p.strip() for p in re.split(r'\n\s*\n', raw) if p.strip()]
@@ -1740,7 +1740,7 @@ def build_priser():
 # Vanliga frågor  (Q&A carried over verbatim from the client's own page)
 # ==========================================================================
 def faq_pairs():
-    with open('research/crawl-pages.json', encoding='utf-8') as f:
+    with open(OLD_SITE_TEXT, encoding='utf-8') as f:
         pages = json.load(f)
     raw = pages['vanliga-fragor']['text']
     chunks = re.split(r'^### ', raw, flags=re.M)[1:]
