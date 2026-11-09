@@ -2229,7 +2229,7 @@ försäkringsbolag eller socialtjänst betalar. Vi fakturerar efter överenskomm
 <h2>Nå oss</h2>
 <p>E-post: <a href="mailto:kontakt@kbt-konsulterna.se">kontakt@kbt-konsulterna.se</a><br>
 Telefon: <a href="tel:+4618104044">018 – 10 40 44</a></p>
-<p>Du kan också använda <a href="{base}kontakt/index.html">kontaktformuläret</a>. Vi
+<p>Du kan också använda <a href="{base}kontakt/index.html#foretag">formuläret för uppdrag</a>. Vi
 återkommer för det mesta samma dag.</p>
 
 <h2>Sekretess när ni är uppdragsgivare</h2>
