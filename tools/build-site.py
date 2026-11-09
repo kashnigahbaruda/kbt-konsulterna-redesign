@@ -332,7 +332,7 @@ HEAD_TPL = '''<!doctype html>
     </nav>
     <a class="head-akut" href="{base}akut-hjalp/index.html">Akut hjälp</a>
     <a class="head-tel" href="{tel_href}">{tel}</a>
-    <a class="btn btn--primary" href="{base}kontakt/index.html">Boka samtal</a>
+    <a class="btn btn--primary" href="{base}{book_href}">{book_label}</a>
     <button class="burger" type="button" aria-expanded="false" aria-controls="mnav" aria-label="Meny">
       <svg class="icon burger__bars" aria-hidden="true" focusable="false"><use href="#i-menu"></use></svg>
       <svg class="icon burger__x" aria-hidden="true" focusable="false"><use href="#i-close"></use></svg>
@@ -344,7 +344,7 @@ HEAD_TPL = '''<!doctype html>
           {mnav}
       </ul>
       <div class="mobile-nav__foot">
-        <a class="btn btn--primary" href="{base}kontakt/index.html">Boka samtal</a>
+        <a class="btn btn--primary" href="{base}{book_href}">{book_label}</a>
         <a class="btn btn--ghost" href="{tel_href}">Ring {tel}</a>
         <a class="a-link" href="{base}akut-hjalp/index.html">Akut hjälp</a>
       </div>
@@ -459,7 +459,10 @@ def page(path, title, desc, body, ogimg='samtalsrum', extra='', ogtitle=None,
         # the page that carries these tags, not the client's current site.
         ogurl=canonical.replace(SITE, PREVIEW_SITE, 1) if PREVIEW else canonical,
         nav=nav_html(base, current), mnav=mobile_nav_html(base, current),
-        tel=TEL, tel_href=TEL_HREF, extra=extra, logo_w=LOGO_W, logo_h=LOGO_H)
+        tel=TEL, tel_href=TEL_HREF, extra=extra, logo_w=LOGO_W, logo_h=LOGO_H,
+        # The header button has little room on a phone, so it gets a short label.
+        book_label='Kontakta oss' if book_for(path) is ORG_BOOK else BOOK[0],
+        book_href=book_for(path)[1])
     foot = FOOT_TPL.format(base=base, js_v=JS_V, addr=ADDR, tel=TEL, tel_href=TEL_HREF, mail=MAIL,
                            logo_w=LOGO_W, logo_h=LOGO_H)
     # A relative href ending in "/" resolves over HTTP but 404s over file://,
@@ -506,8 +509,18 @@ def hero_video(base, slug):
             + '\n          '.join(srcs) + '\n        </video>')
 
 
+# The main call to action. Organisations are sent to their own form on the
+# contact page; everyone else to the patients' form at the top of it.
+BOOK = ('Boka samtal', 'kontakt/index.html')
+ORG_BOOK = ('Förfrågan om uppdrag', 'kontakt/index.html#foretag')
+
+
+def book_for(path):
+    return ORG_BOOK if path.startswith('organisationer/') else BOOK
+
+
 def hero(base, slug, eyebrow, h1, lede, alt, full=False, crumb=None,
-         actions=True, trust=False, video=None, pic_cls='', addr=False):
+         actions=True, trust=False, video=None, pic_cls='', addr=False, book=BOOK):
     kind = 'hero--full' if full else 'hero--page'
     crumb_html = f'<p class="crumb">{crumb}</p>' if crumb else ''
     trust_html = ('<ul class="hero__trust">\n        ' + '\n        '.join(
@@ -518,7 +531,7 @@ def hero(base, slug, eyebrow, h1, lede, alt, full=False, crumb=None,
     addr_html = (f'<p class="hero__addr"><a href="{MAPS}">{icon("pin")}'
                  f'<span>{ADDR}</span></a></p>') if addr else ''
     act = f'''<div class="actions">
-          <a class="btn btn--on-dark" href="{base}kontakt/index.html">Boka samtal {ARROW_BTN}</a>
+          <a class="btn btn--on-dark" href="{base}{book[1]}">{book[0]} {ARROW_BTN}</a>
           <a class="hero__tel" href="{TEL_HREF}">eller ring {TEL}</a>
         </div>''' if actions else ''
     return f'''<section class="hero {kind}">
@@ -543,7 +556,8 @@ CTA_IMG = ('samtalsrum', 'Ett av mottagningens samtalsrum, med två fåtöljer v
 
 
 def cta_band(base, heading='Ta första steget och kontakta oss.',
-             text='Skriv eller ring. Vi hör vanligen av oss samma dag.', img=CTA_IMG):
+             text='Skriv eller ring. Vi hör vanligen av oss samma dag.', img=CTA_IMG,
+             book=BOOK):
     return f'''<section class="bleed">
   <div class="bleed__media">{pic_wide(base, *img)}</div>
   <div class="bleed__scrim"></div>
@@ -552,7 +566,7 @@ def cta_band(base, heading='Ta första steget och kontakta oss.',
       <h2>{heading}</h2>
       <p class="hero__lede" style="margin-top:1.2rem">{text}</p>
       <div class="actions" style="margin-top:2rem">
-        <a class="btn btn--on-dark" href="{base}kontakt/index.html">Boka samtal {ARROW_BTN}</a>
+        <a class="btn btn--on-dark" href="{base}{book[1]}">{book[0]} {ARROW_BTN}</a>
         <a class="hero__tel" href="{TEL_HREF}">eller ring {TEL}</a>
       </div>
     </div>
@@ -1309,7 +1323,8 @@ def build_org():
       'Handledning, coaching, föreläsningar och utbildning för arbetsgivare, '
       'skola, vård och socialtjänst. På plats hos er, hos oss eller via videosamtal.',
       'Karin Holmström håller en genomgång vid whiteboardtavlan för en grupp i mottagningens mötesrum',
-      crumb=f'<a href="{b}index.html">Hem</a><span>/</span>För organisationer')}
+      crumb=f'<a href="{b}index.html">Hem</a><span>/</span>För organisationer',
+      book=ORG_BOOK)}
 
 <section class="band">
   <div class="wrap split">
@@ -2514,7 +2529,7 @@ def build_topic_page(section, parent, node=None):
   </div>
 </section>
 
-{cta_band(base)}
+{cta_band(base, book=book_for(path))}
 {akut_strip(base)}
 '''
     return page(path, n['title'], n['desc'], body,
