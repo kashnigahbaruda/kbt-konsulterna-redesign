@@ -323,18 +323,10 @@ connection down with it:
   The live upload gets its own hand-started step when the practice is ready to switch.
 
 The login is stored in a GitHub environment (*Settings → Environments*) called `staging`,
-with:
-
-| Name | Kind | Value |
-|---|---|---|
-| `FTP_HOST` | variable | `cpsrv02.misshosting.com` |
-| `FTP_DIR` | variable | the web root as that FTP account sees it, usually `/` |
-| `FTP_USER` | secret | the FTP account from the web host |
-| `FTP_PASS` | secret | its password |
-
-`FTP_HOST` and `FTP_DIR` are variables rather than secrets because GitHub masks every
-occurrence of a secret's value in the logs, and a secret of `/` would turn every path into
-`***`.
+with two secrets: `FTP_USER` and `FTP_PASS` (the staging FTP account and its password,
+pasted as-is, without the quote marks the local env file needs). The host
+(`cpsrv02.misshosting.com`) and folder (`/`) are not secret and are written in the
+workflow itself.
 
 A fresh checkout uploads every file (the timestamps are all new), about 33 MB.
 

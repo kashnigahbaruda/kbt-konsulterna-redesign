@@ -8,8 +8,8 @@
 # A live upload will get its own, hand-started step when the practice is ready
 # to switch.
 #
-# The "staging" environment holds the secrets FTP_USER and FTP_PASS and the
-# variables FTP_HOST and FTP_DIR. See README.md, "Deploying".
+# The "staging" environment holds the secrets FTP_USER and FTP_PASS.
+# See README.md, "Deploying".
 name: Deploy to staging
 
 on:
@@ -37,8 +37,10 @@ jobs:
 
       - name: Build and upload to staging
         env:
-          FTP_HOST: ${{ vars.FTP_HOST }}
-          FTP_DIR: ${{ vars.FTP_DIR }}
+          # Not secret: the server name on the FTP certificate, and the staging
+          # account's own root folder.
+          FTP_HOST: cpsrv02.misshosting.com
+          FTP_DIR: /
           FTP_USER: ${{ secrets.FTP_USER }}
           FTP_PASS: ${{ secrets.FTP_PASS }}
         run: |
