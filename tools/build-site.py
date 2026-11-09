@@ -87,13 +87,13 @@ NAV = [
         ('Psykologisk behandling', 'barn-och-ungdom/behandling/index.html'),
         ('Utredning & bedömning', 'barn-och-ungdom/utredning/index.html'),
         ('Stöd till vuxna runt barnet', 'barn-och-ungdom/stod/index.html'),
+        ('Sexuella beteendeproblem', 'barn-och-ungdom/sexuella-beteendeproblem/index.html'),
     ]),
     ('För organisationer', 'organisationer/index.html', [
         ('Handledning & coaching', 'organisationer/handledning/index.html'),
         ('Föreläsningar & utbildning', 'organisationer/utbildning/index.html'),
         ('Rehabilitering', 'organisationer/rehabilitering/index.html'),
         ('Skadligt bruk', 'organisationer/skadligt-bruk/index.html'),
-        ('Sexuella beteendeproblem', 'organisationer/sexuella-beteendeproblem/index.html'),
         ('Kontakt för uppdrag', 'organisationer/kontakt/index.html'),
     ]),
     ('Medarbetare', 'medarbetare/index.html', []),
@@ -640,7 +640,7 @@ def price_band(base, dark=False):
       <div class="prices">
         <div>
           <p class="price__label">Enskilt samtal</p>
-          <p class="price__fig">1&nbsp;500&nbsp;kr <span class="price__unit">/ 45 min</span></p>
+          <p class="price__fig">1&nbsp;600&nbsp;kr <span class="price__unit">/ 45 min</span></p>
         </div>
         <div>
           <p class="price__label">Parterapi</p>
@@ -1208,6 +1208,7 @@ def build_barn():
         ('Psykologisk behandling', 'barn-och-ungdom/behandling/'),
         ('Utredning &amp; bedömning', 'barn-och-ungdom/utredning/'),
         ('Stöd till vuxna runt barnet', 'barn-och-ungdom/stod/'),
+        ('Sexuella beteendeproblem hos ungdomar', 'barn-och-ungdom/sexuella-beteendeproblem/'),
       ])}
     </div>
   </div>
@@ -1238,6 +1239,17 @@ def build_barn():
              'socialtjänst — genom rådgivning, handledning och utbildning.</p>',
              stod, tone='band--hi',
              more=(b, 'barn-och-ungdom/stod/', 'Om råd, stöd och handledning'))}
+
+{hub_section('sexuella-beteendeproblem', 'Sexuella beteendeproblem hos ungdomar',
+             'Riskbedömning, behandling och konsultation.',
+             '<p style="margin-bottom:0">För socialtjänst, HVB, skolor och LSS-verksamheter '
+             'som möter ungdomar med sexuella beteendeproblem: strukturerade '
+             'riskbedömningar med ERASOR, övergreppsspecifik behandling, konsultation, '
+             'handledning och utbildning. Elias Westerlund har lång erfarenhet av '
+             'området från HVB-verksamhet.</p>',
+             '',
+             more=(b, 'barn-och-ungdom/sexuella-beteendeproblem/',
+                   'Om sexuella beteendeproblem hos ungdomar'))}
 
 <section class="bleed bleed--plain">
   <div class="wrap bleed__inner">
@@ -1319,7 +1331,6 @@ def build_org():
         ('Föreläsningar &amp; utbildning', 'organisationer/utbildning/'),
         ('Rehabilitering', 'organisationer/rehabilitering/'),
         ('Skadligt bruk på arbetsplatsen', 'organisationer/skadligt-bruk/'),
-        ('Sexuella beteendeproblem hos ungdomar', 'organisationer/sexuella-beteendeproblem/'),
         ('Kontakt för uppdrag', 'organisationer/kontakt/'),
       ])}
     </div>
@@ -1357,17 +1368,6 @@ def build_org():
              'decennier, kliniskt och i forskning.</p>',
              '',
              more=(b, 'organisationer/skadligt-bruk/', 'Om skadligt bruk i arbetslivet'))}
-
-{hub_section('sexuella-beteendeproblem', 'Sexuella beteendeproblem hos ungdomar',
-             'Riskbedömning, behandling och konsultation.',
-             '<p style="margin-bottom:0">För socialtjänst, HVB, skolor och LSS-verksamheter '
-             'som möter ungdomar med sexuella beteendeproblem: strukturerade '
-             'riskbedömningar med ERASOR, övergreppsspecifik behandling, konsultation, '
-             'handledning och utbildning. Elias Westerlund har lång erfarenhet av '
-             'området från HVB-verksamhet.</p>',
-             '', tone='band--hi',
-             more=(b, 'organisationer/sexuella-beteendeproblem/',
-                   'Om sexuella beteendeproblem hos ungdomar'))}
 
 <section class="band band--deep">
   <div class="wrap split">
@@ -1652,7 +1652,7 @@ def build_priser():
       <div class="prices" style="margin-bottom:clamp(2.5rem,5vw,3.5rem)">
         <div>
           <p class="price__label">Enskilt samtal</p>
-          <p class="price__fig">1&nbsp;500&nbsp;kr <span class="price__unit">/ 45 min</span></p>
+          <p class="price__fig">1&nbsp;600&nbsp;kr <span class="price__unit">/ 45 min</span></p>
         </div>
         <div>
           <p class="price__label">Parterapi</p>
@@ -1716,7 +1716,7 @@ def build_priser():
 '''
     return page('priser/index.html',
                 'Priser – psykolog och parterapi i Uppsala | KBT-Konsulterna',
-                'Enskilt samtal 1 500 kr / 45 min, parterapi 2 400 kr / 60 min. '
+                'Enskilt samtal 1 600 kr / 45 min, parterapi 2 400 kr / 60 min. '
                 'Villkor, remiss och högkostnadsskydd hos KBT-Konsulterna.',
                 body, ogimg='gardshuset-tradgard')
 

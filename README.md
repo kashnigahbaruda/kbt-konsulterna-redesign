@@ -31,9 +31,9 @@ barn-och-ungdom/              Children & young people — hub
   behandling/                   + 5 treatment topics
   utredning/                    + 3 assessment topics
   stod/                         + 4 pages for the adults around the child
+  sexuella-beteendeproblem/     Risk assessment and treatment (client's text, Nov 2026)
 organisationer/               Employers — hub
-  handledning/ utbildning/ rehabilitering/ skadligt-bruk/
-  sexuella-beteendeproblem/ kontakt/
+  handledning/ utbildning/ rehabilitering/ skadligt-bruk/ kontakt/
 medarbetare/                  Team index + 7 individual bio pages
 priser/                       Prices, terms, region referrals
 kontakt/                      Contact, both forms, directions
