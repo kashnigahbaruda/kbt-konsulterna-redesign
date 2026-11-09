@@ -319,7 +319,7 @@ connection down with it.
 | Push to | Before launch | After launch (`LIVE_ENABLED` = `true`) |
 |---|---|---|
 | `staging` | staging.kbt-konsulterna.se | staging.kbt-konsulterna.se |
-| `master` | staging.kbt-konsulterna.se | **kbt-konsulterna.se**, after an Approve click |
+| `master` | staging.kbt-konsulterna.se | **kbt-konsulterna.se**, straight away |
 
 Each target is a GitHub environment (*Settings → Environments*) with two secrets,
 `FTP_USER` and `FTP_PASS`, for its own FTP account, pasted as-is (without the quote marks
@@ -332,15 +332,17 @@ be overridden with an environment variable `FTP_DIR`.
 
 1. Niclas empties `public_html` and sends the FTP login for it.
 2. *Settings → Environments → New environment* `live`: add the secrets `FTP_USER` and
-   `FTP_PASS`, tick *Required reviewers* and add yourself.
+   `FTP_PASS`. No required reviewer: merging into `master` is the decision to publish,
+   and most changes are small text and image fixes.
 3. *Settings → Secrets and variables → Actions → Variables*: add `LIVE_ENABLED` = `true`.
-4. *Actions → Deploy → Run workflow* on `master`, then *Approve* when it waits. Check the
-   live site (no `noindex`, https, redirects, both forms).
+4. *Actions → Deploy → Run workflow* on `master`. Check the live site (no `noindex`,
+   https, redirects, both forms).
 5. Turn off GitHub Pages (*Settings → Pages*). It builds the preview from `master`, and
    the preview's address only confuses people once the real site is up.
 
 After that, work on `staging`, push to see it on staging, and merge into `master` to
-publish.
+publish. To have a live upload wait for a click again, add a required reviewer to the
+`live` environment.
 
 To run it by hand instead:
 

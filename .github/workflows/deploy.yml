@@ -6,9 +6,9 @@
 #                          LIVE_ENABLED is "true" (Settings > Secrets and
 #                          variables > Actions > Variables)
 #
-# Live uploads run in the "live" environment, which should have a required
-# reviewer: the job then waits for an Approve click in the Actions tab.
-# Each environment holds the secrets FTP_USER and FTP_PASS for its own FTP
+# Live uploads run in the "live" environment and go straight up: merging into
+# master is the decision to publish. Add a required reviewer to that
+# environment to make them wait for an Approve click instead. Each environment holds the secrets FTP_USER and FTP_PASS for its own FTP
 # account, and the job refuses a login that belongs to the other site.
 # See README.md, "Deploying".
 name: Deploy
