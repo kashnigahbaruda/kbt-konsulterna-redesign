@@ -2004,7 +2004,11 @@ def source_select(idx):
         </div>'''
 
 
-# Both forms post to kontakt/skicka.php, which mails them to the practice.
+# The patients' form is Kaddio's, embedded: messages land in the practice's
+# record system rather than an inbox, so they are covered by confidentiality.
+KADDIO_FORM = 'https://kbt-konsulterna.kaddio.com/iframe/contact-us'
+
+# The organisations' form posts to kontakt/skicka.php, which mails it to the practice.
 # GitHub Pages cannot run PHP and answers a POST with 405, so the preview keeps "#".
 FORM_ACTION = '#' if PREVIEW else 'skicka.php'
 
@@ -2074,29 +2078,13 @@ def build_kontakt():
     <div data-reveal>
       <p class="eyebrow">Kontaktformulär</p>
       <h2 style="font-size:var(--step-2);margin-bottom:1.6rem">Frågor eller förfrågan om tid</h2>
-      <form class="form" method="post" action="{FORM_ACTION}">
-        {form_hidden('privat', 1)}
-        <div class="field">
-          <label for="namn">Namn <span class="field__req">*</span></label>
-          <input id="namn" name="namn" type="text" autocomplete="name" required>
-        </div>
-        <div class="field">
-          <label for="epost">E-post <span class="field__req">*</span></label>
-          <input id="epost" name="epost" type="email" autocomplete="email" required>
-        </div>
-        <div class="field">
-          <label for="telefon">Telefon</label>
-          <input id="telefon" name="telefon" type="tel" autocomplete="tel">
-        </div>
-        <div class="field">
-          <label for="meddelande">Meddelande <span class="field__req">*</span></label>
-          <textarea id="meddelande" name="meddelande" required></textarea>
-        </div>
-        {source_select(1)}
-        <button class="btn btn--primary" type="submit">Skicka {ARROW_BTN}</button>
-        <p style="font-size:0.95rem;color:var(--muted);margin:0">Skriv inga känsliga uppgifter
-        om din hälsa i formuläret. Vi hör av oss och tar det vidare i ett samtal.</p>
-      </form>
+      <div class="kaddio">
+        <iframe src="{KADDIO_FORM}" title="Kontaktformulär"
+          loading="lazy"></iframe>
+      </div>
+      <p style="font-size:0.95rem;color:var(--muted);margin:1rem 0 0">Formuläret skickas
+      krypterat till vårt journalsystem Kaddio och kan bara läsas av behörig personal hos
+      oss. Det du skriver omfattas av sekretess.</p>
     </div>
   </div>
 </section>

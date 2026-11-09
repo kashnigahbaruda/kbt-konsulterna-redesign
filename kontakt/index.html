@@ -21,7 +21,7 @@
 <link rel="icon" href="../assets/brand/icon-512.png" type="image/png" sizes="512x512">
 <link rel="apple-touch-icon" href="../assets/brand/apple-touch-icon.png">
 <script>document.documentElement.classList.add('js')</script>
-<link rel="stylesheet" href="../assets/css/site.css?v=0e1f4ff8">
+<link rel="stylesheet" href="../assets/css/site.css?v=498f53b7">
 <link rel="preload" href="../assets/fonts/familjen-grotesk-latin.woff2" as="font" type="font/woff2" crossorigin>
 <link rel="preload" href="../assets/fonts/newsreader-latin.woff2" as="font" type="font/woff2" crossorigin>
 <noscript><style>
@@ -193,45 +193,13 @@
     <div data-reveal>
       <p class="eyebrow">Kontaktformulär</p>
       <h2 style="font-size:var(--step-2);margin-bottom:1.6rem">Frågor eller förfrågan om tid</h2>
-      <form class="form" method="post" action="#">
-        <input type="hidden" name="formular" value="privat">
-        <div class="form__hp" aria-hidden="true"><label for="webbplats1">Lämna tomt</label><input id="webbplats1" name="webbplats" type="text" tabindex="-1" autocomplete="off"></div>
-        <div class="field">
-          <label for="namn">Namn <span class="field__req">*</span></label>
-          <input id="namn" name="namn" type="text" autocomplete="name" required>
-        </div>
-        <div class="field">
-          <label for="epost">E-post <span class="field__req">*</span></label>
-          <input id="epost" name="epost" type="email" autocomplete="email" required>
-        </div>
-        <div class="field">
-          <label for="telefon">Telefon</label>
-          <input id="telefon" name="telefon" type="tel" autocomplete="tel">
-        </div>
-        <div class="field">
-          <label for="meddelande">Meddelande <span class="field__req">*</span></label>
-          <textarea id="meddelande" name="meddelande" required></textarea>
-        </div>
-        <div class="field">
-          <label for="hittade1">Hur hittade du oss?</label>
-          <div class="select">
-            <select id="hittade1" name="hittade">
-              <option value="">Välj gärna ett alternativ</option>
-              <option>Google (sökning)</option>
-            <option>Google Maps</option>
-            <option>Rekommendation</option>
-            <option>Arbetsgivare / företag</option>
-            <option>Kände till oss sedan tidigare</option>
-            <option>Sociala medier</option>
-            <option>Annat / vet ej</option>
-            </select>
-            <svg class="icon select__caret" aria-hidden="true" focusable="false"><use href="#i-chevron-down"></use></svg>
-          </div>
-        </div>
-        <button class="btn btn--primary" type="submit">Skicka <svg class="icon btn__arrow" aria-hidden="true" focusable="false"><use href="#i-arrow-right"></use></svg></button>
-        <p style="font-size:0.95rem;color:var(--muted);margin:0">Skriv inga känsliga uppgifter
-        om din hälsa i formuläret. Vi hör av oss och tar det vidare i ett samtal.</p>
-      </form>
+      <div class="kaddio">
+        <iframe src="https://kbt-konsulterna.kaddio.com/iframe/contact-us" title="Kontaktformulär"
+          loading="lazy"></iframe>
+      </div>
+      <p style="font-size:0.95rem;color:var(--muted);margin:1rem 0 0">Formuläret skickas
+      krypterat till vårt journalsystem Kaddio och kan bara läsas av behörig personal hos
+      oss. Det du skriver omfattas av sekretess.</p>
     </div>
   </div>
 </section>
