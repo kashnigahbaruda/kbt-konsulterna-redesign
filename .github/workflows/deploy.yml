@@ -1,26 +1,22 @@
-# Builds the live version of the site and uploads it to staging.kbt-konsulterna.se
-# over FTPS, on every push to master (or by hand: Actions > Deploy > Run workflow).
+# Builds the live version of the site and uploads it to Misshosting over FTPS.
 #
-# STAGING ONLY. This workflow cannot touch the live site kbt-konsulterna.se:
-# - it only ever runs `tools/deploy.sh test`;
-# - the login it uses (the "staging" environment) is an FTP account that only
-#   reaches the staging folder on the server.
-# A live upload will get its own, hand-started step when the practice is ready
-# to switch.
+#   push to `staging`  ->  staging.kbt-konsulterna.se
+#   push to `master`   ->  staging.kbt-konsulterna.se, until launch
+#                      ->  kbt-konsulterna.se, once the repository variable
+#                          LIVE_ENABLED is "true" (Settings > Secrets and
+#                          variables > Actions > Variables)
 #
-# The "staging" environment holds the secrets FTP_USER and FTP_PASS.
+# Live uploads run in the "live" environment, which should have a required
+# reviewer: the job then waits for an Approve click in the Actions tab.
+# Each environment holds the secrets FTP_USER and FTP_PASS for its own FTP
+# account, and the job refuses a login that belongs to the other site.
 # See README.md, "Deploying".
-name: Deploy to staging
+name: Deploy
 
 on:
   push:
-    branches: [master]
+    branches: [master, staging]
   workflow_dispatch:
-
-# One upload at a time; a newer push waits for the running one to finish.
-concurrency:
-  group: deploy-staging
-  cancel-in-progress: false
 
 permissions:
   contents: read
@@ -28,25 +24,38 @@ permissions:
 jobs:
   deploy:
     runs-on: ubuntu-latest
-    environment: staging
+    environment: ${{ (github.ref_name == 'master' && vars.LIVE_ENABLED == 'true') && 'live' || 'staging' }}
+    # One upload per site at a time; a newer push waits for the running one.
+    concurrency:
+      group: deploy-${{ (github.ref_name == 'master' && vars.LIVE_ENABLED == 'true') && 'live' || 'staging' }}
+      cancel-in-progress: false
+    env:
+      TARGET: ${{ (github.ref_name == 'master' && vars.LIVE_ENABLED == 'true') && 'live' || 'test' }}
     steps:
       - uses: actions/checkout@v4
 
       - name: Install lftp
         run: sudo apt-get update -qq && sudo apt-get install -y -qq lftp
 
-      - name: Build and upload to staging
+      - name: Build and upload
         env:
-          # Not secret: the server name on the FTP certificate, and the staging
-          # account's own root folder.
+          # Not secret: the server name on the FTP certificate. FTP_DIR is the
+          # web root as the account sees it; both accounts start in their own.
           FTP_HOST: cpsrv02.misshosting.com
-          FTP_DIR: /
+          FTP_DIR: ${{ vars.FTP_DIR || '/' }}
           FTP_USER: ${{ secrets.FTP_USER }}
           FTP_PASS: ${{ secrets.FTP_PASS }}
         run: |
-          # Belt and braces: refuse a login that is not the staging account.
-          case "$FTP_USER" in
-            *@staging.kbt-konsulterna.se) ;;
-            *) echo "FTP_USER is not the staging account, stopping." >&2; exit 1 ;;
+          echo "Uploading to: $TARGET (branch ${GITHUB_REF_NAME})"
+          # Refuse a login that belongs to the other site.
+          case "$TARGET:$FTP_USER" in
+            test:*@staging.kbt-konsulterna.se) ;;
+            live:*@staging.kbt-konsulterna.se)
+              echo "The live environment has the staging login, stopping." >&2; exit 1 ;;
+            live:?*) ;;
+            *) echo "FTP_USER is missing or not the $TARGET account, stopping." >&2; exit 1 ;;
           esac
-          tools/deploy.sh test
+          if [ "$TARGET" = live ]; then
+            export DEPLOY_CONFIRM=live
+          fi
+          tools/deploy.sh "$TARGET"

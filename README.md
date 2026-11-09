@@ -53,7 +53,7 @@ tools/articles.py             The topic tree: copy for all 39 sub-pages
 tools/build-fonts.py          Fetches the OFL fonts and cuts Newsreader down
 tools/build-site.py           Shared shell + every page builder
 tools/old-site-text.json      The bios and FAQ from the old site, which the build reads
-.github/workflows/deploy.yml  Builds and uploads to staging (only) on every push
+.github/workflows/deploy.yml  Builds and uploads: staging branch → staging, master → live after launch
 ```
 
 57 pages, restructured from the current site's 108. The current site runs two complete
@@ -314,21 +314,33 @@ upload if it cannot find the password protection.
 
 **Uploads run on GitHub Actions** (`.github/workflows/deploy.yml`), because the
 office's wired network blocks FTPS and tethering a phone took the rest of the
-connection down with it:
+connection down with it.
 
-- every push to `master` uploads to staging, and so does *Actions → Deploy to staging →
-  Run workflow*;
-- **it cannot upload to the live site.** It only runs `tools/deploy.sh test`, and stops
-  unless the login is the staging FTP account, which only reaches the staging folder.
-  The live upload gets its own hand-started step when the practice is ready to switch.
+| Push to | Before launch | After launch (`LIVE_ENABLED` = `true`) |
+|---|---|---|
+| `staging` | staging.kbt-konsulterna.se | staging.kbt-konsulterna.se |
+| `master` | staging.kbt-konsulterna.se | **kbt-konsulterna.se**, after an Approve click |
 
-The login is stored in a GitHub environment (*Settings → Environments*) called `staging`,
-with two secrets: `FTP_USER` and `FTP_PASS` (the staging FTP account and its password,
-pasted as-is, without the quote marks the local env file needs). The host
-(`cpsrv02.misshosting.com`) and folder (`/`) are not secret and are written in the
-workflow itself.
+Each target is a GitHub environment (*Settings → Environments*) with two secrets,
+`FTP_USER` and `FTP_PASS`, for its own FTP account, pasted as-is (without the quote marks
+the local env file needs). The upload stops if the staging job gets a login that is not
+`…@staging.kbt-konsulterna.se`, or the live job gets that staging login. The host
+(`cpsrv02.misshosting.com`) is written in the workflow; the folder defaults to `/` and can
+be overridden with an environment variable `FTP_DIR`.
 
-A fresh checkout uploads every file (the timestamps are all new), about 33 MB.
+**At launch:**
+
+1. Niclas empties `public_html` and sends the FTP login for it.
+2. *Settings → Environments → New environment* `live`: add the secrets `FTP_USER` and
+   `FTP_PASS`, tick *Required reviewers* and add yourself.
+3. *Settings → Secrets and variables → Actions → Variables*: add `LIVE_ENABLED` = `true`.
+4. *Actions → Deploy → Run workflow* on `master`, then *Approve* when it waits. Check the
+   live site (no `noindex`, https, redirects, both forms).
+5. Turn off GitHub Pages (*Settings → Pages*). It builds the preview from `master`, and
+   the preview's address only confuses people once the real site is up.
+
+After that, work on `staging`, push to see it on staging, and merge into `master` to
+publish.
 
 To run it by hand instead:
 
