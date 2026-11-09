@@ -1,28 +1,25 @@
-# Builds the live version of the site and uploads it to Misshosting over FTPS.
+# Builds the live version of the site and uploads it to staging.kbt-konsulterna.se
+# over FTPS, on every push to master (or by hand: Actions > Deploy > Run workflow).
 #
-# - Every push to master goes to staging.kbt-konsulterna.se.
-# - The live site only goes up when started by hand: Actions > Deploy >
-#   Run workflow > target "live".
+# STAGING ONLY. This workflow cannot touch the live site kbt-konsulterna.se:
+# - it only ever runs `tools/deploy.sh test`;
+# - the login it uses (the "staging" environment) is an FTP account that only
+#   reaches the staging folder on the server.
+# A live upload will get its own, hand-started step when the practice is ready
+# to switch.
 #
-# The FTP logins live in two GitHub environments, "staging" and "live", each
-# with the secrets FTP_USER and FTP_PASS and the variables FTP_HOST and FTP_DIR.
-# See README.md, "Deploying".
-name: Deploy
+# The "staging" environment holds the secrets FTP_USER and FTP_PASS and the
+# variables FTP_HOST and FTP_DIR. See README.md, "Deploying".
+name: Deploy to staging
 
 on:
   push:
     branches: [master]
   workflow_dispatch:
-    inputs:
-      target:
-        description: Where to upload
-        type: choice
-        options: [staging, live]
-        default: staging
 
 # One upload at a time; a newer push waits for the running one to finish.
 concurrency:
-  group: deploy-${{ inputs.target || 'staging' }}
+  group: deploy-staging
   cancel-in-progress: false
 
 permissions:
@@ -31,19 +28,23 @@ permissions:
 jobs:
   deploy:
     runs-on: ubuntu-latest
-    environment: ${{ inputs.target || 'staging' }}
+    environment: staging
     steps:
       - uses: actions/checkout@v4
 
       - name: Install lftp
         run: sudo apt-get update -qq && sudo apt-get install -y -qq lftp
 
-      - name: Build and upload
+      - name: Build and upload to staging
         env:
           FTP_HOST: ${{ vars.FTP_HOST }}
           FTP_DIR: ${{ vars.FTP_DIR }}
           FTP_USER: ${{ secrets.FTP_USER }}
           FTP_PASS: ${{ secrets.FTP_PASS }}
-          # Only set when someone chose "live" by hand.
-          DEPLOY_CONFIRM: ${{ inputs.target == 'live' && 'live' || '' }}
-        run: tools/deploy.sh ${{ inputs.target == 'live' && 'live' || 'test' }}
+        run: |
+          # Belt and braces: refuse a login that is not the staging account.
+          case "$FTP_USER" in
+            *@staging.kbt-konsulterna.se) ;;
+            *) echo "FTP_USER is not the staging account, stopping." >&2; exit 1 ;;
+          esac
+          tools/deploy.sh test

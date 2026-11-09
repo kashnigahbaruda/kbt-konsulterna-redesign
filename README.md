@@ -53,7 +53,7 @@ tools/articles.py             The topic tree: copy for all 39 sub-pages
 tools/build-fonts.py          Fetches the OFL fonts and cuts Newsreader down
 tools/build-site.py           Shared shell + every page builder
 tools/old-site-text.json      The bios and FAQ from the old site, which the build reads
-.github/workflows/deploy.yml  Builds and uploads to staging on every push
+.github/workflows/deploy.yml  Builds and uploads to staging (only) on every push
 ```
 
 57 pages, restructured from the current site's 108. The current site runs two complete
@@ -316,12 +316,14 @@ upload if it cannot find the password protection.
 office's wired network blocks FTPS and tethering a phone took the rest of the
 connection down with it:
 
-- every push to `master` uploads to staging;
-- the live site only goes up when started by hand: *Actions → Deploy → Run workflow*,
-  target `live`.
+- every push to `master` uploads to staging, and so does *Actions → Deploy to staging →
+  Run workflow*;
+- **it cannot upload to the live site.** It only runs `tools/deploy.sh test`, and stops
+  unless the login is the staging FTP account, which only reaches the staging folder.
+  The live upload gets its own hand-started step when the practice is ready to switch.
 
-The logins are stored in two GitHub environments (*Settings → Environments*), `staging`
-and `live`, each with:
+The login is stored in a GitHub environment (*Settings → Environments*) called `staging`,
+with:
 
 | Name | Kind | Value |
 |---|---|---|
@@ -332,8 +334,7 @@ and `live`, each with:
 
 `FTP_HOST` and `FTP_DIR` are variables rather than secrets because GitHub masks every
 occurrence of a secret's value in the logs, and a secret of `/` would turn every path into
-`***`. Add yourself as a required reviewer on the `live` environment so a live upload
-waits for a click.
+`***`.
 
 A fresh checkout uploads every file (the timestamps are all new), about 33 MB.
 
