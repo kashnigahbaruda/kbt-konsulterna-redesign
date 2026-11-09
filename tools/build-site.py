@@ -94,6 +94,8 @@ NAV = [
         ('Föreläsningar & utbildning', 'organisationer/utbildning/index.html'),
         ('Rehabilitering', 'organisationer/rehabilitering/index.html'),
         ('Skadligt bruk', 'organisationer/skadligt-bruk/index.html'),
+        # Lives under Barn & ungdom, listed here too at the practice's request.
+        ('Sexuella beteendeproblem', 'barn-och-ungdom/sexuella-beteendeproblem/index.html'),
         ('Kontakt för uppdrag', 'organisationer/kontakt/index.html'),
     ]),
     ('Medarbetare', 'medarbetare/index.html', []),
@@ -1346,6 +1348,7 @@ def build_org():
         ('Föreläsningar &amp; utbildning', 'organisationer/utbildning/'),
         ('Rehabilitering', 'organisationer/rehabilitering/'),
         ('Skadligt bruk på arbetsplatsen', 'organisationer/skadligt-bruk/'),
+        ('Sexuella beteendeproblem hos ungdomar', 'barn-och-ungdom/sexuella-beteendeproblem/'),
         ('Kontakt för uppdrag', 'organisationer/kontakt/'),
       ])}
     </div>
@@ -1383,6 +1386,16 @@ def build_org():
              'decennier, kliniskt och i forskning.</p>',
              '',
              more=(b, 'organisationer/skadligt-bruk/', 'Om skadligt bruk i arbetslivet'))}
+
+{hub_section('sexuella-beteendeproblem', 'Sexuella beteendeproblem hos ungdomar',
+             'Riskbedömning, behandling och konsultation.',
+             '<p style="margin-bottom:0">För socialtjänst, HVB, skolor och LSS-verksamheter '
+             'som möter ungdomar med sexuella beteendeproblem: strukturerade '
+             'riskbedömningar med ERASOR, övergreppsspecifik behandling, konsultation, '
+             'handledning och utbildning.</p>',
+             '', tone='band--hi',
+             more=(b, 'barn-och-ungdom/sexuella-beteendeproblem/',
+                   'Om sexuella beteendeproblem hos ungdomar'))}
 
 <section class="band band--deep">
   <div class="wrap split">
@@ -2353,12 +2366,23 @@ def to_href(base, path):
     return base + path
 
 
+# Pages that belong to another section but are listed in this one's side menu
+# too. The page itself lives in one place only, so its text is not duplicated.
+SIDE_EXTRA = {
+    'organisationer': [('Sexuella beteendeproblem',
+                        'barn-och-ungdom/sexuella-beteendeproblem/index.html')],
+}
+
+
 def side_nav(base, section, l2_slug, l3_slug=None):
     """The sibling navigator: every level-2 page in this section, with the
     active one's children nested underneath. Sticky beside the article on
     desktop; a closed <details> above it on phones."""
     items = []
     for c in section['children']:
+        if c['slug'] == 'kontakt':          # extra links go above the contact page
+            for label, path in SIDE_EXTRA.get(section['slug'], []):
+                items.append(f'<li><a href="{to_href(base, path)}">{H.escape(label)}</a></li>')
         active2 = c['slug'] == l2_slug
         cur = ' aria-current="page"' if active2 and not l3_slug else ''
         cls = ' class="is-open"' if active2 else ''
@@ -2533,7 +2557,8 @@ def build_topic_page(section, parent, node=None):
 {akut_strip(base)}
 '''
     return page(path, n['title'], n['desc'], body,
-                ogimg=n['img'][0] if n.get('img') else section.get('img', 'samtalsrum'),
+                ogimg=n.get('ogimg') or (n['img'][0] if n.get('img')
+                                         else section.get('img', 'samtalsrum')),
                 extra=extra)
 
 

@@ -2899,6 +2899,9 @@ en kartläggning av barnets förutsättningar, se
                      'skolor, LSS-verksamheter och andra aktörer som möter ungdomar med sexuella '
                      'beteendeproblem.',
                 people=['elias-westerlund'],
+                # Share image without people: the section default shows a real
+                # child during an assessment, who must not be linked to this subject.
+                ogimg='motesrum',
                 also=[('Stöd till socialtjänst', 'barn-och-ungdom/stod/socialtjanst/'),
                       ('Stöd till HVB-hem och familjehem', 'barn-och-ungdom/stod/hvb-familjehem/'),
                       ('Kontakt för uppdrag', 'organisationer/kontakt/')],
