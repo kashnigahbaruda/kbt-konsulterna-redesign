@@ -965,7 +965,7 @@ def team_subset(base, slugs, eyebrow, heading, note):
         <p style="margin-bottom:0">{note}</p>
       </div>
     </div>
-    <div class="team">
+    <div class="team{' team--four' if len(slugs) == 4 else ''}">
       {cards}
     </div>
     <p style="margin-top:2.5rem;margin-bottom:0"><a class="a-link" href="{base}medarbetare/index.html">Alla medarbetare {ARROW}</a></p>
@@ -1412,11 +1412,11 @@ def build_org():
   </div>
 </section>
 
-{team_subset(b, ['angeli-holmstedt', 'thomas-alm', 'barry-karlsson'],
-             'Handledare',
-             'Våra handledare.',
-             'Angeli Holmstedt är dessutom MI-utbildare via MINT och lärare i '
-             'mindfulnessbaserade program.')}
+{team_subset(b, ['angeli-holmstedt', 'thomas-alm', 'karin-holmstrom', 'aksel-reppling'],
+             'Psykologer',
+             'Psykologerna som tar uppdrag.',
+             'Angeli Holmstedt och Thomas Alm är handledare. Angeli är dessutom '
+             'MI-utbildare via MINT och lärare i mindfulnessbaserade program.')}
 {marks_band(b)}
 '''
     return page('organisationer/index.html',
