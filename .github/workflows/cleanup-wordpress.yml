@@ -1,0 +1,60 @@
+# Removes the old WordPress files from kbt-konsulterna.se after the new site is
+# up. Only started by hand: Actions > Remove old WordPress files > Run workflow.
+#
+# Leave "delete" unticked first: that run only lists what is on the server and
+# what would go. Read the list, then run it again with "delete" ticked.
+# Only WordPress's own files are deleted; see tools/cleanup-wordpress.sh.
+name: Remove old WordPress files
+
+on:
+  workflow_dispatch:
+    inputs:
+      site:
+        description: Which site to look at (staging only lists, as a test)
+        type: choice
+        options: [live, staging]
+        default: live
+      delete:
+        description: Delete the WordPress files (unticked = only list them)
+        type: boolean
+        default: false
+
+permissions:
+  contents: read
+
+jobs:
+  cleanup:
+    runs-on: ubuntu-latest
+    environment: ${{ inputs.site }}
+    # Same group as the deploy, so this never runs during an upload.
+    concurrency:
+      group: deploy-${{ inputs.site }}
+      cancel-in-progress: false
+    env:
+      TARGET: ${{ inputs.site == 'live' && 'live' || 'test' }}
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Install lftp
+        run: sudo apt-get update -qq && sudo apt-get install -y -qq lftp
+
+      - name: List or delete
+        env:
+          FTP_HOST: cpsrv02.misshosting.com
+          FTP_DIR: ${{ vars.FTP_DIR || '/' }}
+          FTP_USER: ${{ secrets.FTP_USER }}
+          FTP_PASS: ${{ secrets.FTP_PASS }}
+          DELETE: ${{ inputs.delete }}
+        run: |
+          case "$TARGET:$FTP_USER" in
+            test:*@staging.kbt-konsulterna.se) ;;
+            live:*@staging.kbt-konsulterna.se)
+              echo "The live environment has the staging login, stopping." >&2; exit 1 ;;
+            live:?*) ;;
+            *) echo "FTP_USER is missing or not the $TARGET account, stopping." >&2; exit 1 ;;
+          esac
+          if [ "$DELETE" = true ]; then
+            tools/cleanup-wordpress.sh "$TARGET" --delete
+          else
+            tools/cleanup-wordpress.sh "$TARGET"
+          fi

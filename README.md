@@ -54,6 +54,7 @@ tools/build-fonts.py          Fetches the OFL fonts and cuts Newsreader down
 tools/build-site.py           Shared shell + every page builder
 tools/old-site-text.json      The bios and FAQ from the old site, which the build reads
 .github/workflows/deploy.yml  Builds and uploads: staging branch → staging, master → live after launch
+.github/workflows/cleanup-wordpress.yml  Run by hand once after launch: removes the old WordPress files
 ```
 
 57 pages, restructured from the current site's 108. The current site runs two complete
@@ -330,14 +331,25 @@ be overridden with an environment variable `FTP_DIR`.
 
 **At launch:**
 
-1. Niclas empties `public_html` and sends the FTP login for it.
+1. Niclas sends the FTP login for the main site. `public_html` is not emptied first:
+   the new site goes up on top of WordPress (the new `.htaccess` replaces WordPress's
+   and serves `index.html` first), so the site is never empty. WordPress is archived
+   on a subdomain.
 2. *Settings → Environments → New environment* `live`: add the secrets `FTP_USER` and
    `FTP_PASS`. No required reviewer: merging into `master` is the decision to publish,
-   and most changes are small text and image fixes.
+   and most changes are small text and image fixes. If that account starts in its home
+   folder rather than in `public_html`, also add the environment variable
+   `FTP_DIR` = `/public_html` (the cleanup below stops if it finds a home folder).
 3. *Settings → Secrets and variables → Actions → Variables*: add `LIVE_ENABLED` = `true`.
 4. *Actions → Deploy → Run workflow* on `master`. Check the live site (no `noindex`,
    https, redirects, both forms).
-5. Turn off GitHub Pages (*Settings → Pages*). It builds the preview from `master`, and
+5. *Actions → Remove old WordPress files → Run workflow*, site `live`, "delete" unticked.
+   The log lists the new site's files, the WordPress files it would delete and anything
+   else, which it keeps. If the list looks right, run it again with "delete" ticked. It
+   only deletes WordPress's own files (`wp-*`, `index.php`, `xmlrpc.php`, license and
+   readme), and only once the live home page serves the new site
+   (`tools/cleanup-wordpress.sh`).
+6. Turn off GitHub Pages (*Settings → Pages*). It builds the preview from `master`, and
    the preview's address only confuses people once the real site is up.
 
 After that, work on `staging`, push to see it on staging, and merge into `master` to
