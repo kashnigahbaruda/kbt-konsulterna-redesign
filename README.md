@@ -5,6 +5,10 @@ psychology practice in central Uppsala. Static HTML and CSS — no build step, n
 
 **Live since 10 November 2026 → https://kbt-konsulterna.se**
 
+**Branches:** pushing `master` publishes to the live site straight away; pushing `staging`
+publishes to the password-protected staging.kbt-konsulterna.se. Try changes on `staging`,
+then merge into `master`. Both upload through GitHub Actions — see [Going live](#going-live).
+
 > The pages committed here are the preview build: they carry `noindex, nofollow` and point
 > their share tags at the old GitHub Pages address (now turned off). The live and staging
 > uploads are built with `KBT_LIVE=1` instead — see [Going live](#going-live).
