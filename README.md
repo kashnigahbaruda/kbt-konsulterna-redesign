@@ -3,11 +3,11 @@
 A redesign proposal for [kbt-konsulterna.se](https://kbt-konsulterna.se/), a private
 psychology practice in central Uppsala. Static HTML and CSS — no build step, no dependencies.
 
-**Live preview → https://kashnigahbaruda.github.io/kbt-konsulterna-redesign/**
+**Live since 10 November 2026 → https://kbt-konsulterna.se**
 
-> **This is a design preview, not the live practice website.** Every page carries
-> `noindex, nofollow` so it cannot compete with the client's real site in search results.
-> Remove that before any real launch — see [Going live](#going-live).
+> The pages committed here are the preview build: they carry `noindex, nofollow` and point
+> their share tags at the old GitHub Pages address (now turned off). The live and staging
+> uploads are built with `KBT_LIVE=1` instead — see [Going live](#going-live).
 
 Locally, just **open `index.html` in a browser**. Every link resolves from `file://`, so the
 whole thing can be zipped and sent on as-is.
@@ -329,30 +329,15 @@ the local env file needs). The upload stops if the staging job gets a login that
 (`cpsrv02.misshosting.com`) is written in the workflow; the folder defaults to `/` and can
 be overridden with an environment variable `FTP_DIR`.
 
-**At launch:**
+**Launch, done 10 November 2026:** Niclas cleared out WordPress (archived on a subdomain)
+and left a placeholder page. The `live` environment (limited to `master`) holds the main
+site's FTP login, `LIVE_ENABLED` is `true`, the first upload replaced the
+placeholder, and GitHub Pages is turned off. The account starts in the web root, so
+`FTP_DIR` stays `/`. The WordPress cleanup (*Actions → Remove old WordPress files*,
+`tools/cleanup-wordpress.sh`) found nothing to delete; it stays for reference and only
+lists unless "delete" is ticked.
 
-1. Niclas sends the FTP login for the main site. `public_html` is not emptied first:
-   the new site goes up on top of WordPress (the new `.htaccess` replaces WordPress's
-   and serves `index.html` first), so the site is never empty. WordPress is archived
-   on a subdomain.
-2. *Settings → Environments → New environment* `live`: add the secrets `FTP_USER` and
-   `FTP_PASS`. No required reviewer: merging into `master` is the decision to publish,
-   and most changes are small text and image fixes. If that account starts in its home
-   folder rather than in `public_html`, also add the environment variable
-   `FTP_DIR` = `/public_html` (the cleanup below stops if it finds a home folder).
-3. *Settings → Secrets and variables → Actions → Variables*: add `LIVE_ENABLED` = `true`.
-4. *Actions → Deploy → Run workflow* on `master`. Check the live site (no `noindex`,
-   https, redirects, both forms).
-5. *Actions → Remove old WordPress files → Run workflow*, site `live`, "delete" unticked.
-   The log lists the new site's files, the WordPress files it would delete and anything
-   else, which it keeps. If the list looks right, run it again with "delete" ticked. It
-   only deletes WordPress's own files (`wp-*`, `index.php`, `xmlrpc.php`, license and
-   readme), and only once the live home page serves the new site
-   (`tools/cleanup-wordpress.sh`).
-6. Turn off GitHub Pages (*Settings → Pages*). It builds the preview from `master`, and
-   the preview's address only confuses people once the real site is up.
-
-After that, work on `staging`, push to see it on staging, and merge into `master` to
+Now work on `staging`, push to see it on staging, and merge into `master` to
 publish. To have a live upload wait for a click again, add a required reviewer to the
 `live` environment.
 
